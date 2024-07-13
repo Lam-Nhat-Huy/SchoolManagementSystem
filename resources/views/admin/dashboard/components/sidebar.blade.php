@@ -1,0 +1,58 @@
+<!-- Sidebar -->
+<div class="sidebar" data-background-color="dark">
+    <div class="sidebar-logo">
+        <!-- Logo Header -->
+        <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+                <img src="{{ asset('admin') }}/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                    height="20" />
+            </a>
+            <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                    <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                    <i class="gg-menu-left"></i>
+                </button>
+            </div>
+            <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+            </button>
+        </div>
+        <!-- End Logo Header -->
+    </div>
+
+    <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+
+                {{-- Dùng để lọc sidebar từ trong config/apps/module.php --}}
+                @foreach (config('apps.module') as $key => $value)
+                    @foreach ($value as $index => $item)
+                        <li class="nav-item">
+                            <a data-bs-toggle="collapse" href="#dashboard-{{ $key }}-{{ $index }}"
+                                class="collapsed" aria-expanded="false">
+                                <i class="{{ $item['icon'] }}"></i>
+                                <p>{{ $item['title'] }}</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" id="dashboard-{{ $key }}-{{ $index }}">
+                                <ul class="nav nav-collapse">
+                                    @foreach ($item['subModule'] as $sub)
+                                        <li>
+                                            <a href="{{ route('dashboard.index') }}">
+                                                <span class="sub-item">{{ $sub['title'] }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
+                    @endforeach
+                @endforeach
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- End Sidebar -->
