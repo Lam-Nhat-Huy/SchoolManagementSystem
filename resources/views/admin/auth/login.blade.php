@@ -20,7 +20,6 @@
             </div>
             <button type="submit" class="submit-btn">Đăng nhập</button>
         </form>
-        <p>Chào mừng bạn đến với khu vực quản trị</p>
     </div>
 </body>
 
