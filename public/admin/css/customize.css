@@ -1,16 +1,17 @@
+/* CSS cập nhật */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #1a2035;
+    background-color: rgb(8, 16, 40);
     margin: 0;
     font-family: 'Arial', sans-serif;
     color: #ffffff;
 }
 
 .login-container {
-    background-color: #1e1e2f;
+    background-color: #0b1739;
     padding: 2em;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -35,7 +36,8 @@ button {
     border-radius: 5px;
     font-size: 0.9em;
     cursor: pointer;
-    width: 48%;
+    width: 100%; /* Chỉnh sửa để các nút có chiều rộng 100% */
+    margin-bottom: 1em; /* Khoảng cách giữa các nút */
 }
 
 .google-login {
@@ -115,9 +117,11 @@ input::placeholder {
 }
 
 .submit-btn {
-    background-color: #bb66cc;
+    background: linear-gradient(286deg, rgb(76, 160, 252) 23%, rgb(224, 47, 238) 76%);
     color: white;
     font-size: 1em;
+    width: 100%;
+    margin-bottom: 1em;
 }
 
 p {

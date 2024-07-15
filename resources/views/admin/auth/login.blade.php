@@ -4,26 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
+    <title>Đăng nhập</title>
     <link rel="stylesheet" href="{{ asset('admin') }}/css/customize.css">
 </head>
 
 <body>
     <div class="login-container">
-        <h2>LogIn</h2>
-        <button class="google-login">Login with Google</button>
-        <button class="apple-login">Login with Apple</button>
-        <div class="divider">or Login with</div>
+        <h2>Đăng Nhập</h2>
         <form action="#" method="POST">
-            <input type="email" name="email" placeholder="Your Email" required>
-            <input type="password" name="password" placeholder="Your Password" required>
+            @csrf
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Mật Khẩu" required>
             <div class="options">
-                <label><input type="checkbox" name="remember"> Remember me</label>
-                <a href="#">Forgot password?</a>
+                <a href="#">Quên mật khẩu?</a>
             </div>
-            <button type="submit" class="submit-btn">Submit</button>
+            <button type="submit" class="submit-btn">Đăng nhập</button>
         </form>
-        <p>Don't have an account? <a href="#">Signup</a></p>
+        <p>Chào mừng bạn đến với khu vực quản trị</p>
     </div>
 </body>
 
