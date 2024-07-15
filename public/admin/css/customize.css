@@ -37,7 +37,6 @@ button {
     font-size: 0.9em;
     cursor: pointer;
     width: 100%; /* Chỉnh sửa để các nút có chiều rộng 100% */
-    margin-bottom: 1em; /* Khoảng cách giữa các nút */
 }
 
 .google-login {
@@ -62,7 +61,7 @@ button {
     content: "";
     position: absolute;
     top: 50%;
-    width: 45%;
+    width: 28%;
     height: 1px;
     background-color: #bbbbbb;
 }
@@ -80,16 +79,16 @@ form {
     flex-direction: column;
 }
 
-input[type="email"],
-input[type="password"] {
+input[type="email"], .branch {
     padding: 0.75em;
     margin-bottom: 1em;
     border: 1px solid #444444;
     border-radius: 5px;
-    background-color: #333344;
-    color: white;
+    background-color: #ffff;
+    color: #000000;
     font-size: 0.9em;
 }
+
 
 input::placeholder {
     color: #bbbbbb;
@@ -119,7 +118,7 @@ input::placeholder {
 .submit-btn {
     background: linear-gradient(286deg, rgb(76, 160, 252) 23%, rgb(224, 47, 238) 76%);
     color: white;
-    font-size: 1em;
+    font-size: 0.9rem;
     width: 100%;
     margin-bottom: 1em;
 }
