@@ -8,7 +8,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Thống Kê',
-                    'route' => ''
+                    'route' => 'dashboard.index'
                 ]
             ]
         ],
@@ -19,11 +19,11 @@ return [
             'subModule' => [
                 [
                     'title' => 'Thành Viên',
-                    'route' => ''
+                    'route' => 'dashboard.index'
                 ],
                 [
                     'title' => 'Nhóm Thành Viên',
-                    'route' => ''
+                    'route' => 'dashboard.index'
                 ]
             ]
         ],
@@ -34,18 +34,18 @@ return [
             'subModule' => [
                 [
                     'title' => 'Lịch Dạy',
-                    'route' => ''
+                    'route' => 'dashboard.index'
                 ]
             ]
         ],
         [
-            'title' => 'Học Sinh',
+            'title' => 'Sinh Viên',
             'icon' => 'fas fa-graduation-cap', // Icon cho học sinh
             'name' => '',
             'subModule' => [
                 [
-                    'title' => 'Học Sinh',
-                    'route' => ''
+                    'title' => 'Sinh Viên',
+                    'route' => 'student.index'
                 ]
             ]
         ],
@@ -56,7 +56,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Giáo Viên',
-                    'route' => ''
+                    'route' => 'dashboard.index'
                 ]
             ]
         ],
@@ -67,7 +67,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Lớp Học',
-                    'route' => ''
+                    'route' => 'dashboard.index'
                 ]
             ]
         ],
@@ -78,7 +78,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Môn Học',
-                    'route' => ''
+                    'route' => 'dashboard.index'
                 ]
             ]
         ],
@@ -89,7 +89,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Điểm Danh',
-                    'route' => ''
+                    'route' => 'dashboard.index'
                 ]
             ]
         ]

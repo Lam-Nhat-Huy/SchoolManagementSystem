@@ -40,9 +40,14 @@
                                 <ul class="nav nav-collapse">
                                     @foreach ($item['subModule'] as $sub)
                                         <li>
-                                            <a href="{{ route('dashboard.index') }}">
-                                                <span class="sub-item">{{ $sub['title'] }}</span>
-                                            </a>
+                                            @if (Route::has($sub['route']))
+                                                <a href="{{ route($sub['route']) }}">
+                                                    <span class="sub-item">{{ $sub['title'] }}</span>
+                                                </a>
+                                            @else
+                                                <span class="sub-item text-danger">Route [{{ $sub['route'] }}] not
+                                                    defined</span>
+                                            @endif
                                         </li>
                                     @endforeach
                                 </ul>
