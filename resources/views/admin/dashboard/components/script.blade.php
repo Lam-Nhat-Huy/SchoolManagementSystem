@@ -19,7 +19,7 @@
     <script src="{{ asset('admin') }}/js/plugin/datatables/datatables.min.js"></script>
 
     <!-- Bootstrap Notify -->
-    <script src="{{ asset('admin') }}/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    {{-- <script src="{{ asset('admin') }}/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script> --}}
 
     <!-- jQuery Vector Maps -->
     <script src="{{ asset('admin') }}/js/plugin/jsvectormap/jsvectormap.min.js"></script>
@@ -62,3 +62,10 @@
             fillColor: "rgba(255, 165, 52, .14)",
         });
     </script>
+
+    {{-- Dùng để lặp các link js được config ở bên controller --}}
+    @if (isset($config['js']) && is_array($config['js']))
+        @foreach ($config['js'] as $key => $value)
+            {!! '<script src="' . $value . '"></script>' !!}
+        @endforeach
+    @endif

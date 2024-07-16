@@ -32,3 +32,14 @@
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link rel="stylesheet" href="{{ asset('admin') }}/css/demo.css" />
+
+@if (isset($config['css']) && is_array($config['css']))
+    @foreach ($config['css'] as $key => $value)
+        {!! '<link rel="stylesheet" href="' . $value . '">' !!}
+    @endforeach
+@endif
+
+<script>
+    var BASE_URL = '{{ config('app.url') }}'
+    var SUFFIX = '{{ config('apps.general.suffix') }}'
+</script>
