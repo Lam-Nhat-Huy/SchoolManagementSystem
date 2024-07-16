@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subjects;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -11,8 +12,18 @@ class SubjectController extends Controller
     {
         $template = "admin.subject.subject.pages.index";
 
+        $data = Subjects::orderBy('id', 'asc')->paginate(1);
+
+        $template = "admin.subject.subject.pages.index";
+
         return view('admin.dashboard.layout', compact(
             'template',
+            'data'
+        ));
+
+        return view('admin.dashboard.layout', compact(
+            'template',
+            'data'
         ));
     }
 
@@ -45,7 +56,7 @@ class SubjectController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        return "Đây là trang thêm môn học";
     }
 
     public function edit($id)
@@ -77,5 +88,6 @@ class SubjectController extends Controller
 
     public function update(Request $request, $id)
     {
+        return "Đây là trang chỉnh sửa môn học";
     }
 }

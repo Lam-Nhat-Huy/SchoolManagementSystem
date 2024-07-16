@@ -70,29 +70,31 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr role="row" class="odd">
-                            <td class="sorting_1">Toán cao cấp</td>
-                            <td>Nguyễn Văn B</td>
-                            <td>3</td>
-                            <td>45</td>
-                            <td>Thứ 2, 4, 6</td>
-                            <td>A101</td>
-                            <td>Đang hoạt động</td>
-                            <td>
-                                <a href="{{ route('subject.edit', ['id' => 1]) }}" class="btn btn-sm btn-black">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <form action="{{ route('subject.destroy', ['id' => 1]) }}" method="POST"
-                                    style="display:inline-block;"
-                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                        @foreach ($data as $item)
+                            <tr role="row" class="odd">
+                                <td class="sorting_1">{{ $item->name }}</td>
+                                <td>Nguyễn Văn B</td>
+                                <td>3</td>
+                                <td>45</td>
+                                <td>Thứ 2, 4, 6</td>
+                                <td>A101</td>
+                                <td>Đang hoạt động</td>
+                                <td>
+                                    <a href="{{ route('subject.edit', ['id' => 1]) }}" class="btn btn-sm btn-black">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('subject.destroy', ['id' => 1]) }}" method="POST"
+                                        style="display:inline-block;"
+                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                         <!-- Các dòng dữ liệu môn học khác -->
                     </tbody>
                 </table>
@@ -106,25 +108,7 @@
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
                     <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="basic-datatables_previous"><a
-                                href="#" aria-controls="basic-datatables" data-dt-idx="0" tabindex="0"
-                                class="page-link">Trước</a></li>
-                        <li class="paginate_button page-item active"><a href="#"
-                                aria-controls="basic-datatables" data-dt-idx="1" tabindex="0"
-                                class="page-link">1</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                        <li class="paginate_button page-item next" id="basic-datatables_next"><a href="#"
-                                aria-controls="basic-datatables" data-dt-idx="7" tabindex="0"
-                                class="page-link">Tiếp</a></li>
+                        {{ $data->links('pagination::bootstrap-4') }}
                     </ul>
                 </div>
             </div>
