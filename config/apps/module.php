@@ -72,6 +72,17 @@ return [
             ]
         ],
         [
+            'title' => 'Khóa Học',
+            'icon' => 'fas fa-chalkboard-teacher', // Icon cho Khóa Học
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Khóa Học',
+                    'route' => 'dashboard.index'
+                ]
+            ]
+        ],
+        [
             'title' => 'Môn Học',
             'icon' => 'fas fa-book', // Icon cho môn học
             'name' => '',
