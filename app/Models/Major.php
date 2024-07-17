@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Students extends Model
+class Major extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'email',
-        'phone',
-        'major_id',
-        'year_of_enrollment',
-        'role_id',
+        'description',
         'created_by',
         'created_at',
         'updated_by',
@@ -23,14 +19,4 @@ class Students extends Model
         'deleted_by',
         'deleted_at',
     ];
-
-    public function subject()
-    {
-        return $this->belongsTo(Major::class);
-    }
-
-    public function role()
-    {
-        return $this->belongsTo(Roles::class);
-    }
 }

@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('majors', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('email', 100)->unique();
-            $table->string('phone', 15);
-            $table->unsignedBigInteger('major_id')->nullable()->constrained('majors')->onDelete('set null');
-            $table->integer('year_of_enrollment');
-            $table->unsignedBigInteger('role_id')->nullable()->constrained('roles')->onDelete('set null');
-            $table->string('OTP');
+            $table->string('name', 255)->unique();
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('majors');
     }
 };

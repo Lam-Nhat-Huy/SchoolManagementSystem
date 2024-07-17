@@ -2,26 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Students;
+use App\Models\Major;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class StudentsSeeder extends Seeder
+class MajorSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Students::insert([
+        Major::insert([
             [
-                'name' => 'John Doe',
-                'email' => 'john.doe@example.com',
-                'phone' => '1234567890',
-                'major_id' => 1,
-                'year_of_enrollment' => 2023,
-                'role_id' => 2,
-                'OTP' => rand(111111, 999999),
+                'name' => 'Lập Trình Web',
+                'description' => 'Chuyên Ngành Lập Trình Web',
                 'created_by' => null,
                 'created_at' => now(),
                 'updated_by' => null,
@@ -30,13 +25,18 @@ class StudentsSeeder extends Seeder
                 'deleted_at' => null,
             ],
             [
-                'name' => 'Jack',
-                'email' => 'jack.doe@example.com',
-                'phone' => '0943777288',
-                'major_id' => 2,
-                'year_of_enrollment' => 2024,
-                'role_id' => 2,
-                'OTP' => rand(111111, 999999),
+                'name' => 'Phát Triển Phần Mềm',
+                'description' => 'Chuyên Ngành Phát Triển Phần Mềm',
+                'created_by' => null,
+                'created_at' => now(),
+                'updated_by' => null,
+                'updated_at' => now(),
+                'deleted_by' => null,
+                'deleted_at' => null,
+            ],
+            [
+                'name' => 'Digital Marketing',
+                'description' => 'Chuyên Ngành Digital Marketing',
                 'created_by' => null,
                 'created_at' => now(),
                 'updated_by' => null,
