@@ -58,6 +58,10 @@
                                                 rowspan="1" colspan="1"
                                                 aria-label="Số tiết: activate to sort column ascending"
                                                 style="width: 84.3125px;">Số điện thoại</th>
+                                                <th class="sorting" tabindex="0" aria-controls="basic-datatables"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Số tiết: activate to sort column ascending"
+                                                style="width: 84.3125px;">Hành Động</th>
                                         </tr>
                                     </thead>
                                     {{-- <tfoot>
