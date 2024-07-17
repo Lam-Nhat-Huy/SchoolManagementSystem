@@ -10,10 +10,10 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title float-left">{{ $title }}</h4>
-                <a href="{{ $url }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
+                <a href="{{ route('subject.index') }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
             </div>
             <div class="card-body">
-                <form action="{{ route('subject.store') }}" method="POST" autocomplete="on">
+                <form action="{{ $url }}" method="POST" autocomplete="on">
                     @csrf
                     <div class="row">
                         <div class="col-lg-9">
