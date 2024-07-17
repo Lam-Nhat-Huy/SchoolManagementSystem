@@ -50,13 +50,13 @@ return [
             ]
         ],
         [
-            'title' => 'Giáo Viên',
+            'title' => 'Giảng Viên',
             'icon' => 'fas fa-chalkboard-teacher', // Icon cho giáo viên
             'name' => '',
             'subModule' => [
                 [
-                    'title' => 'Giáo Viên',
-                    'route' => 'dashboard.index'
+                    'title' => 'Giảng Viên',
+                    'route' => 'teacher.index'
                 ]
             ]
         ],
