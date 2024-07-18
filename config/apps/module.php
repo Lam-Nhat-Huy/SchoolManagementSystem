@@ -78,7 +78,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Khóa Học',
-                    'route' => 'dashboard.index'
+                    'route' => 'course.index'
                 ]
             ]
         ],

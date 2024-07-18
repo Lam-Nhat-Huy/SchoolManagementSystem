@@ -48,7 +48,7 @@
         </div>
         <div class="form-group">
             <label for="class_description">Mô tả lớp học</label>
-            <textarea class="form-control" id="description_class" name="description_class" placeholder="Mô tả lớp học">{{ isset($getEdit) ? $getEdit->description : old('class_name') }}</textarea>
+            <textarea class="form-control" id="description_class" name="description_class" placeholder="Mô tả lớp học">{{ isset($getEdit) ? $getEdit->description : old('description_class') }}</textarea>
         </div>
     </div>
 </div>
