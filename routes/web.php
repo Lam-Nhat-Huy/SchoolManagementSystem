@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\CourseController;
@@ -94,5 +95,18 @@ Route::prefix('wp-admin')->group(function () {
 
         Route::get('/delete/{id}', [CourseController::class, 'delete'])->name('course.delete')->where(['id' => '[0-9]+']);
         Route::delete('/destroy/{id}', [CourseController::class, 'destroy'])->name('course.destroy')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('account')->group(function () {
+        Route::get('/index', [AccountController::class, 'index'])->name('account.index');
+
+        Route::get('/create', [AccountController::class, 'create'])->name('account.create');
+        Route::post('/store', [AccountController::class, 'store'])->name('account.store');
+
+        Route::get('/edit/{id}', [AccountController::class, 'edit'])->name('account.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [AccountController::class, 'update'])->name('account.update')->where(['id' => '[0-9]+']);
+
+        Route::get('/delete/{id}', [AccountController::class, 'delete'])->name('account.delete')->where(['id' => '[0-9]+']);
+        Route::delete('/destroy/{id}', [AccountController::class, 'destroy'])->name('account.destroy')->where(['id' => '[0-9]+']);
     });
 });

@@ -19,12 +19,8 @@ return [
             'subModule' => [
                 [
                     'title' => 'Thành Viên',
-                    'route' => 'dashboard.index'
+                    'route' => 'account.index'
                 ],
-                [
-                    'title' => 'Nhóm Thành Viên',
-                    'route' => 'dashboard.index'
-                ]
             ]
         ],
         [
