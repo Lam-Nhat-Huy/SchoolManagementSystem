@@ -90,6 +90,17 @@ return [
             ]
         ],
         [
+            'title' => 'Đánh Giá',
+            'icon' => 'fas fa-pencil-alt', // Icon cho Đánh Giá
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Đánh Giá',
+                    'route' => 'evaluation.index'
+                ]
+            ]
+        ],
+        [
             'title' => 'Điểm Danh',
             'icon' => 'fas fa-check', // Icon cho điểm danh
             'name' => '',

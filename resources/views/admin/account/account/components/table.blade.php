@@ -32,10 +32,10 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên môn học: activate to sort column descending">Tên</th>
+                                aria-label="Tên thành viên: activate to sort column descending">Tên</th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên môn học: activate to sort column descending">Email</th>
+                                aria-label="Tên thành viên: activate to sort column descending">Email</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-label="Giảng viên: activate to sort column ascending">Tạo</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
@@ -62,7 +62,7 @@
                                     </a>
                                     <form action="{{ route('account.destroy', ['id' => $items->id]) }}" method="POST"
                                         style="display:inline-block;"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
+                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa thành viên này?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">

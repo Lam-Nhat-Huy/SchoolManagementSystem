@@ -32,7 +32,7 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên môn học: activate to sort column descending">Tên
+                                aria-label="Tên lớp học: activate to sort column descending">Tên
                                 Lớp Học</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-label="Giảng viên: activate to sort column ascending">Giảng viên
@@ -64,7 +64,7 @@
                                     </a>
                                     <form action="{{ route('class.destroy', ['id' => $items->class_id]) }}"
                                         method="POST" style="display:inline-block;"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
+                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa lớp học này?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">

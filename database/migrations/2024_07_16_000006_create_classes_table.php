@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('course_id')->nullable()->constrained('courses')->onDelete('set null');
             $table->unsignedBigInteger('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
+            $table->integer('is_evaluation')->default(0);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
