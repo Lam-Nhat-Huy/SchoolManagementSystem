@@ -7,23 +7,18 @@
             <label for="subject_name">Tên môn học</label>
             <input type="text" class="form-control" id="subject_name" name="subject_name" placeholder="Tên môn học">
         </div>
+
         <div class="form-group">
-            <label for="instructor">Giảng viên</label>
-            <input type="text" class="form-control" id="instructor" name="instructor" placeholder="Giảng viên">
-        </div>
-        <div class="form-group">
-            <label for="credit_hours">Số tín chỉ</label>
-            <input type="number" class="form-control" id="credit_hours" name="credit_hours" placeholder="Số tín chỉ">
-        </div>
-        <div class="form-group">
-            <label for="num_sessions">Số tiết</label>
-            <input type="number" class="form-control" id="num_sessions" name="num_sessions" placeholder="Số tiết">
+            <label for="status">Khóa học</label>
+            <select class="form-control setupSelect2" id="course_id" name="course_id">
+                <option value="1">Công Nghệ Thông Tin</option>
+                <option value="2">Phát Triển Phần Mềm</option>
+            </select>
         </div>
 
         <div class="form-group">
-            <label for="classroom">Phòng học</label>
-            <input type="text" class="form-control" id="classroom" name="classroom" placeholder="Phòng học">
+            <label for="instructor">Mô tả</label>
+            <textarea name="description" class="form-control" id="description" name="description"></textarea>
         </div>
-
     </div>
 </div>
