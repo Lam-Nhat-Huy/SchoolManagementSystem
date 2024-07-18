@@ -2,7 +2,7 @@
     @include('admin.dashboard.components.breadcrumb')
 
     @php
-        $url = $config['method'] == 'create' ? route('class.store') : route('class.update', 1);
+        $url = $config['method'] == 'create' ? route('class.store') : route('class.update', $getEdit->id);
         $title = $config['method'] == 'create' ? 'Thêm mới lớp học' : 'Chỉnh sửa lớp học';
     @endphp
 

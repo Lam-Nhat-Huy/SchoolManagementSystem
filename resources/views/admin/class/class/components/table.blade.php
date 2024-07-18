@@ -42,75 +42,38 @@
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-label="Giảng viên: activate to sort column ascending">Tạo</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Chỉnh Sửa</th>
+                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Sửa</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-label="Hành động: activate to sort column ascending">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr role="row" class="odd">
-                            <td class="sorting_1" title="Description..">WD201</td>
-                            <td>Nguyễn Văn B</td>
-                            <td>Nhập Môn Lập Trình</td>
-                            <td>Lữ Phát Huy (17/07/2024)</td>
-                            <td>Không Có</td>
-                            <td>
-                                <a href="{{ route('class.edit', ['id' => 1]) }}" class="btn btn-sm btn-black">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <form action="{{ route('class.destroy', ['id' => 1]) }}" method="POST"
-                                    style="display:inline-block;"
-                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td class="sorting_1" title="Description..">WD202</td>
-                            <td>Nguyễn Văn C</td>
-                            <td>Thiết Kế UI/UX</td>
-                            <td>Lữ Phát Huy (17/07/2024)</td>
-                            <td>Không Có</td>
-                            <td>
-                                <a href="{{ route('class.edit', ['id' => 1]) }}" class="btn btn-sm btn-black">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <form action="{{ route('class.destroy', ['id' => 1]) }}" method="POST"
-                                    style="display:inline-block;"
-                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr role="row" class="odd">
-                            <td class="sorting_1" title="Description..">WD203</td>
-                            <td>Nguyễn Văn D</td>
-                            <td>Lập Trình PHP 3</td>
-                            <td>Lữ Phát Huy (17/07/2024)</td>
-                            <td>Không Có</td>
-                            <td>
-                                <a href="{{ route('class.edit', ['id' => 1]) }}" class="btn btn-sm btn-black">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <form action="{{ route('class.destroy', ['id' => 1]) }}" method="POST"
-                                    style="display:inline-block;"
-                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                        @foreach ($getAllClass as $items)
+                            <tr role="row" class="odd">
+                                <td class="sorting_1" title="{{ $items->description }}">{{ $items->name }}</td>
+                                <td>{{ $items->teacher_name }}</td>
+                                <td>{{ $items->course_name }}</td>
+                                <td>{{ $items->creator_name }} ({{ $items->created_at->format('d-m-Y') }})</td>
+                                <td>{{ $items->updater_name ?? 'Không Có' }}
+                                    {{ !empty($items->updated_at) ? '(' . $items->updated_at->format('d-m-Y') . ')' : '' }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('class.edit', ['id' => $items->class_id]) }}"
+                                        class="btn btn-sm btn-black">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('class.destroy', ['id' => $items->class_id]) }}"
+                                        method="POST" style="display:inline-block;"
+                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
