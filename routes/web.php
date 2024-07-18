@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SchedulesController;
 use App\Http\Controllers\Admin\EvaluationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
@@ -122,5 +123,19 @@ Route::prefix('wp-admin')->group(function () {
 
         Route::get('/delete/{id}', [EvaluationController::class, 'delete'])->name('evaluation.delete')->where(['id' => '[0-9]+']);
         Route::delete('/destroy/{id}', [EvaluationController::class, 'destroy'])->name('evaluation.destroy')->where(['id' => '[0-9]+']);
+    });
+
+    //Lịch học
+    Route::prefix('schedule')->group(function () {
+        Route::get('/index', [SchedulesController::class, 'index'])->name('schedule.index');
+
+        Route::get('/create', [SchedulesController::class, 'create'])->name('schedule.create');
+        Route::post('/store', [SchedulesController::class, 'store'])->name('schedule.store');
+
+        Route::get('/edit/{id}', [SchedulesController::class, 'edit'])->name('schedule.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [SchedulesController::class, 'update'])->name('schedule.update')->where(['id' => '[0-9]+']);
+
+        Route::get('/delete/{id}', [SchedulesController::class, 'delete'])->name('schedule.delete')->where(['id' => '[0-9]+']);
+        Route::delete('/destroy/{id}', [SchedulesController::class, 'destroy'])->name('schedule.destroy')->where(['id' => '[0-9]+']);
     });
 });

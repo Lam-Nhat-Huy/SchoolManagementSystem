@@ -33,7 +33,20 @@ return [
                     'route' => 'dashboard.index'
                 ]
             ]
-        ],
+        ]
+        ,
+        [
+            'title' => 'Lịch học',
+            'icon' => 'fas fa-calendar', // Icon cho lịch học
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Lịch học',
+                    'route' => 'schedule.index'
+                ]
+            ]
+        ]
+        ,
         [
             'title' => 'Sinh Viên',
             'icon' => 'fas fa-graduation-cap', // Icon cho học sinh
