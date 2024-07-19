@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EnrollmentController;
+use App\Http\Controllers\Admin\EnrollmentStudentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SchedulesController;
 use App\Http\Controllers\Admin\EvaluationController;
@@ -139,18 +141,42 @@ Route::prefix('wp-admin')->group(function () {
         Route::delete('/destroy/{id}', [SchedulesController::class, 'destroy'])->name('schedule.destroy')->where(['id' => '[0-9]+']);
     });
 
-     Route::prefix('student')->group(function () {
-         Route::get('/index', [StudentController::class, 'index'])->name('student.index');
+    Route::prefix('student')->group(function () {
+        Route::get('/index', [StudentController::class, 'index'])->name('student.index');
 
-         Route::get('/create', [StudentController::class, 'create'])->name('student.create');
-         Route::get('/store', [StudentController::class, 'store'])->name('student.store');
-         Route::post('/store', [StudentController::class, 'store'])->name('student.store');
-         Route::get('/edit/{id}', [StudentController::class, 'store'])->name('student.edit');
+        Route::get('/create', [StudentController::class, 'create'])->name('student.create');
+        Route::get('/store', [StudentController::class, 'store'])->name('student.store');
+        Route::post('/store', [StudentController::class, 'store'])->name('student.store');
+        Route::get('/edit/{id}', [StudentController::class, 'store'])->name('student.edit');
 
-         Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('student.edit')->where(['id' => '[0-9]+']);
-         Route::post('/update/{id}', [StudentController::class, 'update'])->name('student.update')->where(['id' => '[0-9]+']);
+        Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('student.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [StudentController::class, 'update'])->name('student.update')->where(['id' => '[0-9]+']);
 
-         Route::get('/delete/{id}', [StudentController::class, 'delete'])->name('student.delete')->where(['id' => '[0-9]+']);
-         Route::delete('/destroy/{id}', [StudentController::class, 'destroy'])->name('student.destroy')->where(['id' => '[0-9]+']);
-     });
+        Route::get('/delete/{id}', [StudentController::class, 'delete'])->name('student.delete')->where(['id' => '[0-9]+']);
+        Route::delete('/destroy/{id}', [StudentController::class, 'destroy'])->name('student.destroy')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('evaluationed')->group(function () {
+        Route::get('/index', [EvaluationedController::class, 'index'])->name('evaluationed.index');
+
+        Route::get('/create', [EvaluationedController::class, 'create'])->name('evaluationed.create');
+        Route::post('/store', [EvaluationedController::class, 'store'])->name('evaluationed.store');
+
+        Route::get('/edit/{id}', [EvaluationedController::class, 'edit'])->name('evaluationed.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [EvaluationedController::class, 'update'])->name('evaluationed.update')->where(['id' => '[0-9]+']);
+
+        Route::get('/delete/{id}', [EvaluationedController::class, 'delete'])->name('evaluationed.delete')->where(['id' => '[0-9]+']);
+        Route::delete('/destroy/{id}', [EvaluationedController::class, 'destroy'])->name('evaluationed.destroy')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('enrollment')->group(function () {
+        Route::get('/index', [EnrollmentController::class, 'index'])->name('enrollment.index');
+
+        Route::get('/edit/{id}', [EnrollmentController::class, 'edit'])->name('enrollment.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [EnrollmentController::class, 'update'])->name('enrollment.update')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('enrollment_student')->group(function () {
+        Route::get('/index', [EnrollmentStudentController::class, 'index'])->name('enrollment_student.index');
+    });
 });

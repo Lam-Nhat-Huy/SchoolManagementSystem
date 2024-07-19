@@ -48,6 +48,21 @@ return [
         ]
         ,
         [
+            'title' => 'Bảng Điểm',
+            'icon' => 'fas fa-file-signature', // Icon cho Bảng Điểm
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Nhập Điểm',
+                    'route' => 'enrollment.index'
+                ],
+                [
+                    'title' => 'Bảng Điểm',
+                    'route' => 'enrollment_student.index'
+                ]
+            ]
+        ],
+        [
             'title' => 'Sinh Viên',
             'icon' => 'fas fa-graduation-cap', // Icon cho học sinh
             'name' => '',
