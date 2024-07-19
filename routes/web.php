@@ -32,6 +32,7 @@ Route::prefix('wp-admin')->group(function () {
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('user.delete')->where(['id' => '[0-9]+']);
         Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy')->where(['id' => '[0-9]+']);
     });
+    
 
     Route::prefix('student')->group(function () {
         Route::get('/index', [StudentController::class, 'index'])->name('student.index');
@@ -123,4 +124,19 @@ Route::prefix('wp-admin')->group(function () {
         Route::get('/delete/{id}', [EvaluationController::class, 'delete'])->name('evaluation.delete')->where(['id' => '[0-9]+']);
         Route::delete('/destroy/{id}', [EvaluationController::class, 'destroy'])->name('evaluation.destroy')->where(['id' => '[0-9]+']);
     });
+
+    // `Route::prefix('student')->group(function () {
+    //     Route::get('/index', [StudentController::class, 'index'])->name('student.index');
+
+    //     Route::get('/create', [StudentController::class, 'create'])->name('student.create');
+    //     Route::get('/store', [StudentController::class, 'store'])->name('student.store');
+    //     Route::post('/store', [StudentController::class, 'store'])->name('student.store');
+    //     Route::get('/edit{id}', [StudentController::class, 'store'])->name('student.edit');
+
+    //     Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('student.edit')->where(['id' => '[0-9]+']);
+    //     Route::post('/update/{id}', [StudentController::class, 'update'])->name('student.update')->where(['id' => '[0-9]+']);
+
+    //     Route::get('/delete/{id}', [StudentController::class, 'delete'])->name('student.delete')->where(['id' => '[0-9]+']);
+    //     Route::delete('/destroy/{id}', [StudentController::class, 'destroy'])->name('student.destroy')->where(['id' => '[0-9]+']);
+    // });`
 });
