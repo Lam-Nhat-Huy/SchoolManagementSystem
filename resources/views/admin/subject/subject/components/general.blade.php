@@ -5,7 +5,7 @@
     <div class="card-body">
         <div class="form-group">
             <label for="subject_name">Tên môn học</label>
-            <input type="text" class="form-control" id="subject_name" name="subject_name" placeholder="Tên môn học">
+            <input type="text" class="form-control" id="subject_name" name="name" placeholder="Tên môn học">
         </div>
 
         <div class="form-group">

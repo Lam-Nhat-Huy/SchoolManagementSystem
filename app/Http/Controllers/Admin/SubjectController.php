@@ -4,10 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Subjects;
+use App\Services\SubjectService;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
+
+    protected $subjectService;
+
+    public function __construct(SubjectService $subjectService)
+    {
+        $this->subjectService = $subjectService;
+    }
+
     public function index()
     {
         $template = "admin.subject.subject.pages.index";
@@ -56,7 +65,10 @@ class SubjectController extends Controller
 
     public function store(Request $request)
     {
-        return "Đây là trang thêm môn học";
+        if ($this->subjectService->create($request)) {
+            return redirect()->route('subject.index')->with('success', 'Thêm mới bảng ghi thành công');
+        }
+        return redirect()->route('subject.index')->with('error', 'Thêm mới bảng ghi thất bại');
     }
 
     public function edit($id)
