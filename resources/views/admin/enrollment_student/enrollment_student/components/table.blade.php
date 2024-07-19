@@ -112,5 +112,5 @@
             </div>
         </div>
     @endforeach
-    <h6>Điểm Trung Bình: {{ $averageGpa }}</h6>
+    <h6>Điểm Trung Bình: {{ $aeravgeGpa ?? '' }}</h6>
 </div>
