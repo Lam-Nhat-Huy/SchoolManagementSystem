@@ -24,6 +24,17 @@ class Students extends Model
         'deleted_at',
     ];
 
+    public function getYearOfEnrollmentAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function setYearOfEnrollmentAttribute($value)
+    {
+        $this->attributes['year_of_enrollment'] = \Carbon\Carbon::parse($value);
+    }
+
+
     public function subject()
     {
         return $this->belongsTo(Major::class);

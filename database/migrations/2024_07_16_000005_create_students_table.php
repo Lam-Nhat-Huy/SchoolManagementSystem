@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email', 100)->unique();
             $table->string('phone', 15);
             $table->unsignedBigInteger('major_id')->nullable()->constrained('majors')->onDelete('set null');
-            $table->integer('year_of_enrollment');
+            $table->timestamp('year_of_enrollment');
             $table->unsignedBigInteger('role_id')->nullable()->constrained('roles')->onDelete('set null');
             $table->string('OTP');
             $table->unsignedBigInteger('created_by')->nullable();
