@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\AccountController;
-use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\CourseController;
@@ -11,17 +10,30 @@ use App\Http\Controllers\Admin\EnrollmentStudentController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SchedulesController;
 use App\Http\Controllers\Admin\EvaluationController;
+use App\Http\Controllers\Admin\EvaluationedController;
+use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Middleware\Authentication;
+use App\Http\Middleware\Authenticationed;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [AuthController::class, 'index'])->name('auth.index');
-Route::get('/wp-admin', [AuthController::class, 'index'])->name('auth.index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::prefix('login')->middleware(Authenticationed::class)->group(function () {
+    Route::get('/index', [LoginController::class, 'index'])->name('login.index');
 
-Route::prefix('wp-admin')->group(function () {
+    Route::post('/send_otp', [LoginController::class, 'send_otp'])->name('login.send_otp');
+
+    Route::get('/enter_otp', [LoginController::class, 'enter_otp'])->name('login.enter_otp');
+
+    Route::post('/confirm_otp', [LoginController::class, 'confirm_otp'])->name('login.confirm_otp');
+});
+
+Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () {
     Route::get('/trang-chu', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::prefix('user')->group(function () {
