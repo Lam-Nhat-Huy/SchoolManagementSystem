@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -178,5 +179,12 @@ Route::prefix('wp-admin')->group(function () {
 
     Route::prefix('enrollment_student')->group(function () {
         Route::get('/index', [EnrollmentStudentController::class, 'index'])->name('enrollment_student.index');
+    });
+
+    Route::prefix('traning_officer_chat')->group(function () {
+        Route::get('/index', [ChatController::class, 'index'])->name('traning_officer_chat.index');
+
+        Route::get('/detail/{id}', [ChatController::class, 'detail'])->name('traning_officer_chat.detail')->where(['id' => '[0-9]+']);
+        Route::post('/store', [ChatController::class, 'store'])->name('traning_officer_chat.store');
     });
 });

@@ -138,6 +138,17 @@ return [
                     'route' => 'dashboard.index'
                 ]
             ]
+                ],
+        [
+            'title' => 'Hỗ Trợ Sinh Viên',
+            'icon' => 'fab fa-rocketchat', // Icon cho Hỗ Trợ Sinh Viên
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Hỗ Trợ Sinh Viên',
+                    'route' => 'traning_officer_chat.index'
+                ]
+            ]
         ]
     ]
 ];

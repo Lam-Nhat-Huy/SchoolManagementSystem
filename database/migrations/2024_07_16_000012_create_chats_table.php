@@ -15,13 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id')->nullable()->constrained('students')->onDelete('set null');
             $table->unsignedBigInteger('role_id')->default(4);
+            $table->unsignedBigInteger('reply_to')->nullable();
             $table->text('message');
             $table->timestamp('sent_at')->useCurrent();
             $table->boolean('is_reply')->default(false);
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->timestamp('created_at')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
             $table->timestamp('deleted_at')->nullable();
         });
