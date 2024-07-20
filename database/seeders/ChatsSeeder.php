@@ -115,7 +115,7 @@ class ChatsSeeder extends Seeder
             ],
             [
                 'student_id' => 1,
-                'reply_to' => 7,
+                'reply_to' => 1,
                 'message' => 'The meeting is at 3 PM.',
                 'sent_at' => now(),
                 'is_reply' => true,
@@ -151,7 +151,7 @@ class ChatsSeeder extends Seeder
             ],
             [
                 'student_id' => 2,
-                'reply_to' => 11,
+                'reply_to' => 2,
                 'message' => 'Could you share them?',
                 'sent_at' => now(),
                 'is_reply' => true,
@@ -169,7 +169,7 @@ class ChatsSeeder extends Seeder
             ],
             [
                 'student_id' => 4,
-                'reply_to' => 10,
+                'reply_to' => 3,
                 'message' => 'The homework is about integrals.',
                 'sent_at' => now(),
                 'is_reply' => true,
@@ -178,7 +178,7 @@ class ChatsSeeder extends Seeder
             ],
             [
                 'student_id' => 1,
-                'reply_to' => 13,
+                'reply_to' => 4,
                 'message' => 'Next class will cover derivatives.',
                 'sent_at' => now(),
                 'is_reply' => true,
@@ -196,7 +196,7 @@ class ChatsSeeder extends Seeder
             ],
             [
                 'student_id' => 3,
-                'reply_to' => 16,
+                'reply_to' => 3,
                 'message' => 'I found "Calculus Made Easy" very helpful.',
                 'sent_at' => now(),
                 'is_reply' => true,
@@ -214,7 +214,7 @@ class ChatsSeeder extends Seeder
             ],
             [
                 'student_id' => 1,
-                'reply_to' => 18,
+                'reply_to' => 2,
                 'message' => 'I have it, I can share a copy.',
                 'sent_at' => now(),
                 'is_reply' => true,
