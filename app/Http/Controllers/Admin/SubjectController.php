@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Subjects;
+use App\Services\SubjectService;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -56,7 +57,6 @@ class SubjectController extends Controller
 
     public function store(Request $request)
     {
-        return "Đây là trang thêm môn học";
     }
 
     public function edit($id)

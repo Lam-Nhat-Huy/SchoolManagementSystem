@@ -15,6 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id')->nullable()->constrained('students')->onDelete('set null');
             $table->unsignedBigInteger('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
+            $table->double('lab_1')->nullable();
+            $table->double('lab_2')->nullable();
+            $table->double('assignment_1')->nullable();
+            $table->double('lab_3')->nullable();
+            $table->double('lab_4')->nullable();
+            $table->double('assignment_2')->nullable();
+            $table->double('final_exam')->nullable();
             $table->date('enrollment_date');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();

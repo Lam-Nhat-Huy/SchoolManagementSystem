@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             ClassesSeeder::class,
             SchedulesSeeder::class,
             EnrollmentsSeeder::class,
-            GradesSeeder::class,
             CreateTeacherEvaluationsSeeder::class,
             TeacherEvaluationsSeeder::class,
             ChatsSeeder::class,

@@ -1,23 +1,39 @@
 <?php
 
 use App\Http\Controllers\Admin\AccountController;
-use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EnrollmentController;
+use App\Http\Controllers\Admin\EnrollmentStudentController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SchedulesController;
 use App\Http\Controllers\Admin\EvaluationController;
+use App\Http\Controllers\Admin\EvaluationedController;
+use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Middleware\Authentication;
+use App\Http\Middleware\Authenticationed;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [AuthController::class, 'index'])->name('auth.index');
-Route::get('/wp-admin', [AuthController::class, 'index'])->name('auth.index');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::prefix('login')->middleware(Authenticationed::class)->group(function () {
+    Route::get('/index', [LoginController::class, 'index'])->name('login.index');
 
-Route::prefix('wp-admin')->group(function () {
+    Route::post('/send_otp', [LoginController::class, 'send_otp'])->name('login.send_otp');
+
+    Route::get('/enter_otp', [LoginController::class, 'enter_otp'])->name('login.enter_otp');
+
+    Route::post('/confirm_otp', [LoginController::class, 'confirm_otp'])->name('login.confirm_otp');
+});
+
+Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () {
     Route::get('/trang-chu', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::prefix('user')->group(function () {
@@ -32,7 +48,6 @@ Route::prefix('wp-admin')->group(function () {
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('user.delete')->where(['id' => '[0-9]+']);
         Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy')->where(['id' => '[0-9]+']);
     });
-    
 
     Route::prefix('student')->group(function () {
         Route::get('/index', [StudentController::class, 'index'])->name('student.index');
@@ -125,18 +140,63 @@ Route::prefix('wp-admin')->group(function () {
         Route::delete('/destroy/{id}', [EvaluationController::class, 'destroy'])->name('evaluation.destroy')->where(['id' => '[0-9]+']);
     });
 
-    // `Route::prefix('student')->group(function () {
-    //     Route::get('/index', [StudentController::class, 'index'])->name('student.index');
+    //Lịch học
+    Route::prefix('schedule')->group(function () {
+        Route::get('/index', [SchedulesController::class, 'index'])->name('schedule.index');
 
-    //     Route::get('/create', [StudentController::class, 'create'])->name('student.create');
-    //     Route::get('/store', [StudentController::class, 'store'])->name('student.store');
-    //     Route::post('/store', [StudentController::class, 'store'])->name('student.store');
-    //     Route::get('/edit{id}', [StudentController::class, 'store'])->name('student.edit');
+        Route::get('/create', [SchedulesController::class, 'create'])->name('schedule.create');
+        Route::post('/store', [SchedulesController::class, 'store'])->name('schedule.store');
 
-    //     Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('student.edit')->where(['id' => '[0-9]+']);
-    //     Route::post('/update/{id}', [StudentController::class, 'update'])->name('student.update')->where(['id' => '[0-9]+']);
+        Route::get('/edit/{id}', [SchedulesController::class, 'edit'])->name('schedule.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [SchedulesController::class, 'update'])->name('schedule.update')->where(['id' => '[0-9]+']);
 
-    //     Route::get('/delete/{id}', [StudentController::class, 'delete'])->name('student.delete')->where(['id' => '[0-9]+']);
-    //     Route::delete('/destroy/{id}', [StudentController::class, 'destroy'])->name('student.destroy')->where(['id' => '[0-9]+']);
-    // });`
+        Route::get('/delete/{id}', [SchedulesController::class, 'delete'])->name('schedule.delete')->where(['id' => '[0-9]+']);
+        Route::delete('/destroy/{id}', [SchedulesController::class, 'destroy'])->name('schedule.destroy')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('student')->group(function () {
+        Route::get('/index', [StudentController::class, 'index'])->name('student.index');
+
+        Route::get('/create', [StudentController::class, 'create'])->name('student.create');
+        Route::get('/store', [StudentController::class, 'store'])->name('student.store');
+        Route::post('/store', [StudentController::class, 'store'])->name('student.store');
+        Route::get('/edit/{id}', [StudentController::class, 'store'])->name('student.edit');
+
+        Route::get('/edit/{id}', [StudentController::class, 'edit'])->name('student.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [StudentController::class, 'update'])->name('student.update')->where(['id' => '[0-9]+']);
+
+        Route::get('/delete/{id}', [StudentController::class, 'delete'])->name('student.delete')->where(['id' => '[0-9]+']);
+        Route::delete('/destroy/{id}', [StudentController::class, 'destroy'])->name('student.destroy')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('evaluationed')->group(function () {
+        Route::get('/index', [EvaluationedController::class, 'index'])->name('evaluationed.index');
+
+        Route::get('/create', [EvaluationedController::class, 'create'])->name('evaluationed.create');
+        Route::post('/store', [EvaluationedController::class, 'store'])->name('evaluationed.store');
+
+        Route::get('/edit/{id}', [EvaluationedController::class, 'edit'])->name('evaluationed.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [EvaluationedController::class, 'update'])->name('evaluationed.update')->where(['id' => '[0-9]+']);
+
+        Route::get('/delete/{id}', [EvaluationedController::class, 'delete'])->name('evaluationed.delete')->where(['id' => '[0-9]+']);
+        Route::delete('/destroy/{id}', [EvaluationedController::class, 'destroy'])->name('evaluationed.destroy')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('enrollment')->group(function () {
+        Route::get('/index', [EnrollmentController::class, 'index'])->name('enrollment.index');
+
+        Route::get('/edit/{id}', [EnrollmentController::class, 'edit'])->name('enrollment.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [EnrollmentController::class, 'update'])->name('enrollment.update')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('enrollment_student')->group(function () {
+        Route::get('/index', [EnrollmentStudentController::class, 'index'])->name('enrollment_student.index');
+    });
+
+    Route::prefix('traning_officer_chat')->group(function () {
+        Route::get('/index', [ChatController::class, 'index'])->name('traning_officer_chat.index');
+
+        Route::get('/detail/{id}', [ChatController::class, 'detail'])->name('traning_officer_chat.detail')->where(['id' => '[0-9]+']);
+        Route::post('/store', [ChatController::class, 'store'])->name('traning_officer_chat.store');
+    });
 });

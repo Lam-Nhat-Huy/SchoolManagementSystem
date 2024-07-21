@@ -33,6 +33,34 @@ return [
                     'route' => 'dashboard.index'
                 ]
             ]
+        ]
+        ,
+        [
+            'title' => 'Lịch học',
+            'icon' => 'fas fa-calendar', // Icon cho lịch học
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Lịch học',
+                    'route' => 'schedule.index'
+                ]
+            ]
+        ]
+        ,
+        [
+            'title' => 'Bảng Điểm',
+            'icon' => 'fas fa-file-signature', // Icon cho Bảng Điểm
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Nhập Điểm',
+                    'route' => 'enrollment.index'
+                ],
+                [
+                    'title' => 'Bảng Điểm',
+                    'route' => 'enrollment_student.index'
+                ]
+            ]
         ],
         [
             'title' => 'Sinh Viên',
@@ -108,6 +136,17 @@ return [
                 [
                     'title' => 'Điểm Danh',
                     'route' => 'dashboard.index'
+                ]
+            ]
+                ],
+        [
+            'title' => 'Hỗ Trợ Sinh Viên',
+            'icon' => 'fab fa-rocketchat', // Icon cho Hỗ Trợ Sinh Viên
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Hỗ Trợ Sinh Viên',
+                    'route' => 'traning_officer_chat.index'
                 ]
             ]
         ]
