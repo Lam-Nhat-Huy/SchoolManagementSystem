@@ -39,9 +39,17 @@ button {
     width: 100%; /* Chỉnh sửa để các nút có chiều rộng 100% */
 }
 
-.google-login {
+.google-button {
+    display: inline-block;
     background: linear-gradient(286deg, rgb(76, 160, 252) 23%, rgb(224, 47, 238) 76%);
     color: white;
+    padding: 0.75em;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    text-decoration: none;
+    width: 298px; /* Chỉnh sửa để các nút có chiều rộng 100% */
 }
 
 .apple-login {

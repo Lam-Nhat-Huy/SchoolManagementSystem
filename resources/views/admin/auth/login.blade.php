@@ -12,18 +12,13 @@
 <body>
     <div class="login-container">
         <h2>Đăng Nhập</h2>
-        <button class="google-login">Đăng nhập với Google</button>
+
+        <a href="{{ route('auth.google') }}" class="google-button">Đăng nhập với Google</a>
+
         <div class="divider">hoặc đăng nhập với</div>
         <form action="#" method="POST">
             @csrf
             <input type="email" name="email" placeholder="Email" required>
-            <select name="branch" class="branch">
-                <option value="">Cần Thơ</option>
-                <option value="">Hồ Chí Minh</option>
-            </select>
-            <div class="options">
-                <a href="#">Quên mật khẩu?</a>
-            </div>
             <button type="submit" class="submit-btn">Đăng nhập</button>
         </form>
     </div>
