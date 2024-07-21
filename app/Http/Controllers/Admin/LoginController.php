@@ -19,6 +19,7 @@ class LoginController extends Controller
 
     public function enter_otp() {
         // Giao diện trang nhập mã OTP
+        return view('admin.auth.enter_otp');
     }
 
     public function confirm_otp() {
