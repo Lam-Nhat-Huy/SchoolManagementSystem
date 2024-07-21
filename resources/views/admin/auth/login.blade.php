@@ -11,7 +11,7 @@
 
 <body>
     <div class="login-container">
-        <h2>Đăng Nhập</h2>
+        <h2 style="margin-bottom: 20px;">Đăng Nhập</h2>
 
         <a href="{{ route('auth.google') }}" class="google-button">Đăng nhập với Google</a>
 
