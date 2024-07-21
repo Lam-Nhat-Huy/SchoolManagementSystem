@@ -52,10 +52,10 @@
                                 <td>{{ $item->description }}</td>
                                 <td>Công Nghệ Thông Tin</td>
                                 <td>
-                                    <a href="{{ route('subject.edit', ['id' => 1]) }}" class="btn btn-sm btn-black">
+                                    <a href="{{ route('subject.edit', ['id' => $item->id]) }}" class="btn btn-sm btn-black">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('subject.destroy', ['id' => 1]) }}" method="POST"
+                                    <form action="{{ route('subject.destroy', ['id' => $item->id]) }}" method="POST"
                                         style="display:inline-block;"
                                         onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
                                         @csrf
