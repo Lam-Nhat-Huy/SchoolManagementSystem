@@ -10,10 +10,7 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $getAllCourse = Courses::select('courses.*', 'creator_account.name as creator_name', 'updater_account.name as updater_name')
-            ->orderBy('courses.created_at', 'DESC')
-            ->leftJoin('accounts as creator_account', 'courses.created_by', '=', 'creator_account.id')
-            ->leftJoin('accounts as updater_account', 'courses.updated_by', '=', 'updater_account.id')
+        $getAllCourse = Courses::orderBy('courses.created_at', 'DESC')
             ->get();
 
         $template = 'admin.course.course.pages.index';
