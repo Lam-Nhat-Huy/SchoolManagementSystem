@@ -54,7 +54,7 @@ return [
             ]
         ],
         [
-            'user_role' => [1, 3],
+            'user_role' => [1, 2, 3],
             'title' => 'Bảng Điểm',
             'icon' => 'fas fa-file-signature', // Icon cho Bảng Điểm
             'name' => '',
@@ -137,7 +137,7 @@ return [
             ]
         ],
         [
-            'user_role' => [1, 3],
+            'user_role' => [1, 2, 3],
             'title' => 'Đánh Giá',
             'icon' => 'fas fa-pencil-alt', // Icon cho Đánh Giá
             'name' => '',
@@ -151,6 +151,11 @@ return [
                     'title' => 'Đánh Giá Của Sinh Viên',
                     'route' => 'evaluationed.index',
                     'user_role' => [1, 3]
+                ],
+                [
+                    'title' => 'Danh Sách Đánh Giá',
+                    'route' => 'evaluation_by_student.index',
+                    'user_role' => 2
                 ]
             ]
         ],

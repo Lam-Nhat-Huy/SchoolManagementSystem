@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\TeachingSchedule;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Student\EvaluationByStudentController;
 use App\Http\Middleware\Authentication;
 use App\Http\Middleware\Authenticationed;
 use Illuminate\Support\Facades\Route;
@@ -214,5 +215,12 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
         Route::get('/index', [StudentChatController::class, 'index'])->name('student_chat.index');
         
         Route::post('/store', [StudentChatController::class, 'store'])->name('student_chat.store');
+    });
+
+    Route::prefix('evaluation_by_student')->group(function () {
+        Route::get('/index', [EvaluationByStudentController::class, 'index'])->name('evaluation_by_student.index');
+
+        Route::get('/feedback/{id}', [EvaluationByStudentController::class, 'feedback'])->name('evaluation_by_student.feedback')->where(['id' => '[0-9]+']);
+        Route::post('/store', [EvaluationByStudentController::class, 'store'])->name('evaluation_by_student.store');
     });
 });
