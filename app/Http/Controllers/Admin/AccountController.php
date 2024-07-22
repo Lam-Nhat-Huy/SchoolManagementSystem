@@ -10,10 +10,7 @@ class AccountController extends Controller
 {
     public function index()
     {
-        $getAllAccount = Account::select('accounts.*', 'creator_account.name as creator_name', 'updater_account.name as updater_name')
-            ->orderBy('accounts.created_at', 'DESC')
-            ->leftJoin('accounts as creator_account', 'accounts.created_by', '=', 'creator_account.id')
-            ->leftJoin('accounts as updater_account', 'accounts.updated_by', '=', 'updater_account.id')
+        $getAllAccount = Account::orderBy('accounts.created_at', 'DESC')
             ->get();
 
         $template = 'admin.account.account.pages.index';

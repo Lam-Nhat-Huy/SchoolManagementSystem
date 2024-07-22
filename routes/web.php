@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\TeachingSchedule;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\Authentication;
@@ -158,6 +159,10 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
 
         Route::get('/delete/{id}', [SchedulesController::class, 'delete'])->name('schedule.delete')->where(['id' => '[0-9]+']);
         Route::delete('/destroy/{id}', [SchedulesController::class, 'destroy'])->name('schedule.destroy')->where(['id' => '[0-9]+']);
+    });
+
+    Route::prefix('teaching_schedule')->group(function () {
+        Route::get('/index', [TeachingSchedule::class, 'index'])->name('teaching_schedule.index');
     });
 
     Route::prefix('student')->group(function () {

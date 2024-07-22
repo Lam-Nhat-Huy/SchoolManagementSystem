@@ -32,19 +32,15 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên lớp học: activate to sort column descending">Tên
+                                aria-label="Tên lớp học: activate to sort column descending" style="width: 27%;">Tên
                                 Lớp Học</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Giảng viên
+                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" style="width: 27%;">Giảng viên
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Khóa Học</th>
+                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" style="width: 27%;">Khóa Học</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Tạo</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Sửa</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending">Hành động</th>
+                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 19%;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,10 +49,6 @@
                                 <td class="sorting_1" title="{{ $items->description }}">{{ $items->name }}</td>
                                 <td>{{ $items->teacher_name }}</td>
                                 <td>{{ $items->course_name }}</td>
-                                <td>{{ $items->creator_name }} ({{ $items->created_at->format('d-m-Y') }})</td>
-                                <td>{{ $items->updater_name ?? 'Không Có' }}
-                                    {{ !empty($items->updated_at) ? '(' . $items->updated_at->format('d-m-Y') . ')' : '' }}
-                                </td>
                                 <td>
                                     <a href="{{ route('class.edit', ['id' => $items->class_id]) }}"
                                         class="btn btn-sm btn-black">

@@ -32,16 +32,12 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên thành viên: activate to sort column descending">Tên</th>
+                                aria-label="Tên thành viên: activate to sort column descending" style="width: 40%;">Tên</th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên thành viên: activate to sort column descending">Email</th>
+                                aria-label="Tên thành viên: activate to sort column descending" style="width: 40%;">Email</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Tạo</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Sửa</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending">Hành động</th>
+                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 20%;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,12 +45,6 @@
                             <tr role="row" class="odd">
                                 <td class="sorting_1">{{ $items->name }}</td>
                                 <td class="sorting_1">{{ $items->email }}</td>
-                                <td>{{ $items->creator_name ?? 'Không Có' }}
-                                    {{ !empty($items->created_at) ? '(' . $items->created_at->format('d-m-Y') . ')' : '' }}
-                                </td>
-                                <td>{{ $items->updater_name ?? 'Không Có' }}
-                                    {{ !empty($items->updated_at) ? '(' . $items->updated_at->format('d-m-Y') . ')' : '' }}
-                                </td>
                                 <td>
                                     <a href="{{ route('account.edit', ['id' => $items->id]) }}"
                                         class="btn btn-sm btn-black">

@@ -18,7 +18,7 @@ class StudentsSeeder extends Seeder
                 'name' => "Student $i",
                 'email' => "student$i@example.com",
                 'phone' => '094377728' . $i,
-                'major_id' => rand(1, 5),
+                'major_id' => rand(1, 3),
                 'year_of_enrollment' => now(),
                 'role_id' => 2,
                 'OTP' => rand(111111, 999999),

@@ -32,23 +32,15 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên khóa học: activate to sort column descending">Tên Khóa Học</th>
+                                aria-label="Tên khóa học: activate to sort column descending" style="width: 80%;">Tên Khóa Học</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Tạo</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Sửa</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending">Hành động</th>
+                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 20%;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($getAllCourse as $items)
                             <tr role="row" class="odd">
                                 <td class="sorting_1" title="{{ $items->description }}">{{ $items->name }}</td>
-                                <td>{{ $items->creator_name }} ({{ $items->created_at->format('d-m-Y') }})</td>
-                                <td>{{ $items->updater_name ?? 'Không Có' }}
-                                    {{ !empty($items->updated_at) ? '(' . $items->updated_at->format('d-m-Y') . ')' : '' }}
-                                </td>
                                 <td>
                                     <a href="{{ route('course.edit', ['id' => $items->id]) }}"
                                         class="btn btn-sm btn-black">
