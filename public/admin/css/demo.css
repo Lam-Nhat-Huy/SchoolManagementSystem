@@ -7,6 +7,11 @@
   line-clamp: 1;
 }
 
+.flex-sm-fill div p {
+  margin-bottom: 0px;
+  margin-right: 20px;
+}
+
 .scroll-y-hidden {
   overflow: hidden;
   overflow-y: scroll;
