@@ -27,29 +27,9 @@
                         <th class="sorting" tabindex="0" aria-controls="basic-datatables"
                         rowspan="1" colspan="1"
                         aria-label="Salary: activate to sort column ascending"
-                        style="width: 156.047px;">Tạo</th>
-                        <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                        rowspan="1" colspan="1"
-                        aria-label="Salary: activate to sort column ascending"
-                        style="width: 156.047px;">Chỉnh sửa</th>
-                        <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                        rowspan="1" colspan="1"
-                        aria-label="Salary: activate to sort column ascending"
                         style="width: 156.047px;">Hành động</th>
                 </tr>
             </thead>
-            <tfoot>
-                <tr>
-                    <th rowspan="1" colspan="1">Tên</th>
-                    <th rowspan="1" colspan="1">email</th>
-                    <th rowspan="1" colspan="1">Số điện thoại</th>
-                    <th rowspan="1" colspan="1">Chuyên ngành</th>
-                    <th rowspan="1" colspan="1">Ngày nhập học</th>
-                    <th rowspan="1" colspan="1">Tạo</th>
-                    <th rowspan="1" colspan="1">Chỉnh sửa</th>
-                    <th rowspan="1" colspan="1">Hành động</th>
-                </tr>
-            </tfoot>
             <tbody>
                 @foreach ($getAllStudent as $student)
                 <tr role="row" class="odd">
@@ -59,33 +39,28 @@
                     <td>{{$student->major_name}}</td>
                     <td>{{$student->year_of_enrollment}}</td>
                     <td>
-                        {{$student->created_at}}
-                    </td>
-                    <td>{{ $student->updater_name ?? 'Không Có' }}
-                        {{ !empty($student->updated_at) ? '(' . $student->updated_at->format('d-m-Y') . ')' : '' }}
-                    </td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="{{ route('student.edit', ['id' => $student->student_id]) }}"
-                                class="btn btn-sm btn-black m-lg-auto">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <form action="{{ route('student.destroy', ['id' => $student->student_id]) }}"
-                                method="POST" style="display:inline-block; "
-                                onsubmit="return confirm('Bạn có chắc chắn muốn xóa lớp học này?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
-                        </div>
-
+                        <a href="{{ route('student.edit', ['id' => $student->student_id]) }}"
+                            class="btn btn-sm btn-black">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <form action="{{ route('student.destroy', ['id' => $student->student_id]) }}"
+                            method="POST" style="display:inline-block;"
+                            onsubmit="return confirm('Bạn có chắc chắn muốn xóa lớp học này?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
-
             </tbody>
         </table>
     </div>
+</div>
+<div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
+    <ul class="pagination">
+        {{ $getAllStudent->links('pagination::bootstrap-5') }}
+    </ul>
 </div>

@@ -7,22 +7,35 @@ use App\Models\Students;
 use Illuminate\Http\Request;
 use App\Models\Major;
 use App\Models\Roles;
+
 class StudentController extends Controller
 {
     public function index()
     {
         $template = "admin.student.student.pages.index";
-        $getAllStudent = Students::select('students.*', 'students.id as student_id', 'students.name as student_name', 'students.email as student_email', 'students.phone as student_phone', 'majors.name as major_name', 'students.year_of_enrollment as student_year', 'roles.name as role_name', 'students.OTP as student_OTP', 'creator_account.name as creator_name', 'updater_account.name as updater_name')
+        $getAllStudent = Students::select(
+            'students.*',
+            'students.id as student_id',
+            'students.name as student_name',
+            'students.email as student_email',
+            'students.phone as student_phone',
+            'majors.name as major_name',
+            'students.year_of_enrollment as student_year',
+            'roles.name as role_name',
+            'students.OTP as student_OTP'
+        )
             ->join('majors', 'students.major_id', '=', 'majors.id')
             ->join('roles', 'students.role_id', '=', 'roles.id')
-            ->leftJoin('accounts as creator_account', 'students.created_by', '=', 'creator_account.id')
-            ->leftJoin('accounts as updater_account', 'students.updated_by', '=', 'updater_account.id')
-            ->get();
-        // $config['seo'] = config('apps.user');
+            ->paginate(10);
+
         $config['method'] = 'create';
-        return view('admin.dashboard.layout', compact(
-            'template','getAllStudent'
-        )
+
+        return view(
+            'admin.dashboard.layout',
+            compact(
+                'template',
+                'getAllStudent'
+            )
         );
     }
     public function create()
@@ -48,14 +61,16 @@ class StudentController extends Controller
             ]
         ];
         $config['method'] = 'create';
-        
 
-        return view('admin.dashboard.layout', compact(
-            'template',
-            'config',
-            'getAllMajor',
-            'getAllRoles'
-        )
+
+        return view(
+            'admin.dashboard.layout',
+            compact(
+                'template',
+                'config',
+                'getAllMajor',
+                'getAllRoles'
+            )
         );
     }
 
@@ -72,7 +87,7 @@ class StudentController extends Controller
             ->first();
 
         $getAllMajor = Major::orderBy('created_at', 'DESC')
-        ->get();
+            ->get();
 
         $template = "admin.student.student.pages.store";
 
@@ -91,12 +106,14 @@ class StudentController extends Controller
         ];
         $config['method'] = 'edit';
 
-        return view('admin.dashboard.layout', compact(
-            'template',
-            'config',
-            'getEdit',
-            'getAllMajor',
-        )
+        return view(
+            'admin.dashboard.layout',
+            compact(
+                'template',
+                'config',
+                'getEdit',
+                'getAllMajor',
+            )
         );
     }
     public function update(Request $request, $id)
