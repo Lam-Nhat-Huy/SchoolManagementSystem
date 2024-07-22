@@ -55,7 +55,7 @@
                     </ul>
                 </div>
                 <div class="navbar align-self-center d-flex">
-                    <button class="btn btn-primary">Đăng nhập</button>
+                    <a href="{{route('login.index')}}" class="btn btn-primary">Đăng nhập</a>
                 </div>
             </div>
 
