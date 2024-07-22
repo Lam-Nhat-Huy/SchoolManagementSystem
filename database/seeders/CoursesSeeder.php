@@ -19,8 +19,8 @@ class CoursesSeeder extends Seeder
                 'description' => 'Công nghệ thông tin là một ngành học được đào tạo để sử dụng máy tính và các phần mềm máy tính để phân phối và xử lý các dữ liệu thông tin, đồng thời dùng để trao đổi, lưu trữ và chuyển đổi các dữ liệu thông tin dưới nhiều hình thức khác nhau.',
                 'created_by' => 1,
                 'created_at' => now(),
-                'updated_by' => 2,
-                'updated_at' => now(),
+                'updated_by' => null,
+                'updated_at' => null,
                 'deleted_by' => null,
                 'deleted_at' => null,
             ], [
