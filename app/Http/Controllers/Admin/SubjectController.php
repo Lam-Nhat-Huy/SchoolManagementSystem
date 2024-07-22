@@ -13,7 +13,8 @@ class SubjectController extends Controller
     protected $subjectService;
     protected $subjectRepository;
 
-    public function __construct(SubjectServiceInterface $subjectService, SubjectRepositoryInterface $subjectRepository){
+    public function __construct(SubjectServiceInterface $subjectService, SubjectRepositoryInterface $subjectRepository)
+    {
         $this->subjectService = $subjectService;
         $this->subjectRepository = $subjectRepository;
     }

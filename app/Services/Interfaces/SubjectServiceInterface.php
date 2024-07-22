@@ -8,4 +8,8 @@ namespace App\Services\Interfaces;
  */
 interface SubjectServiceInterface
 {
+    public function getSubject();
+    public function create($request);
+    public function update($request, $id);
+    public function destroy($id);
 }
