@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('teacher_evaluations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
+            $table->unsignedBigInteger('create_teacher_evaluation_id')->nullable()->constrained('create_teacher_evaluations')->onDelete('set null');
             $table->unsignedBigInteger('student_id')->nullable()->constrained('students')->onDelete('set null');
             $table->integer('first_rating_level')->nullable();
             $table->integer('second_rating_level')->nullable();
             $table->integer('third_rating_level')->nullable();
             $table->integer('fourth_rating_level')->nullable();
             $table->integer('fifth_rating_level')->nullable();
-            $table->date('evaluation_date');
+            $table->date('evaluation_date')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
