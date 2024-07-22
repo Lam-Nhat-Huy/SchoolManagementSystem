@@ -29,33 +29,36 @@
                 {{-- Dùng để lọc sidebar từ trong config/apps/module.php --}}
                 @foreach (config('apps.module') as $key => $value)
                     @foreach ($value as $index => $item)
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#dashboard-{{ $key }}-{{ $index }}"
-                                class="collapsed" aria-expanded="false">
-                                <i class="{{ $item['icon'] }}"></i>
-                                <p>{{ $item['title'] }}</p>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="dashboard-{{ $key }}-{{ $index }}">
-                                <ul class="nav nav-collapse">
-                                    @foreach ($item['subModule'] as $sub)
-                                        <li>
-                                            @if (Route::has($sub['route']))
-                                                <a href="{{ route($sub['route']) }}">
-                                                    <span class="sub-item">{{ $sub['title'] }}</span>
-                                                </a>
-                                            @else
-                                                <span class="sub-item text-danger">Route [{{ $sub['route'] }}] not
-                                                    defined</span>
+                        @if (in_array(session('user_role'), (array) $item['user_role']))
+                            <li class="nav-item">
+                                <a data-bs-toggle="collapse" href="#dashboard-{{ $key }}-{{ $index }}"
+                                    class="collapsed" aria-expanded="false">
+                                    <i class="{{ $item['icon'] }}"></i>
+                                    <p>{{ $item['title'] }}</p>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse" id="dashboard-{{ $key }}-{{ $index }}">
+                                    <ul class="nav nav-collapse">
+                                        @foreach ($item['subModule'] as $subKey => $sub)
+                                            @if (in_array(session('user_role'), (array) $sub['user_role']))
+                                                <li>
+                                                    @if (Route::has($sub['route']))
+                                                        <a href="{{ route($sub['route']) }}">
+                                                            <span class="sub-item">{{ $sub['title'] }}</span>
+                                                        </a>
+                                                    @else
+                                                        <span class="sub-item text-danger">Route [{{ $sub['route'] }}]
+                                                            not defined</span>
+                                                    @endif
+                                                </li>
                                             @endif
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
                     @endforeach
                 @endforeach
-
             </ul>
         </div>
     </div>
