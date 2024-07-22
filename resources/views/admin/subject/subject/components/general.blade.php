@@ -5,7 +5,7 @@
     <div class="card-body">
         <div class="form-group">
             <label for="subject_name">Tên môn học</label>
-            <input type="text" class="form-control" id="subject_name" name="name" placeholder="Tên môn học">
+            <input type="text" class="form-control" id="subject_name" value="{{ old('name', $subject->name ?? '') }}" name="name" placeholder="Tên môn học">
         </div>
 
         <div class="form-group">
@@ -18,7 +18,7 @@
 
         <div class="form-group">
             <label for="instructor">Mô tả</label>
-            <textarea name="description" class="form-control" id="description" name="description"></textarea>
+            <textarea name="description" class="form-control" id="description" name="description">{{ old('description', $subject->description ?? '') }}</textarea>
         </div>
     </div>
 </div>

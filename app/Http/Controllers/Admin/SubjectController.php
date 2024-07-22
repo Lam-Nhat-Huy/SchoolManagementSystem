@@ -4,23 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Subjects;
-use App\Services\SubjectService;
+use App\Repositories\Interfaces\SubjectRepositoryInterface;
+use App\Services\Interfaces\SubjectServiceInterface;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
+    protected $subjectService;
+    protected $subjectRepository;
+
+    public function __construct(SubjectServiceInterface $subjectService, SubjectRepositoryInterface $subjectRepository){
+        $this->subjectService = $subjectService;
+        $this->subjectRepository = $subjectRepository;
+    }
+
     public function index()
     {
-        $template = "admin.subject.subject.pages.index";
-
-        $data = Subjects::orderBy('id', 'asc')->paginate(1);
+        $data = $this->subjectService->getSubject();
 
         $template = "admin.subject.subject.pages.index";
-
-        return view('admin.dashboard.layout', compact(
-            'template',
-            'data'
-        ));
 
         return view('admin.dashboard.layout', compact(
             'template',
@@ -57,10 +59,15 @@ class SubjectController extends Controller
 
     public function store(Request $request)
     {
+        if ($this->subjectService->create($request)) {
+            return redirect()->route('subject.index')->with('success', 'Thêm mới bảng ghi thành công');
+        }
+        return redirect()->route('subject.index')->with('error', 'Thêm mới bảng ghi thất bại');
     }
 
     public function edit($id)
     {
+        $subject = $this->subjectRepository->getSubjectById($id);
 
         $template = "admin.subject.subject.pages.store";
 
@@ -82,12 +89,24 @@ class SubjectController extends Controller
 
         return view('admin.dashboard.layout', compact(
             'template',
-            'config'
+            'config',
+            'subject'
         ));
     }
 
     public function update(Request $request, $id)
     {
-        return "Đây là trang chỉnh sửa môn học";
+        if ($this->subjectService->update($request, $id)) {
+            return redirect()->route('subject.index')->with('success', 'Chỉnh sửa bảng ghi thành công');
+        }
+        return redirect()->route('subject.index')->with('error', 'Chỉnh sửa bảng ghi thất bại');
+    }
+
+    public function destroy($id)
+    {
+        if ($this->subjectService->destroy($id)) {
+            return redirect()->route('subject.index')->with('success', 'Xóa bảng ghi thành công');
+        }
+        return redirect()->route('subject.index')->with('error', 'Xóa bảng ghi thất bại');
     }
 }

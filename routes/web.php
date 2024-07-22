@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('login')->middleware(Authenticationed::class)->group(function () {
-    Route::get('/index', [LoginController::class, 'index'])->name('login.index');
+    Route::get('/', [LoginController::class, 'index'])->name('login.index');
 
     Route::post('/send_otp', [LoginController::class, 'send_otp'])->name('login.send_otp');
 
@@ -32,6 +32,10 @@ Route::prefix('login')->middleware(Authenticationed::class)->group(function () {
 
     Route::post('/confirm_otp', [LoginController::class, 'confirm_otp'])->name('login.confirm_otp');
 });
+
+Route::get('/auth/google', [LoginController::class, 'redirectToGoogle'])->name('auth.google');
+
+Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
 Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () {
     Route::get('/trang-chu', [DashboardController::class, 'index'])->name('dashboard.index');

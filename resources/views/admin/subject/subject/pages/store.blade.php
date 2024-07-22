@@ -2,7 +2,7 @@
     @include('admin.dashboard.components.breadcrumb')
 
     @php
-        $url = $config['method'] == 'create' ? route('subject.store') : route('subject.update', 1);
+        $url = $config['method'] == 'create' ? route('subject.store') : route('subject.update', $subject->id);
         $title = $config['method'] == 'create' ? 'Thêm mới môn học' : 'Chỉnh sửa môn học';
     @endphp
 
@@ -21,7 +21,6 @@
                         </div>
                         <div class="col-lg-3">
                             @include('admin.subject.subject.components.aside')
-
                         </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-success mb10 button-fix" name="send"
