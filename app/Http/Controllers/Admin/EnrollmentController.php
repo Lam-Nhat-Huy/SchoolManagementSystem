@@ -18,7 +18,8 @@ class EnrollmentController extends Controller
         )
             ->orderBy('enrollments.created_at', 'DESC')
             ->join('students', 'enrollments.student_id', '=', 'students.id')
-            ->join('subjects', 'enrollments.subject_id', '=', 'subjects.id')
+            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
+            ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
             ->get();
 
         $template = 'admin.enrollment.enrollment.pages.index';
@@ -39,7 +40,8 @@ class EnrollmentController extends Controller
         )
             ->orderBy('enrollments.created_at', 'DESC')
             ->join('students', 'enrollments.student_id', '=', 'students.id')
-            ->join('subjects', 'enrollments.subject_id', '=', 'subjects.id')
+            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
+            ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
             ->where('enrollments.id', '=', $id)
             ->first();
 
