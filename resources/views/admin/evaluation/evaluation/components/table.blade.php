@@ -32,16 +32,15 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending">Lớp</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 40%;">Lớp
+                            </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending">Giảng Viên</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 40%;">Giảng
+                                Viên</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Tạo</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">Sửa</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending">Hành động</th>
+                                colspan="1" aria-label="Hành động: activate to sort column ascending"
+                                style="width: 20%;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,17 +48,13 @@
                             <tr role="row" class="odd">
                                 <td class="sorting_1">{{ $items->class_name }}</td>
                                 <td>{{ $items->teacher_name }}</td>
-                                <td>{{ $items->creator_name }} ({{ $items->created_at->format('d-m-Y') }})</td>
-                                <td>{{ $items->updater_name ?? 'Không Có' }}
-                                    {{ !empty($items->updated_at) ? '(' . $items->updated_at->format('d-m-Y') . ')' : '' }}
-                                </td>
                                 <td>
                                     <a href="{{ route('evaluation.edit', ['id' => $items->id]) }}"
                                         class="btn btn-sm btn-black">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('evaluation.destroy', ['id' => $items->id]) }}" method="POST"
-                                        style="display:inline-block;"
+                                    <form action="{{ route('evaluation.destroy', ['id' => $items->id]) }}"
+                                        method="POST" style="display:inline-block;"
                                         onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');">
                                         @csrf
                                         @method('DELETE')

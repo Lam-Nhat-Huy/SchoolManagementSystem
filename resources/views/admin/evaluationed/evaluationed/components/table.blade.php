@@ -1,7 +1,7 @@
 <div class="table-responsive">
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
         <div class="row">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-10">
                 <div class="dataTables_length" id="basic-datatables_length">
                     <label>Hiển thị:
                         <select name="basic-datatables_length" aria-controls="basic-datatables"
@@ -15,12 +15,14 @@
                     </label>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-2">
                 <div id="basic-datatables_filter" class="dataTables_filter">
-                    <label>Tìm kiếm:
-                        <input type="search" class="form-control form-control-sm" placeholder=""
-                            aria-controls="basic-datatables">
-                    </label>
+                    <select class="form-control form-control-sm">
+                        <option value="0">--Lọc Theo Lớp--</option>
+                        @foreach ($getAllClasses as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>
@@ -32,37 +34,47 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên lớp học: activate to sort column descending" style="width: 27%;">Tên
-                                Lớp Học</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" style="width: 27%;">Giảng viên
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 15%;">Lớp
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" style="width: 27%;">Môn Học</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 19%;">Hành động</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 25%;">Giảng Viên</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q1</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q2</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q3</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q4</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q5</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">GPA</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($getAllClass as $items)
+                        @foreach ($getAllEvaluationed as $items)
                             <tr role="row" class="odd">
-                                <td class="sorting_1" title="{{ $items->description }}">{{ $items->name }}</td>
+                                <td class="sorting_1">{{ $items->class_name }}</td>
                                 <td>{{ $items->teacher_name }}</td>
-                                <td>{{ $items->subject_name }}</td>
-                                <td>
-                                    <a href="{{ route('class.edit', ['id' => $items->class_id]) }}"
-                                        class="btn btn-sm btn-black">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('class.destroy', ['id' => $items->class_id]) }}"
-                                        method="POST" style="display:inline-block;"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa lớp học này?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
+                                <td>{{ $items->first_rating_level }}</td>
+                                <td>{{ $items->second_rating_level }}</td>
+                                <td>{{ $items->third_rating_level }}</td>
+                                <td>{{ $items->fourth_rating_level }}</td>
+                                <td>{{ $items->fifth_rating_level }}</td>
+                                <td>{{ ($items->first_rating_level +
+                                    $items->second_rating_level +
+                                    $items->third_rating_level +
+                                    $items->fourth_rating_level +
+                                    $items->fifth_rating_level) /
+                                    5 }}
                                 </td>
                             </tr>
                         @endforeach
@@ -73,7 +85,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-5">
                 <div class="dataTables_info" id="basic-datatables_info" role="status" aria-live="polite">Hiển thị 1
-                    đến 10 của 20 lớp học</div>
+                    đến 10 của 20 đánh giá</div>
             </div>
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
@@ -81,8 +93,9 @@
                         <li class="paginate_button page-item previous disabled" id="basic-datatables_previous"><a
                                 href="#" aria-controls="basic-datatables" data-dt-idx="0" tabindex="0"
                                 class="page-link">Trước</a></li>
-                        <li class="paginate_button page-item active"><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                        <li class="paginate_button page-item active"><a href="#"
+                                aria-controls="basic-datatables" data-dt-idx="1" tabindex="0"
+                                class="page-link">1</a></li>
                         <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
                                 data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
                         <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
