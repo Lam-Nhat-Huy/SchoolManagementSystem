@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::prefix('login')->middleware(Authenticationed::class)->group(function () {
     Route::get('/', [LoginController::class, 'index'])->name('login.index');
 
@@ -192,7 +194,6 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
         Route::get('/edit/{id}', [EnrollmentController::class, 'edit'])->name('enrollment.edit')->where(['id' => '[0-9]+']);
         Route::post('/update/{id}', [EnrollmentController::class, 'update'])->name('enrollment.update')->where(['id' => '[0-9]+']);
     });
-
     Route::prefix('enrollment_student')->group(function () {
         Route::get('/index', [EnrollmentStudentController::class, 'index'])->name('enrollment_student.index');
     });
