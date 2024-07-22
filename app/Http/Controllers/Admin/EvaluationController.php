@@ -12,12 +12,10 @@ class EvaluationController extends Controller
 {
     public function index()
     {
-        $getAllEvaluationCreate = CreateTeacherEvaluations::select('create_teacher_evaluations.*', 'creator_account.name as creator_name', 'updater_account.name as updater_name', 'classes.name as class_name', 'teachers.name as teacher_name')
+        $getAllEvaluationCreate = CreateTeacherEvaluations::select('create_teacher_evaluations.*', 'classes.name as class_name', 'teachers.name as teacher_name')
             ->orderBy('create_teacher_evaluations.created_at', 'DESC')
             ->join('classes', 'create_teacher_evaluations.class_id', '=', 'classes.id')
             ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->leftJoin('accounts as creator_account', 'create_teacher_evaluations.created_by', '=', 'creator_account.id')
-            ->leftJoin('accounts as updater_account', 'create_teacher_evaluations.updated_by', '=', 'updater_account.id')
             ->get();
 
         $template = 'admin.evaluation.evaluation.pages.index';

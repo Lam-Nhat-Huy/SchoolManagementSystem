@@ -34,7 +34,7 @@ class TeachingSchedule extends Controller
         )
             ->join('classes', 'schedules.class_id', '=', 'classes.id')
             ->join('subjects', 'schedules.subject_id', '=', 'subjects.id')
-            ->join('teachers', 'schedules.teacher_id', '=', 'teachers.id');
+            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id');
 
         if (!empty(session('user_role') == 3)) {
             $getAllTeachingSchedule = $getAllTeachingSchedule->where('teacher_id', session('user_id'));
