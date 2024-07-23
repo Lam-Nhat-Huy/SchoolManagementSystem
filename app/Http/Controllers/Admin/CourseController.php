@@ -11,7 +11,7 @@ class CourseController extends Controller
     public function index()
     {
         $getAllCourse = Courses::orderBy('courses.created_at', 'DESC')
-            ->get();
+            ->paginate(10);
 
         $template = 'admin.course.course.pages.index';
 

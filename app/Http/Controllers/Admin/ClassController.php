@@ -15,7 +15,7 @@ class ClassController extends Controller
         $getAllClass = Classes::select('classes.*', 'classes.id as class_id', 'teachers.name as teacher_name', 'subjects.name as subject_name')
             ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
             ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
-            ->get();
+            ->paginate(10);
 
         $template = 'admin.class.class.pages.index';
 

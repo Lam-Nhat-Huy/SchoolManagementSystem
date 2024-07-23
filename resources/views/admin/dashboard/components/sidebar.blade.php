@@ -3,10 +3,27 @@
     <div class="sidebar-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="{{ route('dashboard.index') }}" class="logo">
-                <img src="{{ asset('admin') }}/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
-                    height="20" />
-            </a>
+            @if (!empty(session('user_role') == 1))
+                <a href="{{ route('dashboard.index') }}" class="logo">
+                    <img src="{{ asset('admin') }}/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                        height="20" />
+                </a>
+            @elseif(!empty(session('user_role') == 2))
+                <a href="{{ route('schedule.index') }}" class="logo">
+                    <img src="{{ asset('admin') }}/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                        height="20" />
+                </a>
+            @elseif(!empty(session('user_role') == 3))
+                <a href="{{ route('teaching_schedule.index') }}" class="logo">
+                    <img src="{{ asset('admin') }}/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                        height="20" />
+                </a>
+            @else
+                <a href="{{ route('dashboard.index') }}" class="logo">
+                    <img src="{{ asset('admin') }}/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
+                        height="20" />
+                </a>
+            @endif
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
                     <i class="gg-menu-right"></i>

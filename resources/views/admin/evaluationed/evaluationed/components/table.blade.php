@@ -36,34 +36,45 @@
                                 colspan="1" aria-sort="ascending"
                                 aria-label="Tên đánh giá: activate to sort column descending" style="width: 15%;">Lớp
                             </th>
+                            @if (!empty(session('user_role') != 3))
+                                <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                    colspan="1" aria-sort="ascending"
+                                    aria-label="Tên đánh giá: activate to sort column descending" style="width: 25%;">
+                                    Giảng Viên</th>
+                            @endif
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 25%;">Giảng Viên</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q1
+                            </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q1</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q2
+                            </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q2</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q3
+                            </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q3</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q4
+                            </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q4</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q5
+                            </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">Q5</th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">GPA</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 10%;">GPA
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($getAllEvaluationed as $items)
                             <tr role="row" class="odd">
                                 <td class="sorting_1">{{ $items->class_name }}</td>
-                                <td>{{ $items->teacher_name }}</td>
+                                @if (!empty(session('user_role') != 3))
+                                    <td>{{ $items->teacher_name }}</td>
+                                @endif
                                 <td>{{ $items->first_rating_level }}</td>
                                 <td>{{ $items->second_rating_level }}</td>
                                 <td>{{ $items->third_rating_level }}</td>
@@ -82,36 +93,10 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="basic-datatables_info" role="status" aria-live="polite">Hiển thị 1
-                    đến 10 của 20 đánh giá</div>
-            </div>
-            <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
-                    <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="basic-datatables_previous"><a
-                                href="#" aria-controls="basic-datatables" data-dt-idx="0" tabindex="0"
-                                class="page-link">Trước</a></li>
-                        <li class="paginate_button page-item active"><a href="#"
-                                aria-controls="basic-datatables" data-dt-idx="1" tabindex="0"
-                                class="page-link">1</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                        <li class="paginate_button page-item next" id="basic-datatables_next"><a href="#"
-                                aria-controls="basic-datatables" data-dt-idx="7" tabindex="0"
-                                class="page-link">Tiếp</a></li>
-                    </ul>
-                </div>
-            </div>
+        <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
+            <ul class="pagination">
+                {{ $getAllEvaluationed->links('pagination::bootstrap-5') }}
+            </ul>
         </div>
     </div>
 </div>

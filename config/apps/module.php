@@ -111,7 +111,7 @@ return [
             ]
         ],
         [
-            'user_role' => [1, 3],
+            'user_role' => 1,
             'title' => 'Khóa Học',
             'icon' => 'fas fa-chalkboard-teacher', // Icon cho Khóa Học
             'name' => '',
@@ -119,7 +119,7 @@ return [
                 [
                     'title' => 'Khóa Học',
                     'route' => 'course.index',
-                    'user_role' => [1, 3],
+                    'user_role' => 1,
                 ]
             ]
         ],

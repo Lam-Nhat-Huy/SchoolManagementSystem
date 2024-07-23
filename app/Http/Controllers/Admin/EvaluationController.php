@@ -16,7 +16,7 @@ class EvaluationController extends Controller
             ->orderBy('create_teacher_evaluations.created_at', 'DESC')
             ->join('classes', 'create_teacher_evaluations.class_id', '=', 'classes.id')
             ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->get();
+            ->paginate(10);
 
         $template = 'admin.evaluation.evaluation.pages.index';
 
