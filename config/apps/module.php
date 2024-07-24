@@ -155,19 +155,6 @@
                 ]
             ],
             [
-                'user_role' => [1, 3],
-                'title' => 'Điểm Danh',
-                'icon' => 'fas fa-check', // Icon cho điểm danh
-                'name' => '',
-                'subModule' => [
-                    [
-                        'title' => 'Điểm Danh',
-                        'route' => 'dashboard.index',
-                        'user_role' => [1, 3],
-                    ]
-                ]
-            ],
-            [
                 'user_role' => [1, 2, 4],
                 'title' => 'Hỗ Trợ Sinh Viên',
                 'icon' => 'fab fa-rocketchat', // Icon cho Hỗ Trợ Sinh Viên
