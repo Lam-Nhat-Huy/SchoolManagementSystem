@@ -51,10 +51,16 @@ class SubjectRegistrationService implements SubjectRegistrationServiceInterface
         }
     }
 
-    public function showClassesBySubjectId($id)
+    public function showClassesBySubjectId($subjectId, $studentId)
     {
         try {
-            return $this->subjectRegistrationRepository->getClassData($id);
+            $classes = $this->subjectRegistrationRepository->getClassData($subjectId);
+
+            foreach ($classes as $class) {
+                $class->is_joined = $this->isClassAlreadyAdded($studentId, $class->id);
+            }
+
+            return $classes;
         } catch (\Exception $e) {
             echo $e->getMessage();
             return false;
@@ -74,6 +80,18 @@ class SubjectRegistrationService implements SubjectRegistrationServiceInterface
             Enrollments::create($payload);
 
             return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function isClassAlreadyAdded($studentId, $classId)
+    {
+        try {
+            return Enrollments::where('student_id', $studentId)
+                ->where('class_id', $classId)
+                ->exists();
         } catch (\Exception $e) {
             echo $e->getMessage();
             return false;

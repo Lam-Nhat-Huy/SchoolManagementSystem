@@ -17,12 +17,16 @@
                                 {{ $item->name . ' - ' . $item->subject->name . ' - ' . $item->teacher->name }}
                             </td>
                             <td>
-                                <form action="{{ route('insert.class') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="student_id" value="{{ session('user_id') }}">
-                                    <input type="hidden" name="class_id" value="{{ $item->id  }}">
-                                    <button type="submit" class="badge badge-success">Tham gia</button>
-                                </form>
+                                @if($item->is_joined)
+                                    <button class="badge badge-secondary" disabled>Đã tham gia</button>
+                                @else
+                                    <form action="{{ route('insert.class') }}" method="POST" class="join-form">
+                                        @csrf
+                                        <input type="hidden" name="student_id" value="{{ session('user_id') }}">
+                                        <input type="hidden" name="class_id" value="{{ $item->id  }}">
+                                        <button type="submit" class="badge badge-success join-button">Tham gia</button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

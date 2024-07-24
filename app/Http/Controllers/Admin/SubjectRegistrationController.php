@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\Interfaces\SubjectRegistrationServiceInterface;
 use Illuminate\Http\Request;
+use Flasher\Prime\FlasherInterface;
 
 class SubjectRegistrationController extends Controller
 {
@@ -59,12 +60,12 @@ class SubjectRegistrationController extends Controller
 
     public function getClass($id)
     {
-        $data = $this->subjectRegistrationService->showClassesBySubjectId($id);
+        $studentId = session('user_id');
+
+        $data = $this->subjectRegistrationService->showClassesBySubjectId($id, $studentId);
 
         $template = "admin.subject_register.class.pages.index";
-
         $config['seo'] = config('apps.subject_register');
-
         $breadcrumb = [
             ['title' => 'Danh sách khóa học', 'url' => route('get.course')],
             ['title' => 'Danh sách môn học', 'url' => route('get.subject', $id)],
@@ -81,9 +82,25 @@ class SubjectRegistrationController extends Controller
 
     public function handleInsertClassData(Request $request)
     {
-        if ($this->subjectRegistrationService->insertClassData($request)) {
+        # Lấy thông tin từ request form
+        $studentId = $request->input('student_id');
+        $classId = $request->input('class_id');
+
+        # Kiểm tra đã có dữ liệu này trong database chưa bằng cách gọi hàm bên service
+        if ($this->subjectRegistrationService->isClassAlreadyAdded($studentId, $classId)) {
+            toastr()->error('Bạn đã tham gia khóa học này rồi.');
             return redirect()->back();
         }
+
+        # Thêm dữ liêu vào database
+        if ($this->subjectRegistrationService->insertClassData($request)) {
+            toastr()->success('Bạn đã tham gia khóa học thành công');
+            return redirect()->back();
+        } else {
+            toastr()->error('Có lỗi xảy ra khi tham gia khóa học.');
+            return redirect()->back();
+        }
+
         return redirect()->back();
     }
 }
