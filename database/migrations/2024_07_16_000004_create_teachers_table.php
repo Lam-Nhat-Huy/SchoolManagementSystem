@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
+            $table->string('image')->nullable();
             $table->string('email', 100)->unique();
             $table->string('phone', 10);
             $table->unsignedBigInteger('course_id')->nullable()->constrained('courses')->onDelete('set null');

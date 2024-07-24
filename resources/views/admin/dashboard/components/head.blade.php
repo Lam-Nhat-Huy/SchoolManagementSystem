@@ -25,6 +25,7 @@
     });
 </script>
 
+
 <!-- CSS Files -->
 <link rel="stylesheet" href="{{ asset('admin') }}/css/bootstrap.min.css" />
 <link rel="stylesheet" href="{{ asset('admin') }}/css/plugins.min.css" />
@@ -43,3 +44,4 @@
     var BASE_URL = '{{ config('app.url') }}'
     var SUFFIX = '{{ config('apps.general.suffix') }}'
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

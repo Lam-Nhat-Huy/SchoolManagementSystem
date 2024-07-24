@@ -7,7 +7,14 @@
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title float-left">Danh sách giảng viên</h4>
                 <!-- Thêm nút thêm mới môn học -->
-                <a href="{{ route('teacher.create') }}" class="btn btn-sm btn-primary float-right">Thêm giảng viên mới</a>
+                <div class="action">
+                      <a href="{{ route('teacher.create') }}" class="btn btn-sm btn-success float-right">
+                    <i class="fa fa-plus"></i> Thêm giảng viên
+                </a>
+                <a href="" class="btn btn-sm btn-primary">Xuất Excel</a>
+                </div>
+              
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -42,10 +49,10 @@
                                     role="grid" aria-describedby="basic-datatables_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Tên môn học: activate to sort column descending"
-                                                style="width: 242.312px;">ID giảng viên</th>
+                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
+                                                rowspan="1" colspan="1"
+                                                aria-label="Giảng viên: activate to sort column ascending"
+                                                style="width: 366.031px;"></th>
                                             <th class="sorting" tabindex="0" aria-controls="basic-datatables"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Giảng viên: activate to sort column ascending"
@@ -58,7 +65,7 @@
                                                 rowspan="1" colspan="1"
                                                 aria-label="Số tiết: activate to sort column ascending"
                                                 style="width: 84.3125px;">Số điện thoại</th>
-                                                <th class="sorting" tabindex="0" aria-controls="basic-datatables"
+                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
                                                 rowspan="1" colspan="1"
                                                 aria-label="Số tiết: activate to sort column ascending"
                                                 style="width: 84.3125px;">Hành Động</th>
@@ -77,7 +84,9 @@
 
                                         @foreach ($data as $teacher)
                                             <tr role="row" class="odd">
-                                                <td class="sorting_1">{{ $teacher->id }}</td>
+                                                <td><img src="{{ asset('uploads/teacher/' . $teacher->image) }}"
+                                                        alt="Hình ảnh" width="100"
+                                                        class="rounded-circle img-thumbnail"></td>
                                                 <td>{{ $teacher->name }}</td>
                                                 <td>{{ $teacher->email }}</td>
                                                 <td>{{ $teacher->phone }}</td>
@@ -149,4 +158,3 @@
         </div>
     </div>
 </div>
-
