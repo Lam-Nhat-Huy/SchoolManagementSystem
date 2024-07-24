@@ -12,11 +12,9 @@ class ClassController extends Controller
 {
     public function index()
     {
-        $getAllClass = Classes::select('classes.*', 'classes.id as class_id', 'teachers.name as teacher_name', 'courses.name as course_name', 'creator_account.name as creator_name', 'updater_account.name as updater_name')
+        $getAllClass = Classes::select('classes.*', 'classes.id as class_id', 'teachers.name as teacher_name', 'subjects.name as subject_name')
             ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->join('courses', 'classes.course_id', '=', 'courses.id')
-            ->leftJoin('accounts as creator_account', 'classes.created_by', '=', 'creator_account.id')
-            ->leftJoin('accounts as updater_account', 'classes.updated_by', '=', 'updater_account.id')
+            ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
             ->get();
 
         $template = 'admin.class.class.pages.index';

@@ -7,11 +7,11 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EnrollmentController;
 use App\Http\Controllers\Admin\EnrollmentStudentController;
-use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SchedulesController;
 use App\Http\Controllers\Admin\EvaluationController;
 use App\Http\Controllers\Admin\EvaluationedController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\StudentChatController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
@@ -208,5 +208,11 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
 
         Route::get('/detail/{id}', [ChatController::class, 'detail'])->name('traning_officer_chat.detail')->where(['id' => '[0-9]+']);
         Route::post('/store', [ChatController::class, 'store'])->name('traning_officer_chat.store');
+    });
+
+    Route::prefix('student_chat')->group(function () {
+        Route::get('/index', [StudentChatController::class, 'index'])->name('student_chat.index');
+        
+        Route::post('/store', [StudentChatController::class, 'store'])->name('student_chat.store');
     });
 });

@@ -17,7 +17,6 @@ class SchedulesSeeder extends Seeder
             [
                 'class_id' => 1,
                 'subject_id' => 1,
-                'teacher_id' => 1,
                 'start_time' => '12:10:00',
                 'end_time' => '2:00:00',
                 'day_of_week' => 'Thứ Hai',
@@ -31,7 +30,6 @@ class SchedulesSeeder extends Seeder
             [
                 'class_id' => 2,
                 'subject_id' => 1,
-                'teacher_id' => 2,
                 'start_time' => '07:10:00',
                 'end_time' => '9:00:00',
                 'day_of_week' => 'Thứ Hai',

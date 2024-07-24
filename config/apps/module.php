@@ -180,7 +180,7 @@ return [
                 ],
                 [
                     'title' => 'Chat Với Phòng Đào Tạo',
-                    'route' => 'traning_officer_chat.index',
+                    'route' => 'student_chat.index',
                     'user_role' => 2
                 ]
             ]
