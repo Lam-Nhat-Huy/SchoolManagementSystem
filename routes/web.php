@@ -115,6 +115,8 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
 
         Route::get('/create', [CourseController::class, 'create'])->name('course.create');
         Route::post('/store', [CourseController::class, 'store'])->name('course.store');
+        Route::get('/restore/{id}', [CourseController::class, 'restore'])->name('course.restore')->where(['id' => '[0-9]+']);
+        Route::post('/forceDelete/{id}', [CourseController::class, 'forceDelete'])->name('course.forceDelete')->where(['id' => '[0-9]+']);
 
         Route::get('/edit/{id}', [CourseController::class, 'edit'])->name('course.edit')->where(['id' => '[0-9]+']);
         Route::post('/update/{id}', [CourseController::class, 'update'])->name('course.update')->where(['id' => '[0-9]+']);
@@ -232,3 +234,7 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
         Route::post('/insert_class', [SubjectRegistrationController::class, 'handleInsertClassData'])->name('insert.class');
     });
 });
+
+
+
+

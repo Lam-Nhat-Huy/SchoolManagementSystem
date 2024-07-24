@@ -27,10 +27,11 @@
 
 
 <!-- CSS Files -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{ asset('admin') }}/css/bootstrap.min.css" />
 <link rel="stylesheet" href="{{ asset('admin') }}/css/plugins.min.css" />
 <link rel="stylesheet" href="{{ asset('admin') }}/css/kaiadmin.min.css" />
-
+<link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet"/>
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link rel="stylesheet" href="{{ asset('admin') }}/css/demo.css" />
 
