@@ -11,7 +11,7 @@ class AccountController extends Controller
     public function index()
     {
         $getAllAccount = Account::orderBy('accounts.created_at', 'DESC')
-            ->get();
+            ->paginate(10);
 
         $template = 'admin.account.account.pages.index';
 

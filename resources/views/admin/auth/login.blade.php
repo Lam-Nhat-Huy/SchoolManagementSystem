@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
     <link rel="stylesheet" href="{{ asset('admin') }}/css/customize.css">
+    <link rel="icon" href="{{ asset('admin') }}/img/banner_home/logo_web.jpg" type="image/x-icon" />
 
 </head>
 

@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('admin') }}assets/css/customsize.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="icon" href="{{ asset('admin') }}/img/banner_home/logo_web.jpg" type="image/x-icon" />
 </head>
 
 <style>
@@ -65,10 +66,14 @@
 
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-body mt-3">
-            <div><a href="{{ route('login.index', ['role_id' => 4]) }}" class="btn btn-dark mb-3 w-100">Cán Bộ Đào Tạo</a></div>
-            <div><a href="{{ route('login.index', ['role_id' => 3]) }}" class="btn btn-dark mb-3 w-100">Giảng Viên</a></div>
-            <div><a href="{{ route('login.index', ['role_id' => 2]) }}" class="btn btn-dark mb-3 w-100">Sinh Viên</a></div>
-            <div><a href="{{ route('login.index', ['role_id' => 1]) }}" class="btn btn-dark mb-3 w-100">Quản Trị Viên</a></div>
+            <div><a href="{{ route('login.index', ['role_id' => 4]) }}" class="btn btn-dark mb-3 w-100">Cán Bộ Đào
+                    Tạo</a></div>
+            <div><a href="{{ route('login.index', ['role_id' => 3]) }}" class="btn btn-dark mb-3 w-100">Giảng Viên</a>
+            </div>
+            <div><a href="{{ route('login.index', ['role_id' => 2]) }}" class="btn btn-dark mb-3 w-100">Sinh Viên</a>
+            </div>
+            <div><a href="{{ route('login.index', ['role_id' => 1]) }}" class="btn btn-dark mb-3 w-100">Quản Trị
+                    Viên</a></div>
         </div>
     </div>
     <!-- Close Header -->
