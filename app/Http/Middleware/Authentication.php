@@ -17,7 +17,7 @@ class Authentication
     public function handle(Request $request, Closure $next): Response
     {
        if (empty(session('user_id'))) {
-           return redirect()->route('login.index');
+           return redirect()->route('home');
        }
 
         return $next($request);

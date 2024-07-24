@@ -16,7 +16,7 @@ class Authenticationed
     public function handle(Request $request, Closure $next): Response
     {
         if (!empty(session('user_id'))) {
-            return redirect()->route('home');
+            return redirect()->route('dashboard.index');
         }
 
         return $next($request);

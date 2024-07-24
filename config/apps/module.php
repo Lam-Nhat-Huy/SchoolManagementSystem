@@ -41,7 +41,7 @@ return [
             ]
         ],
         [
-            'user_role' => [1, 2],
+            'user_role' => [1, 2, 4],
             'title' => 'Lịch học',
             'icon' => 'fas fa-calendar', // Icon cho lịch học
             'name' => '',
@@ -49,7 +49,7 @@ return [
                 [
                     'title' => 'Lịch học',
                     'route' => 'schedule.index',
-                    'user_role' => [1, 2]
+                    'user_role' => [1, 2, 4]
                 ]
             ]
         ],
@@ -160,7 +160,7 @@ return [
             ]
         ],
         [
-            'user_role' => [1, 2, 4],
+            'user_role' => [2, 4],
             'title' => 'Hỗ Trợ Sinh Viên',
             'icon' => 'fab fa-rocketchat', // Icon cho Hỗ Trợ Sinh Viên
             'name' => '',
@@ -168,7 +168,7 @@ return [
                 [
                     'title' => 'Hỗ Trợ Sinh Viên',
                     'route' => 'traning_officer_chat.index',
-                    'user_role' => [1, 4]
+                    'user_role' => 4
                 ],
                 [
                     'title' => 'Chat Với Phòng Đào Tạo',
@@ -180,7 +180,7 @@ return [
         [
             'user_role' => [2],
             'title' => 'Đăng ký môn học',
-            'icon' => 'fas fa-book', // Icon cho lịch học
+            'icon' => 'fas fa-book', // Icon cho môn học
             'name' => '',
             'subModule' => [
                 [

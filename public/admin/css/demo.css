@@ -442,6 +442,13 @@ body[data-background-color="dark"] .demo-icon .icon-class {
   height: 300px;
 }
 
+.message_error {
+  color: #ff0000;
+  font-size: 14px;
+  text-align: start;
+  padding-bottom: 12px;
+}
+
 @media screen and (max-width: 1200px) {
   .chat-container {
     height: 700px !important;

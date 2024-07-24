@@ -15,7 +15,7 @@ class TrainingOfficerAccountSeeder extends Seeder
         TrainingOfficerAccount::insert([
             [
                 'email' => 'luphathuyne@gmail.com',
-                'role_id' => 1,
+                'role_id' => 4,
                 'OTP' => rand(111111, 999999),
                 'created_by' => null,
                 'created_at' => null,

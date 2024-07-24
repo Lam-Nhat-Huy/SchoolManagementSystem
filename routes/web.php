@@ -29,7 +29,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('login')->middleware(Authenticationed::class)->group(function () {
-    Route::get('/', [LoginController::class, 'index'])->name('login.index');
+    Route::get('/{role_id}', [LoginController::class, 'index'])->name('login.index')->where(['role_id' => '[0-9]+']);
 
     Route::post('/send_otp', [LoginController::class, 'send_otp'])->name('login.send_otp');
 
