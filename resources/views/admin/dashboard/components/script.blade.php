@@ -35,6 +35,21 @@
     <script src="{{ asset('admin') }}/js/setting-demo.js"></script>
     <script src="{{ asset('admin') }}/js/demo.js"></script>
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            toastr.options.onShown = function() {
+                $('.toast-title').each(function() {
+                    // Tùy chỉnh tiêu đề ở đây nếu cần
+                    if ($(this).text() === 'success') {
+                        $(this).text('Thành công');
+                    }
+                });
+            };
+        });
+    </script>
     <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
             type: "line",

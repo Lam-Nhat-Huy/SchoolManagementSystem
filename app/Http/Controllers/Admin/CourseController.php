@@ -3,18 +3,29 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Course\StroreCourseRequest;
+use App\Http\Requests\Admin\Course\UpdateCourseRequest;
 use App\Models\Courses;
 use Illuminate\Http\Request;
+use Flasher\Prime\FlasherInterface;
 
 class CourseController extends Controller
 {
     public function index()
     {
-        $getAllCourse = Courses::orderBy('courses.created_at', 'DESC')
-            ->paginate(10);
-
+        $getAllCourse = Courses::withTrashed()
+            ->select(
+                'courses.*',
+                'creator_account.name as creator_name',
+                'updater_account.name as updater_name',
+                'deleter_account.name as deleter_name'
+            )
+            ->orderBy('courses.created_at', 'DESC')
+            ->leftJoin('accounts as creator_account', 'courses.created_by', '=', 'creator_account.id')
+            ->leftJoin('accounts as updater_account', 'courses.updated_by', '=', 'updater_account.id')
+            ->leftJoin('accounts as deleter_account', 'courses.deleted_by', '=', 'deleter_account.id')
+            ->get();
         $template = 'admin.course.course.pages.index';
-
         return view('admin.dashboard.layout', compact(
             'template',
             'getAllCourse',
@@ -38,19 +49,26 @@ class CourseController extends Controller
                 '/admin/lib/library.js',
             ]
         ];
-
         $config['method'] = 'create';
-
-
         return view('admin.dashboard.layout', compact(
             'template',
             'config',
         ));
     }
 
-    public function store(Request $request)
+    public function store(StroreCourseRequest $request, FlasherInterface $flasher)
     {
-        dd($request->all());
+        try {
+            Courses::create([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'created_by' => session('user_id')
+            ]);
+            toastr()->success('Thêm khóa học thành công!');
+            return redirect()->route('course.index');
+        } catch (\Throwable $e) {
+            return back();
+        }
     }
 
     public function edit($id)
@@ -83,7 +101,55 @@ class CourseController extends Controller
         ));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateCourseRequest $request, $id)
     {
+        try {
+            $course = Courses::findOrFail($id);
+            $course->update([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'updated_by' => session('user_id')
+            ]);
+            toastr()->success('Cập nhật khóa học thành công!');
+            return redirect()->route('course.index');
+        } catch (\Throwable $e) {
+            toastr()->error('Có lỗi xảy ra khi cập nhật khóa học!');
+            return back();
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $course = Courses::findOrFail($id);
+            $course->deleted_by = session('user_id'); //thêm id người xóa vào
+            $course->save(); // lưu
+            $course->delete(); // xóa mềm
+            toastr()->success('Cập nhật khóa học thành công!');
+            return redirect()->route('course.index');
+        } catch (\Throwable $e) {
+            toastr()->error('Có lỗi xảy ra khi cập nhật khóa học!');
+            return back();
+        }
+    }
+
+    public function restore($id)
+    {
+        $course = Courses::withTrashed()->findOrFail($id);
+        $course->deleted_by = null;
+        $course->save();
+        Courses::withTrashed()
+            ->where('id', $id)
+            ->restore();
+        toastr()->success('Khôi phục khóa học thành công!');
+        return redirect()->route('course.index');
+    }
+
+    public function forceDelete($id){
+        Courses::withTrashed()
+        ->where('id', $id)
+        ->forceDelete();
+        toastr()->success('Xóa khóa học thành công!');
+        return redirect()->route('course.index');
     }
 }
