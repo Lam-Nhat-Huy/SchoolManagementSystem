@@ -431,20 +431,28 @@ body[data-background-color="dark"] .demo-icon .icon-class {
 }
 
 .chat-container {
-  height: 390px;
+  height: 250px;
 }
 
 .height_for_phone {
   height: 570px;
 }
 
+.chat-aside-height {
+  height: 300px;
+}
+
 @media screen and (max-width: 1200px) {
-  #modalShowcase .modal-dialog {
-    padding: 3rem !important;
+  .chat-container {
+    height: 700px !important;
   }
 
-  .height_for_phone {
-    height: 800px;
+  .chat-aside-height {
+    height: 700px;
+  }
+
+  #modalShowcase .modal-dialog {
+    padding: 3rem !important;
   }
 
   .hidden_for_phone {
@@ -454,7 +462,7 @@ body[data-background-color="dark"] .demo-icon .icon-class {
 
 @media screen and (max-width: 550px) {
   .hidden_for_phone {
-    display: none;
+    display: none !important;
   }
 
   .table-typo tr td {
@@ -483,12 +491,20 @@ body[data-background-color="dark"] .demo-icon .icon-class {
 }
 
 @media screen and (max-width: 576px) {
+  .chat-container {
+    height: 525px !important;
+  }
+
+  .chat-aside-height {
+    height: 525px;
+  }
+
   .custom-template .custom-content {
     overflow: auto;
   }
 
   .height_for_phone {
-    height: 490px;
+    height: 490px !important;
   }
 
   .form-show-notify>.text-right,
@@ -498,6 +514,14 @@ body[data-background-color="dark"] .demo-icon .icon-class {
 }
 
 @media screen and (max-width: 400px) {
+  .chat-container {
+    height: 340px !important;
+  }
+
+  .chat-aside-height {
+    height: 340px;
+  }
+
   .custom-template {
     width: 85% !important;
     right: -85%;
