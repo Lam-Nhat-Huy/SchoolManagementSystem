@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\Enrollments;
+use App\Repositories\SubjectRegistrationRepository;
+use App\Services\Interfaces\SubjectRegistrationServiceInterface;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+
+/**
+ * Class SubjectRegistrationService
+ * @package App\Services
+ */
+class SubjectRegistrationService implements SubjectRegistrationServiceInterface
+{
+    protected $subjectRegistrationRepository;
+
+    public function __construct(SubjectRegistrationRepository $subjectRegistrationRepository)
+    {
+        $this->subjectRegistrationRepository = $subjectRegistrationRepository;
+    }
+
+    public function showCourse()
+    {
+        try {
+            return $this->subjectRegistrationRepository->getCoursesWithSubjects();
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function showSubject($id)
+    {
+        try {
+            return $this->subjectRegistrationRepository->getSubjectsWithClasses($id);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function showClass($id)
+    {
+        try {
+            return $this->subjectRegistrationRepository->getClassesBySubjectId($id);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function showClassesBySubjectId($id)
+    {
+        try {
+            return $this->subjectRegistrationRepository->getClassData($id);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function insertClassData($request)
+    {
+        try {
+            $payload = [
+                'student_id' => $request->input('student_id'),
+                'class_id' => $request->input('class_id'),
+                'enrollment_date' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => null
+            ];
+
+            Enrollments::create($payload);
+
+            return true;
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+}

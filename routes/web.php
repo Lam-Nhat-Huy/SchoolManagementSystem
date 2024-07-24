@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\TeachingSchedule;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SubjectRegistrationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Student\EvaluationByStudentController;
 use App\Http\Middleware\Authentication;
@@ -196,10 +197,10 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
 
     Route::prefix('enrollment')->group(function () {
         Route::get('/index', [EnrollmentController::class, 'index'])->name('enrollment.index');
-
         Route::get('/edit/{id}', [EnrollmentController::class, 'edit'])->name('enrollment.edit')->where(['id' => '[0-9]+']);
         Route::post('/update/{id}', [EnrollmentController::class, 'update'])->name('enrollment.update')->where(['id' => '[0-9]+']);
     });
+
     Route::prefix('enrollment_student')->group(function () {
         Route::get('/index', [EnrollmentStudentController::class, 'index'])->name('enrollment_student.index');
     });
@@ -213,7 +214,7 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
 
     Route::prefix('student_chat')->group(function () {
         Route::get('/index', [StudentChatController::class, 'index'])->name('student_chat.index');
-        
+
         Route::post('/store', [StudentChatController::class, 'store'])->name('student_chat.store');
     });
 
@@ -222,5 +223,12 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
 
         Route::get('/feedback/{id}', [EvaluationByStudentController::class, 'feedback'])->name('evaluation_by_student.feedback')->where(['id' => '[0-9]+']);
         Route::post('/store', [EvaluationByStudentController::class, 'store'])->name('evaluation_by_student.store');
+    });
+
+    Route::prefix('subject_register')->group(function () {
+        Route::get('/get_course', [SubjectRegistrationController::class, 'getCourse'])->name('get.course');
+        Route::get('/get_subject/{id}', [SubjectRegistrationController::class, 'getSubject'])->name('get.subject');
+        Route::get('/get_class/{id}', [SubjectRegistrationController::class, 'getClass'])->name('get.class');
+        Route::post('/insert_class', [SubjectRegistrationController::class, 'handleInsertClassData'])->name('insert.class');
     });
 });

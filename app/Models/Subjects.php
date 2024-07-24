@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subjects extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'name',
         'description',
@@ -21,8 +21,13 @@ class Subjects extends Model
         'deleted_at',
     ];
 
+    public function classes()
+    {
+        return $this->hasMany(Classes::class, 'subject_id');
+    }
+
     public function course()
     {
-        return $this->belongsTo(Courses::class);
+        return $this->belongsTo(Courses::class, 'course_id');
     }
 }
