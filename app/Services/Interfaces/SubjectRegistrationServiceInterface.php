@@ -11,6 +11,7 @@ interface SubjectRegistrationServiceInterface
     public function showCourse();
     public function showSubject($id);
     public function showClass($id);
-    public function showClassesBySubjectId($id);
+    public function showClassesBySubjectId($subjectId, $studentId);
     public function insertClassData($request);
+    public function isClassAlreadyAdded($studentId, $classId);
 }
