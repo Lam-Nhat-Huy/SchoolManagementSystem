@@ -16,14 +16,27 @@ return [
         ],
         [
             'user_role' => 1,
-            'title' => 'Tài khoản',
+            'title' => 'Quản Trị Viên',
             'icon' => 'fas fa-users', // Icon cho quản lý thành viên
             'name' => 'user',
             'subModule' => [
                 [
-                    'title' => 'Thành Viên',
+                    'title' => 'Tài Khoản',
                     'route' => 'account.index',
                     'user_role' => 1
+                ],
+            ]
+        ],
+        [
+            'user_role' => [1, 4],
+            'title' => 'Cán Bộ Đào Tạo',
+            'icon' => 'fas fa-hands-helping', // Icon cho quản lý CBDT
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Tài Khoản',
+                    'route' => 'training_officer_account.index',
+                    'user_role' => [1, 4],
                 ],
             ]
         ],

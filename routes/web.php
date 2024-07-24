@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\TrainingOfficer\AccountController as TrainingOfficerAccountController;
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\CourseController;
@@ -232,6 +233,19 @@ Route::prefix('wp-admin')->middleware(Authentication::class)->group(function () 
         Route::get('/get_subject/{id}', [SubjectRegistrationController::class, 'getSubject'])->name('get.subject');
         Route::get('/get_class/{id}', [SubjectRegistrationController::class, 'getClass'])->name('get.class');
         Route::post('/insert_class', [SubjectRegistrationController::class, 'handleInsertClassData'])->name('insert.class');
+    });
+
+    Route::prefix('training_officer_account')->group(function () {
+        Route::get('/index', [TrainingOfficerAccountController::class, 'index'])->name('training_officer_account.index');
+
+        Route::get('/create', [TrainingOfficerAccountController::class, 'create'])->name('training_officer_account.create');
+        Route::post('/store', [TrainingOfficerAccountController::class, 'store'])->name('training_officer_account.store');
+
+        Route::get('/edit/{id}', [TrainingOfficerAccountController::class, 'edit'])->name('training_officer_account.edit')->where(['id' => '[0-9]+']);
+        Route::post('/update/{id}', [TrainingOfficerAccountController::class, 'update'])->name('training_officer_account.update')->where(['id' => '[0-9]+']);
+
+        Route::get('/delete/{id}', [TrainingOfficerAccountController::class, 'delete'])->name('training_officer_account.delete')->where(['id' => '[0-9]+']);
+        Route::delete('/destroy/{id}', [TrainingOfficerAccountController::class, 'destroy'])->name('training_officer_account.destroy')->where(['id' => '[0-9]+']);
     });
 });
 
