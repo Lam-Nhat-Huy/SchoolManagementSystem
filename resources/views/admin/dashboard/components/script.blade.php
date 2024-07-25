@@ -40,14 +40,41 @@
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <script>
         $(document).ready(function() {
-            toastr.options.onShown = function() {
-                $('.toast-title').each(function() {
-                    // Tùy chỉnh tiêu đề ở đây nếu cần
-                    if ($(this).text() === 'success') {
-                        $(this).text('Thành công');
+            function loadTable(page = 1) {
+                var perPage = $('#per_page_select').val();
+                var search = $('#search_input').val();
+                $.ajax({
+                    url: '{{ route('course.index') }}',
+                    type: 'GET',
+                    data: {
+                        per_page: perPage,
+                        search: search,
+                        page: page
+                    },
+                    success: function(response) {
+                        $('#table-container').html(response.html);
+                        $('.dataTables_info').text(
+                            `Hiển thị ${response.info.from} đến ${response.info.to} của ${response.info.total} khóa học`
+                            );
                     }
                 });
-            };
+            }
+
+            $('#per_page_select').on('change', function() {
+                loadTable();
+            });
+
+            $('#search_input').on('keyup', function() {
+                loadTable();
+            });
+
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                loadTable(page);
+            });
+
+            loadTable();
         });
     </script>
     <script>
