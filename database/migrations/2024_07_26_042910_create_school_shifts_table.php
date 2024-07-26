@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('school_shifts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('class_id')->nullable()->constrained('teacher_id')->onDelete('set null');
-            $table->unsignedBigInteger('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
-            $table->unsignedBigInteger('school_shift_id')->nullable()->constrained('school_shift')->onDelete('set null');
-            $table->string('day_of_week', 10);
+            $table->string('name', 10);
+            $table->text('description');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('school_shifts');
     }
 };
