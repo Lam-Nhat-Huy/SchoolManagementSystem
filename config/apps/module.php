@@ -170,7 +170,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Ngành học',
-                    'route' => 'subject.index',
+                    'route' => 'major.index',
                     'user_role' => 1
                 ]
             ]

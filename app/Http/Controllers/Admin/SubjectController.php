@@ -77,7 +77,6 @@ class SubjectController extends Controller
     public function edit($id)
     {
         $subject = $this->subjectRepository->getSubjectById($id);
-
         $majors = $this->subjectRepository->getMajors();
         $subjectTypes = $this->subjectRepository->getSubjectTypes();
         $departments = $this->subjectRepository->getDepartments();
@@ -109,6 +108,7 @@ class SubjectController extends Controller
             'departments'
         ));
     }
+
 
     public function update(Request $request, $id)
     {

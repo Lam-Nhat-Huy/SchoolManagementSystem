@@ -30,54 +30,38 @@
                        aria-describedby="basic-datatables_info">
                     <thead>
                     <tr role="row">
-                        <th tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                            colspan="1" aria-sort="ascending"
-                            aria-label="Tên phòng ban: activate to sort column descending" style="width: 200px;">
-                            Tên phòng ban
+                        <th  style="width: 150px;">
+                            Mã ngành học
                         </th>
-                        <th  tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                            colspan="1" aria-label="Mã phòng ban: activate to sort column ascending"
-                            style="width: 100px;">
-                            Mã phòng ban
+                        <th  style="width: 200px;">
+                            Tên ngành học
                         </th>
-                        <th  tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                            colspan="1" aria-label="Trạng thái: activate to sort column ascending"
-                            style="width: 100px;">
+                        <th  style="width: 150px;">
+                            Tiêu chuẩn
+                        </th>
+                        <th  style="width: 100px;">
                             Trạng thái
                         </th>
-                        <th  tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                            colspan="1" aria-label="Ngày tạo: activate to sort column ascending"
-                            style="width: 150px;">
-                            Ngày tạo
-                        </th>
-                        <th  tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                            colspan="1" aria-label="Ngày cập nhật: activate to sort column ascending"
-                            style="width: 150px;">
-                            Ngày cập nhật
-                        </th>
-                        <th  tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                            colspan="1" aria-label="Hành động: activate to sort column ascending"
-                            style="width: 150px;">
+                        <th  style="width: 150px;">
                             Hành động
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($data as $department)
+                    @foreach ($data as $item)
                         <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
-                            <td class="sorting_1">{{ $department->name }}</td>
-                            <td>{{ $department->code }}</td>
-                            <td>{{ $department->status === 'active' ? 'Hoạt động' : 'Không hoạt động' }}</td>
-                            <td>{{ $department->created_at }}</td>
-                            <td>{{ $department->updated_at }}</td>
+                            <td>{{ $item->code }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->standard }}</td>
+                            <td>{{ $item->status === 0 ? 'Hoạt động' : 'Không hoạt động' }}</td>
                             <td>
-                                <a href="{{ route('department.edit', ['id' => $department->id]) }}"
+                                <a href="{{ route('major.edit', ['id' => $item->id]) }}"
                                    class="btn btn-sm btn-black" title="Sửa">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <form action="{{ route('department.destroy', ['id' => $department->id]) }}" method="POST"
+                                <form action="{{ route('major.destroy', ['id' => $item->id]) }}" method="POST"
                                       style="display:inline-block;"
-                                      onsubmit="return confirm('Bạn có chắc chắn muốn xóa phòng ban này?');">
+                                      onsubmit="return confirm('Bạn có chắc chắn muốn xóa ngành học này?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger" title="Xóa">
@@ -87,7 +71,7 @@
                             </td>
                         </tr>
                     @endforeach
-                    <!-- Các dòng dữ liệu phòng ban khác -->
+                    <!-- Các dòng dữ liệu ngành học khác -->
                     </tbody>
                 </table>
             </div>
