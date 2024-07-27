@@ -23,7 +23,6 @@ class SubjectsSeeder extends Seeder
                 'credit_num' => 3,
                 'total_class_session' => 30,
                 'status' => 0,
-                'ordering' => 1,
                 'created_at' => null,
                 'updated_at' => null,
             ],
@@ -36,7 +35,6 @@ class SubjectsSeeder extends Seeder
                 'credit_num' => 3,
                 'total_class_session' => 30,
                 'status' => 0,
-                'ordering' => 1,
                 'created_at' => null,
                 'updated_at' => null,
             ],
@@ -49,7 +47,6 @@ class SubjectsSeeder extends Seeder
                 'credit_num' => 3,
                 'total_class_session' => 30,
                 'status' => 0,
-                'ordering' => 1,
                 'created_at' => null,
                 'updated_at' => null,
             ]

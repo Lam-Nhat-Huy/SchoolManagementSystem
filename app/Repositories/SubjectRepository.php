@@ -40,7 +40,6 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
             'credit_num',
             'total_class_session',
             'status',
-            'ordering',
         ])->findOrFail($id);
     }
 

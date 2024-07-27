@@ -10,13 +10,12 @@ class Major extends Model
     use HasFactory;
 
     protected $fillable = [
+        'department_id',
+        'code',
         'name',
-        'description',
-        'created_by',
+        'standard',
+        'status',
         'created_at',
-        'updated_by',
         'updated_at',
-        'deleted_by',
-        'deleted_at',
     ];
 }

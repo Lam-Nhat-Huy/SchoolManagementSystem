@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSubjectRequest;
 use App\Models\Subjects;
 use App\Repositories\Interfaces\SubjectRepositoryInterface;
 use App\Services\Interfaces\SubjectServiceInterface;
@@ -65,7 +66,7 @@ class SubjectController extends Controller
         ));
     }
 
-    public function store(Request $request)
+    public function store(StoreSubjectRequest $request)
     {
         if ($this->subjectService->create($request)) {
             return redirect()->route('subject.index')->with('success', 'Thêm mới bảng ghi thành công');

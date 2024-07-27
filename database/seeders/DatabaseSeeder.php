@@ -1,9 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\CreateTeacherEvaluations;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,8 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         $this->call([
             RolesSeeder::class,
             SchoolShiftSeeder::class,
@@ -31,6 +27,8 @@ class DatabaseSeeder extends Seeder
             CreateTeacherEvaluationsSeeder::class,
             TeacherEvaluationsSeeder::class,
             ChatsSeeder::class,
+            SubjectTypeSeeder::class,
+            DepartmentSeeder::class,  // Thêm dòng này
         ]);
     }
 }

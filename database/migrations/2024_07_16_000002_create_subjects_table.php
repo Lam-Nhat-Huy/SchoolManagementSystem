@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('credit_num');
             $table->integer('total_class_session');
             $table->boolean('status');
-            $table->integer('ordering');
             $table->timestamps();
         });
     }

@@ -13,6 +13,5 @@ class Department extends Model
         'code',
         'name',
         'status',
-        'ordering',
     ];
 }

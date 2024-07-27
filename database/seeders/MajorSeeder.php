@@ -20,7 +20,6 @@ class MajorSeeder extends Seeder
                 'name' => "Lập trình web",
                 'standard' => "Không bắt buộc",
                 'status' => 0,
-                'ordering' => 1,
                 'created_at' => null,
                 'updated_at' => null,
             ],
@@ -30,7 +29,6 @@ class MajorSeeder extends Seeder
                 'name' => "Phát triển phần mềm",
                 'standard' => "Không bắt buộc",
                 'status' => 0,
-                'ordering' => 1,
                 'created_at' => null,
                 'updated_at' => null,
             ],
@@ -40,7 +38,6 @@ class MajorSeeder extends Seeder
                 'name' => "Lập trình game",
                 'standard' => "Không bắt buộc",
                 'status' => 0,
-                'ordering' => 1,
                 'created_at' => null,
                 'updated_at' => null,
             ]
