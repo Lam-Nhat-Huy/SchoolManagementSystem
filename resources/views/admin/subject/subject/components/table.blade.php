@@ -32,27 +32,53 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên môn học: activate to sort column descending" style="width: 200px;">Tên
-                                môn học</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending"
-                                style="width: 200px;">Mô Tả</th>
+                                aria-label="Tên môn học: activate to sort column descending" style="width: 200px;">
+                                Tên môn học
+                            </th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-label="Số tín chỉ: activate to sort column ascending"
-                                style="width: 100px;">Khóa Học</th>
+                                style="width: 100px;">
+                                Số tín chỉ
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-label="Số buổi học: activate to sort column ascending"
+                                style="width: 100px;">
+                                Số buổi học
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-label="Trạng thái: activate to sort column ascending"
+                                style="width: 100px;">
+                                Trạng thái
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-label="Mã môn học: activate to sort column ascending"
+                                style="width: 100px;">
+                                Mã môn học
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-label="Phòng ban: activate to sort column ascending"
+                                style="width: 150px;">
+                                Phòng ban
+                            </th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-label="Hành động: activate to sort column ascending"
-                                style="width: 100px;">Hành động</th>
+                                style="width: 150px;">
+                                Hành động
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $item)
-                            <tr role="row" class="odd">
+                            <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
                                 <td class="sorting_1">{{ $item->name }}</td>
-                                <td>{{ $item->description }}</td>
-                                <td>Công Nghệ Thông Tin</td>
+                                <td>{{ $item->credit_num }}</td>
+                                <td>{{ $item->total_class_session }}</td>
+                                <td>{{ $item->status === 'active' ? 'Hoạt động' : 'Không hoạt động' }}</td>
+                                <td>{{ $item->code }}</td>
+                                <td>{{ $item->department->name ?? 'Chưa có phòng ban' }}</td>
                                 <td>
-                                    <a href="{{ route('subject.edit', ['id' => $item->id]) }}" class="btn btn-sm btn-black">
+                                    <a href="{{ route('subject.edit', ['id' => $item->id]) }}"
+                                        class="btn btn-sm btn-black" title="Sửa">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <form action="{{ route('subject.destroy', ['id' => $item->id]) }}" method="POST"
@@ -60,7 +86,7 @@
                                         onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Xóa">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </form>

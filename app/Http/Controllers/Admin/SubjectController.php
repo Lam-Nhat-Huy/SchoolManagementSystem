@@ -35,6 +35,10 @@ class SubjectController extends Controller
     {
         $template = "admin.subject.subject.pages.store";
 
+        $majors = $this->subjectRepository->getMajors();
+        $subjectTypes = $this->subjectRepository->getSubjectTypes();
+        $departments = $this->subjectRepository->getDepartments();
+
         $config = [
             'css' => [
                 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
@@ -54,7 +58,10 @@ class SubjectController extends Controller
 
         return view('admin.dashboard.layout', compact(
             'template',
-            'config'
+            'config',
+            'majors',
+            'subjectTypes',
+            'departments'
         ));
     }
 
@@ -69,6 +76,10 @@ class SubjectController extends Controller
     public function edit($id)
     {
         $subject = $this->subjectRepository->getSubjectById($id);
+
+        $majors = $this->subjectRepository->getMajors();
+        $subjectTypes = $this->subjectRepository->getSubjectTypes();
+        $departments = $this->subjectRepository->getDepartments();
 
         $template = "admin.subject.subject.pages.store";
 
@@ -91,7 +102,10 @@ class SubjectController extends Controller
         return view('admin.dashboard.layout', compact(
             'template',
             'config',
-            'subject'
+            'subject',
+            'majors',
+            'subjectTypes',
+            'departments'
         ));
     }
 

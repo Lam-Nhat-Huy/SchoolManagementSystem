@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subjects', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 100);
-            $table->text('description')->nullable();
-            $table->unsignedBigInteger('course_id')->nullable()->constrained('courses')->onDelete('set null');
-            $table->unsignedBigInteger('created_by')->nullable();
-            $table->timestamp('created_at')->nullable();
-            $table->unsignedBigInteger('updated_by')->nullable();
-            $table->timestamp('updated_at')->nullable();
-            $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->timestamp('deleted_at')->nullable();
-
+            $table->id(); // Tự động tạo khóa chính với tên là 'id'
+            $table->unsignedBigInteger('major_id');
+            $table->unsignedBigInteger('subject_type_id');
+            $table->unsignedBigInteger('department_id');
+            $table->string('code');
+            $table->string('name');
+            $table->integer('credit_num');
+            $table->integer('total_class_session');
+            $table->boolean('status');
+            $table->integer('ordering');
+            $table->timestamps();
         });
     }
 

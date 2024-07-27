@@ -11,7 +11,6 @@
                         <i class="fa fa-plus"></i> Thêm môn học
                     </a>
 
-                    <a href="" class="btn btn-sm btn-primary">Xuất Excel</a>
                 </div>
             </div>
             <div class="card-body">

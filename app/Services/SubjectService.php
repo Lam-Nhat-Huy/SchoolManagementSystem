@@ -14,19 +14,22 @@ class SubjectService implements SubjectServiceInterface
 {
     protected $subjectRepository;
 
-    public function __construct(SubjectRepository $subjectRepository) {
+    public function __construct(SubjectRepository $subjectRepository)
+    {
         $this->subjectRepository = $subjectRepository;
     }
 
-    public function getSubject() {
+    public function getSubject()
+    {
         return $this->subjectRepository->getData();
     }
 
-    public function create($request) {
+    public function create($request)
+    {
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token', 'send']);
-            $this->subjectRepository->create($payload);
+            $request = $this->subjectRepository->create($payload);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -64,5 +67,4 @@ class SubjectService implements SubjectServiceInterface
             return false;
         }
     }
-
 }

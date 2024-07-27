@@ -10,15 +10,17 @@ class Subjects extends Model
     use HasFactory;
 
     protected $fillable = [
+        'major_id',
+        'subject_type_id',
+        'department_id',
+        'code',
         'name',
-        'description',
-        'course_id',
-        'created_by',
+        'credit_num',
+        'total_class_session',
+        'status',
+        'ordering',
         'created_at',
-        'updated_by',
         'updated_at',
-        'deleted_by',
-        'deleted_at',
     ];
 
     public function classes()
@@ -29,5 +31,11 @@ class Subjects extends Model
     public function course()
     {
         return $this->belongsTo(Courses::class, 'course_id');
+    }
+
+    // Thêm phương thức này để lấy thông tin phòng ban
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
     }
 }
