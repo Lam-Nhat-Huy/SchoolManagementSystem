@@ -8,7 +8,7 @@ namespace App\Services\Interfaces;
  */
 interface SubjectServiceInterface
 {
-    public function getSubject();
+    public function getSubject($search = null);
     public function create($request);
     public function update($request, $id);
     public function destroy($id);
