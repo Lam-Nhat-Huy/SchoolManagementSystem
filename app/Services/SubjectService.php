@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Subjects;
 use App\Repositories\SubjectRepository;
 use App\Services\Interfaces\SubjectServiceInterface;
 use Illuminate\Support\Facades\DB;
@@ -19,10 +20,17 @@ class SubjectService implements SubjectServiceInterface
         $this->subjectRepository = $subjectRepository;
     }
 
-    public function getSubject()
+    public function getSubject($search = null)
     {
-        return $this->subjectRepository->getData();
+        $query = Subjects::query();
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        return $query->paginate(10); // hoặc số lượng bản ghi bạn muốn hiển thị mỗi trang
     }
+
 
     public function create($request)
     {

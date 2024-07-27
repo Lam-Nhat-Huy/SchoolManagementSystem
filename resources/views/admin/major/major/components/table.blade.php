@@ -10,9 +10,8 @@
                 <div id="basic-datatables_filter" class="dataTables_filter">
                     <form action="{{ route('major.index') }}" method="GET">
                         <label>Tìm kiếm:
-                            <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm" placeholder="Nhập tên hoặc mã ngành" aria-controls="basic-datatables">
+                            <input type="search" name="search" class="form-control form-control-sm" placeholder="Nhập tên ngành học" aria-controls="basic-datatables">
                         </label>
-                        <button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
                     </form>
                 </div>
             </div>

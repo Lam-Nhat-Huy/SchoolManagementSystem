@@ -10,16 +10,25 @@ use Illuminate\Http\Request;
 class MajorController extends Controller
 {
     // Hiển thị danh sách phòng ban
-    public function index()
+    public function index(Request $request)
     {
-        $data = Major::paginate(10);
+        $query = Major::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('code', 'LIKE', "%$search%");
+        }
+
+        $data = $query->paginate(10);
         $template = "admin.major.major.pages.index";
 
         return view('admin.dashboard.layout', compact(
             'template',
-            'data'
+            'data',
         ));
     }
+
 
     // Hiển thị form tạo phòng ban mới
     public function create()
