@@ -5,21 +5,31 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Models\Department;
+use App\Models\Major;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
     // Hiển thị danh sách phòng ban
-    public function index()
+    public function index(Request $request)
     {
-        $data = Department::paginate(10);
-        $template = "admin.department.department.pages.index";
+        $query = Department::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('code', 'LIKE', "%$search%");
+        }
+
+        $data = $query->paginate(10);
+        $template = "admin.department.department.pages.index"; // Sửa đường dẫn template
 
         return view('admin.dashboard.layout', compact(
             'template',
             'data'
         ));
     }
+
 
     // Hiển thị form tạo phòng ban mới
     public function create()

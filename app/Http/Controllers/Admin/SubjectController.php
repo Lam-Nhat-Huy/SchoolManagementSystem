@@ -20,9 +20,10 @@ class SubjectController extends Controller
         $this->subjectRepository = $subjectRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = $this->subjectService->getSubject();
+        $search = $request->input('search');
+        $data = $this->subjectService->getSubject($search);
 
         $template = "admin.subject.subject.pages.index";
 
@@ -31,6 +32,7 @@ class SubjectController extends Controller
             'data'
         ));
     }
+
 
     public function create()
     {
