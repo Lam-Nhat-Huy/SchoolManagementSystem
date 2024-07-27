@@ -22,7 +22,6 @@ Route::get('/auth/google', [LoginController::class, 'redirectToGoogle'])->name('
 
 Route::get('/auth/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
-require __DIR__ . '/admin.php';
 
 
 
