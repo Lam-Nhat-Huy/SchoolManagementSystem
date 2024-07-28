@@ -1,3 +1,5 @@
+
+
 <div class="page-inner">
     @include('admin.dashboard.components.breadcrumb')
 
@@ -17,113 +19,75 @@
                     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
-                                <div class="dataTables_length" id="basic-datatables_length">
-                                    <label>Hiển thị:
-                                        <select name="basic-datatables_length" aria-controls="basic-datatables"
-                                            class="form-control form-control-sm">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select>
-                                        bản ghi
-                                    </label>
-                                </div>
+                                <div class="dataTables_length" id="basic-datatables_length"></div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <div id="basic-datatables_filter" class="dataTables_filter">
-                                    <label>Tìm kiếm:
-                                        <input type="search" class="form-control form-control-sm" placeholder=""
-                                            aria-controls="basic-datatables">
-                                    </label>
+                                    <form action="{{ route('teacher.index') }}" method="GET">
+                                        <label>Tìm kiếm:
+                                            <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm" placeholder="Nhập tên hoặc mã phòng ban" aria-controls="basic-datatables">
+                                        </label>
+                                        <button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="basic-datatables" class="display table table-striped table-hover dataTable"
-                                    role="grid" aria-describedby="basic-datatables_info">
+                                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Hình ảnh: activate to sort column ascending"
-                                                style="width: 80px;"></th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Mã giảng viên: activate to sort column ascending"
-                                                style="width: 120px;">Mã giảng viên</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Tên giảng viên: activate to sort column ascending"
-                                                style="width: 150px;">Tên giảng viên</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Địa chỉ email: activate to sort column ascending"
-                                                style="width: 200px;">Địa chỉ email</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Số điện thoại: activate to sort column ascending"
-                                                style="width: 120px;">Số điện thoại</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Địa chỉ nhà: activate to sort column ascending"
-                                                style="width: 200px;">Địa chỉ nhà</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Địa chỉ hiện tại: activate to sort column ascending"
-                                                style="width: 200px;">Địa chỉ hiện tại</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Giới tính: activate to sort column ascending"
-                                                style="width: 100px;">Giới tính</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Ngày tháng năm sinh: activate to sort column ascending"
-                                                style="width: 150px;">Ngày tháng năm sinh</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Bằng cấp: activate to sort column ascending"
-                                                style="width: 150px;">Bằng cấp</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Số CCCD: activate to sort column ascending"
-                                                style="width: 150px;">Số CCCD</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Giới thiệu bản thân: activate to sort column ascending"
-                                                style="width: 200px;">Giới thiệu bản thân</th>
-                                            <th class="sorting" tabindex="0" aria-controls="basic-datatables"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Hành Động: activate to sort column ascending"
-                                                style="width: 100px;">Hành Động</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Hình ảnh: activate to sort column descending" style="width: 150px;">Hình ảnh</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Mã giảng viên: activate to sort column ascending" style="width: 100px;">Mã giảng viên</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Tên: activate to sort column ascending" style="width: 200px;">Tên</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Email: activate to sort column ascending" style="width: 150px;">Email</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Phone: activate to sort column ascending" style="width: 100px;">Phone</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Địa chỉ nhà: activate to sort column ascending" style="width: 200px;">Địa chỉ nhà</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Địa chỉ hiện tại: activate to sort column ascending" style="width: 200px;">Địa chỉ hiện tại</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Giới tính: activate to sort column ascending" style="width: 100px;">Giới tính</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Ngày tháng năm sinh: activate to sort column ascending" style="width: 150px;">Ngày tháng năm sinh</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Bằng cấp: activate to sort column ascending" style="width: 150px;">Bằng cấp</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Số cccd: activate to sort column ascending" style="width: 150px;">Số cccd</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Số cccd: activate to sort column ascending" style="width: 150px;">Bio</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Chuyên khoa: activate to sort column ascending" style="width: 150px;">Chuyên khoa</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Chuyên ngành: activate to sort column ascending" style="width: 150px;">Chuyên ngành</th>
+                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Chuyên ngành: activate to sort column ascending" style="width: 150px;">Thao tác</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($data as $teacher)
-                                            <tr role="row" class="odd">
-                                                <td><img src="{{ asset('uploads/teacher/' . $teacher->image) }}"
-                                                        alt="Hình ảnh" width="100"
-                                                        class="rounded-circle img-thumbnail"></td>
-                                                <td>{{ $teacher->code }}</td>
-                                                <td>{{ $teacher->name }}</td>
-                                                <td>{{ $teacher->email }}</td>
-                                                <td>{{ $teacher->phone }}</td>
-                                                <td>{{ $teacher->address }}</td>
-                                                <td>{{ $teacher->current_address }}</td>
-                                                <td>{{ $teacher->gender }}</td>
-                                                <td>{{ $teacher->date_of_birth }}</td>
-                                                <td>{{ $teacher->qualifications }}</td>
-                                                <td>{{ $teacher->cccd }}</td>
-                                                <td>{{ $teacher->bio }}</td>
-                                                <td>
-                                                    <a href="{{ route('teacher.edit', $teacher->id) }}"
-                                                        class="btn btn-sm btn-black">
+                                            <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
+                                                <td style="text-align: center;">
+                                                    <img src="{{ $teacher->image ? asset('uploads/teacher/' . $teacher->image) : asset('uploads/def/sbcf-default-avatar.webp') }}" 
+                                                         alt="Hình ảnh" class="rounded-circle" style="width: 100px; height: 90px; object-fit: cover;">
+                                                </td>
+                                                
+                                                
+                                                
+                                                
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->code }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->name }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->email }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->phone }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->address }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->current_address }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->gender }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->date_of_birth }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->qualifications }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->cccd }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->bio }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->course_name }}</td>
+                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->major_name }}</td>
+                                                
+                                                
+
+
+                                                <td style="padding: 5px; line-height: 1.2;">
+                                                    <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-sm btn-black">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <form action="{{ route('teacher.destroy', $teacher->id) }}"
-                                                        method="POST" style="display:inline-block;"
-                                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa giáo viên này?');">
+                                                    <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa giáo viên này?');">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-danger">
@@ -139,25 +103,12 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
-                                <div class="dataTables_info" id="basic-datatables_info" role="status"
-                                    aria-live="polite">Hiển thị 1 đến 10 của 20 giảng viên</div>
+                                <div class="dataTables_info" id="basic-datatables_info" role="status" aria-live="polite">Hiển thị {{ $data->firstItem() }} đến {{ $data->lastItem() }} của {{ $data->total() }} giảng viên</div>
                             </div>
                             <div class="col-sm-12 col-md-7">
                                 <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
                                     <ul class="pagination">
-                                        <li class="paginate_button page-item previous disabled"
-                                            id="basic-datatables_previous"><a href="#"
-                                                aria-controls="basic-datatables" data-dt-idx="0" tabindex="0"
-                                                class="page-link">Trước</a></li>
-                                        <li class="paginate_button page-item active"><a href="#"
-                                                aria-controls="basic-datatables" data-dt-idx="1" tabindex="0"
-                                                class="page-link">1</a></li>
-                                        <li class="paginate_button page-item "><a href="#"
-                                                aria-controls="basic-datatables" data-dt-idx="2" tabindex="0"
-                                                class="page-link">2</a></li>
-                                        <li class="paginate_button page-item next" id="basic-datatables_next"><a
-                                                href="#" aria-controls="basic-datatables" data-dt-idx="3"
-                                                tabindex="0" class="page-link">Tiếp</a></li>
+                                        {{ $data->links('pagination::bootstrap-4') }}
                                     </ul>
                                 </div>
                             </div>

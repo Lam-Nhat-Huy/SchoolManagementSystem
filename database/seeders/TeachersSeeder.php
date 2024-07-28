@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\Teachers;
@@ -24,7 +23,8 @@ class TeachersSeeder extends Seeder
                 'gender' => 'Male',
                 'date_of_birth' => '1980-01-01',
                 'qualifications' => 'MSc in Education',
-                'cccd' => '123456789',
+                'cccd_front' => 'cccd_front_T001.jpg',
+                'cccd_back' => 'cccd_back_T001.jpg',
                 'bio' => 'An experienced teacher with over 20 years in the education field.',
                 'course_id' => 1,
                 'role_id' => 3,
@@ -47,7 +47,8 @@ class TeachersSeeder extends Seeder
                 'gender' => 'Female',
                 'date_of_birth' => '1985-05-15',
                 'qualifications' => 'PhD in Mathematics',
-                'cccd' => '987654321',
+                'cccd_front' => 'cccd_front_T002.jpg',
+                'cccd_back' => 'cccd_back_T002.jpg',
                 'bio' => 'Specializes in advanced mathematical concepts and research.',
                 'course_id' => 1,
                 'role_id' => 3,
@@ -70,7 +71,8 @@ class TeachersSeeder extends Seeder
                 'gender' => 'Male',
                 'date_of_birth' => '1990-07-20',
                 'qualifications' => 'BSc in Physics',
-                'cccd' => '1122334455',
+                'cccd_front' => 'cccd_front_T003.jpg',
+                'cccd_back' => 'cccd_back_T003.jpg',
                 'bio' => 'Passionate about teaching physics and conducting experiments.',
                 'course_id' => 2,
                 'role_id' => 3,
@@ -93,7 +95,8 @@ class TeachersSeeder extends Seeder
                 'gender' => 'Male',
                 'date_of_birth' => '1982-11-11',
                 'qualifications' => 'MA in Literature',
-                'cccd' => '2233445566',
+                'cccd_front' => 'cccd_front_T004.jpg',
+                'cccd_back' => 'cccd_back_T004.jpg',
                 'bio' => 'Expert in literature with a focus on modern poetry.',
                 'course_id' => 2,
                 'role_id' => 3,
@@ -116,7 +119,8 @@ class TeachersSeeder extends Seeder
                 'gender' => 'Female',
                 'date_of_birth' => '1975-04-04',
                 'qualifications' => 'PhD in Chemistry',
-                'cccd' => '3344556677',
+                'cccd_front' => 'cccd_front_T005.jpg',
+                'cccd_back' => 'cccd_back_T005.jpg',
                 'bio' => 'Dedicated to teaching chemistry and fostering a love for science.',
                 'course_id' => 1,
                 'role_id' => 3,
@@ -139,7 +143,8 @@ class TeachersSeeder extends Seeder
                 'gender' => 'Female',
                 'date_of_birth' => '1988-09-09',
                 'qualifications' => 'MEd in Education',
-                'cccd' => '4455667788',
+                'cccd_front' => 'cccd_front_T006.jpg',
+                'cccd_back' => 'cccd_back_T006.jpg',
                 'bio' => 'Focused on innovative teaching methods and student engagement.',
                 'course_id' => 1,
                 'role_id' => 3,
@@ -154,3 +159,4 @@ class TeachersSeeder extends Seeder
         ]);
     }
 }
+

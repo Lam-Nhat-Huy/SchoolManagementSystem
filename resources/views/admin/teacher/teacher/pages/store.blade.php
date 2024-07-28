@@ -75,6 +75,10 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <label for="teacher_qualifications">Bằng cấp</label>
+                                        <input type="text" name="teacher_qualifications" id="teacher_qualifications" class="form-control" value="{{ old('teacher_qualifications', $teacher->qualifications ?? '') }}" placeholder="Nhập bằng cấp">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="teacher_date_of_birth">Ngày tháng năm sinh</label>
                                         <input
                                             value="{{ old('teacher_date_of_birth', $teacher->date_of_birth ?? '') }}"
@@ -103,69 +107,68 @@
                                 <input type="file" name="teacher_image" id="teacher_image" class="form-control">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="teacher_cccd">Ảnh CCCD</label>
-                                <input type="file" name="teacher_cccd" id="teacher_cccd" class="form-control">
-                                @if (old('teacher_cccd'))
-                                    <div class="mt-2">
-                                        <img src="{{ asset('uploads/teacher/' . old('teacher_cccd')) }}"
-                                            alt="CCCD" width="100" height="100" class="img-thumbnail">
-                                        <p class="text-muted">Tệp hiện tại: {{ old('teacher_cccd') }}</p>
+                                <label for="teacher_cccd_front">Ảnh CCCD (Mặt trước)</label>
+                                <input type="file" name="teacher_cccd_front" id="teacher_cccd_front" class="form-control">
+                                @if (old('teacher_cccd_front'))
+                                    <div class="mt-2 text-center">
+                                        <img src="{{ asset('uploads/teacher/' . old('teacher_cccd_front')) }}" alt="CCCD Front" width="100" height="100" class="img-thumbnail">
                                     </div>
-                                @elseif(isset($teacher->cccd))
-                                    <div class="mt-2">
-                                        <img src="{{ asset('uploads/teacher/' . $teacher->cccd) }}" alt="CCCD"
-                                            width="100" height="100" class="img-thumbnail">
-                                        <p class="text-muted">Tệp hiện tại: {{ $teacher->cccd }}</p>
+                                @elseif(isset($teacher->cccd_front))
+                                    <div class="mt-2 text-center">
+                                        <img src="{{ asset('uploads/teacher/' . $teacher->cccd_front) }}" alt="CCCD Front" width="100" height="100" class="img-thumbnail">
                                     </div>
                                 @endif
                             </div>
-
-
-
+                            
                             <div class="form-group mb-3">
-                                <label for="teacher_qualifications">Bằng cấp</label>
-                                <input type="file" name="teacher_qualifications" id="teacher_qualifications"
-                                    class="form-control">
-                                @if (old('teacher_qualifications'))
-                                    <div class="mt-2">
-                                        <img src="{{ asset('uploads/teacher/' . old('teacher_qualifications')) }}"
-                                            alt="Bằng cấp" width="100" height="100" class="img-thumbnail"
-                                            style="object-fit: cover;">
-                                        <p class="text-muted">Tệp hiện tại: {{ old('teacher_qualifications') }}</p>
+                                <label for="teacher_cccd_back">Ảnh CCCD (Mặt sau)</label>
+                                <input type="file" name="teacher_cccd_back" id="teacher_cccd_back" class="form-control">
+                                @if (old('teacher_cccd_back'))
+                                    <div class="mt-2 text-center">
+                                        <img src="{{ asset('uploads/teacher/' . old('teacher_cccd_back')) }}" alt="CCCD Back" width="100" height="100" class="img-thumbnail">
                                     </div>
-                                @elseif(isset($teacher->qualifications))
-                                    <div class="mt-2">
-                                        <img src="{{ asset('uploads/teacher/' . $teacher->qualifications) }}"
-                                            alt="Bằng cấp" width="100" height="100" class="img-thumbnail"
-                                            style="object-fit: cover;">
-                                        <p class="text-muted">Tệp hiện tại: {{ $teacher->qualifications }}</p>
+                                @elseif(isset($teacher->cccd_back))
+                                    <div class="mt-2 text-center">
+                                        <img src="{{ asset('uploads/teacher/' . $teacher->cccd_back) }}" alt="CCCD Back" width="100" height="100" class="img-thumbnail">
                                     </div>
                                 @endif
                             </div>
+                            
+                            
+
+
+
+                 
+                            
 
 
                             <div class="form-group mb-3">
-                                <label for="status">Chuyên Khoa</label>
-                                <select class="form-control setupSelect2" id="status" name="monhoc">
-                                    @foreach ($data as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ old('monhoc') == $item->id || (isset($teacher->course_id) && $teacher->course_id == $item->id) ? 'selected' : '' }}>
-                                            {{ $item->name }}
+                                <label for="course_id">Chuyên Khoa</label>
+                                <select class="form-control setupSelect2" id="course_id" name="course_id">
+                                    @foreach ($courses as $course)
+                                        <option value="{{ $course->id }}"
+                                            {{ old('course_id') == $course->id || (isset($teacher->course_id) && $teacher->course_id == $course->id) ? 'selected' : '' }}>
+                                            {{ $course->name }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
+                            
                             <div class="form-group mb-3">
-                                <label for="status">Chuyên ngành</label>
-                                <select class="form-control setupSelect2" id="status" name="monhoc">
-                                    @foreach ($data as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ old('monhoc') == $item->id || (isset($teacher->course_id) && $teacher->course_id == $item->id) ? 'selected' : '' }}>
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
+                                <label for="major_id">Chuyên Ngành</label>
+                                <select class="form-control setupSelect2" id="major_id" name="major_id">
+                                    <option value="">Chọn ngành học</option>
+                                    @if(old('course_id') || (isset($teacher->course_id) && $teacher->course_id))
+                                        @foreach ($majors as $major)
+                                            <option value="{{ $major->id }}"
+                                                {{ old('major_id') == $major->id || (isset($teacher->major_id) && $teacher->major_id == $major->id) ? 'selected' : '' }}>
+                                                {{ $major->name }}
+                                            </option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
+
                         </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-success mb10 button-fix" name="send"
@@ -177,3 +180,31 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#course_id').change(function() {
+            var courseId = $(this).val();
+
+            if(courseId) {
+                $.ajax({
+                    url: '{{ route('majors.by.course') }}',
+                    type: 'GET',
+                    data: { course_id: courseId },
+                    success: function(data) {
+                        $('#major_id').empty();
+                        $('#major_id').append('<option value="">Chọn ngành học</option>');
+                        $.each(data, function(key, value) {
+                            $('#major_id').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#major_id').empty();
+                $('#major_id').append('<option value="">Chọn ngành học</option>');
+            }
+        });
+    });
+    
+</script>

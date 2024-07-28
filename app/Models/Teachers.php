@@ -20,9 +20,11 @@ class Teachers extends Model
         'gender',
         'date_of_birth',
         'qualifications',
-        'cccd',
+        'cccd_front',
+        'cccd_back',
         'bio',
         'course_id',
+        'majors_id',
         'role_id',
         'created_by',
         'created_at',
@@ -35,5 +37,14 @@ class Teachers extends Model
     public function role()
     {
         return $this->belongsTo(Roles::class);
+    }
+    public function course()
+    {
+        return $this->belongsTo(Courses::class, 'course_id');
+    }
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class, 'majors_id');
     }
 }

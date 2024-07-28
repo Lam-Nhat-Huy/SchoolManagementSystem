@@ -24,7 +24,9 @@ return new class extends Migration
             $table->string('gender', 10)->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('qualifications')->nullable();
-            $table->string('cccd')->nullable();
+            $table->string('cccd_front')->nullable();
+            $table->string('cccd_back')->nullable();
+
             $table->text('bio')->nullable();
             $table->unsignedBigInteger('course_id')->nullable()->constrained('courses')->onDelete('set null');
             $table->unsignedBigInteger('majors_id')->nullable()->constrained('majors')->onDelete('set null');

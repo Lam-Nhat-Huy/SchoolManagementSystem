@@ -37,4 +37,8 @@ class Courses extends Model
     {
         return $this->belongsTo(Account::class, 'deleted_by');
     }
+    public function majors()
+    {
+        return $this->hasMany(Major::class, 'course_id');
+    }
 }
