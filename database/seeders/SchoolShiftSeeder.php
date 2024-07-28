@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\SchoolShift;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SchoolShiftSeeder extends Seeder
@@ -13,27 +12,52 @@ class SchoolShiftSeeder extends Seeder
      */
     public function run(): void
     {
-        SchoolShift::insert([
-            [
-                'name' => 'Ca 1',
-                'description' => 'Bắt đầu từ 7 giờ đến 9 giờ',
-            ],
-            [
-                'name' => 'Ca 2',
-                'description' => 'Bắt đầu từ 9 giờ 15 phút đến 11 giờ 15 phút',
-            ],
-            [
-                'name' => 'Ca 3',
-                'description' => 'Bắt đầu từ 12 giờ đến 14 giờ',
-            ],
-            [
-                'name' => 'Ca 4',
-                'description' => 'Bắt đầu từ 14 giờ 15 phút đến 16 giờ 15 phút',
-            ],
-            [
-                'name' => 'Ca 5',
-                'description' => 'Bắt đầu từ 16 giờ 30 phút đến 18 giờ 30 phút',
-            ],
-        ]);
+        // SchoolShift::insert([
+        //     [
+        //         'code' => 'CA1',
+        //         'name' => 'Ca 1',
+        //         'description' => 'Viết tắc của Ca 1',
+        //         'start_time' => '07:00:00',
+        //         'end_time' => '09:00:00',
+        //         'shift_date' => '2024-07-27',
+        //         'status' => true,
+        //     ],
+        //     [
+        //         'code' => 'CA2',
+        //         'name' => 'Ca 2',
+        //         'description' => 'Viết tắc của Ca 2',
+        //         'start_time' => '09:15:00',
+        //         'end_time' => '11:15:00',
+        //         'shift_date' => '2024-07-27',
+        //         'status' => true,
+        //     ],
+        //     [
+        //         'code' => 'CA3',
+        //         'name' => 'Ca 3',
+        //         'description' => 'Viết tắc của Ca 3',
+        //         'start_time' => '12:00:00',
+        //         'end_time' => '14:00:00',
+        //         'shift_date' => '2024-07-27',
+        //         'status' => true,
+        //     ],
+        //     [
+        //         'code' => 'CA4',
+        //         'name' => 'Ca 4',
+        //         'description' => 'Viết tắc của Ca 4',
+        //         'start_time' => '14:15:00',
+        //         'end_time' => '16:15:00',
+        //         'shift_date' => '2024-07-27',
+        //         'status' => true,
+        //     ],
+        //     [
+        //         'code' => 'CA5',
+        //         'name' => 'Ca 5',
+        //         'description' => 'Viết tắc của Ca 5',
+        //         'start_time' => '16:30:00',
+        //         'end_time' => '18:30:00',
+        //         'shift_date' => '2024-07-27',
+        //         'status' => true,
+        //     ],
+        // ]);
     }
 }

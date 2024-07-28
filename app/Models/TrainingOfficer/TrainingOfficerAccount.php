@@ -11,7 +11,11 @@ class TrainingOfficerAccount extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name',
         'email',
+        'phone',
+        'address',
+        'hometown',
         'role_id',
         'OTP',
         'created_by',
