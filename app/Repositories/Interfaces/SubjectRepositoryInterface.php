@@ -11,5 +11,5 @@ interface SubjectRepositoryInterface
     public function getSubjectById(int $id = 0);
     public function getMajors();
     public function getSubjectTypes();
-    public function getDepartments();
+    public function getCoures();
 }
