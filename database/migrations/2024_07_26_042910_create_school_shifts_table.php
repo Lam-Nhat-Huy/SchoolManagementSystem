@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('school_shifts', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 10);
-            $table->text('description');
+            $table->string('code', 3)->nullable(); // Mã của ca học
+            $table->string('name', 50); // Tên của ca học
+            $table->text('description')->nullable(); // Mô tả chi tiết về ca học
+            $table->time('start_time'); // Thời gian bắt đầu của ca học
+            $table->time('end_time'); // Thời gian kết thúc của ca học
+            $table->date('shift_date'); // Ngày có ca học
+            $table->boolean('status')->default(true); // Trạng thái của ca học (true = hoạt động, false = không hoạt động)
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('training_officer_accounts', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100); // Tên của cán bộ quản lý
             $table->string('email', 100)->unique();
+            $table->string('phone', 15)->nullable(); // Số điện thoại
+            $table->string('address')->nullable(); // Địa chỉ hiện tại
+            $table->string('hometown')->nullable(); // Quê quán
             $table->unsignedBigInteger('role_id')->nullable()->constrained('roles')->onDelete('set null');
             $table->integer('OTP')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
