@@ -22,6 +22,7 @@ class MajorSeeder extends Seeder
                 'status' => 0,
                 'created_at' => null,
                 'updated_at' => null,
+                'course_id' => 1,
             ],
             [
                 'department_id' => 1,
@@ -31,6 +32,7 @@ class MajorSeeder extends Seeder
                 'status' => 0,
                 'created_at' => null,
                 'updated_at' => null,
+                'course_id' => 1,
             ],
             [
                 'department_id' => 1,
@@ -40,6 +42,7 @@ class MajorSeeder extends Seeder
                 'status' => 0,
                 'created_at' => null,
                 'updated_at' => null,
+                'course_id' => 1,
             ]
         ]);
     }
