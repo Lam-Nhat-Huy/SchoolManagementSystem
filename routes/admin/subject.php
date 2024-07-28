@@ -16,6 +16,8 @@ Route::prefix('subject')->group(function () {
 
     Route::get('/delete/{id}', [SubjectController::class, 'delete'])->name('subject.delete')->where(['id' => '[0-9]+']);
     Route::delete('/destroy/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy')->where(['id' => '[0-9]+']);
+
+    Route::get('/majors-by-department', [SubjectController::class, 'getMajorsByDepartment'])->name('majors.by.department');
 });
 
 Route::prefix('department')->group(function () {
