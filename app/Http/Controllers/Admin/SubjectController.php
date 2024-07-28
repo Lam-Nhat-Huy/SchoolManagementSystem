@@ -113,13 +113,11 @@ class SubjectController extends Controller
 
     public function getMajorsByDepartment(Request $request)
     {
-        $departmentId = $request->input('department_id');
+        $departmentId = $request->input('coure_id');
         $majors = $this->subjectRepository->getMajorsByDepartment($departmentId);
 
         return response()->json($majors);
     }
-
-
 
     public function update(Request $request, $id)
     {

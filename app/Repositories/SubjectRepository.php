@@ -61,6 +61,6 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
 
     public function getMajorsByDepartment($departmentId)
     {
-        return Major::where('department_id', $departmentId)->get();
+        return Major::where('course_id', $departmentId)->get();
     }
 }
