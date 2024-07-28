@@ -4,6 +4,21 @@
     </div>
     <div class="card-body">
         <div class="form-group">
+            <label for="department_id">Khoa/Phòng ban</label>
+            <select class="form-control setupSelect2" id="department_id" name="department_id">
+                @foreach ($departments as $department)
+                    <option value="{{ $department->id }}"
+                            {{ old('department_id', $subject->department_id ?? '') == $department->id ? 'selected' : '' }}>
+                        {{ $department->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('department_id')
+            <label id="department_id-error" class="error mt-2 text-danger" for="department_id">{{ $message }}</label>
+            @enderror
+        </div>
+
+        <div class="form-group">
             <label for="major_id">Ngành học</label>
             <select class="form-control setupSelect2" id="major_id" name="major_id">
                 @foreach ($majors as $major)
@@ -17,6 +32,7 @@
             <label id="major_id-error" class="error mt-2 text-danger" for="major_id">{{ $message }}</label>
             @enderror
         </div>
+
 
         <div class="form-group">
             <label for="subject_type_id">Hình thức học</label>
@@ -34,21 +50,6 @@
         </div>
 
         <div class="form-group">
-            <label for="department_id">Khoa/Phòng ban</label>
-            <select class="form-control setupSelect2" id="department_id" name="department_id">
-                @foreach ($departments as $department)
-                    <option value="{{ $department->id }}"
-                            {{ old('department_id', $subject->department_id ?? '') == $department->id ? 'selected' : '' }}>
-                        {{ $department->name }}
-                    </option>
-                @endforeach
-            </select>
-            @error('department_id')
-            <label id="department_id-error" class="error mt-2 text-danger" for="department_id">{{ $message }}</label>
-            @enderror
-        </div>
-
-        <div class="form-group">
             <label for="status">Trạng thái</label>
             <select class="form-control setupSelect2" id="status" name="status">
                 <option value="0" {{ old('status', $subject->status ?? '') == 0 ? 'selected' : '' }}>Hoạt động</option>
@@ -60,3 +61,31 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#department_id').change(function() {
+            var departmentId = $(this).val();
+
+            if(departmentId) {
+                $.ajax({
+                    url: '{{ route('majors.by.department') }}',
+                    type: 'GET',
+                    data: { department_id: departmentId },
+                    success: function(data) {
+                        $('#major_id').empty();
+                        $('#major_id').append('<option value="">Chọn ngành học</option>'); // Thêm option mặc định
+                        $.each(data, function(key, value) {
+                            $('#major_id').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#major_id').empty();
+                $('#major_id').append('<option value="">Chọn ngành học</option>'); // Thêm option mặc định
+            }
+        });
+    });
+</script>

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Base;
+use App\Models\Courses;
 use App\Models\Department;
 use App\Models\Major;
 use App\Models\Subjects;
@@ -53,8 +54,13 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
         return SubjectType::all(); // Lấy tất cả các loại môn học
     }
 
-    public function getDepartments()
+    public function getCoures()
     {
-        return Department::all(); // Lấy tất cả các khoa/phòng ban
+        return Courses::all(); // Lấy tất cả các khoa/phòng ban
+    }
+
+    public function getMajorsByDepartment($departmentId)
+    {
+        return Major::where('department_id', $departmentId)->get();
     }
 }

@@ -10,12 +10,15 @@ class Major extends Model
     use HasFactory;
 
     protected $fillable = [
-        'department_id',
+        'course_id',
         'code',
         'name',
         'standard',
         'status',
-        'created_at',
-        'updated_at',
     ];
+
+    public function course()
+    {
+        return $this->belongsTo(Courses::class);
+    }
 }

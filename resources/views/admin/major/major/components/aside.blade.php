@@ -4,17 +4,16 @@
     </div>
     <div class="card-body">
         <div class="form-group">
-            <label for="department_id">Phòng ban</label>
-            <select class="form-control setupSelect2" id="department_id" name="department_id">
-                @foreach($departments as $department)
-                    <option value="{{ $department->id }}"
-                            {{ old('department_id', $major->department_id ?? '') == $department->id ? 'selected' : '' }}>
-                        {{ $department->name }}
+            <label for="course_id">Khoa học</label>
+            <select class="form-control setupSelect2" id="course_id" name="course_id">
+                @foreach($courses as $course)
+                    <option value="{{ $course->id }}" {{ old('course_id', $major->course_id ?? '') == $course->id ? 'selected' : '' }}>
+                        {{ $course->name }}
                     </option>
                 @endforeach
             </select>
-            @error('department_id')
-            <label id="department_id-error" class="error mt-2 text-danger" for="department_id">{{ $message }}</label>
+            @error('course_id')
+            <label id="course_id-error" class="error mt-2 text-danger" for="course_id">{{ $message }}</label>
             @enderror
         </div>
 

@@ -40,7 +40,7 @@ class SubjectController extends Controller
 
         $majors = $this->subjectRepository->getMajors();
         $subjectTypes = $this->subjectRepository->getSubjectTypes();
-        $departments = $this->subjectRepository->getDepartments();
+        $departments = $this->subjectRepository->getCoures();
 
         $config = [
             'css' => [
@@ -81,7 +81,7 @@ class SubjectController extends Controller
         $subject = $this->subjectRepository->getSubjectById($id);
         $majors = $this->subjectRepository->getMajors();
         $subjectTypes = $this->subjectRepository->getSubjectTypes();
-        $departments = $this->subjectRepository->getDepartments();
+        $departments = $this->subjectRepository->getCoures();
 
         $template = "admin.subject.subject.pages.store";
 
@@ -110,6 +110,15 @@ class SubjectController extends Controller
             'departments'
         ));
     }
+
+    public function getMajorsByDepartment(Request $request)
+    {
+        $departmentId = $request->input('department_id');
+        $majors = $this->subjectRepository->getMajorsByDepartment($departmentId);
+
+        return response()->json($majors);
+    }
+
 
 
     public function update(Request $request, $id)
