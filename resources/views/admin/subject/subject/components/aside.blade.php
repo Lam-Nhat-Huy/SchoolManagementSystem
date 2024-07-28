@@ -4,17 +4,17 @@
     </div>
     <div class="card-body">
         <div class="form-group">
-            <label for="department_id">Khoa/Phòng ban</label>
-            <select class="form-control setupSelect2" id="department_id" name="department_id">
+            <label for="coure_id">Khoa/Phòng ban</label>
+            <select class="form-control setupSelect2" id="coure_id" name="coure_id">
                 @foreach ($departments as $department)
                     <option value="{{ $department->id }}"
-                            {{ old('department_id', $subject->department_id ?? '') == $department->id ? 'selected' : '' }}>
+                            {{ old('coure_id', $subject->coure_id ?? '') == $department->id ? 'selected' : '' }}>
                         {{ $department->name }}
                     </option>
                 @endforeach
             </select>
-            @error('department_id')
-            <label id="department_id-error" class="error mt-2 text-danger" for="department_id">{{ $message }}</label>
+            @error('coure_id')
+            <label id="coure_id-error" class="error mt-2 text-danger" for="coure_id">{{ $message }}</label>
             @enderror
         </div>
 
@@ -66,14 +66,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#department_id').change(function() {
+        $('#coure_id').change(function() {
             var departmentId = $(this).val();
 
             if(departmentId) {
                 $.ajax({
                     url: '{{ route('majors.by.department') }}',
                     type: 'GET',
-                    data: { department_id: departmentId },
+                    data: { coure_id: departmentId },
                     success: function(data) {
                         $('#major_id').empty();
                         $('#major_id').append('<option value="">Chọn ngành học</option>'); // Thêm option mặc định
