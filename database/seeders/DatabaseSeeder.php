@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\SubjectType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
             TeacherEvaluationsSeeder::class,
             ChatsSeeder::class,
             SubjectTypeSeeder::class,
-            DepartmentSeeder::class,  // Thêm dòng này
+            DepartmentSeeder::class,
         ]);
     }
 }
