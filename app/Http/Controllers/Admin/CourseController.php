@@ -13,48 +13,20 @@ class CourseController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page', 10);
         $search = $request->input('search', '');
-    
-        $query = Courses::withTrashed()
-            ->select(
-                'courses.*',
-                'creator_account.name as creator_name',
-                'updater_account.name as updater_name',
-                'deleter_account.name as deleter_name'
-            )
-            ->where('courses.name', 'like', "%{$search}%")
-            ->orderBy('courses.created_at', 'DESC')
-            ->leftJoin('accounts as creator_account', 'courses.created_by', '=', 'creator_account.id')
-            ->leftJoin('accounts as updater_account', 'courses.updated_by', '=', 'updater_account.id')
-            ->leftJoin('accounts as deleter_account', 'courses.deleted_by', '=', 'deleter_account.id');
-    
-        $getAllCourse = $query->paginate($perPage);
-    
-        $info = [
-            'from' => $getAllCourse->firstItem(),
-            'to' => $getAllCourse->lastItem(),
-            'total' => $getAllCourse->total(),
-        ];
-    
-        if ($request->ajax()) {
-            return response()->json([
-                'html' => view('admin.course.course.components.pagination', [
-                    'getAllCourse' => $getAllCourse,
-                    'info' => $info,
-                ])->render(),
-                'info' => $info,
-            ]);
-        }
-    
+
+        $getAllCourse = Courses::withTrashed()
+            ->with(['creator:id,name', 'updater:id,name', 'deleter:id,name'])
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+
         return view('admin.dashboard.layout', [
             'template' => 'admin.course.course.pages.index',
             'getAllCourse' => $getAllCourse,
-            'perPage' => $perPage,
-            'info' => $info,
         ]);
     }
-    
+
+
     public function create()
     {
         $template = "admin.course.course.pages.store";
@@ -127,7 +99,7 @@ class CourseController extends Controller
     public function update(UpdateCourseRequest $request, $id)
     {
         try {
-            $course = Courses::findOrFail($id);
+            $course = Courses::find($id);
             $course->update([
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
@@ -158,7 +130,7 @@ class CourseController extends Controller
 
     public function restore($id)
     {
-        $course = Courses::withTrashed()->findOrFail($id);
+        $course = Courses::withTrashed()->find($id);
         $course->deleted_by = null;
         $course->save();
         Courses::withTrashed()

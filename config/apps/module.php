@@ -125,12 +125,12 @@ return [
         ],
         [
             'user_role' => [1, 3],
-            'title' => 'Khóa Học',
-            'icon' => 'fas fa-chalkboard-teacher', // Icon cho Khóa Học
+            'title' => 'Ngành Học',
+            'icon' => 'fas fa-chalkboard-teacher', // Icon cho Ngành học
             'name' => '',
             'subModule' => [
                 [
-                    'title' => 'Khóa Học',
+                    'title' => 'Ngành Học',
                     'route' => 'course.index',
                     'user_role' => [1, 3],
                 ]
@@ -145,19 +145,6 @@ return [
                 [
                     'title' => 'Môn Học',
                     'route' => 'subject.index',
-                    'user_role' => 1
-                ]
-            ]
-        ],
-        [
-            'user_role' => 1,
-            'title' => 'Phòng ban',
-            'icon' => 'fas fa-building', // Icon cho môn học
-            'name' => '',
-            'subModule' => [
-                [
-                    'title' => 'Phòng ban',
-                    'route' => 'department.index',
                     'user_role' => 1
                 ]
             ]

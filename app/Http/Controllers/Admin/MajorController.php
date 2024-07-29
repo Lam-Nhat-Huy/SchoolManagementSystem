@@ -2,14 +2,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreMajorRequest;
-use App\Models\Department;
+use App\Models\Courses;
 use App\Models\Major;
 use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
-    // Hiển thị danh sách phòng ban
+    // Hiển thị danh sách ngành học
     public function index(Request $request)
     {
         $query = Major::query();
@@ -29,11 +28,10 @@ class MajorController extends Controller
         ));
     }
 
-
-    // Hiển thị form tạo phòng ban mới
+    // Hiển thị form tạo ngành học mới
     public function create()
     {
-        $departments = Department::all();
+        $courses = Courses::all();
         $template = "admin.major.major.pages.store";
 
         $config = [
@@ -55,23 +53,40 @@ class MajorController extends Controller
         return view('admin.dashboard.layout', compact(
             'template',
             'config',
-            'departments'
+            'courses'
         ));
     }
 
-    // Lưu phòng ban mới vào cơ sở dữ liệu
-    public function store(StoreMajorRequest $request)
+    // Lưu ngành học mới vào cơ sở dữ liệu
+    public function store(Request $request)
     {
-        Major::create($request->validated());
+        $validatedData = $request->validate([
+            'code' => 'required|string|max:255|unique:majors,code',
+            'name' => 'required|string|max:255',
+            'standard' => 'required|string|max:255',
+            'course_id' => 'required|exists:courses,id',
+            'status' => 'required|in:0,1',
+        ], [
+            'code.required' => 'Mã môn học là bắt buộc.',
+            'code.unique' => 'Mã môn học đã tồn tại.',
+            'name.required' => 'Tên môn học là bắt buộc.',
+            'standard.required' => 'Tiêu chuẩn là bắt buộc.',
+            'course_id.required' => 'Khóa học là bắt buộc.',
+            'course_id.exists' => 'Khóa học không hợp lệ.',
+            'status.required' => 'Trạng thái là bắt buộc.',
+            'status.in' => 'Trạng thái không hợp lệ.',
+        ]);
+
+        Major::create($validatedData);
 
         return redirect()->route('major.index')->with('success', 'Ngành học được tạo thành công.');
     }
 
-    // Hiển thị form chỉnh sửa phòng ban
+    // Hiển thị form chỉnh sửa ngành học
     public function edit($id)
     {
         $major = Major::findOrFail($id);
-        $departments = Department::all();
+        $courses = Courses::all();
         $template = "admin.major.major.pages.store";
 
         $config = [
@@ -84,7 +99,7 @@ class MajorController extends Controller
                 '/admin/plugins/ckeditor/ckeditor.js',
                 '/admin/plugins/ckfinder_2/ckfinder.js',
                 '/admin/lib/finder.js',
-                '/admin/lib/library.js',
+                '/admin.lib/library.js',
             ]
         ];
 
@@ -94,21 +109,37 @@ class MajorController extends Controller
             'template',
             'config',
             'major',
-            'departments'
+            'courses'
         ));
     }
 
-
-    // Cập nhật phòng ban trong cơ sở dữ liệu
-    public function update(StoreMajorRequest $request, $id)
+    // Cập nhật ngành học trong cơ sở dữ liệu
+    public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'code' => 'required|string|max:255|unique:majors,code,' . $id,
+            'name' => 'required|string|max:255',
+            'standard' => 'required|string|max:255',
+            'course_id' => 'required|exists:courses,id',
+            'status' => 'required|in:0,1',
+        ], [
+            'code.required' => 'Mã môn học là bắt buộc.',
+            'code.unique' => 'Mã môn học đã tồn tại.',
+            'name.required' => 'Tên môn học là bắt buộc.',
+            'standard.required' => 'Tiêu chuẩn là bắt buộc.',
+            'course_id.required' => 'Khóa học là bắt buộc.',
+            'course_id.exists' => 'Khóa học không hợp lệ.',
+            'status.required' => 'Trạng thái là bắt buộc.',
+            'status.in' => 'Trạng thái không hợp lệ.',
+        ]);
+
         $major = Major::findOrFail($id);
-        $major->update($request->validated());
+        $major->update($validatedData);
 
         return redirect()->route('major.index')->with('success', 'Ngành học được cập nhật thành công.');
     }
 
-    // Xóa phòng ban khỏi cơ sở dữ liệu
+    // Xóa ngành học khỏi cơ sở dữ liệu
     public function destroy($id)
     {
         $major = Major::findOrFail($id);

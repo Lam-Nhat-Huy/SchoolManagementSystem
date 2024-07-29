@@ -15,7 +15,6 @@ class MajorSeeder extends Seeder
     {
         Major::insert([
             [
-                'department_id' => 1,
                 'code' => 'WD18301',
                 'name' => "Lập trình web",
                 'standard' => "Không bắt buộc",
@@ -25,7 +24,6 @@ class MajorSeeder extends Seeder
                 'course_id' => 1,
             ],
             [
-                'department_id' => 1,
                 'code' => 'WD18302',
                 'name' => "Phát triển phần mềm",
                 'standard' => "Không bắt buộc",
@@ -35,7 +33,6 @@ class MajorSeeder extends Seeder
                 'course_id' => 1,
             ],
             [
-                'department_id' => 1,
                 'code' => 'SD18301',
                 'name' => "Lập trình game",
                 'standard' => "Không bắt buộc",

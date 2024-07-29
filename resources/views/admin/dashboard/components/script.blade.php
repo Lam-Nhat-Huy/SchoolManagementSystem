@@ -39,45 +39,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <script>
-        $(document).ready(function() {
-            function loadTable(page = 1) {
-                var perPage = $('#per_page_select').val();
-                var search = $('#search_input').val();
-                $.ajax({
-                    url: '{{ route('course.index') }}',
-                    type: 'GET',
-                    data: {
-                        per_page: perPage,
-                        search: search,
-                        page: page
-                    },
-                    success: function(response) {
-                        $('#table-container').html(response.html);
-                        $('.dataTables_info').text(
-                            `Hiển thị ${response.info.from} đến ${response.info.to} của ${response.info.total} khóa học`
-                            );
-                    }
-                });
-            }
-
-            $('#per_page_select').on('change', function() {
-                loadTable();
-            });
-
-            $('#search_input').on('keyup', function() {
-                loadTable();
-            });
-
-            $(document).on('click', '.pagination a', function(e) {
-                e.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                loadTable(page);
-            });
-
-            loadTable();
-        });
-    </script>
-    <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
             type: "line",
             height: "70",
