@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id(); // Tự động tạo khóa chính với tên là 'id'
             $table->unsignedBigInteger('major_id');
             $table->unsignedBigInteger('subject_type_id');
-            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('coure_id');
             $table->string('code');
             $table->string('name');
             $table->integer('credit_num');

@@ -37,7 +37,7 @@ class SubjectService implements SubjectServiceInterface
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token', 'send']);
-            $request = $this->subjectRepository->create($payload);
+            $requests = $this->subjectRepository->create($payload);
             DB::commit();
             return true;
         } catch (\Exception $e) {

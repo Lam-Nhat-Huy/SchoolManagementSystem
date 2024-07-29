@@ -151,19 +151,6 @@ return [
         ],
         [
             'user_role' => 1,
-            'title' => 'Phòng ban',
-            'icon' => 'fas fa-building', // Icon cho môn học
-            'name' => '',
-            'subModule' => [
-                [
-                    'title' => 'Phòng ban',
-                    'route' => 'department.index',
-                    'user_role' => 1
-                ]
-            ]
-        ],
-        [
-            'user_role' => 1,
             'title' => 'Ngành học',
             'icon' => 'fas  fa-graduation-cap', // Icon cho môn học
             'name' => '',

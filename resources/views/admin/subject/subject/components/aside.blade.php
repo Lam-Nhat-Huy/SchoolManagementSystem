@@ -18,6 +18,7 @@
             @enderror
         </div>
 
+
         <div class="form-group">
             <label for="major_id">Ngành học</label>
             <select class="form-control setupSelect2" id="major_id" name="major_id">

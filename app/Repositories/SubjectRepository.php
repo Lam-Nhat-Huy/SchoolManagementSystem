@@ -35,7 +35,7 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
             'id',
             'major_id',
             'subject_type_id',
-            'department_id',
+            'coure_id',
             'code',
             'name',
             'credit_num',

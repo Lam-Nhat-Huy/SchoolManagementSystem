@@ -17,7 +17,7 @@ class SubjectsSeeder extends Seeder
             [
                 'major_id' => 1,
                 'subject_type_id' => 1,
-                'department_id' => 1,
+                'coure_id' => 1,
                 'code' => "PRO1013",
                 'name' => "PHP3",
                 'credit_num' => 3,
@@ -29,7 +29,7 @@ class SubjectsSeeder extends Seeder
             [
                 'major_id' => 1,
                 'subject_type_id' => 1,
-                'department_id' => 1,
+                'coure_id' => 1,
                 'code' => "PRO1012",
                 'name' => "PHP2",
                 'credit_num' => 3,
@@ -41,7 +41,7 @@ class SubjectsSeeder extends Seeder
             [
                 'major_id' => 1,
                 'subject_type_id' => 1,
-                'department_id' => 1,
+                'coure_id' => 1,
                 'code' => "PRO1011",
                 'name' => "PHP1",
                 'credit_num' => 3,

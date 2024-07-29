@@ -71,9 +71,11 @@ class SubjectController extends Controller
     public function store(StoreSubjectRequest $request)
     {
         if ($this->subjectService->create($request)) {
-            return redirect()->route('subject.index')->with('success', 'Thêm mới bảng ghi thành công');
+            toastr()->success('Thêm bản ghi thành công!');
+            return redirect()->route('subject.index');
         }
-        return redirect()->route('subject.index')->with('error', 'Thêm mới bảng ghi thất bại');
+        toastr()->success('Thêm bản ghi thất bại!');
+        return redirect()->route('subject.index');
     }
 
     public function edit($id)
@@ -84,7 +86,6 @@ class SubjectController extends Controller
         $departments = $this->subjectRepository->getCoures();
 
         $template = "admin.subject.subject.pages.store";
-
         $config = [
             'css' => [
                 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
@@ -122,16 +123,20 @@ class SubjectController extends Controller
     public function update(Request $request, $id)
     {
         if ($this->subjectService->update($request, $id)) {
-            return redirect()->route('subject.index')->with('success', 'Chỉnh sửa bảng ghi thành công');
+            toastr()->success('Chỉnh sửa bảng ghi thành công');
+            return redirect()->route('subject.index');
         }
-        return redirect()->route('subject.index')->with('error', 'Chỉnh sửa bảng ghi thất bại');
+        toastr()->success('Chỉnh sửa bảng ghi thất bại');
+        return redirect()->route('subject.index');
     }
 
     public function destroy($id)
     {
         if ($this->subjectService->destroy($id)) {
-            return redirect()->route('subject.index')->with('success', 'Xóa bảng ghi thành công');
+            toastr()->success('Xóa bảng ghi thành công');
+            return redirect()->route('subject.index');
         }
-        return redirect()->route('subject.index')->with('error', 'Xóa bảng ghi thất bại');
+        toastr()->success('Xóa bảng ghi thất bại');
+        return redirect()->route('subject.index');
     }
 }
