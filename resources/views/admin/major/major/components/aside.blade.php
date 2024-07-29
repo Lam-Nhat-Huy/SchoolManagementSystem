@@ -4,9 +4,10 @@
     </div>
     <div class="card-body">
         <div class="form-group">
-            <label for="course_id">Khoa học</label>
+            <label for="course_id">Ngành học</label>
             <select class="form-control setupSelect2" id="course_id" name="course_id">
-                @foreach($courses as $course)
+                    <option>--Chọn chuyên ngành--</option>
+            @foreach($courses as $course)
                     <option value="{{ $course->id }}" {{ old('course_id', $major->course_id ?? '') == $course->id ? 'selected' : '' }}>
                         {{ $course->name }}
                     </option>
@@ -20,6 +21,7 @@
         <div class="form-group">
             <label for="status">Trạng thái</label>
             <select class="form-control setupSelect2" id="status" name="status">
+                <option>--Chọn trạng thái--</option>
                 <option value="0" {{ old('status', $major->status ?? '') == 0 ? 'selected' : '' }}>Hoạt động</option>
                 <option value="1" {{ old('status', $major->status ?? '') == 1 ? 'selected' : '' }}>Không hoạt động</option>
             </select>

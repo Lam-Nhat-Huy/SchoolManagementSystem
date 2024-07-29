@@ -4,8 +4,9 @@
     </div>
     <div class="card-body">
         <div class="form-group">
-            <label for="coure_id">Khoa/Phòng ban</label>
+            <label for="coure_id">Ngành học</label>
             <select class="form-control setupSelect2" id="coure_id" name="coure_id">
+                <option>--Chọn ngành học--</option>
                 @foreach ($departments as $department)
                     <option value="{{ $department->id }}"
                             {{ old('coure_id', $subject->coure_id ?? '') == $department->id ? 'selected' : '' }}>
@@ -20,8 +21,9 @@
 
 
         <div class="form-group">
-            <label for="major_id">Ngành học</label>
+            <label for="major_id">Chuyên ngành</label>
             <select class="form-control setupSelect2" id="major_id" name="major_id">
+                <option>--Chọn chuyên ngành--</option>
                 @foreach ($majors as $major)
                     <option value="{{ $major->id }}"
                             {{ old('major_id', $subject->major_id ?? '') == $major->id ? 'selected' : '' }}>
@@ -38,6 +40,7 @@
         <div class="form-group">
             <label for="subject_type_id">Hình thức học</label>
             <select class="form-control setupSelect2" id="subject_type_id" name="subject_type_id">
+                <option>--Chọn hình thức học--</option>
                 @foreach ($subjectTypes as $subjectType)
                     <option value="{{ $subjectType->id }}"
                             {{ old('subject_type_id', $subject->subject_type_id ?? '') == $subjectType->id ? 'selected' : '' }}>
@@ -53,6 +56,7 @@
         <div class="form-group">
             <label for="status">Trạng thái</label>
             <select class="form-control setupSelect2" id="status" name="status">
+                <option>--Chọn trạng thái--</option>
                 <option value="0" {{ old('status', $subject->status ?? '') == 0 ? 'selected' : '' }}>Hoạt động</option>
                 <option value="1" {{ old('status', $subject->status ?? '') == 1 ? 'selected' : '' }}>Không hoạt động</option>
             </select>

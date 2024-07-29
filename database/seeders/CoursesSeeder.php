@@ -23,9 +23,20 @@ class CoursesSeeder extends Seeder
                 'updated_at' => null,
                 'deleted_by' => null,
                 'deleted_at' => null,
-            ], [
+            ],
+            [
                 'name' => 'Cơ Khí, Tự Động Hóa',
                 'description' => 'Cơ khí, (điện) tự động hóa là một ngành nghiên cứu và triển khai hệ thống điều khiển, tự động các dây chuyền sản xuất công nghiệp nhằm đảm bảo cho việc điều khiển các thiết bị máy móc một cách nhanh chóng, chính xác và đạt hiệu quả cao nhất.',
+                'created_by' => 1,
+                'created_at' => now(),
+                'updated_by' => null,
+                'updated_at' => null,
+                'deleted_by' => null,
+                'deleted_at' => null,
+            ],
+            [
+                'name' => 'Quản Trị Kinh Doanh',
+                'description' => 'Là một nghệ thuật trong kinh doanh. Marketing & Sales đồng thời là nhân tố định hướng cho toàn bộ hoạt động của một doanh nghiệp, trong đó sự hài lòng của khách hàng là một trong những thước đo của thành công của doanh nghiệp đó.',
                 'created_by' => 1,
                 'created_at' => now(),
                 'updated_by' => null,

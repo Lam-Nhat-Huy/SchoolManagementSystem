@@ -24,16 +24,25 @@
                     <thead>
                     <tr role="row">
                         <th  style="width: 150px;">
-                            Mã ngành học
+                            Mã chuyên ngành
+                        </th>
+                        <th  style="width: 150px;">
+                            Tên ngành
                         </th>
                         <th  style="width: 200px;">
-                            Tên ngành học
+                            Chuyên ngành
                         </th>
                         <th  style="width: 150px;">
                             Tiêu chuẩn
                         </th>
                         <th  style="width: 100px;">
                             Trạng thái
+                        </th>
+                        <th  style="width: 100px;">
+                            Ngày tạo
+                        </th>
+                        <th  style="width: 100px;">
+                            Ngày sửa
                         </th>
                         <th  style="width: 150px;">
                             Hành động
@@ -43,10 +52,13 @@
                     <tbody>
                     @foreach ($data as $item)
                         <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
-                            <td>{{ $item->code }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->standard }}</td>
-                            <td>{{ $item->status === 0 ? 'Hoạt động' : 'Không hoạt động' }}</td>
+                            <td>{{ $item->code ?? "Không có dữ liệu" }}</td>
+                            <td>{{ $item->course->name ?? "Không có dữ liệu"}}</td>
+                            <td>{{ $item->name ?? "Không có dữ liệu"}}</td>
+                            <td>{{ $item->standard ?? "Không có dữ liệu"}}</td>
+                            <td>{!! $item->status === 0 ? '<span class="text-success">Hoạt động</span>' : '<span class="text-danger">Không hoạt động</span>' !!}</td>
+                            <td>{{ $item->created_at->format('Y-m-d') ?? "Không có dữ liệu"}}</td>
+                            <td>{{ $item->updated_at->format('Y-m-d') ?? "Không có dữ liệu"}}</td>
                             <td>
                                 <a href="{{ route('major.edit', ['id' => $item->id]) }}"
                                    class="btn btn-sm btn-black" title="Sửa">

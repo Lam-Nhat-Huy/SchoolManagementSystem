@@ -29,12 +29,11 @@ class Subjects extends Model
 
     public function course()
     {
-        return $this->belongsTo(Courses::class, 'course_id');
+        return $this->belongsTo(Courses::class, 'coure_id');
     }
 
-    // Thêm phương thức này để lấy thông tin phòng ban
-    public function department()
+    public function major()
     {
-        return $this->belongsTo(Department::class, 'department_id');
+        return $this->belongsTo(Major::class, 'major_id');
     }
 }

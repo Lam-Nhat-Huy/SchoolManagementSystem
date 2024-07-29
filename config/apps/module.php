@@ -151,12 +151,12 @@ return [
         ],
         [
             'user_role' => 1,
-            'title' => 'Ngành học',
+            'title' => 'Chuyên ngành',
             'icon' => 'fas  fa-graduation-cap', // Icon cho môn học
             'name' => '',
             'subModule' => [
                 [
-                    'title' => 'Ngành học',
+                    'title' => 'Chuyên ngành',
                     'route' => 'major.index',
                     'user_role' => 1
                 ]

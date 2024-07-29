@@ -20,7 +20,7 @@ class SubjectService implements SubjectServiceInterface
         $this->subjectRepository = $subjectRepository;
     }
 
-    public function getSubject($search = null)
+    public function getSubject($search = null, $courseId = null, $status = null, $majorId = null) // Thêm $majorId vào danh sách tham số
     {
         $query = Subjects::query();
 
@@ -28,8 +28,21 @@ class SubjectService implements SubjectServiceInterface
             $query->where('name', 'like', '%' . $search . '%');
         }
 
-        return $query->paginate(10); // hoặc số lượng bản ghi bạn muốn hiển thị mỗi trang
+        if ($courseId) {
+            $query->where('coure_id', $courseId);
+        }
+
+        if ($status !== null) {
+            $query->where('status', $status);
+        }
+
+        if ($majorId) {
+            $query->where('major_id', $majorId);
+        }
+
+        return $query->paginate(10);
     }
+
 
 
     public function create($request)

@@ -16,13 +16,13 @@ class SubjectTypeSeeder extends Seeder
         SubjectType::insert(
             [
                 [
-                    'name' => 'Học trực tuyến',
-                    'note' => "Học tại link google meet"
-                ],
-                [
                     'name' => 'Học trực tiếp',
                     'note' => "Học tại cơ sở"
                 ],
+                [
+                    'name' => 'Học trực tuyến',
+                    'note' => "Học tại link google meet"
+                ]
             ]
         );
     }

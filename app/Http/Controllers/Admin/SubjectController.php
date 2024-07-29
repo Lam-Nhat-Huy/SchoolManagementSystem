@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubjectRequest;
+use App\Models\Courses;
 use App\Models\Subjects;
 use App\Repositories\Interfaces\SubjectRepositoryInterface;
 use App\Services\Interfaces\SubjectServiceInterface;
@@ -23,15 +24,48 @@ class SubjectController extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        $data = $this->subjectService->getSubject($search);
+        $courseId = $request->input('course_id');
+        $status = $request->input('status');
+        $majorId = $request->input('major_id');
+
+        if ($request->ajax()) {
+            $data = $this->subjectService->getSubject($search, $courseId, $status, $majorId);
+            return response()->json([
+                'data' => view('admin.subject.subject.pages._table', compact('data'))->render(),
+                'pagination' => view('admin.subject.subject.pages._pagination', ['data' => $data])->render()
+            ]);
+        }
+
+        $data = $this->subjectService->getSubject($search, $courseId, $status, $majorId);
+        $courses = Courses::all();
+        $majors = $this->subjectRepository->getMajors();
+
+        $config = [
+            'css' => [
+                'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
+                '/admin/css/subject.css'
+            ],
+            'js' => [
+                'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
+                '/admin/plugins/ckeditor/ckeditor.js',
+                '/admin/plugins/ckfinder_2/ckfinder.js',
+                '/admin/lib/finder.js',
+                '/admin/lib/library.js',
+            ]
+        ];
 
         $template = "admin.subject.subject.pages.index";
 
         return view('admin.dashboard.layout', compact(
             'template',
-            'data'
+            'data',
+            'courses',
+            'majors',
+            'config'
         ));
     }
+
+
 
 
     public function create()
@@ -64,7 +98,7 @@ class SubjectController extends Controller
             'config',
             'majors',
             'subjectTypes',
-            'departments'
+            'departments',
         ));
     }
 
