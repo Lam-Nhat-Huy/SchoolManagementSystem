@@ -28,7 +28,7 @@ return [
             ]
         ],
         [
-            'user_role' => [1, 4],
+            'user_role' => [1],
             'title' => 'Cán Bộ Đào Tạo',
             'icon' => 'fas fa-hands-helping', // Icon cho quản lý CBDT
             'name' => '',
@@ -36,7 +36,7 @@ return [
                 [
                     'title' => 'Tài Khoản',
                     'route' => 'training_officer_account.index',
-                    'user_role' => [1, 4],
+                    'user_role' => [1],
                 ],
             ]
         ],
@@ -193,7 +193,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Hỗ Trợ Sinh Viên',
-                    'route' => 'traning_officer_chat.index',
+                    'route' => 'training_officer_chat.index',
                     'user_role' => 4
                 ],
                 [

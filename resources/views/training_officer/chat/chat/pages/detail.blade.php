@@ -1,10 +1,10 @@
 <div class="page-inner">
-    @include('admin.dashboard.components.breadcrumb')
+    @include('training_officer.dashboard.components.breadcrumb')
 
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                @include('admin.student_chat.student_chat.components.chat')
+                @livewire('training_officer.detail')
             </div>
         </div>
     </div>

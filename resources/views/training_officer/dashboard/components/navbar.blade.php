@@ -136,7 +136,7 @@
                         <i class="fa fa-user ms-2 me-2"></i>
                         <span class="profile-username">
                             <span class="op-7">Xin Chào, </span>
-                            <span class="fw-bold">{{ session('user_name') }}</span>
+                            <span class="fw-bold">Cán Bộ Đào Tạo</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -144,7 +144,7 @@
                             <li>
                                 <div class="user-box ps-0">
                                     <div class="u-text">
-                                        <h4>{{ session('user_name') }}</h4>
+                                        <h4>Cán Bộ Đào Tạo</h4>
                                         <p class="text-muted">{{ session('user_email') }}</p>
                                         <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Hồ Sơ</a>
                                     </div>

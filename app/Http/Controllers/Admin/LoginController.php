@@ -208,7 +208,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $request->session()->forget(['user_name', 'user_email', 'user_phone', 'user_major_id', 'user_year_of_enrollment', 'user_role', 'user_course_id', 'user_id']);
+        $request->session()->forget(['user_name', 'user_email', 'user_phone', 'user_major_id', 'user_year_of_enrollment', 'user_role', 'user_course_id', 'user_chat_id', 'user_chat_name', 'user_id']);
 
         toastr()->success('Đăng xuất thành công');
 

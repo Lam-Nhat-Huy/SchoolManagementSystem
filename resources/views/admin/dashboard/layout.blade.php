@@ -3,6 +3,7 @@
 
 <head>
     @include('admin.dashboard.components.head')
+    @livewireStyles
 </head>
 
 <body>
@@ -27,6 +28,7 @@
 
 
     @include('admin.dashboard.components.script')
+    @livewireScripts
 </body>
 
 </html>

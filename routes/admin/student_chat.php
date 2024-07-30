@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\StudentChatController;
+use App\Http\Controllers\Student\StudentChatController;
 
 Route::prefix('student_chat')->group(function () {
     Route::get('/index', [StudentChatController::class, 'index'])->name('student_chat.index');

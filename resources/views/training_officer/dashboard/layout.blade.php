@@ -3,6 +3,7 @@
 
 <head>
     @include('training_officer.dashboard.components.head')
+    @livewireStyles
 </head>
 
 <body>
@@ -27,6 +28,7 @@
 
 
     @include('training_officer.dashboard.components.script')
+    @livewireScripts
 </body>
 
 </html>

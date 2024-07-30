@@ -3,6 +3,7 @@
 
 <head>
     @include('student.dashboard.components.head')
+    @livewireStyles
 </head>
 
 <body>
@@ -27,6 +28,7 @@
 
 
     @include('student.dashboard.components.script')
+    @livewireScripts
 </body>
 
 </html>
