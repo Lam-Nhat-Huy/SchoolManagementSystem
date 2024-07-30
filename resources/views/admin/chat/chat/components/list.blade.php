@@ -7,7 +7,7 @@
                         @include('admin.chat.chat.components.aside')
                         <div class="col-md-6 col-lg-7 col-xl-8 hidden_for_phone">
                             <div data-mdb-perfect-scrollbar-init>
-                                <ul class="list-unstyled mb-0 scroll-y-hidden" style="height: 570px;">
+                                <ul class="list-unstyled mb-0 scroll-y-hidden" style="height: 370px;">
                                     @if (!empty($getAllChat))
                                         @foreach ($getAllChat as $key => $item)
                                             <li class="p-2 border-bottom">

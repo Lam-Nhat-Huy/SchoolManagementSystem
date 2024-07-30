@@ -9,4 +9,7 @@ namespace App\Repositories\Interfaces;
 interface SubjectRepositoryInterface
 {
     public function getSubjectById(int $id = 0);
+    public function getMajors();
+    public function getSubjectTypes();
+    public function getCoures();
 }

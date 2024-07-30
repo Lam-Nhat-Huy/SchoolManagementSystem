@@ -13,8 +13,7 @@ class Schedules extends Model
         'class_id',
         'subject_id',
         'teacher_id',
-        'start_time',
-        'end_time',
+        'school_shift_id',
         'day_of_week',
         'created_by',
         'created_at',
@@ -37,5 +36,10 @@ class Schedules extends Model
     public function teacher()
     {
         return $this->belongsTo(Teachers::class);
+    }
+
+    public function school_shift()
+    {
+        return $this->belongsTo(SchoolShift::class);
     }
 }

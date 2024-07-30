@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Subjects;
 use App\Repositories\SubjectRepository;
 use App\Services\Interfaces\SubjectServiceInterface;
 use Illuminate\Support\Facades\DB;
@@ -14,19 +15,29 @@ class SubjectService implements SubjectServiceInterface
 {
     protected $subjectRepository;
 
-    public function __construct(SubjectRepository $subjectRepository) {
+    public function __construct(SubjectRepository $subjectRepository)
+    {
         $this->subjectRepository = $subjectRepository;
     }
 
-    public function getSubject() {
-        return $this->subjectRepository->getData();
+    public function getSubject($search = null)
+    {
+        $query = Subjects::query();
+
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        return $query->paginate(10); // hoặc số lượng bản ghi bạn muốn hiển thị mỗi trang
     }
 
-    public function create($request) {
+
+    public function create($request)
+    {
         DB::beginTransaction();
         try {
             $payload = $request->except(['_token', 'send']);
-            $this->subjectRepository->create($payload);
+            $requests = $this->subjectRepository->create($payload);
             DB::commit();
             return true;
         } catch (\Exception $e) {
@@ -64,5 +75,4 @@ class SubjectService implements SubjectServiceInterface
             return false;
         }
     }
-
 }

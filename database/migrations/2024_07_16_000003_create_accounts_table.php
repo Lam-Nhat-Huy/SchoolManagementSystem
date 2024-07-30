@@ -18,11 +18,11 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id')->nullable()->constrained('roles')->onDelete('set null');
             $table->integer('OTP')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
-
+            $table->timestamp('deleted_at')->nullable();
         });
     }
 

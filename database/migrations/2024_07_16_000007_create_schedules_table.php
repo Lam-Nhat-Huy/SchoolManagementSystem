@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('class_id')->nullable()->constrained('teacher_id')->onDelete('set null');
             $table->unsignedBigInteger('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->unsignedBigInteger('school_shift_id')->nullable()->constrained('school_shift')->onDelete('set null');
             $table->string('day_of_week', 10);
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();

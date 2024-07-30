@@ -2,9 +2,9 @@
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
         <div class="row">
             <div class="col-sm-12 col-md-6">
-                <div class="dataTables_length" id="basic-datatables_length">
+                <div class="dataTables_length" id="per_page">
                     <label>Hiển thị:
-                        <select name="basic-datatables_length" aria-controls="basic-datatables"
+                        <select name="per_page" id="per_page_select" aria-controls="basic-datatables"
                             class="form-control form-control-sm">
                             <option value="10">10</option>
                             <option value="25">25</option>
@@ -18,76 +18,58 @@
             <div class="col-sm-12 col-md-6">
                 <div id="basic-datatables_filter" class="dataTables_filter">
                     <label>Tìm kiếm:
-                        <input type="search" class="form-control form-control-sm" placeholder=""
+                        <input type="search" id="search_input" class="form-control form-control-sm" placeholder=""
                             aria-controls="basic-datatables">
                     </label>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid"
-                    aria-describedby="basic-datatables_info">
+        <div id="table-container">
+            <div class="table-responsive">
+                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid">
                     <thead>
                         <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên khóa học: activate to sort column descending" style="width: 80%;">Tên Khóa Học</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 20%;">Hành động</th>
+                            <th>Tên Ngành Học</th>
+                            <th style="width:20%" class="text-center">Hành Động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($getAllCourse as $items)
+                        @forelse ($getAllCourse as $items)
                             <tr role="row" class="odd">
-                                <td class="sorting_1" title="{{ $items->description }}">{{ $items->name }}</td>
-                                <td>
-                                    <a href="{{ route('course.edit', ['id' => $items->id]) }}"
-                                        class="btn btn-sm btn-black">
-                                        <i class="fa fa-edit"></i>
+                                <td>{{ $items->name }}</td>
+                                <td class="text-center">
+                                    <a href="{{ $items->deleted_at ? route('course.restore', ['id' => $items->id]) : route('course.edit', ['id' => $items->id]) }}"
+                                        class="btn btn-sm {{ $items->deleted_at ? 'btn-success' : 'btn-black' }}">
+                                        <i class="fa {{ $items->deleted_at ? 'fa-undo' : 'fa-edit' }}"></i>
                                     </a>
-                                    <form action="{{ route('course.destroy', ['id' => $items->id]) }}"
-                                        method="POST" style="display:inline-block;"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa khóa học này?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    @if ($items->deleted_at)
+                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
+                                            data-target="#deleteModal{{ $items->id }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    @else
+                                        <form action="{{ route('course.destroy', $items) }}" method="POST"
+                                            style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                    @include('admin.course.course.components.modal')
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center">Không có dữ liệu</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="basic-datatables_info" role="status" aria-live="polite">Hiển thị 1
-                    đến 10 của 20 khóa học</div>
-            </div>
-            <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
                     <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="basic-datatables_previous"><a
-                                href="#" aria-controls="basic-datatables" data-dt-idx="0" tabindex="0"
-                                class="page-link">Trước</a></li>
-                        <li class="paginate_button page-item active"><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                        <li class="paginate_button page-item next" id="basic-datatables_next"><a href="#"
-                                aria-controls="basic-datatables" data-dt-idx="7" tabindex="0"
-                                class="page-link">Tiếp</a></li>
+                        {{ $getAllCourse->links('pagination::bootstrap-5') }}
                     </ul>
                 </div>
             </div>

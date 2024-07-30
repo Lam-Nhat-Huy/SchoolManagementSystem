@@ -515,3 +515,33 @@
         </div>
     </div>
 </div>
+<script>
+    var chartData = @json($data);
+    document.addEventListener('DOMContentLoaded', function() {
+        var ctx = document.getElementById('statisticsChart').getContext('2d');
+        var statisticsChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'My First dataset',
+                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1,
+                    data: chartData,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>

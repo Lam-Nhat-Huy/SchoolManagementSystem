@@ -16,10 +16,20 @@ class EvaluationedController extends Controller
             ->join('create_teacher_evaluations', 'teacher_evaluations.create_teacher_evaluation_id', '=', 'create_teacher_evaluations.id')
             ->join('classes', 'create_teacher_evaluations.class_id', '=', 'classes.id')
             ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->get();
+            ->where('teacher_evaluations.deleted_at', null);
+
+        if (!empty(session('user_role') == 3)) {
+            $getAllEvaluationed = $getAllEvaluationed->where('classes.teacher_id', session('user_id'));
+        }
+
+        $getAllEvaluationed = $getAllEvaluationed->paginate(10);
 
         $getAllClasses = Classes::where('deleted_at', null)
             ->get();
+
+        if (!empty(session('user_role') == 3)) {
+            $getAllClasses = $getAllClasses->where('teacher_id', session('user_id'));
+        }
 
         $template = 'admin.evaluationed.evaluationed.pages.index';
 

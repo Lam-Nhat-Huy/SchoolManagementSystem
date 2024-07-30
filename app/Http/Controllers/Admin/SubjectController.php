@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSubjectRequest;
 use App\Models\Subjects;
 use App\Repositories\Interfaces\SubjectRepositoryInterface;
 use App\Services\Interfaces\SubjectServiceInterface;
@@ -19,9 +20,10 @@ class SubjectController extends Controller
         $this->subjectRepository = $subjectRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = $this->subjectService->getSubject();
+        $search = $request->input('search');
+        $data = $this->subjectService->getSubject($search);
 
         $template = "admin.subject.subject.pages.index";
 
@@ -31,9 +33,14 @@ class SubjectController extends Controller
         ));
     }
 
+
     public function create()
     {
         $template = "admin.subject.subject.pages.store";
+
+        $majors = $this->subjectRepository->getMajors();
+        $subjectTypes = $this->subjectRepository->getSubjectTypes();
+        $departments = $this->subjectRepository->getCoures();
 
         $config = [
             'css' => [
@@ -54,24 +61,31 @@ class SubjectController extends Controller
 
         return view('admin.dashboard.layout', compact(
             'template',
-            'config'
+            'config',
+            'majors',
+            'subjectTypes',
+            'departments'
         ));
     }
 
     public function store(Request $request)
     {
         if ($this->subjectService->create($request)) {
-            return redirect()->route('subject.index')->with('success', 'Thêm mới bảng ghi thành công');
+            toastr()->success('Thêm bản ghi thành công!');
+            return redirect()->route('subject.index');
         }
-        return redirect()->route('subject.index')->with('error', 'Thêm mới bảng ghi thất bại');
+        toastr()->success('Thêm bản ghi thất bại!');
+        return redirect()->route('subject.index');
     }
 
     public function edit($id)
     {
         $subject = $this->subjectRepository->getSubjectById($id);
+        $majors = $this->subjectRepository->getMajors();
+        $subjectTypes = $this->subjectRepository->getSubjectTypes();
+        $departments = $this->subjectRepository->getCoures();
 
         $template = "admin.subject.subject.pages.store";
-
         $config = [
             'css' => [
                 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
@@ -91,23 +105,38 @@ class SubjectController extends Controller
         return view('admin.dashboard.layout', compact(
             'template',
             'config',
-            'subject'
+            'subject',
+            'majors',
+            'subjectTypes',
+            'departments'
         ));
+    }
+
+    public function getMajorsByDepartment(Request $request)
+    {
+        $departmentId = $request->input('coure_id');
+        $majors = $this->subjectRepository->getMajorsByDepartment($departmentId);
+
+        return response()->json($majors);
     }
 
     public function update(Request $request, $id)
     {
         if ($this->subjectService->update($request, $id)) {
-            return redirect()->route('subject.index')->with('success', 'Chỉnh sửa bảng ghi thành công');
+            toastr()->success('Chỉnh sửa bảng ghi thành công');
+            return redirect()->route('subject.index');
         }
-        return redirect()->route('subject.index')->with('error', 'Chỉnh sửa bảng ghi thất bại');
+        toastr()->success('Chỉnh sửa bảng ghi thất bại');
+        return redirect()->route('subject.index');
     }
 
     public function destroy($id)
     {
         if ($this->subjectService->destroy($id)) {
-            return redirect()->route('subject.index')->with('success', 'Xóa bảng ghi thành công');
+            toastr()->success('Xóa bảng ghi thành công');
+            return redirect()->route('subject.index');
         }
-        return redirect()->route('subject.index')->with('error', 'Xóa bảng ghi thất bại');
+        toastr()->success('Xóa bảng ghi thất bại');
+        return redirect()->route('subject.index');
     }
 }

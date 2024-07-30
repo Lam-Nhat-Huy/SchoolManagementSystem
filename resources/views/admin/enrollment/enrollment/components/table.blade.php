@@ -32,44 +32,44 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 15%;">Sinh
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 20%;">Sinh
                                 Viên</th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 15%;">Môn
-                                Học</th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 10%;">Lab 1
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 20%;">Lớp
                             </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending"style="width: 10%;">Lab 2
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">L1
                             </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending"style="width: 10%;">Asm 1
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">L2
                             </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending"style="width: 10%;">Lab 3
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">ASM1
                             </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending"style="width: 10%;">Lab 4
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">L3
                             </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending"style="width: 10%;">Asm 2
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">L4
                             </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending"style="width: 10%;">Final
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">ASM2
+                            </th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
+                                colspan="1" aria-sort="ascending"
+                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">Final
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending">GPA</th>
+                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" style="width: 5%;">GPA</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending">Hành động
+                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 15%;">Hành động
                             </th>
                         </tr>
                     </thead>
@@ -78,7 +78,7 @@
                             <tr role="row" class="odd">
                                 <td class="sorting_1">{{ $items->student_name . ' (PC0' . $items->student_id . ')' }}
                                 </td>
-                                <td class="sorting_1">{{ $items->subject_name }}</td>
+                                <td class="sorting_1">{{ $items->class_name . ' - ' . $items->subject_name }}</td>
                                 <td class="sorting_1">{{ $items->lab_1 }}</td>
                                 <td class="sorting_1">{{ $items->lab_2 }}</td>
                                 <td class="sorting_1">{{ $items->assignment_1 }}</td>
@@ -115,36 +115,10 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="basic-datatables_info" role="status" aria-live="polite">Hiển thị 1
-                    đến 10 của 20 bảng điểm</div>
-            </div>
-            <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
-                    <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="basic-datatables_previous"><a
-                                href="#" aria-controls="basic-datatables" data-dt-idx="0" tabindex="0"
-                                class="page-link">Trước</a></li>
-                        <li class="paginate_button page-item active"><a href="#"
-                                aria-controls="basic-datatables" data-dt-idx="1" tabindex="0"
-                                class="page-link">1</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                        <li class="paginate_button page-item "><a href="#" aria-controls="basic-datatables"
-                                data-dt-idx="6" tabindex="0" class="page-link">6</a></li>
-                        <li class="paginate_button page-item next" id="basic-datatables_next"><a href="#"
-                                aria-controls="basic-datatables" data-dt-idx="7" tabindex="0"
-                                class="page-link">Tiếp</a></li>
-                    </ul>
-                </div>
-            </div>
+        <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
+            <ul class="pagination">
+                {{ $getAllEnrollment->links('pagination::bootstrap-5') }}
+            </ul>
         </div>
     </div>
 </div>

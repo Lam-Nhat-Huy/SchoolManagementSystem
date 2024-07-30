@@ -3,7 +3,11 @@
 namespace App\Repositories;
 
 use App\Models\Base;
+use App\Models\Courses;
+use App\Models\Department;
+use App\Models\Major;
 use App\Models\Subjects;
+use App\Models\SubjectType;
 use App\Repositories\Interfaces\BaseRepositoryInterface;
 use App\Repositories\Interfaces\SubjectRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
@@ -29,9 +33,34 @@ class SubjectRepository extends BaseRepository implements SubjectRepositoryInter
     {
         return $this->model->select([
             'id',
+            'major_id',
+            'subject_type_id',
+            'coure_id',
+            'code',
             'name',
-            'course_id',
-            'description',
+            'credit_num',
+            'total_class_session',
+            'status',
         ])->findOrFail($id);
+    }
+
+    public function getMajors()
+    {
+        return Major::all(); // Lấy tất cả các ngành học
+    }
+
+    public function getSubjectTypes()
+    {
+        return SubjectType::all(); // Lấy tất cả các loại môn học
+    }
+
+    public function getCoures()
+    {
+        return Courses::all(); // Lấy tất cả các khoa/phòng ban
+    }
+
+    public function getMajorsByDepartment($departmentId)
+    {
+        return Major::where('course_id', $departmentId)->get();
     }
 }

@@ -10,9 +10,18 @@ class Teachers extends Model
     use HasFactory;
 
     protected $fillable = [
+        'code',
         'name',
+        'image',
         'email',
         'phone',
+        'address',
+        'current_address',
+        'gender',
+        'date_of_birth',
+        'qualifications',
+        'cccd',
+        'bio',
         'course_id',
         'role_id',
         'created_by',

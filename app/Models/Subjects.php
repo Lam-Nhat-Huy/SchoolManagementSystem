@@ -8,21 +8,33 @@ use Illuminate\Database\Eloquent\Model;
 class Subjects extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
+        'major_id',
+        'subject_type_id',
+        'coure_id',
+        'code',
         'name',
-        'description',
-        'course_id',
-        'created_by',
+        'credit_num',
+        'total_class_session',
+        'status',
         'created_at',
-        'updated_by',
         'updated_at',
-        'deleted_by',
-        'deleted_at',
     ];
+
+    public function classes()
+    {
+        return $this->hasMany(Classes::class, 'subject_id');
+    }
 
     public function course()
     {
-        return $this->belongsTo(Courses::class);
+        return $this->belongsTo(Courses::class, 'course_id');
+    }
+
+    // Thêm phương thức này để lấy thông tin phòng ban
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
     }
 }

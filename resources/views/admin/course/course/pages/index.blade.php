@@ -4,14 +4,14 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h4 class="card-title float-left">Danh sách khóa học</h4>
+                <h4 class="card-title float-left">Danh sách ngành học</h4>
 
                 <div class="action">
                     <a href="{{ route('course.create') }}" class="btn btn-sm btn-success float-right">
-                        <i class="fa fa-plus"></i> Thêm khóa học
+                        <i class="fa fa-plus"></i> Thêm ngành học
                     </a>
 
-                    <a href="" class="btn btn-sm btn-primary">Xuất Excel</a>
+                    <a href="" class="btn btn-sm btn-primary mr-2">Xuất Excel</a>
                 </div>
             </div>
             <div class="card-body">

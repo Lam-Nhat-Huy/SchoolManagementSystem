@@ -15,9 +15,9 @@ class EnrollmentStudentController extends Controller
             'subjects.name as subject_name',
         )
             ->orderBy('enrollments.created_at', 'DESC')
-            ->join('subjects', 'enrollments.subject_id', '=', 'subjects.id')
-            ->join('students', 'enrollments.student_id', '=', 'students.id')
-            ->where('enrollments.student_id', '=', session('user_id') ?? 1)
+            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
+            ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
+            ->where('enrollments.student_id', '=', session('user_id'))
             ->get();
 
         $template = 'admin.enrollment_student.enrollment_student.pages.index';

@@ -8,7 +8,7 @@
             </span>
         </div>
         <div data-mdb-perfect-scrollbar-init>
-            <ul class="list-unstyled mb-0 scroll-y-hidden" style="height: 500px;">
+            <ul class="list-unstyled mb-0 scroll-y-hidden chat-aside-height">
                 @if (!empty($getAllChat))
                     @foreach ($getAllChat as $key => $item)
                         <li class="p-2 border-bottom">

@@ -30,11 +30,14 @@ class TeachingSchedule extends Controller
             'schedules.*',
             'classes.name as class_name',
             'subjects.name as subject_name',
-            'teachers.name as teacher_name'
+            'teachers.name as teacher_name',
+            'school_shifts.name as school_shift_name',
+            'school_shifts.description as school_shift_description',
         )
             ->join('classes', 'schedules.class_id', '=', 'classes.id')
             ->join('subjects', 'schedules.subject_id', '=', 'subjects.id')
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id');
+            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
+            ->join('school_shifts', 'schedules.school_shift_id', '=', 'school_shifts.id');
 
         if (!empty(session('user_role') == 3)) {
             $getAllTeachingSchedule = $getAllTeachingSchedule->where('teacher_id', session('user_id'));

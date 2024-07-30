@@ -14,12 +14,19 @@ class EnrollmentController extends Controller
             'enrollments.*',
             'students.name as student_name',
             'students.id as student_id',
-            'subjects.name as subject_name'
+            'subjects.name as subject_name',
+            'classes.name as class_name',
         )
             ->orderBy('enrollments.created_at', 'DESC')
             ->join('students', 'enrollments.student_id', '=', 'students.id')
-            ->join('subjects', 'enrollments.subject_id', '=', 'subjects.id')
-            ->get();
+            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
+            ->join('subjects', 'classes.subject_id', '=', 'subjects.id');
+
+        if (!empty(session('user_role') == 3)) {
+            $getAllEnrollment = $getAllEnrollment->where('classes.teacher_id', session('user_id'));
+        }
+
+        $getAllEnrollment = $getAllEnrollment->paginate(10);
 
         $template = 'admin.enrollment.enrollment.pages.index';
 
@@ -39,7 +46,8 @@ class EnrollmentController extends Controller
         )
             ->orderBy('enrollments.created_at', 'DESC')
             ->join('students', 'enrollments.student_id', '=', 'students.id')
-            ->join('subjects', 'enrollments.subject_id', '=', 'subjects.id')
+            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
+            ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
             ->where('enrollments.id', '=', $id)
             ->first();
 

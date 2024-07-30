@@ -21,13 +21,13 @@ class Classes extends Model
         'deleted_at',
     ];
 
-    public function course()
-    {
-        return $this->belongsTo(Courses::class);
-    }
-
     public function teacher()
     {
         return $this->belongsTo(Teachers::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subjects::class, 'subject_id');
     }
 }

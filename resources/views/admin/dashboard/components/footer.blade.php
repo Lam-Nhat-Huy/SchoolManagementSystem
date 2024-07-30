@@ -3,7 +3,7 @@
         <nav class="pull-left">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://www.themekita.com">
+                    <a class="nav-link p-3" href="http://www.themekita.com">
                         Learning Management System
                     </a>
                 </li>

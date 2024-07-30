@@ -1,7 +1,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+<title>Trường Đại Học Đào Sông Nin</title>
 <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-<link rel="icon" href="{{ asset('admin') }}/img/kaiadmin/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="{{ asset('admin') }}/img/banner_home/logo_web.jpg" type="image/x-icon" />
 
 <!-- Fonts and icons -->
 <script src="{{ asset('admin') }}/js/plugin/webfont/webfont.min.js"></script>
@@ -25,11 +25,13 @@
     });
 </script>
 
+
 <!-- CSS Files -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{ asset('admin') }}/css/bootstrap.min.css" />
 <link rel="stylesheet" href="{{ asset('admin') }}/css/plugins.min.css" />
 <link rel="stylesheet" href="{{ asset('admin') }}/css/kaiadmin.min.css" />
-
+<link href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" rel="stylesheet"/>
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link rel="stylesheet" href="{{ asset('admin') }}/css/demo.css" />
 
@@ -43,3 +45,4 @@
     var BASE_URL = '{{ config('app.url') }}'
     var SUFFIX = '{{ config('apps.general.suffix') }}'
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

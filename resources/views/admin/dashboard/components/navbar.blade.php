@@ -2,10 +2,27 @@
     <div class="main-header-logo">
         <!-- Logo Header -->
         <div class="logo-header" data-background-color="dark">
-            <a href="{{ route('dashboard.index') }}" class="logo">
-                <img src="{{ asset('admin') }}/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
-                    height="20" />
-            </a>
+            @if (!empty(session('user_role') == 1))
+                <a href="{{ route('dashboard.index') }}" class="logo">
+                    <img src="{{ asset('admin') }}/img/banner_home/logo_white.png" alt="navbar brand" class="navbar-brand"
+                        height="45" />
+                </a>
+            @elseif(!empty(session('user_role') == 2))
+                <a href="{{ route('schedule.index') }}" class="logo">
+                    <img src="{{ asset('admin') }}/img/banner_home/logo_white.png" alt="navbar brand" class="navbar-brand"
+                        height="45" />
+                </a>
+            @elseif(!empty(session('user_role') == 3))
+                <a href="{{ route('teaching_schedule.index') }}" class="logo">
+                    <img src="{{ asset('admin') }}/img/banner_home/logo_white.png" alt="navbar brand" class="navbar-brand"
+                        height="45" />
+                </a>
+            @else
+                <a href="{{ route('dashboard.index') }}" class="logo">
+                    <img src="{{ asset('admin') }}/img/banner_home/logo_white.png" alt="navbar brand" class="navbar-brand"
+                        height="45" />
+                </a>
+            @endif
             <div class="nav-toggle">
                 <button class="btn btn-toggle toggle-sidebar">
                     <i class="gg-menu-right"></i>
@@ -119,7 +136,7 @@
                         <i class="fa fa-user ms-2 me-2"></i>
                         <span class="profile-username">
                             <span class="op-7">Xin Chào, </span>
-                            <span class="fw-bold">{{ session('user_name') }}</span>
+                            <span class="fw-bold">{{ session('user_name') ?? 'Cán Bộ Đào Tạo' }}</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -127,7 +144,7 @@
                             <li>
                                 <div class="user-box ps-0">
                                     <div class="u-text">
-                                        <h4>{{ session('user_name') }}</h4>
+                                        <h4>{{ session('user_name') ?? 'Cán Bộ Đào Tạo' }}</h4>
                                         <p class="text-muted">{{ session('user_email') }}</p>
                                         <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Hồ Sơ</a>
                                     </div>
