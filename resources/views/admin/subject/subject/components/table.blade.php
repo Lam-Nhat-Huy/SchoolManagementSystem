@@ -2,7 +2,6 @@
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
         @include('admin.subject.subject.components.filter')
 
-        <!-- Phần còn lại của view -->
         <div class="row">
             <div class="col-sm-12">
                 <table id="basic-datatables" class="display table table-striped table-hover table-sm dataTable" role="grid" aria-describedby="basic-datatables_info">
@@ -21,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($data as $item)
+                    @forelse ($data as $item)
                         <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
                             <td style="font-size: 14px">{{ $item->code }}</td>
                             <td style="font-size: 14px">{{ $item->course->name ?? "Không có dữ liệu" }}</td>
@@ -45,7 +44,15 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="10">
+                                <div class="alert alert-warning" role="alert">
+                                    Không tìm thấy dữ liệu.
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>

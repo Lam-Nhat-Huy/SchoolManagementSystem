@@ -21,13 +21,13 @@ class StoreSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'credit_num' => 'required|integer|min:1|max:10',
-            'total_class_session' => 'required|integer|min:1|max:50',
-            'status' => 'required|boolean',
-            'code' => 'required|string|max:50|unique:subjects,code',
-            'created_by' => 'required|exists:users,id',
-            'updated_by' => 'sometimes|exists:users,id',
+            'code' => 'required',
+            'name' => 'required',
+            'credit_num' => 'required',
+            'total_class_session' => 'required',
+            'coure_id' => 'required',
+            'major_id' => 'required',
+            'subject_type_id' => 'required',
         ];
     }
 
@@ -39,26 +39,13 @@ class StoreSubjectRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Tên môn học là bắt buộc.',
-            'name.string' => 'Tên môn học phải là một chuỗi ký tự.',
-            'name.max' => 'Tên môn học không được vượt quá 255 ký tự.',
-            'credit_num.required' => 'Số tín chỉ là bắt buộc.',
-            'credit_num.integer' => 'Số tín chỉ phải là một số nguyên.',
-            'credit_num.min' => 'Số tín chỉ phải lớn hơn hoặc bằng 1.',
-            'credit_num.max' => 'Số tín chỉ không được vượt quá 10.',
-            'total_class_session.required' => 'Số buổi học là bắt buộc.',
-            'total_class_session.integer' => 'Số buổi học phải là một số nguyên.',
-            'total_class_session.min' => 'Số buổi học phải lớn hơn hoặc bằng 1.',
-            'total_class_session.max' => 'Số buổi học không được vượt quá 50.',
-            'status.required' => 'Trạng thái là bắt buộc.',
-            'status.boolean' => 'Trạng thái phải là đúng hoặc sai.',
-            'code.required' => 'Mã môn học là bắt buộc.',
-            'code.string' => 'Mã môn học phải là một chuỗi ký tự.',
-            'code.max' => 'Mã môn học không được vượt quá 50 ký tự.',
-            'code.unique' => 'Mã môn học đã tồn tại.',
-            'created_by.required' => 'Người tạo là bắt buộc.',
-            'created_by.exists' => 'Người tạo không hợp lệ.',
-            'updated_by.exists' => 'Người sửa không hợp lệ.',
+            'code.required' => 'Vui lòng nhập mã môn học',
+            'name.required' => 'Vui lòng tên môn học',
+            'credit_num.required' => 'Vui lòng nhập số tín chỉ',
+            'total_class_session.required' => 'Vui lòng nhập ca học',
+            'coure_id.required' => 'Vui lòng chọn ngành học',
+            'major_id.required' => 'Vui lòng chọn chuyên ngành',
+            'subject_type_id.required' => 'Vui lòng nhập phương thức học'
         ];
     }
 }

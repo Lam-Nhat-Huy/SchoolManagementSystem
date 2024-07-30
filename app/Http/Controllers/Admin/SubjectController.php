@@ -102,7 +102,7 @@ class SubjectController extends Controller
         ));
     }
 
-    public function store(Request $request)
+    public function store(StoreSubjectRequest $request)
     {
         if ($this->subjectService->create($request)) {
             toastr()->success('Thêm bản ghi thành công!');

@@ -36,7 +36,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($data as $item)
+
+                    @forelse ($data as $item)
                         <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
                             <td>{{ $item->code ?? "Không có dữ liệu" }}</td>
                             <td>{{ $item->course->name ?? "Không có dữ liệu"}}</td>
@@ -61,12 +62,23 @@
                                 </form>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="10">
+                                <div class="alert alert-warning" role="alert">
+                                    Không tìm thấy dữ liệu.
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
                     <!-- Các dòng dữ liệu ngành học khác -->
                     </tbody>
                 </table>
             </div>
         </div>
+
+
+
         <div class="row">
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
