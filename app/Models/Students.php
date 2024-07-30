@@ -44,4 +44,9 @@ class Students extends Model
     {
         return $this->belongsTo(Roles::class);
     }
+
+    public function chats()
+    {
+        return $this->hasMany(Chats::class);
+    }
 }
