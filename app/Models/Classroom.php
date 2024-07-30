@@ -12,6 +12,7 @@ class Classroom extends Model
     protected $fillable = [
         'name',
         'description',
+        'status',
         'created_by',
         'created_at',
         'updated_by',

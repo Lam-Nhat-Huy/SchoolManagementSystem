@@ -17,6 +17,7 @@ class ClassroomSeeder extends Seeder
             [
                 'name' => 'F202',
                 'description' => 'Phòng Học F202',
+                'status' => 0,
                 'created_by' => 1,
                 'created_at' => now(),
                 'updated_by' => null,
@@ -27,6 +28,7 @@ class ClassroomSeeder extends Seeder
             [
                 'name' => 'F301',
                 'description' => 'Phòng Học F301',
+                'status' => 0,
                 'created_by' => 1,
                 'created_at' => now(),
                 'updated_by' => null,
