@@ -40,7 +40,6 @@
         <div class="form-group">
             <label for="subject_type_id">Hình thức học</label>
             <select class="form-control setupSelect2" id="subject_type_id" name="subject_type_id">
-                <option>--Chọn hình thức học--</option>
                 @foreach ($subjectTypes as $subjectType)
                     <option value="{{ $subjectType->id }}"
                             {{ old('subject_type_id', $subject->subject_type_id ?? '') == $subjectType->id ? 'selected' : '' }}>
@@ -56,7 +55,6 @@
         <div class="form-group">
             <label for="status">Trạng thái</label>
             <select class="form-control setupSelect2" id="status" name="status">
-                <option>--Chọn trạng thái--</option>
                 <option value="0" {{ old('status', $subject->status ?? '') == 0 ? 'selected' : '' }}>Hoạt động</option>
                 <option value="1" {{ old('status', $subject->status ?? '') == 1 ? 'selected' : '' }}>Không hoạt động</option>
             </select>

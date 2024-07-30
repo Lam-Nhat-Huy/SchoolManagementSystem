@@ -21,7 +21,6 @@
         <div class="form-group">
             <label for="status">Trạng thái</label>
             <select class="form-control setupSelect2" id="status" name="status">
-                <option>--Chọn trạng thái--</option>
                 <option value="0" {{ old('status', $major->status ?? '') == 0 ? 'selected' : '' }}>Hoạt động</option>
                 <option value="1" {{ old('status', $major->status ?? '') == 1 ? 'selected' : '' }}>Không hoạt động</option>
             </select>
@@ -31,3 +30,5 @@
         </div>
     </div>
 </div>
+
+

@@ -13,11 +13,24 @@ class MajorController extends Controller
     {
         $query = Major::query();
 
-        if ($request->has('search')) {
+        if ($request->has('search') && $request->input('search') !== '') {
             $search = $request->input('search');
-            $query->where('name', 'LIKE', "%$search%")
-                ->orWhere('code', 'LIKE', "%$search%");
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'LIKE', "%$search%")
+                    ->orWhere('code', 'LIKE', "%$search%");
+            });
         }
+
+        if ($request->has('course_id') && $request->input('course_id') !== '') {
+            $query->where('course_id', $request->input('course_id'));
+        }
+
+        if ($request->has('status') && $request->input('status') !== '') {
+            $query->where('status', $request->input('status'));
+        }
+
+
+        $courses = Courses::all();
 
         $config = [
             'css' => [
@@ -34,14 +47,18 @@ class MajorController extends Controller
         ];
 
         $data = $query->paginate(10);
+
         $template = "admin.major.major.pages.index";
 
         return view('admin.dashboard.layout', compact(
             'template',
             'config',
             'data',
+            'courses'
         ));
     }
+
+
 
     // Hiển thị form tạo ngành học mới
     public function create()
