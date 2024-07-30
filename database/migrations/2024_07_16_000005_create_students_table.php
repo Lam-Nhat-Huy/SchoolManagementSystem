@@ -14,10 +14,20 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
+            $table->string('student_code', 7)->unique();
+            $table->string('gender', 50);
+            $table->timestamp('date_of_birth');
             $table->string('email', 100)->unique();
-            $table->string('phone', 15);
+            $table->string('address', 200);
+            $table->unsignedBigInteger('course_id')->nullable()->constrained('courses')->onDelete('set null');
             $table->unsignedBigInteger('major_id')->nullable()->constrained('majors')->onDelete('set null');
+            $table->string('cccd_number',20);
+            $table->timestamp('cccd_issue_date');
+            $table->string('cccd_place', 100);
             $table->timestamp('year_of_enrollment');
+            $table->unsignedBigInteger('study_status_id')->nullable()->constrained('study_statuses')->onDelete('set null');
+            $table->string('semesters');
+            $table->string('phone', 15);
             $table->unsignedBigInteger('role_id')->nullable()->constrained('roles')->onDelete('set null');
             $table->string('OTP');
             $table->unsignedBigInteger('created_by')->nullable();

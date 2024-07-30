@@ -10,15 +10,17 @@ class Major extends Model
     use HasFactory;
 
     protected $fillable = [
-        'course_id',
-        'code',
         'name',
-        'standard',
-        'status',
+        'description',
+        'created_by',
+        'created_at',
+        'updated_by',
+        'updated_at',
+        'deleted_by',
+        'deleted_at',
     ];
 
-    public function course()
-    {
-        return $this->belongsTo(Courses::class, 'course_id');
+    public function scopegetMajor($query){
+        return $query->orderBy('created_at', 'DESC')->get();
     }
 }

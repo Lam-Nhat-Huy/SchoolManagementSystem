@@ -19,4 +19,10 @@ class Roles extends Model
         'deleted_by',
         'deleted_at',
     ];
+    protected $attributes = [
+        'role_id' => 2,
+    ];
+    public function scopegetRole($query){
+        return $query->orderBy('created_at', 'DESC')->get();
+    }
 }
