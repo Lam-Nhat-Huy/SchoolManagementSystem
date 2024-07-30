@@ -2,9 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\TeacherDateController;
+use App\Http\Controllers\Admin\TeacherTimeController;
 
 Route::prefix('teacher')->group(function () {
     Route::get('/index', [TeacherController::class, 'index'])->name('teacher.index');
+    Route::get('/day', [TeacherDateController::class, 'index'])->name('teacher.day');
+    Route::get('/time', [TeacherTimeController::class, 'index'])->name('teacher.time');
+
 
     Route::get('/create', [TeacherController::class, 'create'])->name('teacher.create');
     Route::post('/store', [TeacherController::class, 'store'])->name('teacher.store');

@@ -47,4 +47,8 @@ class Teachers extends Model
     {
         return $this->belongsTo(Major::class, 'majors_id');
     }
+    public function schedules()
+    {
+        return $this->hasMany(Schedules::class, 'teacher_id');
+    }
 }

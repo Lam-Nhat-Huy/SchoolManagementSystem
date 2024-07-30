@@ -107,8 +107,19 @@ return [
                     'title' => 'Giảng Viên',
                     'route' => 'teacher.index',
                     'user_role' => 1
+                ],
+                [
+                    'title' => 'Buổi Dạy',
+                    'route' => 'teacher.day',
+                    'user_role' => 1
+                ],
+                [
+                    'title' => 'Giờ Dạy',
+                    'route' => 'teacher.time',
+                    'user_role' => 1
                 ]
             ]
+            
         ],
         [
             'user_role' => 1,

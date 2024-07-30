@@ -13,26 +13,35 @@ use Illuminate\Support\Facades\File;
 
 class TeacherController extends Controller
 {
-    public function index()
-    {
-   // Lấy dữ liệu với quan hệ course và major
-    $data = Teachers::with(['course', 'major'])->orderBy('id', 'asc')->paginate();
+    public function index(Request $request)
+{
+    $search = $request->input('search');
+    $query = Teachers::query();
+
+    if ($search) {
+        $query->where('name', 'LIKE', "%{$search}%")
+              ->orWhere('code', 'LIKE', "%{$search}%");
+    }
+
+    // Lấy dữ liệu với quan hệ course và major
+    $data = $query->with(['course', 'major'])->orderBy('id', 'asc')->paginate(10);
+
     // Thay đổi cấu trúc dữ liệu để chứa tên khóa học và chuyên ngành
     $data->getCollection()->transform(function ($teacher) {
         $teacher->course_name = $teacher->course ? $teacher->course->name : 'Chưa có';
         $teacher->major_name = $teacher->major ? $teacher->major->name : 'Chưa có';
-        
         return $teacher;
     });
 
-        
-        $template = "admin.teacher.teacher.pages.index";
+    $template = "admin.teacher.teacher.pages.index";
 
-        return view('admin.dashboard.layout', compact(
-            'template',
-            'data'
-        ));
-    }
+    return view('admin.dashboard.layout', compact(
+        'template',
+        'data',
+        'search'
+    ));
+}
+
     public function create()
     {
         $data = Courses::all();

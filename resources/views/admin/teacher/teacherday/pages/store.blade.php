@@ -92,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card custom-border col-lg-4" style="border: 1px solid #ccc">
+                        <div class="col-lg-4">
                             <div class="form-group mb-3 d-flex justify-content-center">
                                 @if (old('teacher_image'))
                                     <img src="{{ asset('uploads/teacher/' . old('teacher_image')) }}" alt="Hình ảnh"

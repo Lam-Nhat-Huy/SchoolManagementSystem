@@ -8,10 +8,10 @@
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title float-left">Danh sách giảng viên</h4>
                 <div class="action">
-                    <a href="{{ route('teacher.create') }}" class="btn btn-sm btn-success float-right">
+                    <a href="{{ route('teacher.create') }}" class="btn btn-sm btn-success float-end">
                         <i class="fa fa-plus"></i> Thêm giảng viên
                     </a>
-                    <a href="" class="btn btn-sm btn-primary">Xuất Excel</a>
+                    {{-- <a href="" class="btn btn-sm btn-primary">Xuất Excel</a> --}}
                 </div>
             </div>
             <div class="card-body">
@@ -25,7 +25,7 @@
                                 <div id="basic-datatables_filter" class="dataTables_filter">
                                     <form action="{{ route('teacher.index') }}" method="GET">
                                         <label>Tìm kiếm:
-                                            <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm" placeholder="Nhập tên hoặc mã phòng ban" aria-controls="basic-datatables">
+                                            <input type="search" name="search" value="{{ request('search') }}" class="form-control form-control-sm" placeholder="Nhập tên hoặc mã giảng viên" aria-controls="basic-datatables">
                                         </label>
                                         <button type="submit" class="btn btn-primary btn-sm">Tìm kiếm</button>
                                     </form>
@@ -47,7 +47,6 @@
                                             <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Giới tính: activate to sort column ascending" style="width: 100px;">Giới tính</th>
                                             <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Ngày tháng năm sinh: activate to sort column ascending" style="width: 150px;">Ngày tháng năm sinh</th>
                                             <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Bằng cấp: activate to sort column ascending" style="width: 150px;">Bằng cấp</th>
-                                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Số cccd: activate to sort column ascending" style="width: 150px;">Số cccd</th>
                                             <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Số cccd: activate to sort column ascending" style="width: 150px;">Bio</th>
                                             <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Chuyên khoa: activate to sort column ascending" style="width: 150px;">Chuyên khoa</th>
                                             <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Chuyên ngành: activate to sort column ascending" style="width: 150px;">Chuyên ngành</th>
@@ -75,7 +74,6 @@
                                                 <td style="padding: 5px; line-height: 1.2;">{{ $teacher->gender }}</td>
                                                 <td style="padding: 5px; line-height: 1.2;">{{ $teacher->date_of_birth }}</td>
                                                 <td style="padding: 5px; line-height: 1.2;">{{ $teacher->qualifications }}</td>
-                                                <td style="padding: 5px; line-height: 1.2;">{{ $teacher->cccd }}</td>
                                                 <td style="padding: 5px; line-height: 1.2;">{{ $teacher->bio }}</td>
                                                 <td style="padding: 5px; line-height: 1.2;">{{ $teacher->course_name }}</td>
                                                 <td style="padding: 5px; line-height: 1.2;">{{ $teacher->major_name }}</td>
