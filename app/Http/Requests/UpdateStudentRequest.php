@@ -21,7 +21,7 @@ class UpdateStudentRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('$id');
+        $id = session('student_id_session');
 
         return [
             'name' => 'required|string|max:50',
