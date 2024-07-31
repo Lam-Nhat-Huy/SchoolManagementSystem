@@ -8,7 +8,7 @@
                             <div class="p-3 pt-0">
                                 <div class="input-group rounded mb-3">
                                     <input type="search" class="form-control rounded" placeholder="Tìm Kiếm..."
-                                        aria-label="Tìm Kiếm..." aria-describedby="search-addon" />
+                                        wire:model.live="searchTerm" />
                                     <span class="input-group-text border-0" id="search-addon">
                                         <i class="fas fa-search"></i>
                                     </span>

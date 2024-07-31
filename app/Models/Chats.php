@@ -44,7 +44,7 @@ class Chats extends Model
         return $data;
     }
 
-    public function getAllChat()
+    public function getAllChat($searchItem = null)
     {
         $data = Chats::select('chats.student_id', 'chats.message', 'chats.created_at', 'students.name', DB::raw('COUNT(unread_chats.id) as unread_count'))
             ->join('students', 'chats.student_id', '=', 'students.id')
@@ -58,10 +58,14 @@ class Chats extends Model
             })
             ->whereNull('last_messages.student_id')
             ->groupBy('chats.student_id', 'students.name', 'chats.message', 'chats.created_at')
-            ->orderBy('chats.created_at', 'desc')
-            ->get();
+            ->orderBy('chats.created_at', 'desc');
 
-        return $data;
+        if (!empty($searchItem)) {
+            $data->where('students.name', 'LIKE', '%' . $searchItem . '%');
+        }
+
+        return $data
+            ->get();
     }
 
     public function sendMessage($student_id = null, $message, $role_id, $reply_to = null)
