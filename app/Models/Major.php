@@ -24,4 +24,10 @@ class Major extends Model
     {
         return $this->hasMany(Subjects::class, 'major_id');
     }
+
+    // Bảng majors có course_id của bảng course, liên kết để lấy name của bảng courses
+    public function course()
+    {
+        return $this->belongsTo(Courses::class, 'course_id');
+    }
 }
