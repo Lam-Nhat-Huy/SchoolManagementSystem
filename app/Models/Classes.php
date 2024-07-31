@@ -13,6 +13,7 @@ class Classes extends Model
         'name',
         'course_id',
         'teacher_id',
+        'is_evaluation',
         'created_by',
         'created_at',
         'updated_by',

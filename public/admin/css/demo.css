@@ -447,6 +447,7 @@ body[data-background-color="dark"] .demo-icon .icon-class {
   font-size: 14px;
   text-align: start;
   padding-bottom: 12px;
+  margin-top: 5px;
 }
 
 @media screen and (max-width: 1200px) {

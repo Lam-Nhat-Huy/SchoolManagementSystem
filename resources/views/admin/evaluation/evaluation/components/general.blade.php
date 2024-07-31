@@ -5,8 +5,8 @@
     <div class="card-body">
         <div class="form-group">
             <label for="class_class">Lớp Học Cần Mở Đánh Giá Giảng Viên</label>
-            <select class="form-select form-control" id="defaultSelect" fdprocessedid="fmy4e">
-                @if (isset($getEdit))
+            <select class="form-select form-control" id="classes_evaluation" name="classes_evaluation">
+                @if (!empty($getEdit))
                     @foreach ($getAllClass as $item)
                         @if (!empty($item->is_evaluation == 0) || $item->id == $getEdit->class_id)
                             <option value="{{ $item->id }}" {{ $item->id == $getEdit->class_id ? 'selected' : '' }}>
@@ -23,6 +23,9 @@
                     @endforeach
                 @endif
             </select>
+            @error('classes_evaluation')
+                <div class="message_error">{{ $message }}</div>
+            @enderror
         </div>
     </div>
 </div>

@@ -27,21 +27,42 @@
                             <tr role="row" class="odd">
                                 <td class="sorting_1">{{ $items->class->name }}</td>
                                 <td>{{ $items->teacher_name }}</td>
-                                <td>
-                                    <a href="{{ route('evaluation.edit', ['id' => $items->id]) }}"
-                                        class="btn btn-sm btn-black">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('evaluation.destroy', ['id' => $items->id]) }}"
-                                        method="POST" style="display:inline-block;"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                @if ($items->deleted_by == 0)
+                                    <td>
+                                        <a href="{{ route('evaluation.edit', ['id' => $items->id]) }}"
+                                            class="btn btn-sm btn-black" title="Cập nhật">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form action="{{ route('evaluation.trash', ['id' => $items->id]) }}"
+                                            method="POST" style="display:inline-block;" title="Ẩn">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                @else
+                                    <td>
+                                        <form action="{{ route('evaluation.restore', ['id' => $items->id]) }}"
+                                            method="POST" style="display:inline-block;" title="Khôi phục">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <i class="fas fa-undo-alt"></i>
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('evaluation.delete', ['id' => $items->id]) }}"
+                                            method="POST" style="display:inline-block;"
+                                            onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');" title="Xóa vĩnh viễn">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
