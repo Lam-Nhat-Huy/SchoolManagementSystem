@@ -24,25 +24,42 @@
             <tbody>
                 @foreach ($getAllStudent as $student)
                     <tr role="row" class="odd">
-                        <td class="sorting_1">{{ $student->name }}</td>
+                        <td>{{ $student->name }}</td>
                         <td>{{ $student->email }}</td>
                         <td>{{ $student->phone }}</td>
-                        <td>{{ $student->major_name }}</td>
+                        <td>{{ $student->major->name }}</td>
                         <td>{{ $student->year_of_enrollment }}</td>
-                        <td>
-                            <a href="{{ route('student.saveToSession', ['id' => $student->id]) }}"
-                                class="btn btn-sm btn-black">
-                                <i class="fa fa-edit"></i>
-                            </a>
-                            <form action="{{ route('student.destroy', ['id' => $student->id]) }}" method="POST"
-                                style="display:inline-block;"
-                                onsubmit="return confirm('Bạn có chắc chắn muốn xóa lớp học này?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
+                        <td class="text-center">
+                            @if ($student->deleted_by == null)
+                                <a href="{{ route('student.edit', $student->id) }}" class="btn btn-sm btn-black">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form action="{{ route('student.trash', $student->id) }}" method="POST"
+                                    style="display:inline-block;">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('student.restore', $student->id) }}" method="POST"
+                                    style="display:inline-block;">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-sm btn-success">
+                                        <i class="fas fa-undo-alt"></i>
+                                    </button>
+                                </form>
+                                <form action="{{ route('student.delete', $student->id) }}" method="POST"
+                                    style="display:inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

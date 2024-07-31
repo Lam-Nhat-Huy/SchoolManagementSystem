@@ -9,7 +9,9 @@ class Students extends Model
 {
     use HasFactory;
 
-    public static $data;
+    public $table = 'students';
+
+    protected $data;
 
     protected $fillable = [
         'name',
@@ -40,55 +42,60 @@ class Students extends Model
         return \Carbon\Carbon::parse($value)->format('Y-m-d');
     }
 
+    public function getDateOfBirthAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
+    public function getCccdIssueDateAttribute($value)
+    {
+        return \Carbon\Carbon::parse($value)->format('Y-m-d');
+    }
     public function setYearOfEnrollmentAttribute($value)
     {
         $this->attributes['year_of_enrollment'] = \Carbon\Carbon::parse($value);
     }
-
+    public function setDateOfBirthAttribute($value)
+    {
+        $this->attributes['date_of_birth'] = \Carbon\Carbon::parse($value);
+    }
+    public function setCccdIssueDateAttribute($value)
+    {
+        $this->attributes['cccd_issue_date'] = \Carbon\Carbon::parse($value);
+    }
     public function getAllStudent()
     {
-        $data = Students::select(
-            'students.*',
-            'majors.name as major_name',
-        )
-            ->join('majors', 'students.major_id', '=', 'majors.id')
+        $data = Students::with('major:id,name')
             ->orderBy('students.id', 'DESC')
             ->paginate(10);
 
         return $data;
     }
-
     public function insertStudent($data)
     {
         return Students::insert($data);
     }
-
     public function getEditStudent($id)
     {
-        $data = Students::with('major:name')
-            ->find($id);
+        $data = Students::find($id);
 
         return $data;
     }
-
     public function updateStudent($data, $id)
     {
         $student = Students::find($id);
 
-        if ($student) {
-
-        }
-
         return $student->update($data);
     }
-
     public function major()
     {
-        return $this->belongsTo(Major::class, 'major_id');
+        return $this->belongsTo(Major::class);
     }
-
-    public function role()
+    public function course()
     {
-        return $this->belongsTo(Roles::class);
+        return $this->belongsTo(Courses::class);
+    }
+    public function studystatus()
+    {
+        return $this->belongsTo(StudyStatus::class);
     }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Models\Courses;
-use App\Models\Subjects;
 use App\Repositories\Interfaces\SubjectRepositoryInterface;
 use App\Services\Interfaces\SubjectServiceInterface;
 use Illuminate\Http\Request;

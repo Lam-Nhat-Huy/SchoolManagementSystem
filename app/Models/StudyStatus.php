@@ -15,6 +15,6 @@ class StudyStatus extends Model
     ];
 
     public function students() {
-        return $this->belongsTo(Students::class, 'study_status_id');
+        return $this->belongsTo(Students::class);
     }
 }
