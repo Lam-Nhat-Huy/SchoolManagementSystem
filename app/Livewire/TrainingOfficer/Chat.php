@@ -11,6 +11,8 @@ class Chat extends Component
 
     public $getAllChat;
 
+    public $searchTerm = '';
+
     public function __construct()
     {
         $this->province = new Chats();
@@ -18,7 +20,9 @@ class Chat extends Component
 
     public function mount()
     {
-        $this->fetchList();
+        if (empty($this->searchTerm)) {
+            $this->fetchList();
+        }
     }
 
     public function fetchList()
@@ -28,6 +32,7 @@ class Chat extends Component
 
     public function render()
     {
+        $this->getAllChat = $this->province->getAllChat($this->searchTerm);
         return view('livewire.training_officer.chat');
     }
 }
