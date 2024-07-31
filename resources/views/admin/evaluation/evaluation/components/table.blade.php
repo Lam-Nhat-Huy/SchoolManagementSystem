@@ -28,7 +28,7 @@
                     <tbody>
                         @forelse ($getAllEvaluationCreate as $items)
                             <tr role="row" class="odd">
-                                <td class="sorting_1">{{ $items->class->name }}</td>
+                                <td class="sorting_1">{{ $items->class_name }}</td>
                                 <td>{{ $items->teacher_name }}</td>
                                 @if ($items->deleted_by == 0)
                                     <td>

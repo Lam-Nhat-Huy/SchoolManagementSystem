@@ -24,13 +24,6 @@ class EvaluationController extends Controller
         $this->provinceTableClass = new Classes();
     }
 
-    public function index()
-    {
-        $this->province = new CreateTeacherEvaluations();
-
-        $this->provinceTableClass = new Classes();
-    }
-
     public function index(Request $request)
     {
         if ($request->sbcls === 'asc' || $request->sbtc === 'asc') {
@@ -83,7 +76,6 @@ class EvaluationController extends Controller
         ];
 
         $config['method'] = 'create';
-
 
         return view('admin.dashboard.layout', compact(
             'template',
