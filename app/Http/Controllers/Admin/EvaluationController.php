@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Create_Teacher_Evaluation\UpdateEvaluationRequest;
 use App\Models\Classes;
 use App\Models\CreateTeacherEvaluations;
 use App\Models\TeacherEvaluations;
+use App\Models\Teachers;
 use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
@@ -23,19 +24,34 @@ class EvaluationController extends Controller
         $this->provinceTableClass = new Classes();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $getAllEvaluationCreate = CreateTeacherEvaluations::select('create_teacher_evaluations.*', 'classes.name as class_name', 'teachers.name as teacher_name')
-            ->orderBy('create_teacher_evaluations.created_at', 'DESC')
-            ->join('classes', 'create_teacher_evaluations.class_id', '=', 'classes.id')
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->paginate(10);
+        if ($request->sbcls === 'asc' || $request->sbtc === 'asc') {
+            $sbcls = 'desc';
+            $sbtc = 'desc';
+        } else {
+            $sbcls = 'asc';
+            $sbtc = 'asc';
+        }
+
+        $teacher_id = null;
+
+        if (!empty($request->teacher_id)) {
+            $teacher_id = $request->teacher_id;
+        }
+
+        $getAllEvaluationCreate = $this->province->getAllEvaluationCreate($teacher_id, $sbcls, $sbtc);
+
+        $teachers = Teachers::all();
 
         $template = 'admin.evaluation.evaluation.pages.index';
 
         return view('admin.dashboard.layout', compact(
             'template',
             'getAllEvaluationCreate',
+            'teachers',
+            'sbcls',
+            'sbtc',
         ));
     }
 
@@ -209,7 +225,7 @@ class EvaluationController extends Controller
     public function delete($id)
     {
         $delete = $this->province::find($id);
-        
+
         $table_classes_old = Classes::find($delete->class_id);
 
         $table_classes_old->is_evaluation = 0;
