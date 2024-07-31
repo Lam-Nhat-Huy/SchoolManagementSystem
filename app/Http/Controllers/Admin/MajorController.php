@@ -21,7 +21,7 @@ class MajorController extends Controller
             });
         }
 
-        if ($request->has('course_id') && $request->input('course_id') !== '') {
+        if ($request->has('course_id') && $request->input('course_id') != '') {
             $query->where('course_id', $request->input('course_id'));
         }
 

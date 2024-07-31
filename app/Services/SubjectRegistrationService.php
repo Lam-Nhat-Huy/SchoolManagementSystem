@@ -6,12 +6,7 @@ use App\Models\Enrollments;
 use App\Repositories\SubjectRegistrationRepository;
 use App\Services\Interfaces\SubjectRegistrationServiceInterface;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
 
-/**
- * Class SubjectRegistrationService
- * @package App\Services
- */
 class SubjectRegistrationService implements SubjectRegistrationServiceInterface
 {
     protected $subjectRegistrationRepository;

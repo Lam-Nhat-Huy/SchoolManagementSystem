@@ -40,7 +40,7 @@ class Teachers extends Model
     }
     public function course()
     {
-        return $this->belongsTo(Courses::class, 'course_id');
+        return $this->belongsTo(Courses::class, 'coure_id');
     }
 
     public function major()

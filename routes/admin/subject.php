@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\MajorController;
+use App\Http\Controllers\Admin\EnrollmentStudentController;
 
 Route::prefix('subject')->group(function () {
     Route::get('/index', [SubjectController::class, 'index'])->name('subject.index');
@@ -44,4 +45,9 @@ Route::prefix('major')->group(function () {
 
     Route::get('/delete/{id}', [MajorController::class, 'delete'])->name('major.delete')->where(['id' => '[0-9]+']);
     Route::delete('/destroy/{id}', [MajorController::class, 'destroy'])->name('major.destroy')->where(['id' => '[0-9]+']);
+});
+
+Route::prefix('register_subject')->group(function () {
+    Route::get('/index', [EnrollmentStudentController::class, 'showSubjectRegister'])->name('show_subject_register.index');
+    Route::delete('/destroy/{id}', [EnrollmentStudentController::class, 'destroy'])->name('show_subject_register.destroy')->where(['id' => '[0-9]+']);
 });

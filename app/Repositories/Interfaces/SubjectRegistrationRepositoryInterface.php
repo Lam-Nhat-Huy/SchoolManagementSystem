@@ -11,6 +11,6 @@ interface SubjectRegistrationRepositoryInterface
     public function getCoursesWithSubjects();
     public function getSubjectsWithClasses($courseId);
     public function getClassesBySubjectId($subjectId);
-    public function getTeachersWithSubjects();
     public function getClassData($id);
+
 }

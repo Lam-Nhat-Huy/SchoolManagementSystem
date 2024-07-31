@@ -21,13 +21,18 @@ class Classes extends Model
         'deleted_at',
     ];
 
-    public function teacher()
-    {
-        return $this->belongsTo(Teachers::class);
-    }
-
     public function subject()
     {
         return $this->belongsTo(Subjects::class, 'subject_id');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teachers::class, 'teacher_id');
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollments::class, 'class_id');
     }
 }

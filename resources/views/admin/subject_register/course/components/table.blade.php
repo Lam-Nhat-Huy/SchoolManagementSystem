@@ -2,14 +2,11 @@
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
         <div class="row">
             <div class="col-sm-12">
-                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid"
-                       aria-describedby="basic-datatables_info">
+                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid">
                     <thead>
-                        <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên môn học: activate to sort column descending" style="width: 200px;">Chọn khóa học</th>
-                        </tr>
+                    <tr role="row">
+                        <th style="width: 200px;">Chọn Ngành</th>
+                    </tr>
                     </thead>
                     <tbody>
                     @foreach($data as $item)

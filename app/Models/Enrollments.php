@@ -28,13 +28,13 @@ class Enrollments extends Model
         'deleted_at',
     ];
 
-    public function student()
+    public function class()
     {
-        return $this->belongsTo(Students::class);
+        return $this->belongsTo(Classes::class, 'class_id');
     }
 
-    public function subject()
+    public function student()
     {
-        return $this->belongsTo(Subjects::class);
+        return $this->belongsTo(Students::class, 'student_id');
     }
 }

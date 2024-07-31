@@ -20,7 +20,7 @@ class Courses extends Model
 
     public function subjects()
     {
-        return $this->hasMany(Subjects::class, 'course_id');
+        return $this->hasMany(Subjects::class, 'coure_id');
     }
 
     public function creator()

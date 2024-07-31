@@ -20,7 +20,8 @@ class Major extends Model
         'deleted_at',
     ];
 
-    public function scopegetMajor($query){
-        return $query->orderBy('created_at', 'DESC')->get();
+    public function subjects()
+    {
+        return $this->hasMany(Subjects::class, 'major_id');
     }
 }
