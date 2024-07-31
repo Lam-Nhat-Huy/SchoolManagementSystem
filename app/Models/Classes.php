@@ -12,7 +12,8 @@ class Classes extends Model
     use SoftDeletes;
     protected $fillable = [
         'name',
-        'major_id',
+        'course_id',
+        'teacher_id',
         'created_by',
         'created_at',
         'updated_by',
@@ -21,6 +22,10 @@ class Classes extends Model
         'deleted_at',
     ];
 
+    public function teacher()
+    {
+        return $this->belongsTo(Teachers::class);
+    }
 
     public function subject()
     {

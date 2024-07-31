@@ -19,6 +19,15 @@ class CreateTeacherEvaluations extends Model
         'deleted_at',
     ];
 
+    public function getClassTeacherEvaluation()
+    {
+        return Classes::select('classes.*', 'teachers.name as teacher_name')
+            ->orderBy('classes.created_at', 'DESC')
+            ->where('classes.deleted_at', null)
+            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
+            ->get();
+    }
+
     public function class()
     {
         return $this->belongsTo(Classes::class);

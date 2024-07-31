@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Create_Teacher_Evaluation\CreateEvaluationRequest;
+use App\Http\Requests\Admin\Create_Teacher_Evaluation\UpdateEvaluationRequest;
 use App\Models\Classes;
 use App\Models\CreateTeacherEvaluations;
 use App\Models\TeacherEvaluations;
@@ -10,6 +12,17 @@ use Illuminate\Http\Request;
 
 class EvaluationController extends Controller
 {
+    protected $province;
+
+    protected $provinceTableClass;
+
+    public function __construct()
+    {
+        $this->province = new CreateTeacherEvaluations();
+
+        $this->provinceTableClass = new Classes();
+    }
+
     public function index()
     {
         $getAllEvaluationCreate = CreateTeacherEvaluations::select('create_teacher_evaluations.*', 'classes.name as class_name', 'teachers.name as teacher_name')
@@ -28,11 +41,7 @@ class EvaluationController extends Controller
 
     public function create()
     {
-        $getAllClass = Classes::select('classes.*', 'teachers.name as teacher_name')
-            ->orderBy('classes.created_at', 'DESC')
-            ->where('classes.deleted_at', null)
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->get();
+        $getAllClass = $this->province->getClassTeacherEvaluation();
 
         $template = "admin.evaluation.evaluation.pages.store";
 
@@ -52,7 +61,6 @@ class EvaluationController extends Controller
 
         $config['method'] = 'create';
 
-
         return view('admin.dashboard.layout', compact(
             'template',
             'config',
@@ -60,21 +68,45 @@ class EvaluationController extends Controller
         ));
     }
 
-    public function store(Request $request)
+    public function store(CreateEvaluationRequest $request)
     {
-        dd($request->all());
+        $data = $request->validated();
+
+        if ($data) {
+
+            $create_evaluation = $this->province;
+
+            $create_evaluation->class_id = $data['classes_evaluation'];
+
+            $create_evaluation->created_by = session('user_id');
+
+            $create_evaluation->created_at = now();
+
+            $create_evaluation->save();
+
+            $table_classes = Classes::find($create_evaluation->class_id);
+
+            $table_classes->is_evaluation = 1;
+
+            $table_classes->save();
+
+            toastr()->success('Mở Đánh Giá Thành Công');
+
+            return redirect()->route('evaluation.index');
+        }
+
+        toastr()->error('Có Lỗi Trong Quá Trình Mở Đánh Giá');
+
+        return redirect()->route('evaluation.index');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $getAllClass = Classes::select('classes.*', 'teachers.name as teacher_name')
-            ->orderBy('classes.created_at', 'DESC')
-            ->where('classes.deleted_at', null)
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->get();
+        $request->session()->put('update_evaluation_id', $id);
 
-        $getEdit = CreateTeacherEvaluations::where('create_teacher_evaluations.id', $id)
-            ->first();
+        $getAllClass = $this->province->getClassTeacherEvaluation();
+
+        $getEdit = CreateTeacherEvaluations::find(session('update_evaluation_id'));
 
         $template = "admin.evaluation.evaluation.pages.store";
 
@@ -102,7 +134,92 @@ class EvaluationController extends Controller
         ));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateEvaluationRequest $request)
     {
+        $data = $request->validated();
+
+        if ($data) {
+            $update_evaluation = $this->province::find(session('update_evaluation_id'));
+
+            if ($update_evaluation->class_id !== $data['classes_evaluation']) {
+
+                $table_classes_old = Classes::find($update_evaluation->class_id);
+
+                $table_classes_old->is_evaluation = 0;
+
+                $table_classes_old->save();
+
+                $update_evaluation->class_id = $data['classes_evaluation'];
+
+                $update_evaluation->updated_by = session('user_id');
+
+                $update_evaluation->updated_at = now();
+
+                $update_evaluation->save();
+
+                $table_classes = Classes::find($update_evaluation->class_id);
+
+                $table_classes->is_evaluation = 1;
+
+                $table_classes->save();
+            }
+
+            $request->session()->forget('update_evaluation_id');
+
+            toastr()->success('Cập Nhật Đánh Giá Thành Công');
+
+            return redirect()->route('evaluation.index');
+        }
+
+        toastr()->error('Có Lỗi Trong Quá Trình Cập Nhật Đánh Giá');
+
+        return redirect()->route('evaluation.index');
+    }
+
+    public function trash($id)
+    {
+        $trash = $this->province::find($id);
+
+        $trash->deleted_by = session('user_id');
+
+        $trash->deleted_at = now();
+
+        $trash->save();
+
+        toastr()->success('Đã Ẩn Đánh Giá');
+
+        return redirect()->route('evaluation.index');
+    }
+
+    public function restore($id)
+    {
+        $restore = $this->province::find($id);
+
+        $restore->deleted_by = null;
+
+        $restore->deleted_at = null;
+
+        $restore->save();
+
+        toastr()->success('Đã Khôi Phục Đánh Giá');
+
+        return redirect()->route('evaluation.index');
+    }
+
+    public function delete($id)
+    {
+        $delete = $this->province::find($id);
+        
+        $table_classes_old = Classes::find($delete->class_id);
+
+        $table_classes_old->is_evaluation = 0;
+
+        $table_classes_old->save();
+
+        $delete->delete();
+
+        toastr()->success('Đã Xóa Đánh Giá');
+
+        return redirect()->route('evaluation.index');
     }
 }
