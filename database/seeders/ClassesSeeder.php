@@ -17,8 +17,6 @@ class ClassesSeeder extends Seeder
             [
                 'name' => 'WEB01',
                 'description' => 'Lớp lập trình website',
-                'subject_id' => 1,
-                'teacher_id' => 2,
                 'major_id' => 1,
                 'is_evaluation' => 1,
                 'created_by' => 3,
@@ -31,8 +29,6 @@ class ClassesSeeder extends Seeder
             [
                 'name' => 'WEB02',
                 'description' => 'Lớp lập trình website',
-                'subject_id' => 1,
-                'teacher_id' => 2,
                 'major_id' => 1,
                 'is_evaluation' => 0,
                 'created_by' => 2,
@@ -45,8 +41,6 @@ class ClassesSeeder extends Seeder
             [
                 'name' => 'MUL01',
                 'description' => 'Lớp đa phương tiện',
-                'subject_id' => 1,
-                'teacher_id' => 2,
                 'major_id' => 1,
                 'is_evaluation' => 1,
                 'created_by' => 1,
@@ -59,8 +53,6 @@ class ClassesSeeder extends Seeder
             [
                 'name' => 'MUL02',
                 'description' => 'Lớp đa phương tiện',
-                'subject_id' => 1,
-                'teacher_id' => 2,
                 'major_id' => 1,
                 'is_evaluation' => 0,
                 'created_by' => 3,

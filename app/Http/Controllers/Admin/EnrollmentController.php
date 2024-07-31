@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\ScoreImport;
 use App\Models\Classes;
 use App\Models\Enrollments;
+use App\Models\Schedules;
 use Illuminate\Http\Request;
 use Excel;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ class EnrollmentController extends Controller
         $classId = $request->query('class_id'); // Lấy class_id từ query string
 
         // Lấy danh sách các lớp mà giáo viên đang quản lý
-        $classes = Classes::where('teacher_id', $teacherId)->get();
+        $classes = Schedules::where('teacher_id', $teacherId)->get();
 
         // Xây dựng truy vấn Eloquent
         $query = Enrollments::with(['student', 'class.subject'])
@@ -100,7 +101,7 @@ class EnrollmentController extends Controller
         // Lấy ID tài khoản từ session
         $teacherId = session('user_id');
         // Lấy các lớp mà tài khoản này đang quản lý
-        $enrollments = Classes::where('teacher_id', $teacherId)->get();
+        $enrollments = Schedules::where('teacher_id', $teacherId)->get();
 
         $template = 'admin.enrollment.enrollment.pages.list';
 

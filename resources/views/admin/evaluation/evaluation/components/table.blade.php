@@ -9,23 +9,26 @@
                     aria-describedby="basic-datatables_info">
                     <thead>
                         <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 40%;">Lớp
+                            <th class="{{ $sbcls == 'asc' ? 'sorting_asc' : 'sorting_desc' }}" tabindex="0"
+                                aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 40%;">
+                                <a href="{{ route('evaluation.index') }}?sbcls={{ $sbcls }}&sbtc="
+                                    class="m-0 p-0 text-dark">Lớp</a>
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 40%;">Giảng
-                                Viên</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending"
+                            <th class="{{ $sbtc == 'asc' ? 'sorting_asc' : 'sorting_desc' }}" tabindex="0"
+                                aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending"
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 40%;">
+                                <a href="{{ route('evaluation.index') }}?sbcls=&sbtc={{ $sbtc }}"
+                                    class="m-0 p-0 text-dark">Giảng Viên</a>
+                            </th>
+                            <th tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1"
                                 style="width: 20%;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($getAllEvaluationCreate as $items)
+                        @forelse ($getAllEvaluationCreate as $items)
                             <tr role="row" class="odd">
-                                <td class="sorting_1">{{ $items->class->name }}</td>
+                                <td class="sorting_1">{{ $items->class_name }}</td>
                                 <td>{{ $items->teacher_name }}</td>
                                 @if ($items->deleted_by == 0)
                                     <td>
@@ -54,7 +57,8 @@
                                         </form>
                                         <form action="{{ route('evaluation.delete', ['id' => $items->id]) }}"
                                             method="POST" style="display:inline-block;"
-                                            onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');" title="Xóa vĩnh viễn">
+                                            onsubmit="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');"
+                                            title="Xóa vĩnh viễn">
                                             @csrf
                                             @method('POST')
                                             <button type="submit" class="btn btn-sm btn-danger">
@@ -64,7 +68,15 @@
                                     </td>
                                 @endif
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="3">
+                                    <div class="alert alert-warning mb-0" role="alert">
+                                        Không tìm thấy dữ liệu.
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
