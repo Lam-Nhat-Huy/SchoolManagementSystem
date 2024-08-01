@@ -10,8 +10,11 @@ Route::prefix('account')->group(function () {
     Route::post('/store', [AccountController::class, 'store'])->name('account.store');
 
     Route::get('/edit/{id}', [AccountController::class, 'edit'])->name('account.edit')->where(['id' => '[0-9]+']);
-    Route::post('/update/{id}', [AccountController::class, 'update'])->name('account.update')->where(['id' => '[0-9]+']);
+    Route::post('/update', [AccountController::class, 'update'])->name('account.update');
 
-    Route::get('/delete/{id}', [AccountController::class, 'delete'])->name('account.delete')->where(['id' => '[0-9]+']);
-    Route::delete('/destroy/{id}', [AccountController::class, 'destroy'])->name('account.destroy')->where(['id' => '[0-9]+']);
+    Route::post('/trash/{id}', [AccountController::class, 'trash'])->name('account.trash')->where(['id' => '[0-9]+']);
+
+    Route::post('/restore/{id}', [AccountController::class, 'restore'])->name('account.restore')->where(['id' => '[0-9]+']);
+
+    Route::post('/delete/{id}', [AccountController::class, 'delete'])->name('account.delete')->where(['id' => '[0-9]+']);
 });

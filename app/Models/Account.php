@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory;
-
+    public $table = 'accounts';
+    protected $data;
     protected $fillable = [
         'name',
         'email',
@@ -21,9 +22,29 @@ class Account extends Model
         'deleted_by',
         'deleted_at',
     ];
+    public function getAllAccount($keyword = null, $sort = 1)
+    {
+        $data = Account::orderBy('created_at', 'DESC')
+            ->where('name', 'LIKE', '%' . $keyword . '%')
+            ->where('email', 'LIKE', '%' . $keyword . '%')
+            ->paginate($sort);
+        return $data;
+    }
+    public function getEditAccount($id)
+    {
+        $data = Account::find($id);
 
+        return $data;
+    }
+    public function updateAccount($data, $id)
+    {
+        $account = Account::find($id);
+
+        return $account->update($data);
+    }
     public function role()
     {
         return $this->belongsTo(Roles::class);
     }
+
 }

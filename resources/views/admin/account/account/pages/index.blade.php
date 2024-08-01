@@ -11,7 +11,7 @@
                         <i class="fa fa-plus"></i> Thêm thành viên
                     </a>
 
-                    <a href="" class="btn btn-sm btn-primary">Xuất Excel</a>
+                    <a href="" class="btn btn-sm btn-primary me-2">Xuất Excel</a>
                 </div>
             </div>
             <div class="card-body">
@@ -20,3 +20,11 @@
         </div>
     </div>
 </div>
+<script>
+    function handleRedirect(select) {
+        const value = select.value;
+        if (value) {
+            window.location.href = value;
+        }
+    }
+</script>
