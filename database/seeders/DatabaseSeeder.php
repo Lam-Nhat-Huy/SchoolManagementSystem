@@ -29,7 +29,8 @@ class DatabaseSeeder extends Seeder
             ChatsSeeder::class,
             SubjectTypeSeeder::class,
             DepartmentSeeder::class,
-            StudyStatusSeeder::class
+            StudyStatusSeeder::class,
+            StudentsSeeder::class
         ]);
     }
 }
