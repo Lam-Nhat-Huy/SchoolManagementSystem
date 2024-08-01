@@ -99,15 +99,14 @@ class EnrollmentController extends Controller
     {
         // Lấy ID tài khoản từ session
         $teacherId = session('user_id');
-
         // Lấy các lớp mà tài khoản này đang quản lý
-        $enrollments = Classes::all();
-
+        $enrollments = Classes::where('teacher_id', $teacherId)->get();
 
         $template = 'admin.enrollment.enrollment.pages.list';
 
         return view('admin.dashboard.layout', compact('template', 'enrollments'));
     }
+
 
     public function showClassScores($classId)
     {
