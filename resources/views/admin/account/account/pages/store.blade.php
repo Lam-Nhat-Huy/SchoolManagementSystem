@@ -2,7 +2,7 @@
     @include('admin.dashboard.components.breadcrumb')
 
     @php
-        $url = $config['method'] == 'create' ? route('account.store') : route('account.update', $getEdit->id);
+        $url = $config['method'] == 'create' ? route('account.store') : route('account.update', session('account_session_id'));
         $title = $config['method'] == 'create' ? 'Thêm mới thành viên' : 'Chỉnh sửa thành viên';
     @endphp
 
@@ -15,6 +15,7 @@
             <div class="card-body">
                 <form action="{{ $url }}" method="POST" autocomplete="on">
                     @csrf
+                    @method('POST')
                     <div class="row">
                         <div class="col-lg-12">
                             @include('admin.account.account.components.general')
