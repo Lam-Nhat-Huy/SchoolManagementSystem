@@ -3,12 +3,20 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Student\StoreEvaluationByStudent;
 use App\Models\CreateTeacherEvaluations;
 use App\Models\TeacherEvaluations;
 use Illuminate\Http\Request;
 
+
 class EvaluationByStudentController extends Controller
+
 {
+    protected $province;
+
+    public function __construct(){
+        $this->province = new TeacherEvaluations();
+    }
     public function index()
     {
         $getAllEvaluationOfStudentUnRated = CreateTeacherEvaluations::select('create_teacher_evaluations.*', 'classes.name as class_name', 'teachers.name as teacher_name', 'subjects.name as subject_name')
@@ -28,8 +36,10 @@ class EvaluationByStudentController extends Controller
         ));
     }
 
-    public function feedback($id)
+    public function feedback(Request $request, $id)
     {
+        $request->session()->put('feedback_id_session', $id);
+
         $getTeacher = CreateTeacherEvaluations::select('create_teacher_evaluations.*', 'classes.name as class_name', 'teachers.name as teacher_name', 'subjects.name as subject_name')
             ->join('classes', 'create_teacher_evaluations.class_id', '=', 'classes.id')
             ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
@@ -45,8 +55,32 @@ class EvaluationByStudentController extends Controller
         ));
     }
 
-    public function store(Request $request)
+    public function store(StoreEvaluationByStudent $request)
     {
-        dd($request->all());
+        $data = $request->validated();
+
+        if($data){
+            $evaluation = $this->province;
+
+            $evaluation->create_teacher_evaluation_id = session('feedback_id_session');
+
+            $evaluation->student_id = session('user_id');
+            $evaluation->first_rating_level = $data['op1'];
+            $evaluation->second_rating_level = $data['op2'];
+            $evaluation->third_rating_level = $data['op3'];
+            $evaluation->fourth_rating_level = $data['op4'];
+            $evaluation->fifth_rating_level = $data['op5'];
+            $evaluation->evaluation_date = now();
+
+            $evaluation->save();
+            
+            toastr()->success('Đã gửi đánh giá');
+
+            return redirect()->route('evaluation_by_student.index');
+
+        }
+        toastr()->error('Có lỗi xảy ra, vui lòng thử lại');
+
+        return back();
     }
 }
