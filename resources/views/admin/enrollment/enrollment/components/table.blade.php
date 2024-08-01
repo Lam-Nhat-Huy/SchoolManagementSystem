@@ -1,84 +1,76 @@
 <div class="table-responsive">
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-        <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <div class="dataTables_length" id="basic-datatables_length">
-                    <label>Hiển thị:
-                        <select name="basic-datatables_length" aria-controls="basic-datatables"
-                            class="form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+
+        <div class="row mb-4">
+            <div class="col-sm-12">
+                <!-- Bộ lọc -->
+                <form method="GET" action="{{ route('major.index') }}" class="row g-3 align-items-center">
+                    <div class="col-md-3">
+                        <select class="form-select setupSelect2" name="course_id">
+                            <option value="">Chọn khóa học</option>
                         </select>
-                        bản ghi
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div id="basic-datatables_filter" class="dataTables_filter">
-                    <label>Tìm kiếm:
-                        <input type="search" class="form-control form-control-sm" placeholder=""
-                            aria-controls="basic-datatables">
-                    </label>
-                </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select setupSelect2" name="status">
+                            <option value="">Chọn trạng thái</option>
+                            <option value="0" {{ request('status') === '0' ? 'selected' : '' }}>Hoạt động</option>
+                            <option value="1" {{ request('status') === '1' ? 'selected' : '' }}>Không hoạt động
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="search" placeholder="Tìm kiếm"
+                            value="{{ request('search') }}">
+                    </div>
+                    <div class="col-md-3 d-flex">
+                        <button type="submit" class="btn btn-primary btn-sm me-2">Lọc</button>
+                        <a href="{{ route('major.index') }}" class="btn btn-secondary btn-sm me-2">Bỏ lọc</a>
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                            data-bs-target="#uploadExcelModal">
+                            Nhập excel
+                        </button>
+                    </div>
+
+                </form>
             </div>
         </div>
+
+
         <div class="row">
             <div class="col-sm-12">
                 <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid"
                     aria-describedby="basic-datatables_info">
                     <thead>
                         <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 20%;">Sinh
+                            <th style="width: 20%;">Sinh
                                 Viên</th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 20%;">Lớp
+                            <th style="width: 20%;">Lớp
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">L1
+                            <th style="width: 5%;">L1
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">L2
+                            <th style="width: 5%;">L2
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">ASM1
+                            <th style="width: 5%;">ASM1
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">L3
+                            <th style="width: 5%;">L3
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">L4
+                            <th style="width: 5%;">L4
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">ASM2
+                            <th style="width: 5%;">ASM2
                             </th>
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên bảng điểm: activate to sort column descending" style="width: 5%;">Final
+                            <th style="width: 5%;">Final
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" style="width: 5%;">GPA</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 15%;">Hành động
+                            <th>GPA</th>
+                            <th>Hành động
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($getAllEnrollment as $items)
                             <tr role="row" class="odd">
-                                <td class="sorting_1">{{ $items->student_name . ' (PC0' . $items->student_id . ')' }}
+                                <td class="sorting_1">{{ $items->student->name ?? '' }}
                                 </td>
-                                <td class="sorting_1">{{ $items->class_name . ' - ' . $items->subject_name }}</td>
+                                <td class="sorting_1">{{ $items->class->name ?? ''}}</td>
                                 <td class="sorting_1">{{ $items->lab_1 }}</td>
                                 <td class="sorting_1">{{ $items->lab_2 }}</td>
                                 <td class="sorting_1">{{ $items->assignment_1 }}</td>
@@ -119,6 +111,32 @@
             <ul class="pagination">
                 {{ $getAllEnrollment->links('pagination::bootstrap-5') }}
             </ul>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="uploadExcelModal" tabindex="-1" aria-labelledby="uploadExcelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadExcelModalLabel">Nhập điểm bằng file excel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('import.excel') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="excel_file" class="form-label">Chọn file:</label>
+                        <input type="file" name="excel_file" class="form-control" id="excel_file" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

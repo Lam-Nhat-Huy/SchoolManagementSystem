@@ -74,7 +74,7 @@ return [
             'subModule' => [
                 [
                     'title' => 'Nhập Điểm',
-                    'route' => 'enrollment.index',
+                    'route' => 'enrollment.class.list',
                     'user_role' => [1, 3],
                 ],
                 [
@@ -119,7 +119,7 @@ return [
                     'user_role' => 1
                 ]
             ]
-            
+
         ],
         [
             'user_role' => 1,

@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
             AccountSeeder::class,
             TrainingOfficerAccountSeeder::class,
             TeachersSeeder::class,
-            StudentsSeeder::class,
             ClassesSeeder::class,
             SchedulesSeeder::class,
             EnrollmentsSeeder::class,

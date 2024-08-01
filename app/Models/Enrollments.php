@@ -27,7 +27,7 @@ class Enrollments extends Model
         'deleted_by',
         'deleted_at',
     ];
-
+    
     public function class()
     {
         return $this->belongsTo(Classes::class, 'class_id');
@@ -36,5 +36,10 @@ class Enrollments extends Model
     public function student()
     {
         return $this->belongsTo(Students::class, 'student_id');
+    }
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class, 'account_id');
     }
 }

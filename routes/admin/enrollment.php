@@ -7,4 +7,12 @@ Route::prefix('enrollment')->group(function () {
     Route::get('/index', [EnrollmentController::class, 'index'])->name('enrollment.index');
     Route::get('/edit/{id}', [EnrollmentController::class, 'edit'])->name('enrollment.edit')->where(['id' => '[0-9]+']);
     Route::post('/update/{id}', [EnrollmentController::class, 'update'])->name('enrollment.update')->where(['id' => '[0-9]+']);
+
+    Route::get('/class-list', [EnrollmentController::class, 'classList'])->name('enrollment.class.list');
+    Route::get('/class/{classId}', [EnrollmentController::class, 'showClassScores'])->name('enrollment.classScores');
+
+    Route::get('enrollment/class/{classId}', [EnrollmentController::class, 'showClassScores'])->name('enrollment.showClassScores');
+
+
+    Route::post('/import-excel', [EnrollmentController::class, 'import_excel'])->name('import.excel');
 });

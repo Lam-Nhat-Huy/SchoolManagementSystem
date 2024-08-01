@@ -68,5 +68,4 @@ class EnrollmentStudentController extends Controller
 
         return redirect()->route('show_subject_register.index')->with('success', 'Ngành học được xóa thành công.');
     }
-
 }
