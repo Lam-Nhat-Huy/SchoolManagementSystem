@@ -10,7 +10,7 @@ class TeacherEvaluations extends Model
     use HasFactory;
 
     protected $fillable = [
-        'teacher_id',
+        'create_teacher_evaluation_id',
         'student_id',
         'first_rating_level',
         'second_rating_level',
