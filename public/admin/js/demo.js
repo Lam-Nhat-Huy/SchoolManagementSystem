@@ -5,6 +5,13 @@ function scrollToBottom() {
 
 window.onload = scrollToBottom;
 
+function handleRedirect(select) {
+	const value = select.value;
+	if (value) {
+		window.location.href = value;
+	}
+}
+
 "use strict";
 
 const modalShowcase = `

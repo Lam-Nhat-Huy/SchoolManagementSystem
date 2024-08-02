@@ -67,6 +67,19 @@ return [
             ]
         ],
         [
+            'user_role' => [1, 4],
+            'title' => 'Phòng học',
+            'icon' => 'fas fa-door-open', // Icon cho phòng học
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Phòng học',
+                    'route' => 'classroom.index',
+                    'user_role' => [1, 4]
+                ]
+            ]
+        ],
+        [
             'user_role' => [1, 2, 3],
             'title' => 'Bảng Điểm',
             'icon' => 'fas fa-file-signature', // Icon cho Bảng Điểm
