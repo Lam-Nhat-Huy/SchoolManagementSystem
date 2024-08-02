@@ -15,8 +15,8 @@ class ClassesSeeder extends Seeder
     {
         Classes::insert([
             [
-                'name' => 'WEB01',
-                'description' => 'Lớp lập trình website',
+                'name' => 'WD18301',
+                'description' => 'Lập trình PHP3',
                 'subject_id' => 1,
                 'teacher_id' => 1,
                 'is_evaluation' => 1,
@@ -28,8 +28,8 @@ class ClassesSeeder extends Seeder
                 'deleted_at' => null,
             ],
             [
-                'name' => 'WEB02',
-                'description' => 'Lớp lập trình website',
+                'name' => 'WD18302',
+                'description' => 'Lập trình PHP3',
                 'subject_id' => 1,
                 'teacher_id' => 2,
                 'is_evaluation' => 0,
@@ -41,7 +41,7 @@ class ClassesSeeder extends Seeder
                 'deleted_at' => null,
             ],
             [
-                'name' => 'MUL01',
+                'name' => 'MUL18301',
                 'description' => 'Lớp đa phương tiện',
                 'subject_id' => 2,
                 'teacher_id' => 3,
@@ -54,7 +54,7 @@ class ClassesSeeder extends Seeder
                 'deleted_at' => null,
             ],
             [
-                'name' => 'MUL02',
+                'name' => 'MUL18302',
                 'description' => 'Lớp đa phương tiện',
                 'subject_id' => 2,
                 'teacher_id' => 4,
