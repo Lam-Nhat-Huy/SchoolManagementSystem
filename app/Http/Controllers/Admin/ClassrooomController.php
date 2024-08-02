@@ -48,11 +48,14 @@ class ClassrooomController extends Controller
         $data = $request->validated();
 
         if ($data) {
+            
             $classroom = $this->province;
 
             $classroom->name = $data['name'];
 
             $classroom->description = $data['description'];
+
+            $classroom->status = $data['status'];
 
             $classroom->save();
 
@@ -90,6 +93,8 @@ class ClassrooomController extends Controller
             $classroom->name = $data['name'];
 
             $classroom->description = $data['description'];
+
+            $classroom->status = $data['status'];
 
             $classroom->save();
 

@@ -21,5 +21,14 @@
                 <div class="message_error">{{ $message }}</div>
             @enderror
         </div>
+        <div class="form-group">
+            <label for="class_description">Trạng Thái</label>
+            <select class="form-select form-control" id="status" name="status">
+                <option value="0" {{ isset($getEdit) && $getEdit->status == 0 ? 'selected' : '' }}>Hoạt Động
+                </option>
+                <option value="1" {{ isset($getEdit) && $getEdit->status == 1 ? 'selected' : '' }}>Không Hoạt Động
+                </option>
+            </select>
+        </div>
     </div>
 </div>

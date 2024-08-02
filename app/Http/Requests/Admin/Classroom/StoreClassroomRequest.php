@@ -24,6 +24,7 @@ class StoreClassroomRequest extends FormRequest
         return [
             'name' => 'required|max:10',
             'description' => 'required|max:100',
+            'status' => 'integer',
         ];
     }
 

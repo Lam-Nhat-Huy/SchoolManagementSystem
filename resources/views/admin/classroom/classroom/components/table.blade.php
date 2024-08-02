@@ -36,6 +36,7 @@
                         <tr role="row">
                             <th>Tên phòng học</th>
                             <th>Mô tả</th>
+                            <th>Trạng Thái</th>
                             <th style="width:20%" class="text-center">Hành động</th>
                         </tr>
                     </thead>
@@ -46,6 +47,9 @@
                                 </td>
                                 <td style="padding: 21px 24px !important;" class="text-dark">
                                     {{ $classroom->description }}
+                                </td>
+                                <td style="padding: 21px 24px !important;" class="text-dark">
+                                    {!! $classroom->status == 0 ? '<span class="text-success">Hoạt Động</span>' : '<span class="text-danger">Không Hoạt Động</span>' !!}
                                 </td>
                                 <td class="text-center">
                                     @if ($classroom->deleted_by == 0)
