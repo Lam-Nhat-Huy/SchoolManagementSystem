@@ -39,6 +39,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('.setupSelect2').select2({
+                width: 'resolve' // Đảm bảo Select2 sử dụng chiều rộng của thẻ cha
+            });
+        });
+    </script>
+    <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
             type: "line",
             height: "70",

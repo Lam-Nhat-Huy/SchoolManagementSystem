@@ -29,8 +29,8 @@ class UpdateCourseRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Vui lòng điền tên khóa học',
-            'name.unique' => "Khóa học $this->name đã tồn tại"
+            'name.required' => 'Vui lòng điền tên ngành học',
+            'name.unique' => "Ngành học $this->name đã tồn tại"
         ];
     }
 }

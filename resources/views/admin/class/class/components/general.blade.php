@@ -1,3 +1,4 @@
+@include('admin.class.class.components.filter')
 <div class="card custom-border" style="border: 1px solid #ccc">
     <div class="card-header">
         <h5 style="margin: 0">Thông tin lớp học</h5>
@@ -5,46 +6,28 @@
     <div class="card-body">
         <div class="row m-0">
             <div class="form-group col-lg-6">
-                <label for="class_name">Tên lớp học</label>
-                <input type="text" class="form-control" id="class_name" name="class_name"
-                    value="{{ isset($getEdit) ? $getEdit->name : old('class_name') }}" placeholder="Tên lớp học">
+                <label for="name">Tên lớp học</label>
+                <input type="text" class="form-control" id="name" name="name"
+                    value="{{ isset($getEdit) ? $getEdit->name : old('name') }}" placeholder="Tên lớp học">
+                @error('name')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="form-group col-lg-6">
-                <label for="instructor">Giảng viên</label>
-                <select class="form-select form-control" id="defaultSelect" fdprocessedid="fmy4e">
-                    <option value="0">--Chọn Giảng Viên--</option>
-                    @if (isset($getEdit))
-                        @foreach ($getAllTeacher as $teacher)
-                            <option value="{{ $teacher->id }}"
-                                {{ $teacher->id == $getEdit->teacher_id ? 'selected' : '' }}>
-                                {{ $teacher->name }}
-                            </option>
-                        @endforeach
-                    @else
-                        @foreach ($getAllTeacher as $teacher)
-                            <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                        @endforeach
-                    @endif
+                <label for="class_course">Chuyên ngành học</label>
+                <select class="form-select setupSelect2" id="defaultSelect" fdprocessedid="fmy4e" name="major_id" >
+                    <option value="" class="form-control">--Chọn chuyên ngành học--</option>
+                    @foreach ($getAllMajor as $major)
+                        <option value="{{ $major->id }}"
+                            {{ old('major_id', isset($getEdit) ? $getEdit->major_id : '') == $major->id ? 'selected' : '' }}>
+                            {{ $major->name }}
+                        </option>
+                    @endforeach
                 </select>
+                @error('major_id')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
-        </div>
-        <div class="form-group">
-            <label for="class_course">Khóa học</label>
-            <select class="form-select form-control" id="defaultSelect" fdprocessedid="fmy4e">
-                <option>--Chọn Khóa Học--</option>
-                @if (isset($getEdit))
-                        @foreach ($getAllCourse as $course)
-                            <option value="{{ $course->id }}"
-                                {{ $course->id == $getEdit->course_id ? 'selected' : '' }}>
-                                {{ $course->name }}
-                            </option>
-                        @endforeach
-                    @else
-                        @foreach ($getAllCourse as $course)
-                            <option value="{{ $course->id }}">{{ $course->name }}</option>
-                        @endforeach
-                    @endif
-            </select>
         </div>
         <div class="form-group">
             <label for="class_description">Mô tả lớp học</label>

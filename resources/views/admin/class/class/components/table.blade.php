@@ -1,79 +1,93 @@
+@include('admin.class.class.components.filter')
 <div class="table-responsive">
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-        <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <div class="dataTables_length" id="basic-datatables_length">
-                    <label>Hiển thị:
-                        <select name="basic-datatables_length" aria-controls="basic-datatables"
-                            class="form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+        <div class="row mb-4">
+            <div class="col-sm-12">
+                <form method="GET" action="{{ route('class.index') }}" class="row g-3 align-items-center">
+                    <div class="col-md-3">
+                        <div class="dataTables_length" id="per_page">
+                            <label>Hiển thị:
+                                <select name="per_page" id="per_page_select" aria-controls="basic-datatables"
+                                    class="form-control form-control-sm">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                bản ghi
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control form-control" name="search" placeholder="Tìm kiếm"
+                            value="{{ request('search') }}">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select setupSelect2" name="major_id">
+                            <option value="">--Chọn chuyên ngành--</option>
+                            @foreach ($majors as $major)
+                                <option value="{{ $major->id }}"
+                                    {{ request('major_id') == $major->id ? 'selected' : '' }}>{{ $major->name }}
+                                </option>
+                            @endforeach
                         </select>
-                        bản ghi
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div id="basic-datatables_filter" class="dataTables_filter">
-                    <label>Tìm kiếm:
-                        <input type="search" class="form-control form-control-sm" placeholder=""
-                            aria-controls="basic-datatables">
-                    </label>
-                </div>
+                    </div>
+                    <div class="col-md-3 d-flex">
+                        <button type="submit" class="btn btn-primary btn-sm me-2">Lọc</button>
+                        <a href="{{ route('class.index') }}" class="btn btn-secondary btn-sm me-2">Bỏ lọc</a>
+                        <a href="{{ route('class.create') }}" class="btn btn-sm btn-success">
+                            <i class="fa fa-plus"></i> Thêm lớp học
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid"
-                    aria-describedby="basic-datatables_info">
+        <div id="table-container">
+            <div class="table-responsive">
+                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid">
                     <thead>
                         <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên lớp học: activate to sort column descending" style="width: 27%;">Tên
-                                Lớp Học</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" style="width: 27%;">Giảng viên
-                            </th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" style="width: 27%;">Môn Học</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 19%;">Hành động</th>
+                            <th>Tên lớp học</th>
+                            <th>Chuyên ngành</th>
+                            <th style="width:20%" class="text-center">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($getAllClass as $items)
+                        @forelse ($classes as $class)
                             <tr role="row" class="odd">
-                                <td class="sorting_1" title="{{ $items->description }}">{{ $items->name }}</td>
-                                <td>{{ $items->teacher_name }}</td>
-                                <td>{{ $items->subject_name }}</td>
-                                <td>
-                                    <a href="{{ route('class.edit', ['id' => $items->class_id]) }}"
-                                        class="btn btn-sm btn-black">
-                                        <i class="fa fa-edit"></i>
+                                <td style="padding: 21px 24px !important;" class="text-dark">{{ $class->name }}</td>
+                                <td>{{ $class->major->name }}</td>
+                                <td class="text-center">
+                                    <a href="{{ $class->deleted_at ? route('class.restore', ['id' => $class->id]) : route('class.edit', ['id' => $class->id]) }}"
+                                        class="btn btn-sm {{ $class->deleted_at ? 'btn-success' : 'btn-black' }}">
+                                        <i class="fa {{ $class->deleted_at ? 'fa-undo' : 'fa-edit' }}"></i>
                                     </a>
-                                    <form action="{{ route('class.destroy', ['id' => $items->class_id]) }}"
-                                        method="POST" style="display:inline-block;"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa lớp học này?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    @if ($class->deleted_at)
+                                        <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
+                                            data-target="#deleteModal{{ $class->id }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    @else
+                                        <form action="{{ route('class.destroy', $class) }}" method="POST"
+                                            style="display:inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                    {{-- @include('admin.course.course.components.modal') --}}
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center">Không có dữ liệu</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
-        </div>
-        <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
-            <ul class="pagination">
-                {{ $getAllClass->links('pagination::bootstrap-5') }}
-            </ul>
         </div>
     </div>
 </div>

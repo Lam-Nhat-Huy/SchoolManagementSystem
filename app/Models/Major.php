@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Stmt\Class_;
 
 class Major extends Model
 {
@@ -29,5 +30,10 @@ class Major extends Model
     public function course()
     {
         return $this->belongsTo(Courses::class, 'course_id');
+    }
+
+    public function classes()
+    {
+        return $this->hasMany(Classes::class);
     }
 }

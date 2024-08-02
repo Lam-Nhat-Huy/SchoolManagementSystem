@@ -7,11 +7,8 @@
                 <h4 class="card-title float-left">Danh sách lớp học</h4>
 
                 <div class="action">
-                    <a href="{{ route('class.create') }}" class="btn btn-sm btn-success float-right">
-                        <i class="fa fa-plus"></i> Thêm lớp học
-                    </a>
-
-                    <a href="" class="btn btn-sm btn-primary">Xuất Excel</a>
+                    <a href="" class="btn btn-sm btn-success">Nhập Excel</a>
+                    <a href="" class="btn btn-sm btn-danger mr-2">Xuất Excel</a>
                 </div>
             </div>
             <div class="card-body">

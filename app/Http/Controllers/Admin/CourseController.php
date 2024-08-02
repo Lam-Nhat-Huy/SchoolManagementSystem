@@ -59,7 +59,7 @@ class CourseController extends Controller
                 'description' => $request->input('description'),
                 'created_by' => session('user_id')
             ]);
-            toastr()->success('Thêm khóa học thành công!');
+            toastr()->success('Thêm ngành học thành công!');
             return redirect()->route('course.index');
         } catch (\Throwable $e) {
             return back();
@@ -105,10 +105,10 @@ class CourseController extends Controller
                 'description' => $request->input('description'),
                 'updated_by' => session('user_id')
             ]);
-            toastr()->success('Cập nhật khóa học thành công!');
+            toastr()->success('Cập nhật ngành học thành công!');
             return redirect()->route('course.index');
         } catch (\Throwable $e) {
-            toastr()->error('Có lỗi xảy ra khi cập nhật khóa học!');
+            toastr()->error('Có lỗi xảy ra khi cập nhật ngành học!');
             return back();
         }
     }
@@ -120,10 +120,10 @@ class CourseController extends Controller
             $course->deleted_by = session('user_id'); //thêm id người xóa vào
             $course->save(); // lưu
             $course->delete(); // xóa mềm
-            toastr()->success('Cập nhật khóa học thành công!');
+            toastr()->success('Cập nhật ngành học thành công!');
             return redirect()->route('course.index');
         } catch (\Throwable $e) {
-            toastr()->error('Có lỗi xảy ra khi cập nhật khóa học!');
+            toastr()->error('Có lỗi xảy ra khi cập nhật ngành học!');
             return back();
         }
     }
@@ -136,7 +136,7 @@ class CourseController extends Controller
         Courses::withTrashed()
             ->where('id', $id)
             ->restore();
-        toastr()->success('Khôi phục khóa học thành công!');
+        toastr()->success('Khôi phục ngành học thành công!');
         return redirect()->route('course.index');
     }
 
@@ -145,7 +145,7 @@ class CourseController extends Controller
         Courses::withTrashed()
             ->where('id', $id)
             ->forceDelete();
-        toastr()->success('Xóa khóa học thành công!');
+        toastr()->success('Xóa ngành học thành công!');
         return redirect()->route('course.index');
     }
 }

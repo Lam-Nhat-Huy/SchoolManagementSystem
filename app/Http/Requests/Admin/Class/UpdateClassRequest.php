@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Course;
+namespace App\Http\Requests\Admin\Class;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StroreCourseRequest extends FormRequest
+class UpdateClassRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,8 @@ class StroreCourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:courses'
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'Vui lòng điền tên ngành học',
-            'name.unique' => "Ngành học $this->name đã tồn tại"
+            'name' => 'required|string|min:3|unique:classes,name,' . $this->id,
+            'major_id' => 'required|exists:majors,id'
         ];
     }
 }

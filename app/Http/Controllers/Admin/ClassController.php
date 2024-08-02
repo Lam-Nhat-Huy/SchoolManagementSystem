@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Class\StoreClassRequest;
+use App\Http\Requests\Admin\Class\UpdateClassRequest;
 use App\Models\Classes;
 use App\Models\Courses;
+use App\Models\Major;
+use App\Models\Subjects;
 use App\Models\Teachers;
 use Illuminate\Http\Request;
 
@@ -12,25 +16,34 @@ class ClassController extends Controller
 {
     public function index()
     {
-        $getAllClass = Classes::select('classes.*', 'classes.id as class_id', 'teachers.name as teacher_name', 'subjects.name as subject_name')
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
-            ->paginate(10);
-
+        $classes = Classes::withTrashed()->with(['major:id,name'])->orderBy('major_id', 'ASC')->paginate(10);
+        $majors = Major::all();
+        $config = [
+            'css' => [
+                'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
+                '/admin/css/class.css'
+            ],
+            'js' => [
+                'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
+                '/admin/plugins/ckeditor/ckeditor.js',
+                '/admin/plugins/ckfinder_2/ckfinder.js',
+                '/admin/lib/finder.js',
+                '/admin/lib/library.js',
+            ]
+        ];
         $template = 'admin.class.class.pages.index';
-
         return view('admin.dashboard.layout', compact(
+            'config',
             'template',
-            'getAllClass',
+            'classes',
+            'majors'
         ));
     }
 
+
     public function create()
     {
-        $getAllCourse = Courses::orderBy('created_at', 'DESC')
-            ->get();
-
-        $getAllTeacher = Teachers::orderBy('created_at', 'DESC')
+        $getAllMajor = Major::orderBy('created_at', 'DESC')
             ->get();
 
         $template = "admin.class.class.pages.store";
@@ -55,30 +68,31 @@ class ClassController extends Controller
         return view('admin.dashboard.layout', compact(
             'template',
             'config',
-            'getAllCourse',
-            'getAllTeacher',
+            'getAllMajor',
         ));
     }
 
-    public function store(Request $request)
+    public function store(StoreClassRequest $request)
     {
-        dd($request->all());
+        try {
+            Classes::create([
+                'name' => $request->input('name'),
+                'major_id' => $request->input('major_id'),
+                'description' => $request->input('description'),
+                'created_by' => session('user_id')
+            ]);
+            toastr()->success('Thêm lớp học thành công!');
+            return redirect()->route('class.index');
+        } catch (\Throwable $e) {
+            return back();
+        }
     }
 
     public function edit($id)
     {
-        $getEdit = Classes::select('classes.*', 'classes.id as class_id', 'teachers.name as teacher_name', 'courses.name as course_name')
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->join('courses', 'classes.course_id', '=', 'courses.id')
-            ->where('classes.id', $id)
-            ->first();
-
-        $getAllCourse = Courses::orderBy('created_at', 'DESC')
+        $getEdit =  Classes::where('id', $id)->with(['major:id,name'])->first();
+        $getAllMajor = Major::orderBy('created_at', 'DESC')
             ->get();
-
-        $getAllTeacher = Teachers::orderBy('created_at', 'DESC')
-            ->get();
-
         $template = "admin.class.class.pages.store";
 
         $config = [
@@ -101,12 +115,61 @@ class ClassController extends Controller
             'template',
             'config',
             'getEdit',
-            'getAllCourse',
-            'getAllTeacher',
+            'getAllMajor'
         ));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateClassRequest $request, $id)
     {
+        try {
+            $class = Classes::find($id);
+            $class->update([
+                'name' => $request->input('name'),
+                'major_id' => $request->input('major_id'),
+                'description' => $request->input('description'),
+                'updated_by' => session('user_id')
+            ]);
+            toastr()->success('Cập nhật lớp học thành công!');
+            return redirect()->route('class.index');
+        } catch (\Throwable $e) {
+            toastr()->error('Có lỗi xảy ra khi cập nhật lớp học!');
+            return back();
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $class = Classes::find($id);
+            $class->deleted_by = session('user_id'); //thêm id người xóa vào
+            $class->save(); // lưu
+            $class->delete(); // xóa mềm
+            toastr()->success('Cập nhật lớp học thành công!');
+            return redirect()->route('class.index');
+        } catch (\Throwable $e) {
+            toastr()->error('Có lỗi xảy ra khi cập nhật lớp học!');
+            return back();
+        }
+    }
+
+    public function restore($id)
+    {
+        $class = Classes::withTrashed()->find($id);
+        $class->deleted_by = null;
+        $class->save();
+        Classes::withTrashed()
+            ->where('id', $id)
+            ->restore();
+        toastr()->success('Khôi phục lớp học thành công!');
+        return redirect()->route('class.index');
+    }
+
+    public function forceDelete($id)
+    {
+        Classes::withTrashed()
+            ->where('id', $id)
+            ->forceDelete();
+        toastr()->success('Xóa lớp học thành công!');
+        return redirect()->route('class.index');
     }
 }
