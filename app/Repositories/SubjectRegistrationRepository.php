@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Models\Classes;
-use App\Models\Courses;
+use App\Models\ClassSubject;
 use App\Models\Subjects;
+use App\Models\Courses;
 use App\Repositories\Interfaces\SubjectRegistrationRepositoryInterface;
 
 class SubjectRegistrationRepository extends BaseRepository implements SubjectRegistrationRepositoryInterface
@@ -23,16 +23,18 @@ class SubjectRegistrationRepository extends BaseRepository implements SubjectReg
 
     public function getSubjectsWithClasses($courseId)
     {
-        return Subjects::with('classes')->where('coure_id', $courseId)->orderBy('id', 'asc')->get();
+        return Subjects::where('coure_id', $courseId)->get();
     }
 
     public function getClassesBySubjectId($subjectId)
     {
-        return Classes::where('subject_id', $subjectId)->orderBy('id', 'asc')->get();
+        return Schedules::where('subject_id', $subjectId)->orderBy('id', 'asc')->get();
     }
 
-    public function getClassData($id)
+    public function getClassData($subjectId)
     {
-        return Classes::with(['subject', 'teacher', 'subject.course'])->where('subject_id', $id)->orderBy('id', 'asc')->get();
+        return ClassSubject::with(['class', 'teacher'])
+            ->where('subject_id', $subjectId)
+            ->get();
     }
 }

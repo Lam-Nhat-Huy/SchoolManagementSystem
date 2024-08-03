@@ -14,7 +14,7 @@
                             <td class="sorting_1">
                                 <i class="fas fa-folder" style="font-size: 20px;"></i>
 
-                                <span>{{ $item->name . ' - ' . $item->subject->name . ' - ' . $item->teacher->name }}</span>
+                                <span>{{ $item->class->name . ' - ' . $item->subject->name . ' - ' . $item->teacher->name }}</span>
                             </td>
                             <td>
                                 @if($item->is_joined)

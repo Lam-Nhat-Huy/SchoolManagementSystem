@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Imports\ScoreImport;
 use App\Models\Classes;
+use App\Models\ClassSubject;
 use App\Models\Enrollments;
 use App\Models\Schedules;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class EnrollmentController extends Controller
         $classId = $request->query('class_id'); // Lấy class_id từ query string
 
         // Lấy danh sách các lớp mà giáo viên đang quản lý
-        $classes = Schedules::where('teacher_id', $teacherId)->get();
+        $classes = ClassSubject::where('teacher_id', $teacherId)->get();
 
         // Xây dựng truy vấn Eloquent
         $query = Enrollments::with(['student', 'class.subject'])
@@ -101,33 +102,37 @@ class EnrollmentController extends Controller
         // Lấy ID tài khoản từ session
         $teacherId = session('user_id');
         // Lấy các lớp mà tài khoản này đang quản lý
-        $enrollments = Schedules::where('teacher_id', $teacherId)->get();
+        $enrollments = ClassSubject::where('teacher_id', $teacherId)->get();
 
         $template = 'admin.enrollment.enrollment.pages.list';
 
         return view('admin.dashboard.layout', compact('template', 'enrollments'));
     }
 
-
-    public function showClassScores($classId)
+    public function showClassScores($classSubjectId)
     {
-        // Lấy danh sách điểm của lớp theo class_id
+        // Lấy danh sách điểm của lớp theo class_subject_id
         $scores = Enrollments::select(
             'enrollments.*',
             'students.name as student_name',
             'students.id as student_id'
         )
             ->join('students', 'enrollments.student_id', '=', 'students.id')
-            ->where('enrollments.class_id', $classId)
+            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
+            ->whereHas('class.subject', function ($q) use ($classSubjectId) {
+                $q->where('id', $classSubjectId);
+            })
             ->get();
 
         // Lấy thông tin lớp để hiển thị tiêu đề
-        $class = Classes::find($classId);
+        $classSubject = ClassSubject::find($classSubjectId);
+
 
         $template = 'admin.enrollment.enrollment.pages.index';
 
-        return view('admin.dashboard.layout', compact('template', 'scores', 'class'));
+        return view('admin.dashboard.layout', compact('template', 'scores', 'classSubject'));
     }
+
 
 
     # Nhập excel
