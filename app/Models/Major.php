@@ -36,4 +36,8 @@ class Major extends Model
     {
         return $this->hasMany(Classes::class);
     }
+
+    public function scopegetMajor($query){
+        return $query->orderBy('created_at', 'DESC')->get();
+    }
 }
