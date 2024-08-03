@@ -15,7 +15,7 @@ class ClassesSeeder extends Seeder
     {
         Classes::insert([
             [
-                'name' => 'WEB01',
+                'name' => 'WD18301',
                 'description' => 'Lớp lập trình website',
                 'major_id' => 1,
                 'is_evaluation' => 1,
@@ -27,7 +27,7 @@ class ClassesSeeder extends Seeder
                 'deleted_at' => null,
             ],
             [
-                'name' => 'WEB02',
+                'name' => 'WD18302',
                 'description' => 'Lớp lập trình website',
                 'major_id' => 1,
                 'is_evaluation' => 0,

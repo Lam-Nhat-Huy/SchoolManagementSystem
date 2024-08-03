@@ -31,6 +31,7 @@
                         <tr role="row">
                             <th style="width: 20%;">Sinh
                                 Viên</th>
+                            <th style="width: 20%;">MSSV</th>
                             <th style="width: 20%;">Lớp
                             </th>
                             <th style="width: 5%;">L1
@@ -55,8 +56,8 @@
                     <tbody>
                         @foreach ($getAllEnrollment as $items)
                             <tr role="row" class="odd">
-                                <td class="sorting_1">{{ $items->student->name ?? '' }}
-                                </td>
+                                <td class="sorting_1">{{ $items->student->name  ?? '' }}</td>
+                                <td class="sorting_1">{{ $items->student->student_code  ?? '' }}</td>
                                 <td class="sorting_1">{{ $items->class->name ?? ''}}</td>
                                 <td class="sorting_1">{{ $items->lab_1 }}</td>
                                 <td class="sorting_1">{{ $items->lab_2 }}</td>

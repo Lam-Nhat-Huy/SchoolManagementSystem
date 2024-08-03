@@ -14,7 +14,7 @@
                                 <td class="sorting_1">
                                     <i class="fas fa-folder" style="font-size: 20px;"></i>
 
-                                    <span>{{ $item->subject->code }} - {{ $item->subject->name }} - {{ $item->teacher->name  }}</span>
+                                    <span>{{ $item->class->name }} - {{ $item->subject->name }} - {{ $item->teacher->name  }}</span>
                                 </td>
                                 <td>
                                     <a href="{{ route('enrollment.index', ['class_id' => $item->id]) }}">Xem điểm lớp {{ $item->name }}</a>

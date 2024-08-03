@@ -38,10 +38,10 @@ class TeachersSeeder extends Seeder
             ],
             [
                 'code' => 'T002',
-                'name' => 'Nguyen Thanh Tam',
+                'name' => 'Lâm Nhật Huy',
                 'image' => null,
-                'email' => 'thanhtamnguyen@gmail.com',
-                'phone' => '1234567890',
+                'email' => 'lamnhathuy0393418721@gmail.com',
+                'phone' => '0393379824',
                 'address' => '456 Elm St, Anytown, USA',
                 'current_address' => '456 Current St, Anytown, USA',
                 'gender' => 'Female',

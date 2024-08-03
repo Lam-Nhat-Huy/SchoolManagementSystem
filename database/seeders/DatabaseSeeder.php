@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ClassSubject;
 use App\Models\SubjectType;
 use Illuminate\Database\Seeder;
 
@@ -31,7 +32,8 @@ class DatabaseSeeder extends Seeder
             SubjectTypeSeeder::class,
             DepartmentSeeder::class,
             StudyStatusSeeder::class,
-            StudentsSeeder::class
+            StudentsSeeder::class,
+            ClassSubjectSeeder::class
         ]);
     }
 }
