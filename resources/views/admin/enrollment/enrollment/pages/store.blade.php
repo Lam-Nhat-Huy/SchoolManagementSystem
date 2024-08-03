@@ -16,7 +16,7 @@
                 <a href="{{ route('enrollment.index') }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
             </div>
             <div class="card-body">
-                <form action="{{ $url }}" method="POST" autocomplete="on">
+                <form action="{{ route('enrollment.update', $getEdit->id) }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">

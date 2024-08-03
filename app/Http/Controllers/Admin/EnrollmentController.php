@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\EnrollmentsExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ScoreImport;
 use App\Models\Classes;
@@ -54,18 +55,14 @@ class EnrollmentController extends Controller
 
     public function edit($id)
     {
-        $getEdit = Enrollments::select(
-            'enrollments.*',
-            'students.name as student_name',
-            'students.id as student_id',
-            'subjects.name as subject_name'
-        )
-            ->orderBy('enrollments.created_at', 'DESC')
-            ->join('students', 'enrollments.student_id', '=', 'students.id')
-            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
-            ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
-            ->where('enrollments.id', '=', $id)
-            ->first();
+        // Fetch a single record using `find()` or `first()`
+        $getEdit = Enrollments::find($id);
+
+        // Check if the record exists
+        if (!$getEdit) {
+            // Handle the case where the record is not found
+            return redirect()->route('enrollment.index')->with('error', 'Enrollment not found.');
+        }
 
         $template = "admin.enrollment.enrollment.pages.store";
 
@@ -88,9 +85,11 @@ class EnrollmentController extends Controller
         return view('admin.dashboard.layout', compact(
             'template',
             'config',
-            'getEdit',
+            'getEdit'
         ));
     }
+
+
 
     public function update(Request $request, $id)
     {
@@ -141,4 +140,24 @@ class EnrollmentController extends Controller
         FacadesExcel::import(new ScoreImport, $request->file('excel_file'));
         return redirect()->route('enrollment.index');
     }
+
+    public function exportExcel($classId)
+    {
+        // Lấy thông tin lớp dựa trên classId
+        $class = Classes::find($classId);
+
+        // Kiểm tra nếu lớp tồn tại
+        if ($class) {
+            // Lấy tên lớp và tạo tên file
+            $className = $class->name;
+            $fileName = $className . '.xlsx';
+
+            return FacadesExcel::download(new EnrollmentsExport($classId), $fileName);
+        } else {
+            // Xử lý trường hợp không tìm thấy lớp
+            return redirect()->back()->with('error', 'Lớp không tồn tại.');
+        }
+    }
+
+
 }

@@ -7,90 +7,83 @@
                 <form method="GET" action="{{ route('major.index') }}" class="row g-3 align-items-center">
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="search" placeholder="Tìm kiếm"
-                            value="{{ request('search') }}">
+                               value="{{ request('search') }}">
                     </div>
                     <div class="col-md-3">
-                        <a href="{{ route('enrollment.index') }}" class="btn btn-danger btn-sm me-2">Thêm</a>
-                        <a href="{{ route('enrollment.index') }}" class="btn btn-info btn-sm me-2">Xuất excel</a>
+                        @if($getAllEnrollment->isNotEmpty())
+                            @php
+                                $firstClassId = $getAllEnrollment->first()->class_id;
+                            @endphp
+                        @endif
+                        <!-- Truyền class_id động vào route export -->
+                        <a href="{{ route('enrollment.export', $firstClassId ?? '') }}" class="btn btn-info btn-sm me-2">Xuất excel</a>
                         <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                            data-bs-target="#uploadExcelModal">
+                                data-bs-target="#uploadExcelModal">
                             Nhập excel
                         </button>
                     </div>
-
                 </form>
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-sm-12">
                 <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid"
-                    aria-describedby="basic-datatables_info">
+                       aria-describedby="basic-datatables_info">
                     <thead>
-                        <tr role="row">
-                            <th style="width: 20%;">Sinh
-                                Viên</th>
-                            <th style="width: 20%;">MSSV</th>
-                            <th style="width: 20%;">Lớp
-                            </th>
-                            <th style="width: 5%;">L1
-                            </th>
-                            <th style="width: 5%;">L2
-                            </th>
-                            <th style="width: 5%;">ASM1
-                            </th>
-                            <th style="width: 5%;">L3
-                            </th>
-                            <th style="width: 5%;">L4
-                            </th>
-                            <th style="width: 5%;">ASM2
-                            </th>
-                            <th style="width: 5%;">Final
-                            </th>
-                            <th>GPA</th>
-                            <th>Hành động
-                            </th>
-                        </tr>
+                    <tr role="row">
+                        <th style="width: 20%;">Sinh Viên</th>
+                        <th style="width: 20%;">MSSV</th>
+                        <th style="width: 20%;">Lớp</th>
+                        <th style="width: 5%;">L1</th>
+                        <th style="width: 5%;">L2</th>
+                        <th style="width: 5%;">ASM1</th>
+                        <th style="width: 5%;">L3</th>
+                        <th style="width: 5%;">L4</th>
+                        <th style="width: 5%;">ASM2</th>
+                        <th style="width: 5%;">Final</th>
+                        <th>GPA</th>
+                        <th>Hành động</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach ($getAllEnrollment as $items)
-                            <tr role="row" class="odd">
-                                <td class="sorting_1">{{ $items->student->name  ?? '' }}</td>
-                                <td class="sorting_1">{{ $items->student->student_code  ?? '' }}</td>
-                                <td class="sorting_1">{{ $items->class->name ?? ''}}</td>
-                                <td class="sorting_1">{{ $items->lab_1 }}</td>
-                                <td class="sorting_1">{{ $items->lab_2 }}</td>
-                                <td class="sorting_1">{{ $items->assignment_1 }}</td>
-                                <td class="sorting_1">{{ $items->lab_3 }}</td>
-                                <td class="sorting_1">{{ $items->lab_4 }}</td>
-                                <td class="sorting_1">{{ $items->assignment_2 }}</td>
-                                <td class="sorting_1">{{ $items->final_exam }}</td>
-                                <td class="sorting_1">
-                                    {{ !empty($items->final_exam)
-                                        ? number_format(
-                                            ($items->lab_1 +
-                                                $items->lab_2 +
-                                                $items->assignment_1 +
-                                                $items->lab_3 +
-                                                $items->lab_4 +
-                                                $items->assignment_2 +
-                                                $items->final_exam) /
-                                                7,
-                                            1,
-                                            ',',
-                                            '.',
-                                        )
-                                        : '' }}
-                                </td>
-                                <td>
-                                    <a href="{{ route('enrollment.edit', ['id' => $items->id]) }}"
-                                        class="btn btn-sm btn-black">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach ($getAllEnrollment as $items)
+                        <tr role="row" class="odd">
+                            <td class="sorting_1">{{ $items->student->name ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->student->student_code ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->class->name ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->lab_1 }}</td>
+                            <td class="sorting_1">{{ $items->lab_2 }}</td>
+                            <td class="sorting_1">{{ $items->assignment_1 }}</td>
+                            <td class="sorting_1">{{ $items->lab_3 }}</td>
+                            <td class="sorting_1">{{ $items->lab_4 }}</td>
+                            <td class="sorting_1">{{ $items->assignment_2 }}</td>
+                            <td class="sorting_1">{{ $items->final_exam }}</td>
+                            <td class="sorting_1">
+                                {{ !empty($items->final_exam)
+                                    ? number_format(
+                                        ($items->lab_1 +
+                                            $items->lab_2 +
+                                            $items->assignment_1 +
+                                            $items->lab_3 +
+                                            $items->lab_4 +
+                                            $items->assignment_2 +
+                                            $items->final_exam) /
+                                            7,
+                                        1,
+                                        ',',
+                                        '.',
+                                    )
+                                    : '' }}
+                            </td>
+                            <td>
+                                <a href="{{ route('enrollment.edit', $items->id) }}"
+                                   class="btn btn-sm btn-black">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -102,7 +95,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="uploadExcelModal" tabindex="-1" aria-labelledby="uploadExcelModalLabel" aria-hidden="true">

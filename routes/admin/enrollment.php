@@ -15,4 +15,6 @@ Route::prefix('enrollment')->group(function () {
 
 
     Route::post('/import-excel', [EnrollmentController::class, 'import_excel'])->name('import.excel');
+    Route::get('enrollment/export/{classId}', [EnrollmentController::class, 'exportExcel'])->name('enrollment.export');
+
 });
