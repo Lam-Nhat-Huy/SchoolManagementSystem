@@ -15,35 +15,19 @@ class SchedulesSeeder extends Seeder
     {
         Schedules::insert([
             [
-                'class_id' => 1,
-                'subject_id' => 1,
-                'school_shift_id' => 2,
-                'teacher_id' => 1,  // Assuming you want to assign a teacher as well
-                'day_of_week' => 'Thứ Hai',
-                'start_date' => '2024-07-29',  // Example start date
-                'end_date' => '2024-12-31',    // Example end date
-                'created_by' => 1,
-                'created_at' => now(),
-                'updated_by' => null,
-                'updated_at' => null,
-                'deleted_by' => null,
-                'deleted_at' => null,
+                'class_subject_id' => null,
+                'room_id' => 1,
+                'day_of_week' => 2,
+                'start_time' => '7:00:00',  
+                'end_time' => '9:00:00'
             ],
             [
-                'class_id' => 3,
-                'subject_id' => 2,
-                'school_shift_id' => 3,
-                'teacher_id' => 2,  // Assuming you want to assign a teacher as well
-                'day_of_week' => 'Thứ Ba',
-                'start_date' => '2024-07-30',  // Example start date
-                'end_date' => '2024-12-31',    // Example end date
-                'created_by' => 1,
-                'created_at' => now(),
-                'updated_by' => null,
-                'updated_at' => null,
-                'deleted_by' => null,
-                'deleted_at' => null,
-            ],
+                'class_subject_id' => null,
+                'room_id' => 1,
+                'day_of_week' => 3,
+                'start_time' => '7:00:00',  
+                'end_time' => '9:00:00'
+            ]
         ]);
     }
 }

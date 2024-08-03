@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
-            $table->unsignedBigInteger('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
             $table->unsignedBigInteger('major_id')->nullable()->constrained('majors')->onDelete('set null');
             $table->integer('is_evaluation')->default(0);
             $table->unsignedBigInteger('created_by')->nullable();
@@ -24,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes();
         });
     }
 
