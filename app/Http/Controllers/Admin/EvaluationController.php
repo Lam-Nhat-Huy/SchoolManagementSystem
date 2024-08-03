@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Create_Teacher_Evaluation\CreateEvaluationRequest;
 use App\Http\Requests\Admin\Create_Teacher_Evaluation\UpdateEvaluationRequest;
-use App\Models\Classes;
+use App\Models\ClassSubject;
 use App\Models\CreateTeacherEvaluations;
-use App\Models\TeacherEvaluations;
 use App\Models\Teachers;
 use Illuminate\Http\Request;
 
@@ -21,7 +20,7 @@ class EvaluationController extends Controller
     {
         $this->province = new CreateTeacherEvaluations();
 
-        $this->provinceTableClass = new Classes();
+        $this->provinceTableClass = new ClassSubject();
     }
 
     public function index(Request $request)
@@ -39,8 +38,14 @@ class EvaluationController extends Controller
         if (!empty($request->teacher_id)) {
             $teacher_id = $request->teacher_id;
         }
+        
+        $sort = 10;
 
-        $getAllEvaluationCreate = $this->province->getAllEvaluationCreate($teacher_id, $sbcls, $sbtc);
+        if (!empty($request->sort)) {
+            $sort = $request->sort;
+        }
+
+        $getAllEvaluationCreate = $this->province->getAllEvaluationCreate($teacher_id, $sbcls, $sbtc, $sort);
 
         $teachers = Teachers::all();
 
@@ -92,7 +97,7 @@ class EvaluationController extends Controller
 
             $create_evaluation = $this->province;
 
-            $create_evaluation->class_id = $data['classes_evaluation'];
+            $create_evaluation->class_subject_id = $data['classes_evaluation'];
 
             $create_evaluation->created_by = session('user_id');
 
@@ -100,11 +105,13 @@ class EvaluationController extends Controller
 
             $create_evaluation->save();
 
-            $table_classes = Classes::find($create_evaluation->class_id);
+            $table_class_subject = ClassSubject::find($create_evaluation->class_subject_id);
 
-            $table_classes->is_evaluation = 1;
+            $table_class_subject->is_evaluation = 1;
+            
+            $table_class_subject->created_at = now();
 
-            $table_classes->save();
+            $table_class_subject->save();
 
             toastr()->success('Mở Đánh Giá Thành Công');
 
@@ -157,15 +164,17 @@ class EvaluationController extends Controller
         if ($data) {
             $update_evaluation = $this->province::find(session('update_evaluation_id'));
 
-            if ($update_evaluation->class_id !== $data['classes_evaluation']) {
+            if ($update_evaluation->class_subject_id !== $data['classes_evaluation']) {
 
-                $table_classes_old = Classes::find($update_evaluation->class_id);
+                $table_class_subject_old = ClassSubject::find($update_evaluation->class_subject_id);
 
-                $table_classes_old->is_evaluation = 0;
+                $table_class_subject_old->is_evaluation = 0;
 
-                $table_classes_old->save();
+                $table_class_subject_old->updated_at = now();
 
-                $update_evaluation->class_id = $data['classes_evaluation'];
+                $table_class_subject_old->save();
+
+                $update_evaluation->class_subject_id = $data['classes_evaluation'];
 
                 $update_evaluation->updated_by = session('user_id');
 
@@ -173,11 +182,13 @@ class EvaluationController extends Controller
 
                 $update_evaluation->save();
 
-                $table_classes = Classes::find($update_evaluation->class_id);
+                $table_class_subject = ClassSubject::find($update_evaluation->class_subject_id);
 
-                $table_classes->is_evaluation = 1;
+                $table_class_subject->is_evaluation = 1;
 
-                $table_classes->save();
+                $table_class_subject->created_at = now();
+
+                $table_class_subject->save();
             }
 
             $request->session()->forget('update_evaluation_id');
@@ -226,7 +237,7 @@ class EvaluationController extends Controller
     {
         $delete = $this->province::find($id);
 
-        $table_classes_old = Classes::find($delete->class_id);
+        $table_classes_old = ClassSubject::find($delete->class_subject_id);
 
         $table_classes_old->is_evaluation = 0;
 

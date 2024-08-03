@@ -10,7 +10,7 @@ class CreateTeacherEvaluations extends Model
     use HasFactory;
 
     protected $fillable = [
-        'class_id',
+        'class_subject_id',
         'created_by',
         'created_at',
         'updated_by',
@@ -19,41 +19,43 @@ class CreateTeacherEvaluations extends Model
         'deleted_at',
     ];
 
-    public function getAllEvaluationCreate($teacher_id = null, $sbcls = null, $sbtc = null)
+    public function getAllEvaluationCreate($teacher_id = null, $sbcls = null, $sbtc = null, $sort)
     {
         $data = CreateTeacherEvaluations::select('create_teacher_evaluations.*', 'classes.name as class_name', 'teachers.name as teacher_name')
             ->orderBy('create_teacher_evaluations.created_at', 'DESC')
-            ->join('classes', 'create_teacher_evaluations.class_id', '=', 'classes.id')
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id');
+            ->join('class_subjects', 'create_teacher_evaluations.class_subject_id', '=', 'class_subjects.id')
+            ->join('classes', 'class_subjects.class_id', '=', 'classes.id')
+            ->join('teachers', 'class_subjects.teacher_id', '=', 'teachers.id');
 
         if (!empty($teacher_id)) {
-            $data = $data->where('classes.teacher_id', $teacher_id);
+            $data = $data->where('class_subjects.teacher_id', $teacher_id);
         }
 
         if (!empty($sbcls)) {
-            $data = $data->orderBy('create_teacher_evaluations.class_id', $sbcls);
+            $data = $data->orderBy('create_teacher_evaluations.class_subject_id', $sbcls);
         }
 
         if (!empty($sbtc)) {
-            $data = $data->orderBy('classes.teacher_id', $sbtc);
+            $data = $data->orderBy('class_subjects.teacher_id', $sbtc);
         }
 
-        $data = $data->paginate(10);
+        $data = $data->paginate($sort);
 
         return $data;
     }
 
     public function getClassTeacherEvaluation()
     {
-        return Classes::select('classes.*', 'teachers.name as teacher_name')
-            ->orderBy('classes.created_at', 'DESC')
-            ->where('classes.deleted_at', null)
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
+        return ClassSubject::select('class_subjects.*', 'classes.name as class_name', 'teachers.name as teacher_name')
+            ->orderBy('class_subjects.created_at', 'DESC')
+            ->where('class_subjects.deleted_at', null)
+            ->join('classes', 'class_subjects.class_id', '=', 'classes.id')
+            ->join('teachers', 'class_subjects.teacher_id', '=', 'teachers.id')
             ->get();
     }
 
-    public function class()
+    public function class_subject()
     {
-        return $this->belongsTo(Classes::class);
+        return $this->belongsTo(ClassSubject::class);
     }
 }

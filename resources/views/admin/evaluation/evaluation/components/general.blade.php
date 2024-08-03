@@ -10,7 +10,7 @@
                     @foreach ($getAllClass as $item)
                         @if (!empty($item->is_evaluation == 0) || $item->id == $getEdit->class_id)
                             <option value="{{ $item->id }}" {{ $item->id == $getEdit->class_id ? 'selected' : '' }}>
-                                {{ $item->name . ' - ' . $item->teacher_name }}
+                                {{ $item->class_name . ' - ' . $item->teacher_name }}
                             </option>
                         @endif
                     @endforeach
@@ -18,7 +18,8 @@
                     <option value="0">--Chọn Lớp Học--</option>
                     @foreach ($getAllClass as $item)
                         @if (!empty($item->is_evaluation == 0))
-                            <option value="{{ $item->id }}">{{ $item->name . ' - ' . $item->teacher_name }}</option>
+                            <option value="{{ $item->id }}">{{ $item->class_name . ' - ' . $item->teacher_name }}
+                            </option>
                         @endif
                     @endforeach
                 @endif

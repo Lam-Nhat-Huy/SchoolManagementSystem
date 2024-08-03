@@ -14,7 +14,8 @@ class ClassSubject extends Model
         'class_id',
         'subject_id',
         'teacher_id',
-        'student_count'
+        'student_count',
+        'is_evaluation',
     ];
 
     public function class()

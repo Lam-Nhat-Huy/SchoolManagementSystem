@@ -19,13 +19,16 @@ class TeacherEvaluations extends Model
         'fifth_rating_level',
         'evaluation_date',
         'created_by',
+        'created_at',
         'updated_by',
+        'updated_at',
         'deleted_by',
+        'deleted_at',
     ];
 
-    public function teacher()
+    public function create_teacher_evaluation()
     {
-        return $this->belongsTo(Teachers::class);
+        return $this->belongsTo(CreateTeacherEvaluations::class);
     }
 
     public function student()

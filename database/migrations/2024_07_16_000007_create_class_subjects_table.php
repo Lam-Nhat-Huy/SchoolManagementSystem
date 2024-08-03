@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
             $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
             $table->integer('student_count');
+            $table->integer('is_evaluation')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

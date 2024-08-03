@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('create_teacher_evaluations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('class_id')->nullable()->constrained('classes')->onDelete('set null');
+            $table->unsignedBigInteger('class_subject_id')->nullable()->constrained('class_subjects')->onDelete('set null');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();

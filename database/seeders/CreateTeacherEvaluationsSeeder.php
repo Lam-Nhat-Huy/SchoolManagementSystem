@@ -15,7 +15,7 @@ class CreateTeacherEvaluationsSeeder extends Seeder
     {
         CreateTeacherEvaluations::insert([
             [
-                'class_id' => 1,
+                'class_subject_id' => 1,
                 'created_by' => 1,
                 'created_at' => now(),
                 'updated_by' => null,
@@ -24,7 +24,7 @@ class CreateTeacherEvaluationsSeeder extends Seeder
                 'deleted_at' => null,
             ],
             [
-                'class_id' => 3,
+                'class_subject_id' => 2,
                 'created_by' => 1,
                 'created_at' => now(),
                 'updated_by' => null,
