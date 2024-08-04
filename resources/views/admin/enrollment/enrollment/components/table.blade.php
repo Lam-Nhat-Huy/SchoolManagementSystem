@@ -4,7 +4,7 @@
         <div class="row mb-4">
             <div class="col-sm-12">
                 <!-- Bộ lọc -->
-                <form method="GET" action="{{ route('major.index') }}" class="row g-3 align-items-center">
+                <form method="GET" action="" class="row g-3 align-items-center">
                     <div class="col-md-3">
                         <input type="text" class="form-control" name="search" placeholder="Tìm kiếm"
                                value="{{ request('search') }}">

@@ -24,7 +24,7 @@ class ClassSubjectSeeder extends Seeder
             [
                 'class_id' => 2,
                 'subject_id' => 1,
-                'teacher_id' => 3,
+                'teacher_id' => 2,
                 'student_count' => 30,
                 'is_evaluation' => 0,
             ],

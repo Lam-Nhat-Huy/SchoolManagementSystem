@@ -10,7 +10,6 @@ use App\Models\ClassSubject;
 use App\Models\Enrollments;
 use App\Models\Schedules;
 use Illuminate\Http\Request;
-use Excel;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
@@ -55,12 +54,9 @@ class EnrollmentController extends Controller
 
     public function edit($id)
     {
-        // Fetch a single record using `find()` or `first()`
         $getEdit = Enrollments::find($id);
 
-        // Check if the record exists
         if (!$getEdit) {
-            // Handle the case where the record is not found
             return redirect()->route('enrollment.index')->with('error', 'Enrollment not found.');
         }
 
@@ -108,32 +104,6 @@ class EnrollmentController extends Controller
         return view('admin.dashboard.layout', compact('template', 'enrollments'));
     }
 
-    public function showClassScores($classSubjectId)
-    {
-        // Lấy danh sách điểm của lớp theo class_subject_id
-        $scores = Enrollments::select(
-            'enrollments.*',
-            'students.name as student_name',
-            'students.id as student_id'
-        )
-            ->join('students', 'enrollments.student_id', '=', 'students.id')
-            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
-            ->whereHas('class.subject', function ($q) use ($classSubjectId) {
-                $q->where('id', $classSubjectId);
-            })
-            ->get();
-
-        // Lấy thông tin lớp để hiển thị tiêu đề
-        $classSubject = ClassSubject::find($classSubjectId);
-
-
-        $template = 'admin.enrollment.enrollment.pages.index';
-
-        return view('admin.dashboard.layout', compact('template', 'scores', 'classSubject'));
-    }
-
-
-
     # Nhập excel
     public function import_excel(Request $request)
     {
@@ -143,7 +113,7 @@ class EnrollmentController extends Controller
 
         // Import new data
         FacadesExcel::import(new ScoreImport, $request->file('excel_file'));
-        return redirect()->route('enrollment.index');
+        return redirect()->back();
     }
 
 
