@@ -25,7 +25,7 @@ class ScoreImport implements ToCollection, ToModel
                 ->first();
 
             if ($enrollment) {
-                // Update existing record
+                # Cập nhật lại dữ liệu cũ
                 $enrollment->lab_1 = $row[1];
                 $enrollment->lab_2 = $row[2];
                 $enrollment->lab_3 = $row[3];
@@ -35,7 +35,7 @@ class ScoreImport implements ToCollection, ToModel
                 $enrollment->final_exam = $row[7];
                 $enrollment->save();
             } else {
-                // Create new record
+                # Tạo bảng mới
                 $enrollment = new Enrollments();
                 $enrollment->student_id = $row[0];
                 $enrollment->lab_1 = $row[1];
