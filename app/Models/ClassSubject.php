@@ -31,5 +31,11 @@ class ClassSubject extends Model
     {
         return $this->belongsTo(Teachers::class, 'teacher_id');
     }
+
+    public function sics()
+    {
+        return $this->hasMany(Sics::class, 'class_subject_id');
+    }
 }
+
 

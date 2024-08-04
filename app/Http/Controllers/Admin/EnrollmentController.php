@@ -8,9 +8,8 @@ use App\Imports\ScoreImport;
 use App\Models\Classes;
 use App\Models\ClassSubject;
 use App\Models\Enrollments;
-use App\Models\Schedules;
+use App\Models\Sics;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
 class EnrollmentController extends Controller
@@ -24,7 +23,7 @@ class EnrollmentController extends Controller
         $classes = ClassSubject::where('teacher_id', $teacherId)->get();
 
         // Xây dựng truy vấn Eloquent
-        $query = Enrollments::with(['student', 'class.subject'])
+        $query = Enrollments::with(['student', 'classSubject'])
             ->orderBy('created_at', 'ASC');
 
         // Kiểm tra quyền truy cập của giáo viên
@@ -37,6 +36,15 @@ class EnrollmentController extends Controller
         // Lọc theo class_id nếu có
         if (!empty($classId)) {
             $query->where('class_id', $classId);
+            // Lấy danh sách sinh viên từ bảng sics dựa trên class_subject_id
+            $classSubject = ClassSubject::where('class_id', $classId)->first();
+            if ($classSubject) {
+                $students = Enrollments::with(['student', 'classSubject'])->where('class_subject_id', $classSubject->id)->get();
+            } else {
+                $students = collect();
+            }
+        } else {
+            $students = collect();
         }
 
         $getAllEnrollment = $query->paginate(10);
@@ -46,10 +54,10 @@ class EnrollmentController extends Controller
         return view('admin.dashboard.layout', compact(
             'template',
             'getAllEnrollment',
-            'classes'
+            'classes',
+            'students'
         ));
     }
-
 
 
     public function edit($id)

@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             StudyStatusSeeder::class,
             StudentsSeeder::class,
-            ClassSubjectSeeder::class
+            ClassSubjectSeeder::class,
+            SicsSeeder::class
         ]);
     }
 }

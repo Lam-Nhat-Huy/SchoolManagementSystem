@@ -12,6 +12,7 @@ class Enrollments extends Model
     protected $fillable = [
         'student_id',
         'class_id',
+        'class_subject_id',
         'lab_1',
         'lab_2',
         'assignment_1',
@@ -27,7 +28,7 @@ class Enrollments extends Model
         'deleted_by',
         'deleted_at',
     ];
-    
+
     public function class()
     {
         return $this->belongsTo(Classes::class, 'class_id');
@@ -38,8 +39,9 @@ class Enrollments extends Model
         return $this->belongsTo(Students::class, 'student_id');
     }
 
-    public function account()
+    public function classSubject()
     {
-        return $this->belongsTo(Account::class, 'account_id');
+        return $this->belongsTo(ClassSubject::class, 'class_subject_id');
     }
+
 }

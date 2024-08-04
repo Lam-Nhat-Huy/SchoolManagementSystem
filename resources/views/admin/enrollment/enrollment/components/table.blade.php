@@ -47,34 +47,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($getAllEnrollment as $items)
+                    @foreach ($students as $items)
                         <tr role="row" class="odd">
                             <td class="sorting_1">{{ $items->student->name ?? '' }}</td>
                             <td class="sorting_1">{{ $items->student->student_code ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->class->name ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->lab_1 }}</td>
-                            <td class="sorting_1">{{ $items->lab_2 }}</td>
-                            <td class="sorting_1">{{ $items->assignment_1 }}</td>
-                            <td class="sorting_1">{{ $items->lab_3 }}</td>
-                            <td class="sorting_1">{{ $items->lab_4 }}</td>
-                            <td class="sorting_1">{{ $items->assignment_2 }}</td>
-                            <td class="sorting_1">{{ $items->final_exam }}</td>
+                            <td class="sorting_1">{{ $items->classSubject->class->name ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->lab_1 ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->lab_2 ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->assignment_1 ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->lab_3 ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->lab_4 ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->assignment_2 ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->final_exam ?? '' }}</td>
                             <td class="sorting_1">
-                                {{ !empty($items->final_exam)
-                                    ? number_format(
-                                        ($items->lab_1 +
-                                            $items->lab_2 +
-                                            $items->assignment_1 +
-                                            $items->lab_3 +
-                                            $items->lab_4 +
-                                            $items->assignment_2 +
-                                            $items->final_exam) /
-                                            7,
-                                        1,
-                                        ',',
-                                        '.',
-                                    )
-                                    : '' }}
+                                {{ !empty($items->classSubject->final_exam)
+                                 ? number_format(
+                                     ($items->classSubject->lab_1 +
+                                         $items->classSubject->lab_2 +
+                                         $items->classSubject->assignment_1 +
+                                         $items->classSubject->lab_3 +
+                                         $items->classSubject->lab_4 +
+                                         $items->classSubject->assignment_2 +
+                                         $items->classSubject->final_exam) / 7,
+                                     1,
+                                     ',',
+                                     '.',
+                                 )
+                                 : '' }}
                             </td>
                             <td>
                                 <a href="{{ route('enrollment.edit', $items->id) }}"
