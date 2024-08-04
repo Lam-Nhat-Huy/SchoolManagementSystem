@@ -107,22 +107,15 @@
                                 @endif
                             </div>
                         </div>
-                        @if($data->isNotEmpty())
-                            <div class="row mt-3">
-                                <div class="col-sm-12 col-md-5">
-                                    <div class="dataTables_info" id="basic-datatables_info" role="status" aria-live="polite">
-                                        Hiển thị {{ $data->firstItem() }} đến {{ $data->lastItem() }} của {{ $data->total() }} giảng viên
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-7">
-                                    <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
-                                        <ul class="pagination">
-                                            {{ $data->links('pagination::bootstrap-4') }}
-                                        </ul>
-                                    </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
+                                    <ul class="pagination">
+                                        {{ $data->links('pagination::bootstrap-4') }}
+                                    </ul>
                                 </div>
                             </div>
-                        @endif
+                        </div>
                     </div>
                 </div>
             </div>

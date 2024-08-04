@@ -125,11 +125,6 @@ return [
                     'title' => 'Buổi Dạy',
                     'route' => 'teacher.day',
                     'user_role' => 1
-                ],
-                [
-                    'title' => 'Giờ Dạy',
-                    'route' => 'teacher.time',
-                    'user_role' => 1
                 ]
             ]
 

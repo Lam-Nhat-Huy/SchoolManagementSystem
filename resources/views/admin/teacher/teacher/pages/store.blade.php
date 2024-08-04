@@ -13,14 +13,23 @@
             </div>
         @endif
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title float-left">{{ $title }}</h4>
                 <a href="{{ route('teacher.index') }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
             </div>
             <div class="card-body">
-                <form action="{{ $url }}" method="POST" autocomplete="on"
-                    enctype="multipart/form-data">
+                <form action="{{ $url }}" method="POST" autocomplete="on" enctype="multipart/form-data">
                     @csrf
                     @if ($config['method'] == 'update')
                         @method('PUT')
@@ -46,21 +55,21 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="teacher_phone">Số điện thoại</label>
-                                        <input value="{{ old('teacher_phone', $teacher->phone ?? '') }}" type="text"
+                                        <input value="{{ old('teacher_phone', $teacher->phone ?? '') }}" type="number"
                                             class="form-control" id="teacher_phone" name="teacher_phone"
                                             placeholder="Số điện thoại">
                                     </div>
                                     <div class="form-group">
                                         <label for="teacher_address">Địa chỉ nhà</label>
                                         <input value="{{ old('teacher_address', $teacher->address ?? '') }}"
-                                            type="text" class="form-control" id="teacher_address"
+                                            type="address" class="form-control" id="teacher_address"
                                             name="teacher_address" placeholder="Địa chỉ nhà">
                                     </div>
                                     <div class="form-group">
                                         <label for="teacher_current_address">Địa chỉ hiện tại</label>
                                         <input
                                             value="{{ old('teacher_current_address', $teacher->current_address ?? '') }}"
-                                            type="text" class="form-control" id="teacher_current_address"
+                                            type="address" class="form-control" id="teacher_current_address"
                                             name="teacher_current_address" placeholder="Địa chỉ hiện tại">
                                     </div>
                                     <div class="form-group">
@@ -197,5 +206,20 @@
             }
         });
     });
-    
+    $.ajax({
+    url: '{{ route('majors.by.course') }}',
+    type: 'GET',
+    data: { course_id: courseId },
+    success: function(data) {
+        $('#major_id').empty();
+        $('#major_id').append('<option value="">Chọn ngành học</option>');
+        $.each(data, function(key, value) {
+            $('#major_id').append('<option value="'+ value.id +'">'+ value.name +'</option>');
+        });
+    },
+    error: function(xhr, status, error) {
+        console.log(xhr.responseText);
+    }
+});
+
 </script>
