@@ -19,13 +19,27 @@ class StudentController extends Controller
     {
         $this->province = new Students();
     }
-    public function index()
+    public function index(Request $request)
     {
+        $sort = 10;
+        
+        $major_id = null;
+
+        if (!empty($request->sort)) {
+            $sort = $request->sort;
+        }
+        
+        if (!empty($request->major_id)) {
+            $major_id = $request->major_id;
+        }
+
+        $getAllStudent = $this->province->getAllStudent($request->keyword, $sort, $major_id);
+
+        $getMajor = Major::all();
+
         $template = "admin.student.student.pages.index";
 
-        $getAllStudent = $this->province->getAllStudent();
-
-        return view('admin.dashboard.layout', compact('template', 'getAllStudent'));
+        return view('admin.dashboard.layout', compact('template', 'getAllStudent', 'getMajor'));
     }
     public function create()
     {

@@ -62,11 +62,21 @@ class Students extends Model
     {
         $this->attributes['cccd_issue_date'] = \Carbon\Carbon::parse($value);
     }
-    public function getAllStudent()
+    public function getAllStudent($keyword = null, $sort = 10, $major_id)
     {
         $data = Students::with('major:id,name')
-            ->orderBy('students.id', 'DESC')
-            ->paginate(10);
+            ->orderBy('id', 'DESC');
+
+        if (!empty($keyword)) {
+            $data = $data->where('name', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('email', 'LIKE', '%' . $keyword . '%');
+        }
+
+        if (!empty($major_id)) {
+            $data = $data->where('major_id', '=', $major_id);
+        }
+
+        $data = $data->paginate($sort);
 
         return $data;
     }

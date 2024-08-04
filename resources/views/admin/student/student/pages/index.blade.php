@@ -13,26 +13,34 @@
                 <div class="table-responsive">
                     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <div class="dataTables_length" id="basic-datatables_length"><label>Hiển thị: <select
-                                            name="basic-datatables_length" aria-controls="basic-datatables"
-                                            class="form-control form-control-sm">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select> bản ghi</label></div>
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_length" id="basic-datatables_length"><label>Hiển thị:
+                                        <select name="sort" onchange="handleRedirect(this)"
+                                            aria-controls="basic-datatables" class="form-control form-control-sm">
+                                            <option value="{{ route('student.index') }}?sort=10"
+                                                {{ request('sort') == 10 ? 'selected' : '' }}>10</option>
+                                            <option value="{{ route('student.index') }}?sort=25"
+                                                {{ request('sort') == 25 ? 'selected' : '' }}>25</option>
+                                            <option value="{{ route('student.index') }}?sort=50"
+                                                {{ request('sort') == 50 ? 'selected' : '' }}>50</option>
+                                            <option value="{{ route('student.index') }}?sort=100"
+                                                {{ request('sort') == 100 ? 'selected' : '' }}>100</option>
+                                        </select>
+                                </div>
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                                <div id="basic-datatables_filter" class="dataTables_filter"><label>Tìm kiếm:<input
-                                            type="search" class="form-control form-control-sm" placeholder=""
-                                            aria-controls="basic-datatables"></label></div>
-                            </div>
+                            @include('admin.student.student.components.filter')
+                            @include('admin.student.student.components.table')
                         </div>
-                        @include('admin.student.student.components.table')
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <script>
+        function handleRedirect(select) {
+            const value = select.value;
+            if (value) {
+                window.location.href = value;
+            }
+        }
+    </script>

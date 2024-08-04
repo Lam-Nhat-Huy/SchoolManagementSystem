@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($getAllStudent as $student)
+                @forelse ($getAllStudent as $student)
                     <tr role="row" class="odd">
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->email }}</td>
@@ -52,7 +52,8 @@
                                     </button>
                                 </form>
                                 <form action="{{ route('student.delete', $student->id) }}" method="POST"
-                                    style="display:inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')">
+                                    style="display:inline-block;"
+                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')">
                                     @csrf
                                     @method('POST')
                                     <button type="submit" class="btn btn-sm btn-danger">
@@ -62,7 +63,15 @@
                             @endif
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="10">
+                            <div class="alert alert-warning mb-0" role="alert">
+                                Không tìm thấy dữ liệu.
+                            </div>
+                        </td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
