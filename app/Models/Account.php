@@ -22,11 +22,11 @@ class Account extends Model
         'deleted_by',
         'deleted_at',
     ];
-    public function getAllAccount($keyword = null, $sort = 1)
+    public function getAllAccount($keyword = null, $sort = 10)
     {
         $data = Account::orderBy('created_at', 'DESC')
             ->where('name', 'LIKE', '%' . $keyword . '%')
-            ->where('email', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('email', 'LIKE', '%' . $keyword . '%')
             ->paginate($sort);
         return $data;
     }
