@@ -137,9 +137,15 @@ class EnrollmentController extends Controller
     # Nhập excel
     public function import_excel(Request $request)
     {
+        // Delete old data for the class before importing new data
+        $classId = $request->input('class_id');
+        Enrollments::where('class_id', $classId)->delete();
+
+        // Import new data
         FacadesExcel::import(new ScoreImport, $request->file('excel_file'));
         return redirect()->route('enrollment.index');
     }
+
 
     public function exportExcel($classId)
     {
