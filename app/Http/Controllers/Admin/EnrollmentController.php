@@ -26,7 +26,7 @@ class EnrollmentController extends Controller
 
         // Xây dựng truy vấn Eloquent
         $query = Enrollments::with(['student', 'class.subject'])
-            ->orderBy('created_at', 'DESC');
+            ->orderBy('created_at', 'ASC');
 
         // Kiểm tra quyền truy cập của giáo viên
         if (session('user_role') == 3) {
@@ -145,6 +145,7 @@ class EnrollmentController extends Controller
         FacadesExcel::import(new ScoreImport, $request->file('excel_file'));
         return redirect()->route('enrollment.index');
     }
+
 
 
     public function exportExcel($classId)

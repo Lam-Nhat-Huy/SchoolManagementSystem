@@ -32,4 +32,9 @@ class Classes extends Model
     {
         return $this->hasOne(Subjects::class, 'id', 'subject_id'); // Adjust the column names as per your database structure
     }
+
+    public function class()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
+    }
 }

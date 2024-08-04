@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Schedules;
+use App\Models\ClassSubject;
 use Illuminate\Http\Request;
 
 class TeachingSchedule extends Controller
@@ -26,29 +25,26 @@ class TeachingSchedule extends Controller
             ]
         ];
 
-        $getAllTeachingSchedule = Schedules::select(
-            'schedules.*',
+        $getAllTeachingSchedule = ClassSubject::select(
+            'class_subjects.*',
             'classes.name as class_name',
             'subjects.name as subject_name',
-            'teachers.name as teacher_name',
-            'school_shifts.name as school_shift_name',
-            'school_shifts.description as school_shift_description',
+            'teachers.name as teacher_name'
         )
-            ->join('classes', 'schedules.class_id', '=', 'classes.id')
-            ->join('subjects', 'schedules.subject_id', '=', 'subjects.id')
-            ->join('teachers', 'classes.teacher_id', '=', 'teachers.id')
-            ->join('school_shifts', 'schedules.school_shift_id', '=', 'school_shifts.id');
+            ->join('classes', 'class_subjects.class_id', '=', 'classes.id')
+            ->join('subjects', 'class_subjects.subject_id', '=', 'subjects.id')
+            ->join('teachers', 'class_subjects.teacher_id', '=', 'teachers.id');
 
         if (!empty(session('user_role') == 3)) {
             $getAllTeachingSchedule = $getAllTeachingSchedule->where('teacher_id', session('user_id'));
         }
 
-        $getAllTeachingSchedule = $getAllTeachingSchedule->orderBy('schedules.created_at', 'DESC')->paginate(10);
+        $getAllTeachingSchedule = $getAllTeachingSchedule->orderBy('class_subjects.created_at', 'DESC')->paginate(10);
 
         return view('admin.dashboard.layout', compact(
             'template',
             'getAllTeachingSchedule',
-            'config',
+            'config'
         ));
     }
 }

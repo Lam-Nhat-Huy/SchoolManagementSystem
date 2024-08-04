@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -8,8 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ClassSubject extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'class_id',
         'subject_id',
@@ -33,3 +32,4 @@ class ClassSubject extends Model
         return $this->belongsTo(Teachers::class, 'teacher_id');
     }
 }
+
