@@ -1,3 +1,4 @@
+@include('admin.class.class.components.filter')
 <div class="table-responsive">
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
         <div class="row">

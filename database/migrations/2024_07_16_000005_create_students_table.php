@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('student_code', 7)->unique();
-            $table->string('gender', 50);
+            $table->tinyInteger('gender');
             $table->timestamp('date_of_birth')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('email', 100)->unique();
             $table->string('address', 200);

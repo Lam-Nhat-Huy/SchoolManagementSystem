@@ -26,6 +26,7 @@ class Students extends Model
         'cccd_issue_date',
         'cccd_place',
         'year_of_enrollment',
+        'study_status_id',
         'semesters',
         'phone',
         'role_id',

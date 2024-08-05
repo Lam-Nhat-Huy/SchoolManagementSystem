@@ -38,7 +38,7 @@ class EvaluationController extends Controller
         if (!empty($request->teacher_id)) {
             $teacher_id = $request->teacher_id;
         }
-        
+
         $sort = 10;
 
         if (!empty($request->sort)) {
@@ -51,8 +51,23 @@ class EvaluationController extends Controller
 
         $template = 'admin.evaluation.evaluation.pages.index';
 
+        $config = [
+            'css' => [
+                'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
+                '/admin/css/class.css'
+            ],
+            'js' => [
+                'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
+                '/admin/plugins/ckeditor/ckeditor.js',
+                '/admin/plugins/ckfinder_2/ckfinder.js',
+                '/admin/lib/finder.js',
+                '/admin/lib/library.js',
+            ]
+        ];
+
         return view('admin.dashboard.layout', compact(
             'template',
+            'config',
             'getAllEvaluationCreate',
             'teachers',
             'sbcls',
@@ -108,7 +123,7 @@ class EvaluationController extends Controller
             $table_class_subject = ClassSubject::find($create_evaluation->class_subject_id);
 
             $table_class_subject->is_evaluation = 1;
-            
+
             $table_class_subject->created_at = now();
 
             $table_class_subject->save();
