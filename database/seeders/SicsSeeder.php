@@ -28,7 +28,15 @@ class SicsSeeder extends Seeder
             [
                 'class_subject_id' => 1,
                 'student_id' => 4,
-            ]
+            ],
+            [
+                'class_subject_id' => 2,
+                'student_id' => 1,
+            ],
+            [
+                'class_subject_id' => 2,
+                'student_id' => 1,
+            ],
         ]);
     }
 }

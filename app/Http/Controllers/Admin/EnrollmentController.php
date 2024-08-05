@@ -47,6 +47,7 @@ class EnrollmentController extends Controller
             $students = collect();
         }
 
+
         $getAllEnrollment = $query->paginate(10);
 
         $template = 'admin.enrollment.enrollment.pages.index';

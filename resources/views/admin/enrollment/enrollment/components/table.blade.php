@@ -32,48 +32,58 @@
                        aria-describedby="basic-datatables_info">
                     <thead>
                     <tr role="row">
-                        <th style="width: 20%;">Sinh Viên</th>
-                        <th style="width: 20%;">MSSV</th>
-                        <th style="width: 20%;">Lớp</th>
-                        <th style="width: 5%;">L1</th>
-                        <th style="width: 5%;">L2</th>
-                        <th style="width: 5%;">ASM1</th>
-                        <th style="width: 5%;">L3</th>
-                        <th style="width: 5%;">L4</th>
-                        <th style="width: 5%;">ASM2</th>
-                        <th style="width: 5%;">Final</th>
-                        <th>GPA</th>
+                        <th style="width: 15%;">Thông Tin Sinh Viên</th>
+                        <th style="width: 7%;">L1</th>
+                        <th style="width: 7%;">L2</th>
+                        <th style="width: 7%;">L3</th>
+                        <th style="width: 7%;">L4</th>
+                        <th style="width: 7%;">ASM1</th>
+                        <th style="width: 7%;">ASM2</th>
+                        <th style="width: 7%;">Final</th>
+                        <th style="width: 7%;">GPA</th>
+                        <th style="width: 10%;">Kết quả</th>
                         <th>Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach ($students as $items)
                         <tr role="row" class="odd">
-                            <td class="sorting_1">{{ $items->student->name ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->student->student_code ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->classSubject->class->name ?? '' }}</td>
+                            <td class="sorting_1">
+                                <strong>Sinh Viên:</strong> {{ $items->student->name ?? '' }}<br>
+                                <strong>MSSV:</strong> {{ $items->student->student_code ?? '' }}<br>
+                                <strong>Lớp:</strong> {{ $items->classSubject->class->name ?? '' }}
+                            </td>
                             <td class="sorting_1">{{ $items->lab_1 ?? '' }}</td>
                             <td class="sorting_1">{{ $items->lab_2 ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->assignment_1 ?? '' }}</td>
                             <td class="sorting_1">{{ $items->lab_3 ?? '' }}</td>
                             <td class="sorting_1">{{ $items->lab_4 ?? '' }}</td>
+                            <td class="sorting_1">{{ $items->assignment_1 ?? '' }}</td>
                             <td class="sorting_1">{{ $items->assignment_2 ?? '' }}</td>
                             <td class="sorting_1">{{ $items->final_exam ?? '' }}</td>
                             <td class="sorting_1">
-                                {{ !empty($items->classSubject->final_exam)
+                                {{ $gpa = !empty($items->final_exam)
                                  ? number_format(
-                                     ($items->classSubject->lab_1 +
-                                         $items->classSubject->lab_2 +
-                                         $items->classSubject->assignment_1 +
-                                         $items->classSubject->lab_3 +
-                                         $items->classSubject->lab_4 +
-                                         $items->classSubject->assignment_2 +
-                                         $items->classSubject->final_exam) / 7,
+                                     ($items->lab_1 +
+                                         $items->lab_2 +
+                                         $items->assignment_1 +
+                                         $items->lab_3 +
+                                         $items->lab_4 +
+                                         $items->assignment_2 +
+                                         $items->final_exam) / 7,
                                      1,
                                      ',',
                                      '.',
                                  )
                                  : '' }}
+                            </td>
+                            <td>
+                                @if($gpa < 5)
+                                    <span class="text-danger">FAILED</span>
+                                @elseif($gpa > 5)
+                                    <span class="btn-success">PASSED</span>
+                                @else
+                                    <span class="text-info">STUDING</span>
+                                @endif
                             </td>
                             <td>
                                 <a href="{{ route('enrollment.edit', $items->id) }}"
