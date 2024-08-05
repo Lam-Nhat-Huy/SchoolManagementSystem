@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('enrollments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_id')->nullable()->constrained('students')->onDelete('set null');
-            $table->unsignedBigInteger('class_id')->nullable()->constrained('classes')->onDelete('set null');
-            $table->unsignedBigInteger('account_id')->nullable()->constrained('accounts')->onDelete('set null');
             $table->unsignedBigInteger('class_subject_id')->nullable()->constrained('class_subjects')->onDelete('set null');
             $table->double('lab_1')->nullable();
             $table->double('lab_2')->nullable();

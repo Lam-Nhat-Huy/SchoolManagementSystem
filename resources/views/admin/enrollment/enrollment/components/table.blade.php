@@ -12,11 +12,12 @@
                     <div class="col-md-3">
                         @if($getAllEnrollment->isNotEmpty())
                             @php
-                                $firstClassId = $getAllEnrollment->first()->class_id;
+                                $firstClassId = $getAllEnrollment->first()->class_subject_id;
                             @endphp
                         @endif
-                        <!-- Truyền class_id động vào route export -->
-                        <a href="{{ route('enrollment.export', $firstClassId ?? '') }}" class="btn btn-info btn-sm me-2">Xuất excel</a>
+                        <!-- Truyền class_subject_id động vào route export -->
+                        <a href="{{ route('enrollment.export', $firstClassId ?? '') }}" class="btn btn-info btn-sm me-2"><i class="fa fa-print"></i>
+                            Xuất excel</a>
                         <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
                                 data-bs-target="#uploadExcelModal">
                             Nhập excel
@@ -77,9 +78,11 @@
                                  : '' }}
                             </td>
                             <td>
-                                @if($gpa < 5)
+                                @if($gpa === null)
+                                    <span class="text-info">STUDING</span>
+                                @elseif($gpa < 5)
                                     <span class="text-danger">FAILED</span>
-                                @elseif($gpa > 5)
+                                @elseif($gpa >= 5)
                                     <span class="btn-success">PASSED</span>
                                 @else
                                     <span class="text-info">STUDING</span>

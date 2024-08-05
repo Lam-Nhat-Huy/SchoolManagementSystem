@@ -35,7 +35,7 @@ class EnrollmentController extends Controller
 
         // Lọc theo class_id nếu có
         if (!empty($classId)) {
-            $query->where('class_id', $classId);
+            $query->where('class_subject_id', $classId);
             // Lấy danh sách sinh viên từ bảng sics dựa trên class_subject_id
             $classSubject = ClassSubject::where('class_id', $classId)->first();
             if ($classSubject) {
@@ -98,6 +98,18 @@ class EnrollmentController extends Controller
 
     public function update(Request $request, $id)
     {
+        $enrollment = Enrollments::find($id);
+        $enrollment->lab_1 = $request->input('lab_1');
+        $enrollment->lab_2 = $request->input('lab_2');
+        $enrollment->lab_3 = $request->input('lab_3');
+        $enrollment->lab_4 = $request->input('lab_4');
+        $enrollment->assignment_1 = $request->input('assignment_1');
+        $enrollment->assignment_2 = $request->input('assignment_2');
+        $enrollment->final_exam = $request->input('final_exam');
+        $enrollment->save();
+
+        toastr()->success('Chỉnh sửa bản ghi thành công!');
+        return redirect()->back();
     }
 
 
@@ -118,7 +130,7 @@ class EnrollmentController extends Controller
     {
         // Delete old data for the class before importing new data
         $classId = $request->input('class_id');
-        Enrollments::where('class_id', $classId)->delete();
+        Enrollments::where('class_subject_id', $classId)->delete();
 
         // Import new data
         FacadesExcel::import(new ScoreImport, $request->file('excel_file'));

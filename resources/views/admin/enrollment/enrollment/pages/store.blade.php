@@ -1,18 +1,10 @@
 <div class="page-inner">
     @include('admin.dashboard.components.breadcrumb')
 
-    @php
-        $url = $config['method'] == 'create' ? route('enrollment.store') : route('enrollment.update', $getEdit->id);
-        $title =
-            $config['method'] == 'create'
-                ? 'Thêm mới điểm thi'
-                : 'Nhập điểm môn "' . $getEdit->subject_name . '" cho sinh viên "' . $getEdit->student_name . '"';
-    @endphp
-
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h4 class="card-title float-left">{{ $title }}</h4>
+                <h4 class="card-title float-left">Chỉnh sửa điểm sinh viên</h4>
                 <a href="{{ route('enrollment.index') }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
             </div>
             <div class="card-body">
@@ -22,12 +14,9 @@
                         <div class="col-lg-12">
                             @include('admin.enrollment.enrollment.components.general')
                         </div>
-                        {{-- <div class="col-lg-3">
-                            @include('admin.enrollment.enrollment.components.aside')
-                        </div> --}}
                         <div class="text-right">
                             <button type="submit" class="btn btn-success mb10 button-fix" name="send"
-                                value="send">Lưu</button>
+                                    value="send">Lưu</button>
                         </div>
                     </div>
                 </form>

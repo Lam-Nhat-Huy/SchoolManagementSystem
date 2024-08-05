@@ -21,11 +21,10 @@ class ScoreImport implements ToCollection, ToModel
         $this->current++;
         if ($this->current > 1) {
             $enrollment = Enrollments::where('student_id', $row[0])
-                ->where('class_id', $row[8])
+                ->where('class_subject_id', $row[8])
                 ->first();
 
             if ($enrollment) {
-                // Update existing record
                 $enrollment->lab_1 = $row[1];
                 $enrollment->lab_2 = $row[2];
                 $enrollment->lab_3 = $row[3];
@@ -35,7 +34,6 @@ class ScoreImport implements ToCollection, ToModel
                 $enrollment->final_exam = $row[7];
                 $enrollment->save();
             } else {
-                // Create new record
                 $enrollment = new Enrollments();
                 $enrollment->student_id = $row[0];
                 $enrollment->lab_1 = $row[1];
@@ -45,8 +43,7 @@ class ScoreImport implements ToCollection, ToModel
                 $enrollment->assignment_1 = $row[5];
                 $enrollment->assignment_2 = $row[6];
                 $enrollment->final_exam = $row[7];
-                $enrollment->class_id = $row[8];
-                $enrollment->account_id = $row[9];
+                $enrollment->class_subject_id = $row[8];
                 $enrollment->enrollment_date = now();
                 $enrollment->save();
             }

@@ -16,7 +16,6 @@ class EnrollmentsSeeder extends Seeder
         Enrollments::insert([
             [
                 'student_id' => 1,
-                'class_id' => 1,
                 'class_subject_id' => 1,
                 'lab_1' => null,
                 'lab_2' => null,
@@ -35,7 +34,6 @@ class EnrollmentsSeeder extends Seeder
             ],
             [
                 'student_id' => 2,
-                'class_id' => 1,
                 'class_subject_id' => 1,
                 'lab_1' => null,
                 'lab_2' => null,
@@ -54,7 +52,6 @@ class EnrollmentsSeeder extends Seeder
             ],
             [
                 'student_id' => 3,
-                'class_id' => 1,
                 'class_subject_id' => 1,
                 'lab_1' => null,
                 'lab_2' => null,
@@ -73,7 +70,6 @@ class EnrollmentsSeeder extends Seeder
             ],
             [
                 'student_id' => 4,
-                'class_id' => 1,
                 'class_subject_id' => 1,
                 'lab_1' => null,
                 'lab_2' => null,
@@ -92,7 +88,6 @@ class EnrollmentsSeeder extends Seeder
             ],
             [
                 'student_id' => 5,
-                'class_id' => 1,
                 'class_subject_id' => 1,
                 'lab_1' => null,
                 'lab_2' => null,
@@ -111,7 +106,6 @@ class EnrollmentsSeeder extends Seeder
             ],
             [
                 'student_id' => 2,
-                'class_id' => 2,
                 'class_subject_id' => 2,
                 'lab_1' => null,
                 'lab_2' => null,

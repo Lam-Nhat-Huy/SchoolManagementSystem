@@ -17,8 +17,8 @@ class EnrollmentsExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        return Enrollments::select('student_id', 'lab_1', 'lab_2', 'lab_3', 'lab_4', 'assignment_1', 'assignment_2', 'final_exam', 'class_id', 'account_id')
-            ->where('class_id', $this->classId)
+        return Enrollments::select('student_id', 'lab_1', 'lab_2', 'lab_3', 'lab_4', 'assignment_1', 'assignment_2', 'final_exam', 'class_subject_id')
+            ->where('class_subject_id', $this->classId)
             ->get();
     }
 
@@ -33,8 +33,7 @@ class EnrollmentsExport implements FromCollection, WithHeadings
             'Assignment 1',
             'Assignment 2',
             'Final Exam',
-            'Class ID',
-            'Account ID'
+            'Class Subject ID',
         ];
     }
 }
