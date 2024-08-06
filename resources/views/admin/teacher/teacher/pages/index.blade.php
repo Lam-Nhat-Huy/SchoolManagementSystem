@@ -9,7 +9,6 @@
                     <a href="{{ route('teacher.create') }}" class="btn btn-sm btn-success float-end">
                         <i class="fa fa-plus"></i> Thêm giảng viên
                     </a>
-                    {{-- <a href="" class="btn btn-sm btn-primary">Xuất Excel</a> --}}
                 </div>
             </div>
             <div class="card-body">
@@ -82,8 +81,8 @@
                                                     <td style="padding: 2px; line-height: 1.2;">{{ $teacher->gender }}</td>
                                                     <td style="padding: 2px; line-height: 1.2;">{{ $teacher->date_of_birth }}</td>
                                                     <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->qualifications }}</td>
-                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->course_name }}</td>
-                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->major_name }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->course->name ?? 'Chưa có' }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->major->name ?? 'Chưa có' }}</td>
                                                     <td style="padding: 2px; line-height: 1.2;">
                                                         <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-sm btn-black">
                                                             <i class="fa fa-edit"></i>
