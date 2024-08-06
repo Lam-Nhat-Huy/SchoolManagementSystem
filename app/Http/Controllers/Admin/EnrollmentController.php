@@ -9,6 +9,7 @@ use App\Models\Classes;
 use App\Models\ClassSubject;
 use App\Models\Enrollments;
 use App\Models\Sics;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
@@ -94,8 +95,6 @@ class EnrollmentController extends Controller
         ));
     }
 
-
-
     public function update(Request $request, $id)
     {
         $enrollment = Enrollments::find($id);
@@ -112,7 +111,6 @@ class EnrollmentController extends Controller
         return redirect()->back();
     }
 
-
     public function classList()
     {
         // Lấy ID tài khoản từ session
@@ -128,33 +126,31 @@ class EnrollmentController extends Controller
     # Nhập excel
     public function import_excel(Request $request)
     {
-        // Delete old data for the class before importing new data
         $classId = $request->input('class_id');
         Enrollments::where('class_subject_id', $classId)->delete();
 
-        // Import new data
         FacadesExcel::import(new ScoreImport, $request->file('excel_file'));
         return redirect()->back();
     }
-
-
 
     public function exportExcel($classId)
     {
         // Lấy thông tin lớp dựa trên classId
         $class = Classes::find($classId);
-
         // Kiểm tra nếu lớp tồn tại
         if ($class) {
             // Lấy tên lớp và tạo tên file
             $className = $class->name;
             $fileName = $className . '.xlsx';
-
             return FacadesExcel::download(new EnrollmentsExport($classId), $fileName);
         } else {
             // Xử lý trường hợp không tìm thấy lớp
             return redirect()->back()->with('error', 'Lớp không tồn tại.');
         }
+    }
+
+    public function setTimeEntryPoint(Request $request)
+    {
     }
 
 

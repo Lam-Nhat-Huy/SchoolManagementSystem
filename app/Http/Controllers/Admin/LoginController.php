@@ -196,8 +196,6 @@ class LoginController extends Controller
                 $request->session()->put('user_role', $getAccountGoogle->role_id);
             }
 
-            toastr()->success('Đăng nhập thành công');
-
             return redirect()->route('dashboard.index');
         }
 
@@ -209,9 +207,6 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget(['user_name', 'user_email', 'user_phone', 'user_major_id', 'user_year_of_enrollment', 'user_role', 'user_course_id', 'user_chat_id', 'user_chat_name', 'user_id']);
-
-        toastr()->success('Đăng xuất thành công');
-
         return redirect()->route('home');
     }
 }

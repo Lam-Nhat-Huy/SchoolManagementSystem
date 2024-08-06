@@ -43,6 +43,7 @@
                         <th style="width: 7%;">Final</th>
                         <th style="width: 7%;">GPA</th>
                         <th style="width: 10%;">Kết quả</th>
+                        <th style="width: 10%;">Ngày Nhập</th>
                         <th>Hành động</th>
                     </tr>
                     </thead>
@@ -88,6 +89,7 @@
                                     <span class="text-info">STUDING</span>
                                 @endif
                             </td>
+                            <td>{{ $items->created_at->format('Y-m-d')  }}</td>
                             <td>
                                 <a href="{{ route('enrollment.edit', $items->id) }}"
                                    class="btn btn-sm btn-black">

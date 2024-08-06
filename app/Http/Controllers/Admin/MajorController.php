@@ -111,7 +111,8 @@ class MajorController extends Controller
 
         Major::create($validatedData);
 
-        return redirect()->route('major.index')->with('success', 'Ngành học được tạo thành công.');
+        toastr()->success('Thêm bản ghi thành công!');
+        return redirect()->route('major.index');
     }
 
     // Hiển thị form chỉnh sửa ngành học
@@ -168,7 +169,8 @@ class MajorController extends Controller
         $major = Major::findOrFail($id);
         $major->update($validatedData);
 
-        return redirect()->route('major.index')->with('success', 'Ngành học được cập nhật thành công.');
+        toastr()->success('Chỉnh sửa bản ghi thành công!');
+        return redirect()->route('major.index');
     }
 
     // Xóa ngành học khỏi cơ sở dữ liệu
@@ -177,7 +179,8 @@ class MajorController extends Controller
         $major = Major::findOrFail($id);
         $major->delete();
 
-        return redirect()->route('major.index')->with('success', 'Ngành học được xóa thành công.');
+        toastr()->success('Xóa bản ghi thành công!');
+        return redirect()->route('major.index');
     }
 }
 

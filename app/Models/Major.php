@@ -11,14 +11,11 @@ class Major extends Model
     use HasFactory;
 
     protected $fillable = [
+        'course_id',
+        'code',
         'name',
-        'description',
-        'created_by',
-        'created_at',
-        'updated_by',
-        'updated_at',
-        'deleted_by',
-        'deleted_at',
+        'standard',
+        'status'
     ];
 
     public function subjects()
