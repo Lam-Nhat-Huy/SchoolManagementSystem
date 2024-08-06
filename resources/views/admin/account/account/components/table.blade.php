@@ -1,38 +1,7 @@
 <div class="table-responsive">
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
         <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <div class="dataTables_length" id="basic-datatables_length">
-                    <label>Hiển thị:
-                        <select name="sort" onchange="handleRedirect(this)"
-                            aria-controls="basic-datatables" class="form-control form-control-sm">
-                            <option value="{{ route('account.index') }}?sort=10"
-                                {{ request('sort') == 10 ? 'selected' : '' }}>10</option>
-                            <option value="{{ route('account.index') }}?sort=25"
-                                {{ request('sort') == 25 ? 'selected' : '' }}>25</option>
-                            <option value="{{ route('account.index') }}?sort=50"
-                                {{ request('sort') == 50 ? 'selected' : '' }}>50</option>
-                            <option value="{{ route('account.index') }}?sort=100"
-                                {{ request('sort') == 100 ? 'selected' : '' }}>100</option>
-                        </select>
-                        bản ghi
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
-                <div id="basic-datatables_filter" class="dataTables_filter ">
-                    <form class="d-flex align-items-center justify-content-end" action="{{ route('account.index') }}">
-                        <label>Tìm kiếm:
-                            <input type="search" class="form-control form-control-sm" value="{{ request('keyword') }}"
-                                name="keyword" placeholder="" aria-controls="basic-datatables">
-                        </label>
-                        <div>
-                            <button type="submit" class="btn btn-primary btn-sm ms-2">Lọc</button>
-                            <a href="{{ route('account.index') }}" class="btn btn-secondary btn-sm ">Bỏ lọc</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            @include('admin.account.account.components.filter');
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -42,23 +11,23 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên thành viên: activate to sort column descending" style="width: 40%;">Tên
+                                aria-label="Tên thành viên: activate to sort column descending" style="width: 400px; white-space: nowrap;">Tên
                             </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên thành viên: activate to sort column descending" style="width: 40%;">
+                                aria-label="Tên thành viên: activate to sort column descending" style="width: 400px; white-space: nowrap;">
                                 Email</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-label="Hành động: activate to sort column ascending"
-                                style="width: 20%;">Hành động</th>
+                                style="width: 90px; white-space: nowrap;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($getAllAccount as $items)
                             <tr role="row" class="odd">
-                                <td class="sorting_1">{{ $items->name }}</td>
-                                <td class="sorting_1">{{ $items->email }}</td>
-                                <td class="text-center">
+                                <td style="white-space: nowrap;" class="sorting_1">{{ $items->name }}</td>
+                                <td style="white-space: nowrap;" class="sorting_1">{{ $items->email }}</td>
+                                <td style="white-space: nowrap;" class="text-center">
                                     @if ($items->deleted_by == null)
                                         <a href="{{ route('account.edit', $items->id) }}" class="btn btn-sm btn-black">
                                             <i class="fas fa-edit"></i>
