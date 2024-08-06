@@ -99,7 +99,7 @@ class Students extends Model
     }
     public function major()
     {
-        return $this->belongsTo(Major::class);
+        return $this->belongsTo(Major::class, 'major_id');
     }
     public function course()
     {
@@ -108,5 +108,10 @@ class Students extends Model
     public function studystatus()
     {
         return $this->belongsTo(StudyStatus::class);
+    }
+
+    public function classSubject()
+    {
+        return $this->belongsToMany(ClassSubject::class);
     }
 }

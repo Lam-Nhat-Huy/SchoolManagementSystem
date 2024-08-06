@@ -11,17 +11,20 @@ class Sics extends Model
 
     protected $fillable = [
         'class_subject_id',
-        'student_id',
+        'student_id'
     ];
 
-    public function student()
-    {
-        return $this->belongsTo(Students::class, 'student_id');
+    public function student(){
+        return $this->belongsToMany(Students::class, 'sics', 'class_subject_id', 'student_id');
     }
+
+//    public function student()
+//    {
+//        return $this->belongsTo(Students::class, 'student_id');
+//    }
 
     public function classSubject()
     {
         return $this->belongsTo(ClassSubject::class, 'class_subject_id');
     }
 }
-

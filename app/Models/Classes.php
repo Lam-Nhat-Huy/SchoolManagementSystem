@@ -23,18 +23,28 @@ class Classes extends Model
 
     protected $table = 'classes';
 
+    public function teacher()
+    {
+        return $this->belongsTo(Teachers::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subjects::class, 'subject_id');
+    }
+
     public function major()
     {
         return $this->belongsTo(Major::class, 'major_id');
     }
 
-    public function subject()
+    public function schedules()
     {
-        return $this->hasOne(Subjects::class, 'id', 'subject_id'); // Adjust the column names as per your database structure
+        return $this->hasMany(Schedules::class);
     }
 
-    public function class()
+    public function classSubject()
     {
-        return $this->belongsTo(Classes::class, 'class_id');
+        return $this->hasMany(ClassSubject::class, 'class_id');
     }
 }

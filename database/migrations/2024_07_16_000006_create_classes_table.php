@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedBigInteger('major_id')->nullable()->constrained('majors')->onDelete('set null');
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->timestamp('created_at')->nullable();
+            $table->timestamp('created_at')->nullable(); 
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();

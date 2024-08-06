@@ -29,7 +29,7 @@ return new class extends Migration
 
             $table->text('bio')->nullable();
             $table->unsignedBigInteger('course_id')->nullable()->constrained('courses')->onDelete('set null');
-            $table->unsignedBigInteger('majors_id')->nullable()->constrained('majors')->onDelete('set null');
+            $table->unsignedBigInteger('major_id')->nullable()->constrained('majors')->onDelete('set null');
 
             $table->unsignedBigInteger('role_id')->nullable()->constrained('roles')->onDelete('set null');
             $table->string('OTP');

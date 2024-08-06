@@ -77,8 +77,8 @@ class ClassController extends Controller
         try {
             Classes::create([
                 'name' => $request->input('name'),
-                'major_id' => $request->input('major_id'),
                 'description' => $request->input('description'),
+                'major_id' => $request->input('major_id'),
                 'created_by' => session('user_id')
             ]);
             toastr()->success('Thêm lớp học thành công!');

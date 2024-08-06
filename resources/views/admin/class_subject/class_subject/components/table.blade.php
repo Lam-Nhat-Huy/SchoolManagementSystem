@@ -1,9 +1,9 @@
-@include('admin.class.class.components.filter')
+@include('admin.class_subject.class_subject.components.filter')
 <div class="table-responsive">
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
         <div class="row mb-4">
             <div class="col-sm-12">
-                <form method="GET" action="{{ route('class.index') }}" class="row g-3 align-items-center">
+                <form method="GET" action="{{ route('class-subject.index') }}" class="row g-3 align-items-center">
                     <div class="col-md-3">
                         <div class="dataTables_length" id="per_page">
                             <label>Hiển thị:
@@ -34,9 +34,9 @@
                     </div>
                     <div class="col-md-3 d-flex">
                         <button type="submit" class="btn btn-primary btn-sm me-2">Lọc</button>
-                        <a href="{{ route('class.index') }}" class="btn btn-secondary btn-sm me-2">Bỏ lọc</a>
-                        <a href="{{ route('class.create') }}" class="btn btn-sm btn-success">
-                            <i class="fa fa-plus"></i> Thêm lớp học
+                        <a href="{{ route('class-subject.index') }}" class="btn btn-secondary btn-sm me-2">Bỏ lọc</a>
+                        <a href="{{ route('class-subject.create') }}" class="btn btn-sm btn-success">
+                            <i class="fa fa-plus"></i> Thêm lớp môn
                         </a>
                     </div>
                 </form>
@@ -47,28 +47,39 @@
                 <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid">
                     <thead>
                         <tr role="row">
-                            <th>Tên lớp học</th>
-                            <th>Chuyên ngành</th>
+                            <th>Lớp học</th>
+                            <th>Môn học</th>
+                            <th>Giảng viên</th>
+                            <th>SL sinh viên</th>
                             <th style="width:20%" class="text-center">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($classes as $class)
+                        @forelse ($class_subject as $items)
                             <tr role="row" class="odd">
-                                <td style="padding: 21px 24px !important;" class="text-dark">{{ $class->name }}</td>
-                                <td>{{ $class->major->name }}</td>
+                                <td style="padding: 21px 24px !important;" class="text-dark">{{ $items->class->name }}
+                                </td>
+                                <td>{{ $items->subject->name }}</td>
+                                <td>{{ $items->teacher->name }}</td>
+                                <td>{{ $items->current_student_count ?? 0 }} / {{ $items->student_count }}</td>
                                 <td class="text-center">
-                                    <a href="{{ $class->deleted_at ? route('class.restore', ['id' => $class->id]) : route('class.edit', ['id' => $class->id]) }}"
-                                        class="btn btn-sm {{ $class->deleted_at ? 'btn-success' : 'btn-black' }}">
-                                        <i class="fa {{ $class->deleted_at ? 'fa-undo' : 'fa-edit' }}"></i>
+                                    <a href="{{ route('class-subject.schedule', ['id' => $items->id]) }}"
+                                        class="btn btn-sm btn-primary" title="Thêm lịch học"><i
+                                            class="fas fa-calendar-plus"></i></a>
+                                    <a href="{{ route('class-subject.student', ['id' => $items->id]) }}"
+                                        class="btn btn-sm btn-success" title="Thêm sinh viên"><i
+                                            class="fas fa-user-plus"></i></a>
+                                    <a href="{{ $items->deleted_at ? route('class-subject.restore', ['id' => $items->id]) : route('class-subject.edit', ['id' => $items->id]) }}"
+                                        class="btn btn-sm {{ $items->deleted_at ? 'btn-success' : 'btn-black' }}">
+                                        <i class="fa {{ $items->deleted_at ? 'fa-undo' : 'fa-edit' }}"></i>
                                     </a>
-                                    @if ($class->deleted_at)
+                                    @if ($items->deleted_at)
                                         <a href="#" class="btn btn-sm btn-danger" data-toggle="modal"
-                                            data-target="#deleteModal{{ $class->id }}">
+                                            data-target="#deleteModal{{ $items->id }}">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     @else
-                                        <form action="{{ route('class.destroy', $class) }}" method="POST"
+                                        <form action="{{ route('class-subject.destroy', $items) }}" method="POST"
                                             style="display:inline-block;">
                                             @csrf
                                             @method('DELETE')
@@ -77,12 +88,12 @@
                                             </button>
                                         </form>
                                     @endif
-                                    @include('admin.class.class.components.modal')
+                                    @include('admin.class_subject.class_subject.components.modal')
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="2" class="text-center">Không có dữ liệu</td>
+                                <td colspan="5" class="text-center">Không có dữ liệu</td>
                             </tr>
                         @endforelse
                     </tbody>

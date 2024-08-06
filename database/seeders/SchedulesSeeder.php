@@ -16,32 +16,20 @@ class SchedulesSeeder extends Seeder
         Schedules::insert([
             [
                 'class_subject_id' => null,
-                'room_id' => 1,
-                'school_shift_id' => 1, // Added school_shift_id field
-                'day_of_week' => 'Monday', // Changed to string as defined in migration
+                'classroom_id' => 1,
+                'day_of_week' => 'Friday, 09 August 2024',
+                'start_time' => '7:00:00',
+                'school_shift_id' => 1,
+                'end_time' => '9:00:00'
             ],
             [
                 'class_subject_id' => null,
-                'room_id' => 1,
-                'school_shift_id' => 2, // Added school_shift_id field
-                'day_of_week' => 'Tuesday', // Changed to string as defined in migration
-            ],
-            [
-                'class_subject_id' => null,
-                'room_id' => 1,
-                'school_shift_id' => 3, // Added school_shift_id field
-                'day_of_week' => 'Tuesday', // Changed to string as defined in migration
-            ],   [
-                'class_subject_id' => null,
-                'room_id' => 1,
-                'school_shift_id' => 4, // Added school_shift_id field
-                'day_of_week' => 'Tuesday', // Changed to string as defined in migration
-            ],   [
-                'class_subject_id' => null,
-                'room_id' => 1,
-                'school_shift_id' => 5, // Added school_shift_id field
-                'day_of_week' => 'Tuesday', // Changed to string as defined in migration
-            ],
+                'classroom_id' => 1,
+                'day_of_week' => 'Friday, 09 August 2024',
+                'start_time' => '7:00:00',
+                'school_shift_id' => 1,
+                'end_time' => '9:00:00'
+            ]
         ]);
     }
 }

@@ -81,6 +81,20 @@ return [
         ],
         [
             'user_role' => [1, 2, 3, 4],
+            'user_role' => [1, 3],
+            'title' => 'Lớp môn',
+            'icon' => 'fas fa-layer-group', // Icon cho lớp môn
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Lớp môn',
+                    'route' => 'class-subject.index',
+                    'user_role' => [1, 3]
+                ]
+            ]
+        ],
+        [
+            'user_role' => [1, 2, 3],
             'title' => 'Bảng Điểm',
             'icon' => 'fas fa-file-signature', // Icon cho Bảng Điểm
             'name' => '',

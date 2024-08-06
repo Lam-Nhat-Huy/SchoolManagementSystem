@@ -24,80 +24,167 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid"
-                    aria-describedby="basic-datatables_info" style="width: 100%; overflow-x: auto;">
-                    <thead>
-                        <tr role="row">
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Môn: activate to sort column ascending"
-                                style="width: 200px; white-space: nowrap;">Môn</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Lớp: activate to sort column ascending"
-                                style="width: 100px; white-space: nowrap;">Lớp</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Giảng viên: activate to sort column ascending"
-                                style="width: 200px; white-space: nowrap;">Giảng viên</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Thời gian: activate to sort column ascending"
-                                style="width: 200px; white-space: nowrap;">Thời gian</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Ngày: activate to sort column ascending"
-                                style="width: 80px; white-space: nowrap;">Ngày</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Tạo: activate to sort column ascending"
-                                style="width: 100px; white-space: nowrap;">Tạo</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Sửa: activate to sort column ascending"
-                                style="width: 100px; white-space: nowrap;">Sửa</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Chi tiết: activate to sort column ascending"
-                                style="width: 100px; white-space: nowrap;">Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr role="row" class="odd">
-                            <td style="white-space: nowrap;">Phát triển cá nhân 2</td>
-                            <td style="white-space: nowrap;">WD18301</td>
-                            <td style="white-space: nowrap;">trungnt200</td>
-                            <td style="white-space: nowrap;">07:15:00 - 09:15:00</td>
-                            <td style="white-space: nowrap;">Thứ Năm<br>18/07/2024</td>
-                            <td style="white-space: nowrap;">nhathuybucacchomuc</td>
-                            <td style="white-space: nowrap;">nhathuybucacchomuc</td>
-                            <td>
-                                <a href="{{route('schedule.edit', 1)}}" class="btn btn-sm btn-black">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <form action="{{route('schedule.delete', 1)}}" method="POST"
-                                    style="display:inline-block;"
-                                    onsubmit="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
-                                    <input type="hidden" name="_token"
-                                        value="0Fvly38KMtXjE33lxCkbGivU5hAceFFxOr8NCs1M" autocomplete="off"> <input
-                                        type="hidden" name="_method" value="DELETE"> <button type="submit"
-                                        class="btn btn-sm btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
 
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="basic-datatables_info" role="status" aria-live="polite">Hiển thị 1
-                    đến 10 của 20 lịch học</div>
-            </div>
-            <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers" id="basic-datatables_paginate">
-                    <ul class="pagination">
-                        {{ $data->links('pagination::bootstrap-4') }}
-                    </ul>
+        @if (!$courseId)
+            <!-- Bảng chọn Ngành -->
+            <div class="table-responsive mb-4">
+                <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @if ($courses->isEmpty())
+                                <p>Không có dữ liệu</p>
+                            @else
+                                <table id="basic-datatables" class="display table table-striped table-hover dataTable"
+                                    role="grid">
+                                    <thead>
+                                        <tr role="row">
+                                            <th style="width: 200px;">Chọn Ngành</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($courses as $course)
+                                            <tr>
+                                                <td>
+                                                    <a class="text-dark"
+                                                        href="{{ route('schedule.index', ['courseId' => $course->id]) }}"
+                                                        style="font-size: 14px;">
+                                                        <i class="fas fa-folder" style="font-size: 20px;"></i>
+                                                        {{ $course->name }}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
+
+        @if ($courseId && !$majorId)
+            <!-- Bảng chọn Chuyên ngành -->
+            <div class="table-responsive mb-4">
+                <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @if ($majors->isEmpty())
+                                <p>Không có dữ liệu</p>
+                            @else
+                                <table id="basic-datatables" class="display table table-striped table-hover dataTable"
+                                    role="grid">
+                                    <thead>
+                                        <tr role="row">
+                                            <th style="width: 200px;">Chọn Chuyên ngành</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($majors as $major)
+                                            <tr>
+                                                <td>
+                                                    <a class="text-dark"
+                                                        href="{{ route('schedule.index', ['courseId' => $courseId, 'majorId' => $major->id]) }}"
+                                                        style="font-size: 14px;">
+                                                        <i class="fas fa-folder" style="font-size: 20px;"></i>
+                                                        {{ $major->name }}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if ($majorId && !$classId)
+            <!-- Bảng chọn Lớp môn -->
+            <div class="table-responsive mb-4">
+                <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @if ($classes->isEmpty())
+                                <p>Không có dữ liệu</p>
+                            @else
+                                <table id="basic-datatables" class="display table table-striped table-hover dataTable"
+                                    role="grid">
+                                    <thead>
+                                        <tr role="row">
+                                            <th style="width: 200px;">Chọn Lớp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($classes as $class)
+                                            <tr>
+                                                <td>
+                                                    <a class="text-dark"
+                                                        href="{{ route('schedule.index', ['courseId' => $courseId, 'majorId' => $majorId, 'classId' => $class->id]) }}"
+                                                        style="font-size: 14px;">
+                                                        <i class="fas fa-folder" style="font-size: 20px;"></i>
+                                                        {{ $class->name }}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if ($classId)
+            <!-- Bảng lịch học -->
+            <div class="table-responsive">
+                <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @if ($schedule)
+                                <table id="basic-datatables" class="display table table-striped table-hover dataTable"
+                                    role="grid">
+                                    <thead>
+                                        <tr role="row">
+                                            <th style="width: 200px;">Lớp môn</th>
+                                            <th style="width: 100px;">Chi tiết</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($schedule as $item)
+                                            <tr>
+                                                <td>
+                                                    <a class="text-dark"
+                                                        href="{{ route('schedule.detail', ['id' => $item->id]) }}"
+                                                        style="font-size: 14px;">
+                                                        <i class="fas fa-folder" style="font-size: 20px;"></i>
+                                                        {{ $item->classSubject->class->name . ' - ' . $item->classSubject->subject->name }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="text-dark"
+                                                        href="{{ route('schedule.detail', ['id' => $item->id]) }}"
+                                                        style="font-size: 14px;">
+                                                        <i class="fas fa-info-circle" style="font-size: 20px;"></i>
+                                                        Xem chi tiết
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <p>Không có dữ liệu</p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
     </div>
 </div>
