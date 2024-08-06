@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Teachers;
 use App\Models\TeachingMaterial;
 use Illuminate\Http\Request;
 
@@ -18,9 +19,12 @@ class TeachingMaterialController extends Controller
     public function create()
     {
         $materials = TeachingMaterial::with('teacher')->get();
+        $teachers = Teachers::all(); // Fetch all teachers
         return view('admin.dashboard.layout', [
-            'template' => 'admin.teacher.teachermaterials.pages.store'], compact('materials'));
+            'template' => 'admin.teacher.teachermaterials.pages.store'
+        ], compact('materials', 'teachers'));
     }
+    
 
     public function store(Request $request)
     {

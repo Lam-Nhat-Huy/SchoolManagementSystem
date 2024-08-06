@@ -13,11 +13,12 @@
                     <div class="form-group">
                         <label for="teacher_id">Giáo viên</label>
                         <select name="teacher_id" id="teacher_id" class="form-control" required>
-                            @foreach($materials as $materials)
-                                <option value="{{ $materials->teacher->id }}">{{$materials->teacher->name}}</option>
+                            @foreach($teachers as $teacher)
+                                <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                             @endforeach
                         </select>
                     </div>
+                    
                     <div class="form-group">
                         <label for="title">Tiêu đề</label>
                         <input type="text" name="title" id="title" class="form-control" required>
