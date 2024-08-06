@@ -125,6 +125,11 @@ return [
                     'title' => 'Buổi Dạy',
                     'route' => 'teacher.day',
                     'user_role' => 1
+                ],
+                [
+                    'title' => 'Tài Liệu Giảng Viên',
+                    'route' => 'materials.index',
+                    'user_role' => 1
                 ]
             ]
 
