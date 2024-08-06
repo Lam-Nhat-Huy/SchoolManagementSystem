@@ -98,6 +98,21 @@ class EnrollmentController extends Controller
     public function update(Request $request, $id)
     {
         $enrollment = Enrollments::find($id);
+
+        // Lấy thông tin classSubject từ enrollments
+        $classSubject = $enrollment->classSubject;
+
+        if ($classSubject) {
+            $now = Carbon::now();
+            $startDate = Carbon::parse($classSubject->start_date);
+            $endDate = Carbon::parse($classSubject->end_date);
+
+            if ($now->lt($startDate) || $now->gt($endDate)) {
+                toastr()->error('Thời gian nhập điểm đã hết');
+                return redirect()->back();
+            }
+        }
+
         $enrollment->lab_1 = $request->input('lab_1');
         $enrollment->lab_2 = $request->input('lab_2');
         $enrollment->lab_3 = $request->input('lab_3');
@@ -110,6 +125,7 @@ class EnrollmentController extends Controller
         toastr()->success('Chỉnh sửa bản ghi thành công!');
         return redirect()->back();
     }
+
 
     public function classList()
     {
@@ -128,7 +144,6 @@ class EnrollmentController extends Controller
     {
         $classId = $request->input('class_id');
         Enrollments::where('class_subject_id', $classId)->delete();
-
         FacadesExcel::import(new ScoreImport, $request->file('excel_file'));
         return redirect()->back();
     }
@@ -148,10 +163,4 @@ class EnrollmentController extends Controller
             return redirect()->back()->with('error', 'Lớp không tồn tại.');
         }
     }
-
-    public function setTimeEntryPoint(Request $request)
-    {
-    }
-
-
 }

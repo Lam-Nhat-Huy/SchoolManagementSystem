@@ -30,5 +30,8 @@ class Teachers extends Model
     {
         return $this->belongsTo(Major::class, 'majors_id');
     }
+    public function teachingMaterials()
+    {
+        return $this->hasMany(TeachingMaterial::class);
+    }
 }
-

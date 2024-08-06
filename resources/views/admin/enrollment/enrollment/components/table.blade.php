@@ -18,10 +18,9 @@
                         <!-- Truyền class_subject_id động vào route export -->
                         <a href="{{ route('enrollment.export', $firstClassId ?? '') }}" class="btn btn-info btn-sm me-2"><i class="fa fa-print"></i>
                             Xuất excel</a>
-                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                data-bs-target="#uploadExcelModal">
-                            Nhập excel
-                        </button>
+                            <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#uploadExcelModal">
+                                Nhập excel
+                            </button>
                     </div>
                 </form>
             </div>
