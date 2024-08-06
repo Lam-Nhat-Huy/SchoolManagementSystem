@@ -222,31 +222,31 @@ return [
                 ]
             ]
         ],
-        [
-            'user_role' => [2],
-            'title' => 'Đăng ký môn học',
-            'icon' => 'fas fa-book', // Icon cho môn học
-            'name' => '',
-            'subModule' => [
-                [
-                    'title' => 'Môn học',
-                    'route' => 'get.course',
-                    'user_role' => [2]
-                ]
-            ]
-        ],
-        [
-            'user_role' => [2],
-            'title' => 'Môn học đã đăng ký',
-            'icon' => 'fas fa-check-circle',
-            'name' => '',
-            'subModule' => [
-                [
-                    'title' => 'Môn học',
-                    'route' => 'show_subject_register.index',
-                    'user_role' => [2]
-                ]
-            ]
-        ]
+//        [
+//            'user_role' => [2],
+//            'title' => 'Đăng ký môn học',
+//            'icon' => 'fas fa-book', // Icon cho môn học
+//            'name' => '',
+//            'subModule' => [
+//                [
+//                    'title' => 'Môn học',
+//                    'route' => 'get.course',
+//                    'user_role' => [2]
+//                ]
+//            ]
+//        ],
+//        [
+//            'user_role' => [2],
+//            'title' => 'Môn học đã đăng ký',
+//            'icon' => 'fas fa-check-circle',
+//            'name' => '',
+//            'subModule' => [
+//                [
+//                    'title' => 'Môn học',
+//                    'route' => 'show_subject_register.index',
+//                    'user_role' => [2]
+//                ]
+//            ]
+//        ]
     ]
 ];
