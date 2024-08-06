@@ -17,7 +17,8 @@
                                 Viên</th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 27.33%;">Môn</th>
+                                aria-label="Tên đánh giá: activate to sort column descending" style="width: 27.33%;">Môn
+                            </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
                                 aria-label="Tên đánh giá: activate to sort column descending" style="width: 20%;">Hành
@@ -25,7 +26,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($getAllEvaluationOfStudentUnRated as $items)
+                        @forelse ($getAllEvaluationOfStudentUnRated as $items)
                             @if (App\Models\TeacherEvaluations::where('student_id', session('user_id'))->where('create_teacher_evaluation_id', $items->id)->count() == 0)
                                 <tr role="row" class="odd">
                                     <td class="sorting_1">{{ $items->class_name }}</td>
@@ -50,7 +51,15 @@
                                     </td>
                                 </tr>
                             @endif
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4">
+                                    <div class="alert alert-warning mb-0" role="alert">
+                                        Không tìm thấy dữ liệu.
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

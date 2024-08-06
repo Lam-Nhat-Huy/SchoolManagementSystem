@@ -20,7 +20,7 @@ class StudentsSeeder extends Seeder
                 'student_code' => "PC05334",
                 'gender' => rand(0, 1),
                 'date_of_birth' => Carbon::now()->subYears(20)->format('Y-m-d'),
-                'email' => "huylppc05334@fpt.edu.vn",
+                'email' => "lphdev04@gmail.com",
                 'address' => "Kiên Giang",
                 'course_id' => rand(1, 3),
                 'major_id' => rand(1, 3),
