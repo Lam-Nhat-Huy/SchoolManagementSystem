@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
             StudyStatusSeeder::class,
             StudentsSeeder::class,
             ClassSubjectSeeder::class,
-            SicsSeeder::class
+            SicsSeeder::class,
+            TeachingMaterialsTableSeeder::class
         ]);
     }
 }
