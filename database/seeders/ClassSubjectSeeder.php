@@ -20,6 +20,8 @@ class ClassSubjectSeeder extends Seeder
                 'teacher_id' => 2,
                 'student_count' => 30,
                 'is_evaluation' => 0,
+                'start_date' => '2024-09-01', // Example start date
+                'end_date' => '2024-12-15',   // Example end date
             ],
             [
                 'class_id' => 2,
@@ -27,6 +29,8 @@ class ClassSubjectSeeder extends Seeder
                 'teacher_id' => 2,
                 'student_count' => 30,
                 'is_evaluation' => 0,
+                'start_date' => '2024-09-01', // Example start date
+                'end_date' => '2024-12-15',   // Example end date
             ],
         ]);
     }

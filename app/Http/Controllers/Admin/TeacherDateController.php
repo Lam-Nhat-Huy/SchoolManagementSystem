@@ -2,75 +2,71 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Teachers;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
 use App\Exports\TeachersExport;
-use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
+use App\Http\Controllers\Controller;
+use App\Models\Schedules;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class TeacherDateController extends Controller
 {
     public function index(Request $request)
     {
-        // Get current month start and end dates
+        // Get the search query, date filters, and shift filter
+        $search = $request->input('search');
+        $shift = $request->input('shift');
+    
+        // Get the first and last day of the current month
         $currentMonthStart = Carbon::now()->startOfMonth()->toDateString();
         $currentMonthEnd = Carbon::now()->endOfMonth()->toDateString();
-
-        // Get filter parameters from the request or set default to current month
+    
+        // Use current month as default if no dates are provided
         $startDate = $request->input('start_date', $currentMonthStart);
         $endDate = $request->input('end_date', $currentMonthEnd);
-        $teacherCode = $request->input('teacher_code');
-
-        // Initialize the query to get teachers and count their teaching sessions
-        $query = Teachers::whereHas('schedules', function($query) use ($startDate, $endDate) {
-            $query->whereBetween('start_date', [$startDate, $endDate]);
-        })
-        ->withCount(['schedules' => function($query) use ($startDate, $endDate) {
-            $query->whereBetween('start_date', [$startDate, $endDate]);
-        }])
-        ->withCount(['schedules as total_school_shifts' => function($query) use ($startDate, $endDate) {
-            $query->whereBetween('start_date', [$startDate, $endDate]);
-        }]);
-
-        // Add filter condition for teacher code
-        if ($teacherCode) {
-            $query->where('code', $teacherCode);
+    
+        // Base query to get teachers with their respective number of sessions and shifts
+        $teachersQuery = Schedules::select('class_subjects.teacher_id', 'teachers.name', 'teachers.code')
+            ->selectRaw('COUNT(schedules.id) as total_sessions')
+            ->selectRaw('COUNT(schedules.school_shift_id) as total_shifts')
+            ->join('class_subjects', 'schedules.class_subject_id', '=', 'class_subjects.id')
+            ->join('teachers', 'class_subjects.teacher_id', '=', 'teachers.id');
+    
+        // Apply search filter if a search query is provided
+        if ($search) {
+            $teachersQuery->where(function ($query) use ($search) {
+                $query->where('teachers.name', 'like', '%' . $search . '%')
+                      ->orWhere('teachers.code', 'like', '%' . $search . '%');
+            });
         }
-
-        // Execute the query with pagination
-        $teachers = $query->paginate(10);
-
-        // Calculate teaching hours and salary
-        $hourlyRate = 100000; // Example hourly rate
-        foreach ($teachers as $teacher) {
-            $teacher->teaching_hours = $teacher->total_school_shifts * 2;
-            $teacher->salary = $teacher->teaching_hours * $hourlyRate;
+    
+        // Apply date filters
+        $teachersQuery->whereBetween('class_subjects.start_date', [$startDate, $endDate])
+                      ->whereBetween('class_subjects.end_date', [$startDate, $endDate]);
+    
+        // Apply shift filter if provided
+        if ($shift) {
+            $teachersQuery->where('schedules.school_shift_id', $shift);
         }
-
-        // Return view with data
+    
+        // Group by teacher ID and fetch data
+        $teachers = $teachersQuery->groupBy('class_subjects.teacher_id', 'teachers.name', 'teachers.code')->get();
+    
+        // Pass the data to the view
         return view('admin.dashboard.layout', [
             'template' => 'admin.teacher.teacherday.pages.index',
             'teachers' => $teachers,
+            'search' => $search,
+            'shift' => $shift ?? '',
             'startDate' => $startDate,
             'endDate' => $endDate,
-            'teacherCode' => $teacherCode
         ]);
     }
-
+    
     public function export(Request $request)
     {
-        // Get filter parameters from the request
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $teacherCode = $request->input('teacher_code');
-    
-        // Validate the date parameters
-        $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-        ]);
-    
-        return FacadesExcel::download(new TeachersExport($startDate, $endDate, $teacherCode), 'teachers.xlsx');
+        // Pass the request object to the export class to access filtering parameters
+        return Excel::download(new TeachersExport($request), 'teachers.xlsx');
     }
+    
 }

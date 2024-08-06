@@ -53,20 +53,18 @@
                                     <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
                                         <thead>
                                             <tr role="row">
-                                                <th style="width: 150px;">Hình ảnh</th>
-                                                <th style="width: 100px;">Mã giảng viên</th>
-                                                <th style="width: 200px;">Tên</th>
-                                                <th style="width: 150px;">Email</th>
-                                                <th style="width: 100px;">Phone</th>
-                                                <th style="width: 200px;">Địa chỉ nhà</th>
-                                                <th style="width: 200px;">Địa chỉ hiện tại</th>
+                                                <th style="width: 100px;">Hình ảnh</th>
+                                                <th style="width: 80px;">Mã</th>
+                                                <th style="width: 120px;">Tên</th>
+                                                <th style="width: 120px;">Email</th>
+                                                <th style="width: 80px;">Phone</th>
+                                                <th style="width: 120px;">Địa chỉ</th>
                                                 <th style="width: 100px;">Giới tính</th>
-                                                <th style="width: 150px;">Ngày tháng năm sinh</th>
-                                                <th style="width: 150px;">Bằng cấp</th>
-                                                <th style="width: 150px;">Bio</th>
-                                                <th style="width: 150px;">Chuyên khoa</th>
-                                                <th style="width: 150px;">Chuyên ngành</th>
-                                                <th style="width: 150px;">Thao tác</th>
+                                                <th style="width: 100px;">Ngày sinh</th>
+                                                <th style="width: 120px;">Bằng cấp</th>
+                                                <th style="width: 100px;">Chuyên khoa</th>
+                                                <th style="width: 100px;">Chuyên ngành</th>
+                                                <th style="width: 100px;">Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -74,21 +72,19 @@
                                                 <tr role="row" class="{{ $loop->odd ? 'odd' : 'even' }}">
                                                     <td style="text-align: center;">
                                                         <img src="{{ $teacher->image ? asset('uploads/teacher/' . $teacher->image) : asset('uploads/def/sbcf-default-avatar.webp') }}" 
-                                                             alt="Hình ảnh" class="rounded-circle" style="width: 100px; height: 90px; object-fit: cover;">
+                                                             alt="Hình ảnh" class="rounded-circle" style="width: 70px; height: 70px; object-fit: cover;">
                                                     </td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->code }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->name }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->email }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->phone }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->address }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->current_address }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->gender }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->date_of_birth }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->qualifications }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->bio }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->course_name }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">{{ $teacher->major_name }}</td>
-                                                    <td style="padding: 5px; line-height: 1.2;">
+                                                    <td style="padding: 2px; line-height: 1.2;">{{ $teacher->code }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->name }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->email }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2;">{{ $teacher->phone }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->address }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2;">{{ $teacher->gender }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2;">{{ $teacher->date_of_birth }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->qualifications }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->course_name }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $teacher->major_name }}</td>
+                                                    <td style="padding: 2px; line-height: 1.2;">
                                                         <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-sm btn-black">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
@@ -129,3 +125,18 @@
         document.getElementById('filter-form').submit();
     }
 </script>
+
+<style>
+    #basic-datatables th, #basic-datatables td {
+        font-size: 12px; /* Decrease font size */
+        padding: 8px; /* Decrease padding */
+    }
+    #basic-datatables td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .table-responsive {
+        overflow-x: auto;
+    }
+</style>

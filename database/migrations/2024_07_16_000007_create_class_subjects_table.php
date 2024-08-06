@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('teacher_id')->nullable()->constrained('teachers')->onDelete('set null');
             $table->integer('student_count');
             $table->integer('is_evaluation')->default(0);
+            $table->date('start_date')->nullable(); // Added start_date column
+            $table->date('end_date')->nullable();   // Added end_date column
             $table->timestamps();
             $table->softDeletes();
         });
