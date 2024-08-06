@@ -22,24 +22,14 @@ class TeacherController extends Controller
                   ->orWhere('code', 'LIKE', "%{$search}%");
         }
     
-        // Lấy dữ liệu với quan hệ course và major
+        // Eager load course and major relationships
         $data = $query->with(['course', 'major'])->orderBy('id', 'asc')->paginate(10);
-    
-        // Thay đổi cấu trúc dữ liệu để chứa tên khóa học và chuyên ngành
-        $data->getCollection()->transform(function ($teacher) {
-            $teacher->course_name = $teacher->course ? $teacher->course->name : 'Chưa có';
-            $teacher->major_name = $teacher->major ? $teacher->major->name : 'Chưa có';
-            return $teacher;
-        });
     
         $template = "admin.teacher.teacher.pages.index";
     
-        return view('admin.dashboard.layout', compact(
-            'template',
-            'data',
-            'search'
-        ));
+        return view('admin.dashboard.layout', compact('template', 'data', 'search'));
     }
+    
     
 
     public function create()
