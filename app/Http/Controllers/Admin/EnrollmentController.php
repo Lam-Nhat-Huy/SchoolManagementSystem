@@ -130,9 +130,13 @@ class EnrollmentController extends Controller
     public function classList()
     {
         // Lấy ID tài khoản từ session
-        $teacherId = session('user_id');
-        // Lấy các lớp mà tài khoản này đang quản lý
-        $enrollments = ClassSubject::where('teacher_id', $teacherId)->get();
+        $id = session('user_id');
+
+        if (session('user_role') == 1) {
+            $enrollments = ClassSubject::all();
+        } elseif (session('user_role') == 3) {
+            $enrollments = ClassSubject::where('teacher_id', $id)->get();
+        }
 
         $template = 'admin.enrollment.enrollment.pages.list';
 
