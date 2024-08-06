@@ -11,7 +11,7 @@
         /* Border giống như form-control */
         box-shadow: none !important;
         /* Loại bỏ box-shadow mặc định của Select2 */
-        padding: .6rem 1rem !important;
+        padding: .3rem !important;
         /* Padding giống như form-control */
         font-size: 1rem !important;
         /* Font-size giống như form-control */
@@ -30,7 +30,7 @@
     }
 
     .select2-container--default .select2-selection--single .select2-selection__arrow b {
-        margin-top: 19px !important;
+        margin-top: 14px !important;
     }
 
     .table-responsive{
