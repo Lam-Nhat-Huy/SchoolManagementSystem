@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('teaching_materials', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('teacher_id');
+            $table->unsignedBigInteger('officer_id');
+            $table->unsignedBigInteger('course_id');
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('file_path');
             $table->timestamps();
+            $table->softDeletes(); // Add this line for soft deletes
     
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('officer_id')->references('id')->on('training_officer_accounts')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 
