@@ -76,7 +76,6 @@ class Students extends Model
         $student = Students::find($id);
 
         if ($student) {
-
         }
 
         return $student->update($data);
@@ -90,5 +89,10 @@ class Students extends Model
     public function role()
     {
         return $this->belongsTo(Roles::class);
+    }
+
+    public function classSubject()
+    {
+        return $this->belongsToMany(ClassSubject::class);
     }
 }

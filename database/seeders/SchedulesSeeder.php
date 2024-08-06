@@ -16,15 +16,15 @@ class SchedulesSeeder extends Seeder
         Schedules::insert([
             [
                 'class_subject_id' => null,
-                'room_id' => 1,
-                'day_of_week' => 2,
+                'classroom_id' => 1,
+                'day_of_week' => 'Friday, 09 August 2024',
                 'start_time' => '7:00:00',  
                 'end_time' => '9:00:00'
             ],
             [
                 'class_subject_id' => null,
-                'room_id' => 1,
-                'day_of_week' => 3,
+                'classroom_id' => 1,
+                'day_of_week' => 'Friday, 09 August 2024',
                 'start_time' => '7:00:00',  
                 'end_time' => '9:00:00'
             ]

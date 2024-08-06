@@ -209,7 +209,7 @@ class EvaluationController extends Controller
     public function delete($id)
     {
         $delete = $this->province::find($id);
-        
+
         $table_classes_old = Classes::find($delete->class_id);
 
         $table_classes_old->is_evaluation = 0;

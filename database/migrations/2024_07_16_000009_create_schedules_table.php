@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->foreignId('class_subject_id')->nullable()->constrained('class_subjects')->onDelete('set null');
-            $table->foreignId('room_id')->nullable()->constrained('classrooms')->onDelete('set null');
+            $table->foreignId('classroom_id')->nullable()->constrained('classrooms')->onDelete('set null');
             $table->string('day_of_week'); 
             $table->time('start_time'); 
             $table->time('end_time'); 

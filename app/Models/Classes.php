@@ -12,8 +12,7 @@ class Classes extends Model
     use SoftDeletes;
     protected $fillable = [
         'name',
-        'course_id',
-        'teacher_id',
+        'major_id',
         'created_by',
         'created_at',
         'updated_by',
@@ -35,5 +34,15 @@ class Classes extends Model
     public function major()
     {
         return $this->belongsTo(Major::class, 'major_id');
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedules::class);
+    }
+
+    public function classSubject()
+    {
+        return $this->hasMany(ClassSubject::class, 'class_id');
     }
 }
