@@ -29,7 +29,7 @@ class EnrollmentController extends Controller
 
         // Kiểm tra quyền truy cập của giáo viên
         if (session('user_role') == 3) {
-            $query->whereHas('class', function ($q) use ($teacherId) {
+            $query->whereHas('classSubject', function ($q) use ($teacherId) {
                 $q->where('teacher_id', $teacherId);
             });
         }
