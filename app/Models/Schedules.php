@@ -33,13 +33,13 @@ class Schedules extends Model
         return $this->belongsTo(Subjects::class);
     }
 
-    public function teacher()
-    {
-        return $this->belongsTo(Teachers::class);
-    }
-
     public function school_shift()
     {
         return $this->belongsTo(SchoolShift::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teachers::class, 'teacher_id');
     }
 }

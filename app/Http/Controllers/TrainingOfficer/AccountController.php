@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\TrainingOfficer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TrainingOfficerRequest;
+use App\Http\Requests\TrainingOfficerUpdateRequest;
 use App\Models\TrainingOfficer\TrainingOfficerAccount;
 use Illuminate\Http\Request;
 
@@ -10,8 +12,7 @@ class AccountController extends Controller
 {
     public function index()
     {
-        $getAllTrainingOfficerAccount = TrainingOfficerAccount::orderBy('training_officer_accounts.created_at', 'DESC')
-            ->paginate(10);
+        $getAllTrainingOfficerAccount = TrainingOfficerAccount::withTrashed()->orderBy('training_officer_accounts.created_at', 'DESC')->paginate(10);
 
         $template = 'training_officer.account.account.pages.index';
 
@@ -41,22 +42,36 @@ class AccountController extends Controller
 
         $config['method'] = 'create';
 
-
-        return view('training_officer.dashboard.layout', compact(
-            'template',
-            'config',
-        ));
+        return view('training_officer.dashboard.layout', compact('template', 'config',));
     }
 
-    public function store(Request $request)
+    public function store(TrainingOfficerRequest $request)
     {
-        dd($request->all());
+        $validatedData = $request->validated();
+
+        // Create a new training officer account
+        TrainingOfficerAccount::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+            'hometown' => $validatedData['hometown'],
+            'created_by' => auth()->id(), // Assuming you have authentication set up
+            'created_at' => now(),
+        ]);
+
+        // Redirect to the index page with a success message
+        toastr()->success('Thêm mới cán bộ quản lí thành công');
+            return redirect()->route('training_officer_account.index');
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $getEdit = TrainingOfficerAccount::where('training_officer_accounts.id', $id)
-            ->first();
+        $getEdit = TrainingOfficerAccount::findOrFail($id);
+        
+        $request->session()->put('TrainingId', $id);
+
+        // Store the current email in session
 
         $template = "training_officer.account.account.pages.store";
 
@@ -76,14 +91,57 @@ class AccountController extends Controller
 
         $config['method'] = 'edit';
 
-        return view('training_officer.dashboard.layout', compact(
-            'template',
-            'config',
-            'getEdit',
-        ));
+        return view('training_officer.dashboard.layout', compact('template', 'config', 'getEdit',));
     }
 
-    public function update(Request $request, $id)
+
+    public function update(TrainingOfficerUpdateRequest $request, $id)
     {
+        $validatedData = $request->validated();
+    
+        $trainingOfficerAccount = TrainingOfficerAccount::findOrFail($id);
+    
+        $trainingOfficerAccount->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+            'hometown' => $validatedData['hometown'],
+            'updated_by' => auth()->id(),
+            'updated_at' => now(),
+        ]);
+    
+        toastr()->success('Tài khoản cán bộ đào tạo đã được cập nhật thành công.');
+        return redirect()->route('training_officer_account.index');
+    }
+
+
+    public function destroy($id)
+    {
+        $trainingOfficerAccount = TrainingOfficerAccount::findOrFail($id);
+        $trainingOfficerAccount->deleted_by = auth()->id();
+        $trainingOfficerAccount->save();
+        $trainingOfficerAccount->delete();
+    
+        toastr()->success('Tài khoản cán bộ đào tạo đã được ẩn');
+        return redirect()->route('training_officer_account.index');
+    }
+
+    public function restore($id)
+    {
+        $trainingOfficerAccount = TrainingOfficerAccount::onlyTrashed()->findOrFail($id);
+        $trainingOfficerAccount->restore();
+    
+        toastr()->success('Tài khoản cán bộ đào tạo đã được phục hồi thành công.');
+        return redirect()->route('training_officer_account.index');
+    }
+
+    public function forceDelete($id)
+    {
+        $trainingOfficerAccount = TrainingOfficerAccount::onlyTrashed()->findOrFail($id);
+        $trainingOfficerAccount->forceDelete();
+    
+        toastr()->success('Tài khoản cán bộ đào tạo đã bị xóa vĩnh viễn.');
+        return redirect()->route('training_officer_account.index');
     }
 }

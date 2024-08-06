@@ -275,4 +275,11 @@ class TeacherController extends Controller
 
         return redirect()->route('teacher.index')->with('status', 'Xóa giáo viên thành công');
     }
+      public function getMajorsByCourse(Request $request)
+    {
+        $courseId = $request->input('course_id');
+        $majors = Major::where('course_id', $courseId)->get();
+
+        return response()->json($majors);
+    }
 }

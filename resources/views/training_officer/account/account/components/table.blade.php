@@ -4,8 +4,7 @@
             <div class="col-sm-12 col-md-6">
                 <div class="dataTables_length" id="basic-datatables_length">
                     <label>Hiển thị:
-                        <select name="basic-datatables_length" aria-controls="basic-datatables"
-                            class="form-control form-control-sm">
+                        <select name="basic-datatables_length" aria-controls="basic-datatables" class="form-control form-control-sm">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -18,23 +17,18 @@
             <div class="col-sm-12 col-md-6">
                 <div id="basic-datatables_filter" class="dataTables_filter">
                     <label>Tìm kiếm:
-                        <input type="search" class="form-control form-control-sm" placeholder=""
-                            aria-controls="basic-datatables">
+                        <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="basic-datatables">
                     </label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
-                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid"
-                    aria-describedby="basic-datatables_info">
+                <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
                     <thead>
                         <tr role="row">
-                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-sort="ascending"
-                                aria-label="Tên cán bộ đào tạo: activate to sort column descending" style="width: 80%;">Email</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 20%;">Hành động</th>
+                            <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Tên cán bộ đào tạo: activate to sort column descending" style="width: 80%;">Email</th>
+                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1" colspan="1" aria-label="Hành động: activate to sort column ascending" style="width: 20%;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,19 +36,32 @@
                             <tr role="row" class="odd">
                                 <td class="sorting_1">{{ $items->email }}</td>
                                 <td>
-                                    <a href="{{ route('training_officer_account.edit', ['id' => $items->id]) }}"
-                                        class="btn btn-sm btn-black">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form action="{{ route('training_officer_account.destroy', ['id' => $items->id]) }}" method="POST"
-                                        style="display:inline-block;"
-                                        onsubmit="return confirm('Bạn có chắc chắn muốn xóa cán bộ đào tạo này?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    @if ($items->trashed())
+                                        <form action="{{ route('training_officer_account.restore', ['id' => $items->id]) }}" method="POST" style="display:inline-block;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                <i class="fa fa-undo"></i> Phục hồi
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('training_officer_account.forceDelete', ['id' => $items->id]) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa vĩnh viễn cán bộ đào tạo này?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i> Xóa vĩnh viễn
+                                            </button>
+                                        </form>
+                                    @else
+                                        <a href="{{ route('training_officer_account.edit', ['id' => $items->id]) }}" class="btn btn-sm btn-black">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form action="{{ route('training_officer_account.destroy', ['id' => $items->id]) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa cán bộ đào tạo này?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -69,3 +76,4 @@
         </div>
     </div>
 </div>
+

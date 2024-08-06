@@ -18,15 +18,16 @@ return new class extends Migration
             $table->string('phone', 15)->nullable(); // Số điện thoại
             $table->string('address')->nullable(); // Địa chỉ hiện tại
             $table->string('hometown')->nullable(); // Quê quán
-            $table->unsignedBigInteger('role_id')->nullable()->constrained('roles')->onDelete('set null');
+            $table->unsignedBigInteger('role_id')->nullable()->constrained('roles')->onDelete('set null')->default(4);
             $table->integer('OTP')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('deleted_by')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->softDeletes(); // For soft deletes
         });
+        
     }
 
     /**

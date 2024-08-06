@@ -19,7 +19,6 @@ class TrainingOfficerAccountSeeder extends Seeder
                 'phone' => '1234567890',
                 'address' => '123 Main St, Anytown, USA',
                 'hometown' => 'Hometown, USA',
-                'role_id' => 1,
                 'OTP' => rand(111111, 999999),
                 'created_by' => 1,
                 'created_at' => now(),
@@ -34,7 +33,7 @@ class TrainingOfficerAccountSeeder extends Seeder
                 'phone' => '0987654321',
                 'address' => '456 Elm St, Anytown, USA',
                 'hometown' => 'Another Town, USA',
-                'role_id' => 2,
+
                 'OTP' => rand(111111, 999999),
                 'created_by' => 1,
                 'created_at' => now(),
@@ -49,7 +48,7 @@ class TrainingOfficerAccountSeeder extends Seeder
                 'phone' => '1122334455',
                 'address' => '789 Oak St, Anytown, USA',
                 'hometown' => 'Yet Another Town, USA',
-                'role_id' => 3,
+
                 'OTP' => rand(111111, 999999),
                 'created_by' => 1,
                 'created_at' => now(),
@@ -64,7 +63,7 @@ class TrainingOfficerAccountSeeder extends Seeder
                 'phone' => '5566778899',
                 'address' => '101 Pine St, Anytown, USA',
                 'hometown' => 'Townsville, USA',
-                'role_id' => 4,
+
                 'OTP' => rand(111111, 999999),
                 'created_by' => 1,
                 'created_at' => now(),
