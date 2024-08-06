@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Courses;
+use App\Models\ClassSubject;
 use App\Models\Enrollments;
 use Illuminate\Http\Request;
 
@@ -13,13 +13,14 @@ class EnrollmentStudentController extends Controller
     {
         $getAllEnrollmentStudent = Enrollments::select(
             'enrollments.*',
-            'subjects.name as subject_name',
+            'subjects.name as subject_name'
         )
             ->orderBy('enrollments.created_at', 'DESC')
-            ->join('classes', 'enrollments.class_id', '=', 'classes.id')
-            ->join('subjects', 'classes.subject_id', '=', 'subjects.id')
+            ->join('class_subjects', 'enrollments.class_subject_id', '=', 'class_subjects.id')
+            ->join('subjects', 'class_subjects.subject_id', '=', 'subjects.id')
             ->where('enrollments.student_id', '=', session('user_id'))
             ->get();
+
 
         $template = 'admin.enrollment_student.enrollment_student.pages.index';
 
@@ -31,12 +32,10 @@ class EnrollmentStudentController extends Controller
 
     public function showSubjectRegister()
     {
-
         $studentId = session('user_id');
-        $enrollments = Enrollments::with(['class.subject', 'class.teacher'])
+        $enrollments = Enrollments::with(['classSubject.subject', 'classSubject.teacher'])
             ->where('student_id', $studentId)
             ->get();
-
 
         $template = 'admin.subject_register.subject_registered.pages.index';
 
@@ -69,3 +68,4 @@ class EnrollmentStudentController extends Controller
         return redirect()->route('show_subject_register.index')->with('success', 'Ngành học được xóa thành công.');
     }
 }
+
