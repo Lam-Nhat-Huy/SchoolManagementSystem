@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             TrainingOfficerAccountSeeder::class,
             TeachersSeeder::class,
             ClassesSeeder::class,
+            ClassSubjectSeeder::class,
             SchedulesSeeder::class,
             EnrollmentsSeeder::class,
             CreateTeacherEvaluationsSeeder::class,
@@ -33,7 +34,6 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             StudyStatusSeeder::class,
             StudentsSeeder::class,
-            ClassSubjectSeeder::class,
             SicsSeeder::class,
             TeachingMaterialsTableSeeder::class
         ]);
