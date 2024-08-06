@@ -19,7 +19,8 @@ class TeachingMaterialsTableSeeder extends Seeder
         // Ví dụ dữ liệu mẫu
         DB::table('teaching_materials')->insert([
             [
-                'teacher_id' => 1, // Thay đổi theo ID của giáo viên
+                'officer_id' => 1, 
+                'course_id' => 1, 
                 'title' => 'Material 1',
                 'description' => 'Description for material 1',
                 'file_path' => 'https://drive.google.com/drive/folders/1mfhcHahSQi2Lo6xZwaGb6cwWAa-2V9Pl',

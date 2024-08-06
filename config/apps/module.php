@@ -224,6 +224,19 @@ return [
             ]
         ],
         [
+            'user_role' => [1, 3],
+            'title' => 'Tài Liệu Học Tập',
+            'icon' => 'fas fa-pencil-alt', // Icon cho Đánh Giá
+            'name' => '',
+            'subModule' => [
+                [
+                    'title' => 'Tài Liệu Học Tập',
+                    'route' => 'materials.index',
+                    'user_role' => [1, 3]
+                ]
+            ]
+        ],
+        [
             'user_role' => [2, 4],
             'title' => 'Hỗ Trợ Sinh Viên',
             'icon' => 'fab fa-rocketchat', // Icon cho Hỗ Trợ Sinh Viên
