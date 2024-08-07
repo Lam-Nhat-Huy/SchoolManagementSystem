@@ -75,7 +75,7 @@
                     {{-- ngành --}}
                     <div class="form-group col-6">
                         <label for="course_id">Nghành</label>
-                        <select class="form-select form-control" name="course_id" id="course_id">
+                        <select class="form-select setupSelect2 form-control setupSelect2" name="course_id" id="course_id">
                             @if (isset($getEdit))
                                 @foreach ($getCoures as $course)
                                     <option value="{{ $course->id }}"
@@ -97,7 +97,7 @@
                     {{-- chuyên ngành --}}
                     <div class="form-group col-6">
                         <label for="major_id">Chuyên nghành</label>
-                        <select class="form-select form-control" name="major_id" id="major_id">
+                        <select class="form-select setupSelect2 form-control setupSelect2" name="major_id" id="major_id">
                             @if (isset($getEdit))
                                 @foreach ($getMajor as $major)
                                     <option value="{{ $major->id }}"
@@ -153,8 +153,8 @@
                         @enderror
                     </div>
                     <div class="form-group col-6">
-                        <label for="study_status_id">Chuyên nghành</label>
-                        <select class="form-select form-control" name="study_status_id" id="study_status_id">
+                        <label for="study_status_id">Trạng thái</label>
+                        <select class="form-select setupSelect2 form-control" name="study_status_id" id="study_status_id">
                             @if (isset($getEdit))
                                 @foreach ($getStudyStatus as $study_status)
                                     <option value="{{ $study_status->id }}"
@@ -163,7 +163,7 @@
                                     </option>
                                 @endforeach
                             @else
-                                <option value="0">--Chọn chuyên nghành--</option>
+                                <option value="0">--Chọn trạng thái--</option>
                                 @foreach ($getStudyStatus as $study_status)
                                     <option value="{{ $study_status->id }}">{{ $study_status->name }}</option>
                                 @endforeach
