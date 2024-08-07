@@ -21,29 +21,29 @@ class ScoreImport implements ToCollection, ToModel
         $this->current++;
         if ($this->current > 1) {
             $enrollment = Enrollments::where('student_id', $row[0])
-                ->where('class_subject_id', $row[8])
+                ->where('class_subject_id', $row[9])
                 ->first();
 
             if ($enrollment) {
-                $enrollment->lab_1 = $row[1];
-                $enrollment->lab_2 = $row[2];
-                $enrollment->lab_3 = $row[3];
-                $enrollment->lab_4 = $row[4];
-                $enrollment->assignment_1 = $row[5];
-                $enrollment->assignment_2 = $row[6];
-                $enrollment->final_exam = $row[7];
+                $enrollment->lab_1 = $row[2];
+                $enrollment->lab_2 = $row[3];
+                $enrollment->lab_3 = $row[4];
+                $enrollment->lab_4 = $row[5];
+                $enrollment->assignment_1 = $row[6];
+                $enrollment->assignment_2 = $row[7];
+                $enrollment->final_exam = $row[8];
                 $enrollment->save();
             } else {
                 $enrollment = new Enrollments();
                 $enrollment->student_id = $row[0];
-                $enrollment->lab_1 = $row[1];
-                $enrollment->lab_2 = $row[2];
-                $enrollment->lab_3 = $row[3];
-                $enrollment->lab_4 = $row[4];
-                $enrollment->assignment_1 = $row[5];
-                $enrollment->assignment_2 = $row[6];
-                $enrollment->final_exam = $row[7];
-                $enrollment->class_subject_id = $row[8];
+                $enrollment->lab_1 = $row[2];
+                $enrollment->lab_2 = $row[3];
+                $enrollment->lab_3 = $row[4];
+                $enrollment->lab_4 = $row[5];
+                $enrollment->assignment_1 = $row[6];
+                $enrollment->assignment_2 = $row[7];
+                $enrollment->final_exam = $row[8];
+                $enrollment->class_subject_id = $row[9];
                 $enrollment->enrollment_date = now();
                 $enrollment->save();
             }

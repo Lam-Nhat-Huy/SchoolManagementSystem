@@ -1,8 +1,8 @@
 <?php
-// app/Exports/EnrollmentsExport.php
 namespace App\Exports;
 
 use App\Models\Enrollments;
+use App\Models\Students;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -17,8 +17,20 @@ class EnrollmentsExport implements FromCollection, WithHeadings
 
     public function collection()
     {
-        return Enrollments::select('student_id', 'lab_1', 'lab_2', 'lab_3', 'lab_4', 'assignment_1', 'assignment_2', 'final_exam', 'class_subject_id')
-            ->where('class_subject_id', $this->classId)
+        return Enrollments::join('students', 'enrollments.student_id', '=', 'students.id')
+            ->select(
+                'enrollments.student_id',
+                'students.name as student_name',
+                'enrollments.lab_1',
+                'enrollments.lab_2',
+                'enrollments.lab_3',
+                'enrollments.lab_4',
+                'enrollments.assignment_1',
+                'enrollments.assignment_2',
+                'enrollments.final_exam',
+                'enrollments.class_subject_id'
+            )
+            ->where('enrollments.class_subject_id', $this->classId)
             ->get();
     }
 
@@ -26,6 +38,7 @@ class EnrollmentsExport implements FromCollection, WithHeadings
     {
         return [
             'Student ID',
+            'Student Name',
             'Lab 1',
             'Lab 2',
             'Lab 3',
