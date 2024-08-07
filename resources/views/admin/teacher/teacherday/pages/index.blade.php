@@ -19,26 +19,26 @@
                 <div class="table-responsive">
                     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-12">
                                 <form action="{{ route('teacher.day') }}" method="GET" id="filter-form">
                                     <div class="form-row align-items-end">
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label for="search">Tìm kiếm:</label>
                                             <input type="search" name="search" id="search" value="{{ $search ?? '' }}"
                                                 class="form-control" placeholder="Nhập tên hoặc mã giảng viên"
                                                 aria-controls="basic-datatables">
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label for="start_date">Ngày bắt đầu:</label>
                                             <input type="date" name="start_date" id="start_date"
                                                 value="{{ $startDate ?? '' }}" class="form-control">
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label for="end_date">Ngày kết thúc:</label>
                                             <input type="date" name="end_date" id="end_date"
                                                 value="{{ $endDate ?? '' }}" class="form-control">
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label for="shift">Ca dạy:</label>
                                             <select name="shift" id="shift" class="form-control">
                                                 <option value="">Tất cả</option>
@@ -49,10 +49,10 @@
                                                 <option value="5" {{ $shift == '5' ? 'selected' : '' }}>Ca 5</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-8 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <div class="btn-group d-flex" role="group" aria-label="Filter Actions">
                                                 <button type="submit" class="btn btn-primary flex-fill mr-2">Tìm kiếm</button>
-                                                <button type="button" class="btn btn-secondary flex-fill" onclick="clearFilter()">Xóa Lọc</button>
+                                                <button type="button" class="btn btn-secondary flex-fill" onclick="clearFilter()">Bỏ Lọc</button>
                                             </div>
                                         </div>
                                     </div>
