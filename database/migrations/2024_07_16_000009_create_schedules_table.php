@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('class_subject_id')->nullable()->constrained('class_subjects')->onDelete('set null');
             $table->foreignId('classroom_id')->nullable()->constrained('classrooms')->onDelete('set null');
             $table->string('day_of_week');
-            $table->string('school_shift_id');
+            $table->string('school_shift_id')->nullable();
             $table->time('start_time'); 
             $table->time('end_time'); 
             $table->timestamps();
