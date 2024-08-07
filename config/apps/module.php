@@ -80,8 +80,7 @@ return [
             ]
         ],
         [
-            'user_role' => [1, 2, 3, 4],
-            'user_role' => [1, 3],
+            'user_role' => [1, 4],
             'title' => 'Lớp môn',
             'icon' => 'fas fa-layer-group', // Icon cho lớp môn
             'name' => '',
@@ -89,7 +88,7 @@ return [
                 [
                     'title' => 'Lớp môn',
                     'route' => 'class-subject.index',
-                    'user_role' => [1, 3]
+                    'user_role' => [1, 4]
                 ]
             ]
         ],
