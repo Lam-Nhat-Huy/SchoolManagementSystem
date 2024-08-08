@@ -21,7 +21,7 @@ class StoreSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required',
+            'code' => 'required|unique:subjects,code',
             'name' => 'required',
             'credit_num' => 'required',
             'total_class_session' => 'required',
@@ -40,6 +40,7 @@ class StoreSubjectRequest extends FormRequest
     {
         return [
             'code.required' => 'Vui lòng nhập mã môn học',
+            'code.unique' => 'Mã môn học đã bị trùng, vui lòng nhập mã khác',
             'name.required' => 'Vui lòng tên môn học',
             'credit_num.required' => 'Vui lòng nhập số tín chỉ',
             'total_class_session.required' => 'Vui lòng nhập ca học',
