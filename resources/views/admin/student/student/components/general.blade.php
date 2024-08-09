@@ -1,9 +1,10 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card custom-border" style="border: 1px solid #ccc">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 style="margin: 0">Thêm Sinh Viên</h5>
-            </div>
+                <button type="button" id="addSampleDataBtn" class="btn btn-primary">Thêm Dữ Liệu Mẫu</button>
+            </div>            
             <div class="card-body">
                 <div class="row m-0">
                     <div class="form-group col-6">
@@ -196,3 +197,46 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addSampleDataBtn = document.getElementById('addSampleDataBtn');
+
+        addSampleDataBtn.addEventListener('click', function () {
+            // Mẫu dữ liệu cho các input
+            const sampleData = {
+                name: 'Nguyen Van A',
+                student_code: 'PC0001',
+                gender: 0, // 0: Nam, 1: Nữ
+                date_of_birth: '2000-01-01',
+                email: 'nguyenvana@example.com',
+                address: '123 Nguyen Trai, Ha Noi',
+                course_id: 2, // ID của ngành đã có sẵn
+                major_id: 3, // ID của chuyên ngành đã có sẵn
+                cccd_number: '123456789012',
+                cccd_issue_date: '2020-01-01',
+                cccd_place: 'Ha Noi',
+                year_of_enrollment: '2018-09-01',
+                study_status_id: 1, // ID của trạng thái học tập đã có sẵn
+                semesters: '3',
+                phone: '0987654321'
+            };
+
+            // Gán giá trị cho các input
+            document.getElementById('name').value = sampleData.name;
+            document.getElementById('student_code').value = sampleData.student_code;
+            document.querySelector(`input[name="gender"][value="${sampleData.gender}"]`).checked = true;
+            document.getElementById('date_of_birth').value = sampleData.date_of_birth;
+            document.getElementById('email').value = sampleData.email;
+            document.getElementById('address').value = sampleData.address;
+            document.getElementById('course_id').value = sampleData.course_id;
+            document.getElementById('major_id').value = sampleData.major_id;
+            document.getElementById('cccd_number').value = sampleData.cccd_number;
+            document.getElementById('cccd_issue_date').value = sampleData.cccd_issue_date;
+            document.getElementById('cccd_place').value = sampleData.cccd_place;
+            document.getElementById('year_of_enrollment').value = sampleData.year_of_enrollment;
+            document.getElementById('study_status_id').value = sampleData.study_status_id;
+            document.getElementById('semesters').value = sampleData.semesters;
+            document.getElementById('phone').value = sampleData.phone;
+        });
+    });
+</script>
