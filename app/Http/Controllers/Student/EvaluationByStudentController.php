@@ -22,12 +22,12 @@ class EvaluationByStudentController extends Controller
     {
         $getAllEvaluationOfStudentUnRated = CreateTeacherEvaluations::select('create_teacher_evaluations.*', 'classes.name as class_name', 'teachers.name as teacher_name', 'subjects.name as subject_name')
             ->orderBy('create_teacher_evaluations.created_at', 'DESC')
-            ->join('enrollments', 'create_teacher_evaluations.class_subject_id', '=', 'enrollments.class_subject_id')
+            ->join('sics', 'create_teacher_evaluations.class_subject_id', '=', 'sics.class_subject_id')
             ->join('class_subjects', 'create_teacher_evaluations.class_subject_id', '=', 'class_subjects.id')
             ->join('classes', 'class_subjects.class_id', '=', 'classes.id')
             ->join('teachers', 'class_subjects.teacher_id', '=', 'teachers.id')
             ->join('subjects', 'class_subjects.subject_id', '=', 'subjects.id')
-            ->where('enrollments.student_id', session('user_id'))
+            ->where('sics.student_id', session('user_id'))
             ->where('create_teacher_evaluations.deleted_by', null)
             ->paginate(10);
 
