@@ -15,8 +15,7 @@
             </div>
             <div class="form-group col-lg-6">
                 <label for="class_course">Chuyên ngành học</label>
-                <select class="form-select setupSelect2" id="defaultSelect" fdprocessedid="fmy4e" name="major_id" >
-                    <option value="" class="form-control">--Chọn chuyên ngành học--</option>
+                <select class="form-select form-control" id="defaultSelect" fdprocessedid="fmy4e" name="major_id">
                     @foreach ($getAllMajor as $major)
                         <option value="{{ $major->id }}"
                             {{ old('major_id', isset($getEdit) ? $getEdit->major_id : '') == $major->id ? 'selected' : '' }}>
@@ -35,3 +34,23 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('randomButton').addEventListener('click', function() {
+        const Classname = [];
+
+        for (let i = 0; i < 100 * 10; i++) {
+            Classname.push("Lớp F" + i);
+        }
+
+        const randomName = Classname[Math.floor(Math.random() * Classname.length)];
+
+        document.getElementById('name').value = randomName;
+        document.getElementById('description_class').value = "Mô tả lớp F..";
+
+        const selectElement = document.getElementById('defaultSelect');
+        const options = selectElement.options;
+        const randomOptionIndex = Math.floor(Math.random() * options.length);
+        options[randomOptionIndex].selected = true;
+    });
+</script>

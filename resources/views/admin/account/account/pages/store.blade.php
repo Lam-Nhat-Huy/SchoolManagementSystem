@@ -2,7 +2,10 @@
     @include('admin.dashboard.components.breadcrumb')
 
     @php
-        $url = $config['method'] == 'create' ? route('account.store') : route('account.update', session('account_session_id'));
+        $url =
+            $config['method'] == 'create'
+                ? route('account.store')
+                : route('account.update', session('account_session_id'));
         $title = $config['method'] == 'create' ? 'Thêm mới thành viên' : 'Chỉnh sửa thành viên';
     @endphp
 
@@ -10,7 +13,10 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title float-left">{{ $title }}</h4>
-                <a href="{{ route('account.index') }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
+                <div>
+                    <a href="{{ route('account.index') }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
+                    <button class="btn btn-sm btn-dark" id="randomButton">Dữ Liệu Mẫu</button>
+                </div>
             </div>
             <div class="card-body">
                 <form action="{{ $url }}" method="POST" autocomplete="on">

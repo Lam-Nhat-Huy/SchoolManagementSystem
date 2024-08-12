@@ -1,7 +1,7 @@
 <div class="table-responsive">
     <div id="basic-datatables_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
         <div class="row">
-            @include('admin.account.account.components.filter');
+            @include('admin.account.account.components.filter')
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -11,11 +11,13 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên thành viên: activate to sort column descending" style="width: 400px; white-space: nowrap;">Tên
+                                aria-label="Tên thành viên: activate to sort column descending"
+                                style="width: 400px; white-space: nowrap;">Tên
                             </th>
                             <th class="sorting_asc" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-sort="ascending"
-                                aria-label="Tên thành viên: activate to sort column descending" style="width: 400px; white-space: nowrap;">
+                                aria-label="Tên thành viên: activate to sort column descending"
+                                style="width: 400px; white-space: nowrap;">
                                 Email</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
                                 colspan="1" aria-label="Hành động: activate to sort column ascending"
