@@ -37,17 +37,18 @@ class EnrollmentController extends Controller
         // Lọc theo class_id nếu có
         if (!empty($classId)) {
             $query->where('class_subject_id', $classId);
+
             // Lấy danh sách sinh viên từ bảng sics dựa trên class_subject_id
-            $classSubject = ClassSubject::where('class_id', $classId)->first();
-            if ($classSubject) {
-                $students = Enrollments::with(['student', 'classSubject'])->where('class_subject_id', $classSubject->id)->get();
-            } else {
-                $students = collect();
-            }
+            $students = Sics::where('class_subject_id', $classId)
+                ->with(['enrollments' => function ($query) use ($classId) {
+                    $query->where('class_subject_id', $classId);
+                }])->get();
+
         } else {
             $students = collect();
         }
 
+//        dd($students);
 
         $getAllEnrollment = $query->paginate(10);
 

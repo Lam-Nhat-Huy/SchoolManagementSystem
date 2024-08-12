@@ -41,60 +41,54 @@
                         <th style="width: 7%;">ASM2</th>
                         <th style="width: 7%;">Final</th>
                         <th style="width: 7%;">GPA</th>
-                        <th style="width: 10%;">Kết quả</th>
                         <th style="width: 10%;">Ngày Nhập</th>
-                        <th>Hành động</th>
+                        <th style="width: 10%;">Kết quả</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($students as $items)
+                    @foreach ($students as $student)
                         <tr role="row" class="odd">
                             <td class="sorting_1">
-                                <strong>Sinh Viên:</strong> {{ $items->student->name ?? '' }}<br>
-                                <strong>MSSV:</strong> {{ $items->student->student_code ?? '' }}<br>
-                                <strong>Lớp:</strong> {{ $items->classSubject->class->name ?? '' }}
+                                <strong>Sinh Viên:</strong> {{ $student->students->name ?? '' }}<br>
+                                <strong>MSSV:</strong> {{ $student->students->student_code ?? '' }}<br>
+                                <strong>Lớp:</strong> {{ $student->classSubject->class->name ?? '' }}
                             </td>
-                            <td class="sorting_1">{{ $items->lab_1 ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->lab_2 ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->lab_3 ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->lab_4 ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->assignment_1 ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->assignment_2 ?? '' }}</td>
-                            <td class="sorting_1">{{ $items->final_exam ?? '' }}</td>
-                            <td class="sorting_1">
-                                {{ $gpa = !empty($items->final_exam)
-                                 ? number_format(
-                                     ($items->lab_1 +
-                                         $items->lab_2 +
-                                         $items->assignment_1 +
-                                         $items->lab_3 +
-                                         $items->lab_4 +
-                                         $items->assignment_2 +
-                                         $items->final_exam) / 7,
-                                     1,
-                                     ',',
-                                     '.',
-                                 )
-                                 : '' }}
-                            </td>
-                            <td>
-                                @if($gpa === null)
-                                    <span class="text-info">STUDING</span>
-                                @elseif($gpa < 5)
-                                    <span class="text-danger">FAILED</span>
-                                @elseif($gpa >= 5)
-                                    <span class="btn-success">PASSED</span>
-                                @else
-                                    <span class="text-info">STUDING</span>
-                                @endif
-                            </td>
-                            <td>{{ $items->created_at->format('Y-m-d')  }}</td>
-                            <td>
-                                <a href="{{ route('enrollment.edit', $items->id) }}"
-                                   class="btn btn-sm btn-black">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                            </td>
+                            @foreach ($student->enrollments as $enrollment)
+                                <td class="sorting_1">{{ $enrollment->lab_1 ?? '' }}</td>
+                                <td class="sorting_1">{{ $enrollment->lab_2 ?? '' }}</td>
+                                <td class="sorting_1">{{ $enrollment->lab_3 ?? '' }}</td>
+                                <td class="sorting_1">{{ $enrollment->lab_4 ?? '' }}</td>
+                                <td class="sorting_1">{{ $enrollment->assignment_1 ?? '' }}</td>
+                                <td class="sorting_1">{{ $enrollment->assignment_2 ?? '' }}</td>
+                                <td class="sorting_1">{{ $enrollment->final_exam ?? '' }}</td>
+                                <td class="sorting_1">
+                                    {{ $gpa = !empty($enrollment->final_exam)
+                                        ? number_format(
+                                            ($enrollment->lab_1 +
+                                                $enrollment->lab_2 +
+                                                $enrollment->assignment_1 +
+                                                $enrollment->lab_3 +
+                                                $enrollment->lab_4 +
+                                                $enrollment->assignment_2 +
+                                                $enrollment->final_exam) / 7,
+                                            1,
+                                            ',',
+                                            '.',
+                                        )
+                                        : '' }}
+                                </td>
+                                <td>
+                                    @if($gpa === null)
+                                        <span class="text-info">STUDING</span>
+                                    @elseif($gpa < 5)
+                                        <span class="text-danger">FAILED</span>
+                                    @elseif($gpa >= 5)
+                                        <span class="btn-success">PASSED</span>
+                                    @else
+                                        <span class="text-info">STUDING</span>
+                                    @endif
+                                </td>
+                            @endforeach
                         </tr>
                     @endforeach
                     </tbody>

@@ -27,7 +27,6 @@ class SubjectController extends Controller
         $courseId = $request->input('course_id');
         $status = $request->input('status');
         $majorId = $request->input('major_id');
-
         if ($request->ajax()) {
             $data = $this->subjectService->getSubject($search, $courseId, $status, $majorId);
             return response()->json([

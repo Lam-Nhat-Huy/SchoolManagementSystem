@@ -48,4 +48,9 @@ class ClassSubject extends Model
     {
         return $this->hasMany(Schedules::class, 'class_subject_id');
     }
+
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollments::class, 'class_subject_id', 'id');
+    }
 }
