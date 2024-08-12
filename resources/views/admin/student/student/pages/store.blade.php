@@ -14,7 +14,10 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title float-left">{{ $title }}</h4>
-                <a href="{{ route('student.index') }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
+                <div>
+                    <a href="{{ route('student.index') }}" class="btn btn-sm btn-primary">Quay lại danh sách</a>
+                    <button class="btn btn-sm btn-dark" id="randomButton">Dữ Liệu Mẫu</button>
+                </div>
             </div>
             <div class="card-body">
                 <form action="{{ $url }}" method="POST" autocomplete="on">

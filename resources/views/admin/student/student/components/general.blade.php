@@ -75,7 +75,7 @@
                     {{-- ngành --}}
                     <div class="form-group col-6">
                         <label for="course_id">Nghành</label>
-                        <select class="form-select setupSelect2 form-control setupSelect2" name="course_id" id="course_id">
+                        <select class="form-select form-control" name="course_id" id="course_id">
                             @if (isset($getEdit))
                                 @foreach ($getCoures as $course)
                                     <option value="{{ $course->id }}"
@@ -97,7 +97,7 @@
                     {{-- chuyên ngành --}}
                     <div class="form-group col-6">
                         <label for="major_id">Chuyên nghành</label>
-                        <select class="form-select setupSelect2 form-control setupSelect2" name="major_id" id="major_id">
+                        <select class="form-select form-control" name="major_id" id="major_id">
                             @if (isset($getEdit))
                                 @foreach ($getMajor as $major)
                                     <option value="{{ $major->id }}"
@@ -154,7 +154,7 @@
                     </div>
                     <div class="form-group col-6">
                         <label for="study_status_id">Trạng thái</label>
-                        <select class="form-select setupSelect2 form-control" name="study_status_id" id="study_status_id">
+                        <select class="form-select" name="study_status_id" id="study_status_id">
                             @if (isset($getEdit))
                                 @foreach ($getStudyStatus as $study_status)
                                     <option value="{{ $study_status->id }}"
@@ -196,3 +196,92 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('randomButton').addEventListener('click', function() {
+        // Hàm để tạo ngày ngẫu nhiên trong khoảng cho trước
+        function getRandomDate(start, end) {
+            const date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${year}-${month}-${day}`;
+        }
+        
+        // Tạo mảng các tên sinh viên mẫu
+        const studentNames = ["Nguyễn Văn A", "Trần Thị B", "Lê Văn C", "Phạm Thị D"];
+        const randomName = studentNames[Math.floor(Math.random() * studentNames.length)];
+        document.getElementById('name').value = randomName;
+
+        // Tạo mảng các mã sinh viên mẫu
+        const studentCodes = [];
+        for (let i = 0; i < 100 * 100; i++) {
+            studentCodes.push("PC" + i);
+        }
+        const randomCode = studentCodes[Math.floor(Math.random() * studentCodes.length)];
+        document.getElementById('student_code').value = randomCode;
+
+        // Tạo mảng các địa chỉ mẫu
+        const addresses = ["123 Đường ABC", "456 Đường XYZ", "789 Đường LMN", "101 Đường PQR"];
+        const randomAddress = addresses[Math.floor(Math.random() * addresses.length)];
+        document.getElementById('address').value = randomAddress;
+
+        // Chọn ngẫu nhiên một giới tính
+        const gender = Math.random() < 0.5 ? 0 : 1;
+        document.getElementById(gender === 0 ? 'genderMale' : 'genderFemale').checked = true;
+
+        // Tạo mảng email mẫu
+        const emails = [];
+        for (let i = 0; i < 100 * 100; i++) {
+            emails.push("email" + i + "@gmail.com");
+        }
+        const randomEmail = emails[Math.floor(Math.random() * emails.length)];
+        document.getElementById('email').value = randomEmail;
+
+        // Chọn ngẫu nhiên một khóa học
+        const courseSelect = document.getElementById('course_id');
+        const randomCourseIndex = Math.floor(Math.random() * courseSelect.options.length + 1);
+        courseSelect.options[randomCourseIndex].selected = true;
+
+        // Chọn ngẫu nhiên một chuyên ngành
+        const majorSelect = document.getElementById('major_id');
+        const randomMajorIndex = Math.floor(Math.random() * majorSelect.options.length + 1);
+        majorSelect.options[randomMajorIndex].selected = true;
+
+        // Tạo mảng các số CCCD mẫu
+        const cccdNumbers = ["123456789", "987654321", "456789123", "321654987"];
+        const randomCccdNumber = cccdNumbers[Math.floor(Math.random() * cccdNumbers.length)];
+        document.getElementById('cccd_number').value = randomCccdNumber;
+
+        // Tạo mảng các nơi cấp CCCD mẫu
+        const cccdPlaces = ["Hà Nội", "TP Hồ Chí Minh", "Đà Nẵng", "Cần Thơ"];
+        const randomCccdPlace = cccdPlaces[Math.floor(Math.random() * cccdPlaces.length)];
+        document.getElementById('cccd_place').value = randomCccdPlace;
+
+        // Chọn ngẫu nhiên một trạng thái học tập
+        const statusSelect = document.getElementById('study_status_id');
+        const randomStatusIndex = Math.floor(Math.random() * statusSelect.options.length + 1);
+        statusSelect.options[randomStatusIndex].selected = true;
+
+        // Tạo mảng kỳ học mẫu
+        const semesters = ["1", "2", "3", "4", "5", "6", "7", "8"];
+        const randomSemester = semesters[Math.floor(Math.random() * semesters.length)];
+        document.getElementById('semesters').value = randomSemester;
+
+        // Tạo mảng số điện thoại mẫu
+        const phoneNumbers = ["0901234567", "0912345678", "0923456789", "0934567890"];
+        const randomPhoneNumber = phoneNumbers[Math.floor(Math.random() * phoneNumbers.length)];
+        document.getElementById('phone').value = randomPhoneNumber;
+
+        // Tạo ngày sinh ngẫu nhiên trong khoảng từ năm 1990 đến 2005
+        const randomDateOfBirth = getRandomDate(new Date(1990, 0, 1), new Date(2005, 11, 31));
+        document.getElementById('date_of_birth').value = randomDateOfBirth;
+
+        // Tạo ngày cấp CCCD ngẫu nhiên trong khoảng từ năm 2010 đến 2020
+        const randomCccdIssueDate = getRandomDate(new Date(2010, 0, 1), new Date(2020, 11, 31));
+        document.getElementById('cccd_issue_date').value = randomCccdIssueDate;
+
+        // Tạo năm nhập học ngẫu nhiên trong khoảng từ 2015 đến 2024
+        const randomYearOfEnrollment = getRandomDate(new Date(2015, 0, 1), new Date(2024, 11, 31));
+        document.getElementById('year_of_enrollment').value = randomYearOfEnrollment;
+    });
+</script>

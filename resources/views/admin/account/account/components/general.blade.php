@@ -14,3 +14,20 @@
         <p class="message_error">{{ $message }}</p>
     @enderror
 </div>
+
+<script>
+    document.getElementById('randomButton').addEventListener('click', function() {
+        const names = [];
+        const emails = [];
+        for (let i = 0; i < 100 * 100; i++) {
+            names.push("user" + i + "@gmail.com");
+            emails.push("email" + i + "@gmail.com");
+        }
+
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        const randomEmail = emails[Math.floor(Math.random() * emails.length)];
+
+        document.getElementById('account_name').value = randomName;
+        document.getElementById('account_email').value = randomEmail;
+    });
+</script>
