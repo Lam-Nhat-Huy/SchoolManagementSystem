@@ -31,6 +31,8 @@ class StoreClassSubjectRequest extends FormRequest
             'subject_id' => 'required|exists:subjects,id',
             'teacher_id' => 'required|exists:teachers,id',
             'student_count' => 'required|integer|min:30|max:40',
+            'start_time' => 'required|date|after_or_equal:today',
+            'end_time' => 'required|date|after:start_time',
         ];
     }
 
@@ -71,6 +73,12 @@ class StoreClassSubjectRequest extends FormRequest
             'student_count.integer' => 'Số lượng sinh viên phải là một số nguyên.',
             'student_count.min' => 'Số lượng sinh viên ít nhất là 30.',
             'student_count.max' => 'Số lượng sinh viên tối đa là 40.',
+            'start_time.required' => 'Vui lòng chọn ngày bắt đầu.',
+            'start_time.date' => 'Ngày bắt đầu phải là một ngày hợp lệ.',
+            'start_time.after_or_equal' => 'Ngày bắt đầu không được nhỏ hơn ngày hiện tại.',
+            'end_time.required' => 'Vui lòng chọn ngày kết thúc.',
+            'end_time.date' => 'Ngày kết thúc phải là một ngày hợp lệ.',
+            'end_time.after' => 'Ngày kết thúc phải lớn hơn ngày bắt đầu.',
         ];
     }
 }

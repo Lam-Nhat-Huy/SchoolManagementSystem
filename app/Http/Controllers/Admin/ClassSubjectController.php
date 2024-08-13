@@ -11,6 +11,7 @@ use App\Models\Classroom;
 use App\Models\ClassSubject;
 use App\Models\Major;
 use App\Models\Schedules;
+use App\Models\SchoolShift;
 use App\Models\Sics;
 use App\Models\Students;
 use App\Models\Subjects;
@@ -101,6 +102,8 @@ class ClassSubjectController extends Controller
                 'subject_id' => $request->input('subject_id'),
                 'teacher_id' => $request->input('teacher_id'),
                 'student_count' => $request->input('student_count'),
+                'start_time' => $request->input('start_time'),
+                'end_time' => $request->input('end_time'),
                 'created_by' => session('user_id')
             ]);
             toastr()->success('Thêm lớp môn thành công!');
@@ -115,9 +118,7 @@ class ClassSubjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -233,41 +234,34 @@ class ClassSubjectController extends Controller
     }
 
     public function storeSchedule(StoreScheduleRequest $request, $id)
-{
-    $classSubject = ClassSubject::findOrFail($id);
+    {
+        $classSubject = ClassSubject::findOrFail($id);
 
-    $timeSlots = [
-        1 => ['start_time' => '07:00:00', 'end_time' => '09:00:00'],
-        2 => ['start_time' => '09:10:00', 'end_time' => '11:10:00'],
-        3 => ['start_time' => '11:20:00', 'end_time' => '13:20:00'],
-        4 => ['start_time' => '13:30:00', 'end_time' => '15:30:00'],
-        5 => ['start_time' => '15:40:00', 'end_time' => '17:40:00'],
-        6 => ['start_time' => '17:50:00', 'end_time' => '19:50:00'],
-    ];
+        $schoolShift = SchoolShift::findOrFail($request->input('time'));
 
-    $timeSlotId = $request->input('time');
-    $startTime = $timeSlots[$timeSlotId]['start_time'];
-    $endTime = $timeSlots[$timeSlotId]['end_time'];
-    $date = $request->input('date');
-    
-    // Định dạng ngày thành chuỗi đầy đủ
-    $fullDate = Carbon::parse($date)->format('l, d F Y');
+        $startTime = $schoolShift->start_time;
+        $endTime = $schoolShift->end_time;
+        $date = $request->input('date');
 
-    // Tạo đối tượng Carbon cho thời gian bắt đầu và kết thúc
-    $newStart = Carbon::parse($date . ' ' . $startTime);
-    $newEnd = Carbon::parse($date . ' ' . $endTime);
+        $fullDate = Carbon::parse($date)->format('l, d F Y');
 
-    // Lưu lịch học mới
-    Schedules::create([
-        'class_subject_id' => $id,
-        'classroom_id' => $request->input('classroom'),
-        'day_of_week' => $fullDate,
-        'start_time' => $newStart,
-        'end_time' => $newEnd,
-    ]);
-    
-    return redirect()->back();
-}
+
+        $newStart = Carbon::parse($date . ' ' . $startTime);
+        $newEnd = Carbon::parse($date . ' ' . $endTime);
+
+        // Lưu lịch học mới
+        Schedules::create([
+            'class_subject_id' => $id,
+            'classroom_id' => $request->input('classroom'),
+            'day_of_week' => $fullDate,
+            'school_shift_id' => $request->input('time'),
+            'start_time' => $newStart,
+            'end_time' => $newEnd,
+        ]);
+
+        return redirect()->back();
+    }
+
 
 
     public function student(string $id)
