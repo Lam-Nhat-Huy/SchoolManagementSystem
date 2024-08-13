@@ -130,6 +130,11 @@ return [
                     'title' => 'Tài Liệu Giảng Viên',
                     'route' => 'materials.index',
                     'user_role' => 1
+                ] ,
+                [
+                    'title' => 'Xác thực giảng viên',
+                    'route' => 'teacher.scan',
+                    'user_role' => 1
                 ]
             ]
 
