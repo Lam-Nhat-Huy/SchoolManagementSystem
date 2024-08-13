@@ -40,22 +40,22 @@
                                 colspan="1" aria-label="Giảng viên: activate to sort column ascending" white-space:
                                 nowrap; style="width: 20%;">Giảng viên</th>
                             <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Thời gian: activate to sort column ascending" white-space:
-                                nowrap; style="width: 20%;">Ca Dạy</th>
-                            <th class="sorting" tabindex="0" aria-controls="basic-datatables" rowspan="1"
-                                colspan="1" aria-label="Ngày: activate to sort column ascending" white-space: nowrap;
-                                style="width: 20%;">Ngày</th>
+                                colspan="1" aria-label="Giảng viên: activate to sort column ascending" white-space:
+                                nowrap; style="width: 20%;">Hành động</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($getAllTeachingSchedule as $item)
                             <tr role="row" class="odd">
-                                <td style="white-space: nowrap;">{{ $item->subject_name }}</td>
-                                <td style="white-space: nowrap;">{{ $item->class_name }}</td>
-                                <td style="white-space: nowrap;">{{ $item->teacher_name }}</td>
-                                <td style="white-space: nowrap;" title="{{ $item->school_shift_description }}">
-                                    {{ $item->school_shift_name }}</td>
-                                <td style="white-space: nowrap;">{{ $item->day_of_week }}</td>
+                                <td style="white-space: nowrap;">{{ $item->subject->name }}</td>
+                                <td style="white-space: nowrap;">{{ $item->class->name }}</td>
+                                <td style="white-space: nowrap;">{{ $item->teacher->name }}</td>
+                                <td style="white-space: nowrap;"><a class="text-dark"
+                                        href="{{ route('teaching_schedule.detail', ['id' => $item->id]) }}"
+                                        style="font-size: 14px;">
+                                        <i class="fas fa-info-circle" style="font-size: 20px;"></i>
+                                        Xem chi tiết
+                                    </a></td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -91,6 +91,24 @@
                             @enderror
                         </div>
 
+                        <div class="form-group col-lg-6">
+                            <label for="date">Ngày bắt đầu</label>
+                            <input type="date" class="form-control" id="start_date" name="start_time"
+                                value="{{ old('start_time', \Carbon\Carbon::now()->format('Y-m-d')) }}">
+                            @if ($errors->has('start_time'))
+                                <div class="text-danger">{{ $errors->first('start_time') }}</div>
+                            @endif
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label for="date">Ngày kết thúc</label>
+                            <input type="date" class="form-control" id="end_date" name="end_time"
+                                value="{{ old('end_time', \Carbon\Carbon::now()->format('Y-m-d')) }}">
+                            @if ($errors->has('end_time'))
+                                <div class="text-danger">{{ $errors->first('end_time') }}</div>
+                            @endif
+                        </div>
+
                         <div class="form-group col-lg-12">
                             <label for="student_count">Số lượng sinh viên</label>
                             <input type="number" max="50" min="1" id="student_count"
@@ -119,10 +137,10 @@
     <script>
         $(document).ready(function() {
             $('.setupSelect2').select2();
-    
+
             $('#major_id').on('change', function() {
                 let majorId = $(this).val();
-    
+
                 $.ajax({
                     url: '{{ route('class-subject.filter') }}',
                     type: 'GET',
@@ -133,32 +151,44 @@
                         let classesSelect = $('#defaultSelect1');
                         let subjectsSelect = $('#defaultSelect');
                         let teachersSelect = $('#defaultSelect2');
-    
+
                         classesSelect.empty();
                         subjectsSelect.empty();
                         teachersSelect.empty();
-    
-                        classesSelect.append('<option value="" class="form-control">--Chọn lớp học--</option>');
-                        subjectsSelect.append('<option value="" class="form-control">--Chọn môn học--</option>');
-                        teachersSelect.append('<option value="" class="form-control">--Chọn giảng viên--</option>');
-    
+
+                        classesSelect.append(
+                            '<option value="" class="form-control">--Chọn lớp học--</option>'
+                        );
+                        subjectsSelect.append(
+                            '<option value="" class="form-control">--Chọn môn học--</option>'
+                        );
+                        teachersSelect.append(
+                            '<option value="" class="form-control">--Chọn giảng viên--</option>'
+                        );
+
                         $.each(response.classes, function(index, classObj) {
-                            classesSelect.append('<option value="' + classObj.id + '">' + classObj.name + '</option>');
+                            classesSelect.append('<option value="' + classObj.id +
+                                '">' + classObj.name + '</option>');
                         });
-    
+
                         $.each(response.subjects, function(index, subjectObj) {
-                            subjectsSelect.append('<option value="' + subjectObj.id + '">' + subjectObj.name + '</option>');
+                            subjectsSelect.append('<option value="' + subjectObj.id +
+                                '">' + subjectObj.name + '</option>');
                         });
-    
+
                         $.each(response.teachers, function(index, teacherObj) {
-                            teachersSelect.append('<option value="' + teacherObj.id + '">' + teacherObj.name + '</option>');
+                            teachersSelect.append('<option value="' + teacherObj.id +
+                                '">' + teacherObj.name + '</option>');
                         });
-    
+
                         // Set old values if available
-                        let classId = '{{ old('class_id', isset($classSubject) ? $classSubject->class_id : '') }}';
-                        let subjectId = '{{ old('subject_id', isset($classSubject) ? $classSubject->subject_id : '') }}';
-                        let teacherId = '{{ old('teacher_id', isset($classSubject) ? $classSubject->teacher_id : '') }}';
-    
+                        let classId =
+                            '{{ old('class_id', isset($classSubject) ? $classSubject->class_id : '') }}';
+                        let subjectId =
+                            '{{ old('subject_id', isset($classSubject) ? $classSubject->subject_id : '') }}';
+                        let teacherId =
+                            '{{ old('teacher_id', isset($classSubject) ? $classSubject->teacher_id : '') }}';
+
                         if (classId) {
                             classesSelect.val(classId).trigger('change');
                         }
@@ -168,13 +198,13 @@
                         if (teacherId) {
                             teachersSelect.val(teacherId).trigger('change');
                         }
-    
+
                         // Reinitialize Select2 after updating options
                         $('.setupSelect2').select2();
                     }
                 });
             });
-    
+
             // Trigger the change event on page load if there's a selected major_id
             let initialMajorId =
                 '{{ old('major_id', isset($classSubject) ? $classSubject->class->major_id : '') }}';
@@ -183,4 +213,3 @@
             }
         });
     </script>
-    

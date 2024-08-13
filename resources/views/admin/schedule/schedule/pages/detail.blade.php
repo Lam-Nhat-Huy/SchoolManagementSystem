@@ -5,7 +5,6 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h4 class="card-title float-left">Danh sách lịch học</h4>
-
             </div>
             <div class="card-body">
                 @include('admin.class.class.components.filter')
@@ -44,15 +43,6 @@
                             <div class="table-responsive">
                                 <table id="basic-datatables" class="display table table-striped table-hover dataTable"
                                     role="grid">
-                                    @php
-                                        use Carbon\Carbon;
-
-                                        $date = Carbon::parse($schedule->day_of_week);
-                                        $dayOfWeek = $date->locale('vi')->translatedFormat('l');
-                                        $dayOfWeek = ucfirst($dayOfWeek);
-
-                                        $formattedDate = $date->locale('vi')->translatedFormat('d/m/Y');
-                                    @endphp
                                     <thead>
                                         <tr role="row">
                                             <th>Tên lớp</th>
@@ -65,18 +55,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr role="row" class="odd">
-                                            <td style="font-size: 14px">{{ $schedule->classSubject->class->name }}</td>
-                                            <td style="font-size: 14px">{{ $schedule->classSubject->subject->name }}
-                                            </td>
-                                            <td style="font-size: 14px">{{ $schedule->classSubject->teacher->name }}
-                                            </td>
-                                            <td style="font-size: 14px">{{ $schedule->room->name }}</td>
-                                            <td style="font-size: 14px">{{ $schedule->start_time }}</td>
-                                            <td style="font-size: 14px">{{ $schedule->end_time }}</td>
-                                            <td style="font-size: 14px">
-                                                <span>{{ $dayOfWeek }}</span><br>{{ $formattedDate }}</td>
-                                        </tr>
+                                        @foreach ($allSchedules as $scheduleItem)
+                                            @php
+                                                $date = Carbon\Carbon::parse($scheduleItem->day_of_week);
+                                                $dayOfWeek = $date->locale('vi')->translatedFormat('l');
+                                                $dayOfWeek = ucfirst($dayOfWeek);
+                                                $formattedDate = $date->locale('vi')->translatedFormat('d/m/Y');
+                                            @endphp
+                                            <tr role="row" class="{{ $scheduleItem->id == $schedule->id ? 'odd bg-info' : 'odd' }}">
+                                                <td style="font-size: 14px">{{ $scheduleItem->classSubject->class->name }}</td>
+                                                <td style="font-size: 14px">{{ $scheduleItem->classSubject->subject->name }}</td>
+                                                <td style="font-size: 14px">{{ $scheduleItem->classSubject->teacher->name }}</td>
+                                                <td style="font-size: 14px">{{ $scheduleItem->room->name }}</td>
+                                                <td style="font-size: 14px">{{ $scheduleItem->start_time }}</td>
+                                                <td style="font-size: 14px">{{ $scheduleItem->end_time }}</td>
+                                                <td style="font-size: 14px">
+                                                    <span>{{ $dayOfWeek }}</span><br>{{ $formattedDate }}</td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -88,3 +84,4 @@
         </div>
     </div>
 </div>
+s

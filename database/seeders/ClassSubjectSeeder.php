@@ -16,7 +16,7 @@ class ClassSubjectSeeder extends Seeder
         ClassSubject::insert([
             [
                 'class_id' => 1,
-                'subject_id' => 2,
+                'subject_id' => 1,
                 'teacher_id' => 2,
                 'student_count' => 30,
                 'is_evaluation' => 0,

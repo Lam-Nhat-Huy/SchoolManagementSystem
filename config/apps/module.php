@@ -15,6 +15,19 @@ return [
             ]
         ],
         [
+            'user_role' => [3],
+            'title' => 'Bảng Điều Khiển',
+            'icon' => 'fas fa-tachometer-alt',
+            'name' => 'dashboard',
+            'subModule' => [
+                [
+                    'title' => 'Bảng điều khiển',
+                    'route' => 'teaching_schedule.dashboard',
+                    'user_role' => [3]
+                ]
+            ]
+        ],
+        [
             'user_role' => [1],
             'title' => 'Quản Trị Viên',
             'icon' => 'fas fa-users', // Icon cho quản lý thành viên
@@ -245,5 +258,6 @@ return [
                 ]
             ]
         ],
+
     ]
 ];

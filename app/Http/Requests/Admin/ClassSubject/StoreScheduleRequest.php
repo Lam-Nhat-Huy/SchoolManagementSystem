@@ -68,11 +68,15 @@ class StoreScheduleRequest extends FormRequest
 
             $startTime = $timeSlots[$timeSlotId]['start_time'];
             $endTime = $timeSlots[$timeSlotId]['end_time'];
-            $newStart = Carbon::parse($date . ' ' . $startTime);
-            $newStart = $newStart->format('H:i:s');
-            $newEnd = Carbon::parse($date . ' ' . $endTime);
-            $newEnd = $newEnd->format('H:i:s');
+            $newStart = Carbon::parse($date . ' ' . $startTime)->format('H:i:s');
+            $newEnd = Carbon::parse($date . ' ' . $endTime)->format('H:i:s');
             $dayOfWeek = Carbon::parse($date)->format('l, d F Y');
+
+            // Kiểm tra nếu ngày học nhỏ hơn ngày hiện tại
+            if (Carbon::parse($date)->isBefore(Carbon::today())) {
+                $validator->errors()->add('date', 'Ngày học phải lớn hơn ngày hiện tại.');
+                return;
+            }
 
             // Kiểm tra sự trùng lặp lịch học với phòng học trong cùng ngày
             $existingSchedules = Schedules::where('classroom_id', $this->input('classroom'))
@@ -107,6 +111,7 @@ class StoreScheduleRequest extends FormRequest
                         });
                 })
                 ->exists();
+
             if ($existingTeacherSchedules) {
                 $validator->errors()->add('teacher', 'Lịch học này đã bị trùng lặp với giảng viên.');
             }
@@ -127,6 +132,7 @@ class StoreScheduleRequest extends FormRequest
                         });
                 })
                 ->exists();
+
             if ($existingStudentSchedules) {
                 $validator->errors()->add('student', 'Lịch học này đã bị trùng lặp với sinh viên.');
             }
