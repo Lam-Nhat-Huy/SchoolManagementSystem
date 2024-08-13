@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ScanCardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\TeacherDateController;
@@ -28,7 +29,11 @@ Route::prefix('teacher')->group(function () {
     Route::get('/create-materials', [TeachingMaterialController::class, 'create'])->name('teacher.create-materials');
     Route::post('/store-materials', [TeachingMaterialController::class, 'store'])->name('teacher.store-materials');
     Route::delete('/materials/{id}', [TeachingMaterialController::class, 'destroy'])->name('teacher.materials.destroy')->where(['id' => '[0-9]+']);
-
-
+    Route::get('/scanteacher', [ScanCardController::class, 'index'])->name('teacher.scan');
+    Route::get('/scanteacher-create', [ScanCardController::class, 'create'])->name('teacher.create');
+    Route::post('/scanstore', [ScanCardController::class, 'store'])->name('scan.store');
+    Route::post('scansave', [ScanCardController::class, 'save'])->name('scan.save');
+    Route::delete('user-info{id}', [ScanCardController::class, 'destroy'])->name('user-info.destroy');
+    Route::get('user-info/{id}', [ScanCardController::class, 'show'])->name('user-info.show');
 
 });
