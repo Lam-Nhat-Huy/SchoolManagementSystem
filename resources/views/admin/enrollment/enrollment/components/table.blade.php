@@ -41,7 +41,6 @@
                         <th style="width: 7%;">ASM2</th>
                         <th style="width: 7%;">Final</th>
                         <th style="width: 7%;">GPA</th>
-                        <th style="width: 10%;">Ngày Nhập</th>
                         <th style="width: 10%;">Kết quả</th>
                     </tr>
                     </thead>
