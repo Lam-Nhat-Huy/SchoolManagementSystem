@@ -4,10 +4,10 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h4 class="card-title float-left">Danh Sách Giảng Viên</h4>
+                <h4 class="card-title float-left">Xác Thực Bằng CCCD</h4>
                 <div class="action">
-                    <a href="{{ route('teacher.create') }}" class="btn btn-sm btn-success float-end">
-                        <i class="fa fa-plus"></i> Xác thực bằng CCCD
+                    <a href="{{ route('teacher.scanteacher-create') }}" class="btn btn-sm btn-success float-end">
+                        Thêm Xác Thực
                     </a>
                 </div>
             </div>
@@ -16,18 +16,18 @@
                     <table id="basic-datatables" class="display table table-striped table-hover dataTable" role="grid" aria-describedby="basic-datatables_info">
                         <thead>
                             <tr role="row">
-                                <th style="width: 100px;">Tên</th>
-                                <th>Ngày sinh</th>
-                                <th>Giới tính</th>
+                                <th>Tên</th>
+                                <th>NS</th>
+                                <th>GT</th>
                                 <th>Số CCCD</th>
-                                <th>Quốc tịch</th>
-                                <th>Hộ khẩu thường trú</th>
-                                <th>Địa chỉ</th>
-                                <th>Tỉnh/Thành phố</th>
+                                <th>QT</th>
+                                <th>HKTT</th>
+                                <th>ĐC</th>
+                                <th>Tỉnh/TP</th>
                                 <th>Quận/Huyện</th>
                                 <th>Phường/Xã</th>
                                 <th>Đường</th>
-                                <th>Ngày hết hạn</th>
+                                <th>Hết hạn</th>
                                 <th>Hành động</th>
                             </tr>
                         </thead>
