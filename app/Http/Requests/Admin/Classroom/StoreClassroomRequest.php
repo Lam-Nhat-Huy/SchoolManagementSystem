@@ -22,7 +22,7 @@ class StoreClassroomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:10',
+            'name' => 'required|max:10|unique:classrooms,name',
             'description' => 'required|max:100',
             'status' => 'integer',
         ];
@@ -33,6 +33,7 @@ class StoreClassroomRequest extends FormRequest
         return [
             'name.required' => 'Vui lòng nhập tên phòng học',
             'name.max' => 'Tên phòng học không quá 10 ký tự',
+            'name.unique' => 'Phòng học đã tồn tại',
             'description.required' => 'Vui lòng thêm mô tả',
             'description.max' => 'Mô tả không quá 100 ký tự',
         ];
